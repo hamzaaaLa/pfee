@@ -1,0 +1,139 @@
+/* Start Variables */
+:root {
+    --main-color: #2196f3;
+    --secondary-color: #2c59be;
+    --main-background: #fafafb;
+    --main-transition: 0.3s;
+}
+/* End Variables */
+/* Start Global Rules */
+body {
+    font-family: "Work Sans", sans-serif;
+}
+/* End Global Rules */
+/* Start Header */
+.navbar {
+    background-color: white;
+    -webkit-box-shadow: 0 0 10px #ddd;
+    -moz-box-shadow: 0 0 10px #ddd;
+    box-shadow: 0 0 10px #ddd;
+    padding: 0;
+}
+.navbar .navbar-brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    color: var(--main-color);
+    font-weight: bold;
+    font-size: 26px;
+}
+/*.navbar .nav-item:hover {
+    background-color: #fafafa;
+}*/
+.navbar .nav-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    position: relative;
+    background-image: linear-gradient(
+            to left,
+            var(--main-color),
+            var(--main-color) 50%,
+            #000 50%
+    );
+    background-size: 200% 100%;
+    background-position: 0%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all var(--main-transition) ease-in-out;
+    overflow: hidden;
+}
+.navbar .nav-link:hover {
+    background-position: -100%;
+    left: 0;
+}
+.navbar .nav-link::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: var(--main-color);
+    bottom: 0px;
+    left: -100%;
+    transition: var(--main-transition);
+}
+.navbar .nav-link:hover:before {
+    left: 0;
+}
+@media (max-width: 991px) {
+    .navbar .nav-link {
+        margin: 0 auto;
+        width: fit-content;
+    }
+}
+.dropdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media (max-width: 991px) {
+    .dropdown {
+        padding: 8px 0;
+    }
+}
+.dropdown button {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 25px;
+}
+.dropdown button:hover {
+    background-color: #e9e3fc;
+    border-color: black;
+}
+/*.dropdown button:hover:after  {
+    !*color: white;*!
+}*/
+.dropdown button::after {
+    color: black;
+}
+/*.dropdown button[aria-expanded="true"]:hover {
+    !*border-color: transparent;*!
+}*/
+.dropdown .dropdown-menu {
+    margin-top: 8px;
+    width: 170px;
+}
+@media (max-width: 991px) {
+    .dropdown .dropdown-menu {
+        margin-top: 0;
+        left: 40%;
+    }
+}
+/* End Header */
+/* Start Dashboard */
+.dashboard .holder {
+    display: flex;
+    justify-content: space-between;
+}
+/* Start Courses */
+.courses .row {
+    /*max-width: fit-content;*/
+}
+.courses .col {
+    max-width: fit-content;
+}
+/* End Courses */
+/* Start Announcements */
+.announcements {
+    min-width: 250px;
+}
+.announcements ul li img {
+    width: 50px;
+    border: none;
+    border-radius: 50%;
+}
+/* End Announcements */
+/* End Dashboard */

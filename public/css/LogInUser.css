@@ -1,0 +1,202 @@
+/* Start Variables */
+:root {
+    --main-color: #2196f3;
+    --secondary-color: #2c59be;
+    --main-background: #fafafb;
+    --main-transition: 0.3s;
+}
+/* End Variables */
+/* Start Global Rules */
+body {
+    font-family: 'Work Sans', sans-serif;
+    /*background-color: var(--main-background) !important;*/
+}
+/* End Global Rules */
+/* Start Header */
+.navbar {
+    background-color: white;
+    -webkit-box-shadow: 0 0 10px #ddd;
+    -moz-box-shadow: 0 0 10px #ddd;
+    box-shadow: 0 0 10px #ddd;
+    padding: 0;
+}
+.navbar .navbar-brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    color: var(--main-color);
+    font-weight: bold;
+    font-size: 26px;
+}
+.navbar .nav-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    position: relative;
+    background-image: linear-gradient(
+            to left,
+            var(--main-color),
+            var(--main-color) 50%,
+            #000 50%
+    );
+    background-size: 200% 100%;
+    background-position: 0%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all var(--main-transition) ease-in-out;
+    overflow: hidden;
+}
+.navbar .nav-link:hover {
+    background-position: -100%;
+    left: 0;
+}
+.navbar .nav-link::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: var(--main-color);
+    bottom: 0px;
+    left: -100%;
+    transition: var(--main-transition);
+}
+.navbar .nav-link:hover:before {
+    left: 0;
+}
+@media (max-width: 991px) {
+    .navbar .nav-link {
+        margin: 0 auto;
+        width: fit-content;
+    }
+}
+/* End Header */
+/* Start Login*/
+.login {
+    background-color: var(--main-background);
+}
+.login .container {
+    height: calc(100vh - 60px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login .form {
+    position: relative;
+    border-radius: 0.75rem;
+    background-color: white;
+    color: #616161;
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, .05);
+    width: 22rem;
+    background-clip: border-box;
+}
+
+.login .header {
+    position: relative;
+    background-clip: border-box;
+    /*background-color: #1e88e5;*/
+    /*background-image: linear-gradient(to top right,#1e88e5,#42a5f5);*/
+    /*background-color: #ffc300;*/
+    /*background-color: var(--main-color);*/
+    /*background-color: var(--secondary-color);*/
+    background-color: #007ea7;
+    margin: 10px;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    color: white;
+    box-shadow: 0 0 #0000,0 0 #0000,0 0 #0000,0 0 #0000,rgba(33,150,243,.4);
+    height: 7rem;
+    font-weight: 600;
+    font-size: 1.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login .inputs {
+    padding: 1.5rem;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.login .input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 200px;
+    width: 100%;
+    height: 2.75rem;
+    position: relative;
+}
+
+.login .input {
+    border: 1px solid rgba(128, 128, 128, 0.61);
+    outline: 0;
+    color: #455A64;
+    font-size: .9rem;
+    line-height: 1.25rem;
+    padding: 0.75rem;
+    background-color: transparent;
+    border-radius: .375rem;
+    width: 100%;
+    height: 100%;
+}
+
+.login .input:focus {
+    /*border: 1px solid #ffc300;*/
+    /*border: 1px solid var(--main-color);*/
+    border: 1px solid #007ea7;
+}
+
+.login .checkbox-container {
+    margin-left: -0.625rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+.login .checkbox {
+    position: relative;
+    overflow: hidden;
+    padding: .55rem;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.027);
+    height: 35px;
+    width: 35px;
+}
+
+.login .checkbox input {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.login .checkbox-text {
+    cursor: pointer;
+}
+
+.login .sigin-btn {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: .75rem;
+    line-height: 1rem;
+    text-align: center;
+    padding: .75rem 1.5rem;
+    /*background-color: #1e88e5;*/
+    /*background-image: linear-gradient(to top right,#1e88e5,#42a5f5);*/
+    /*background-color: #ffc300;*/
+    /*background-color: var(--secondary-color);*/
+    background-color: #007ea7;
+    border-radius: .5rem;
+    width: 100%;
+    outline: 0;
+    border: 0;
+    color: white;
+}
+/* End Login*/

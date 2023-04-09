@@ -1,0 +1,295 @@
+/* Start Variables */
+:root {
+    --main-color: #2196f3;
+    --secondary-color: #2c59be;
+    --main-background: #fafafb;
+    --main-transition: 0.3s;
+}
+/* End Variables */
+/* Start Global Rules */
+body {
+    font-family: "Work Sans", sans-serif;
+}
+/* End Global Rules */
+/* Start Components */
+.section-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 5px 2px;
+    background-color: var(--main-color);
+    color: white;
+}
+/* End Components */
+/* Start Header */
+.navbar {
+    background-color: white;
+    -webkit-box-shadow: 0 0 10px #ddd;
+    -moz-box-shadow: 0 0 10px #ddd;
+    box-shadow: 0 0 10px #ddd;
+    padding: 0;
+}
+.navbar .navbar-brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    color: var(--main-color);
+    font-weight: bold;
+    font-size: 26px;
+}
+/*.navbar .nav-item:hover {
+    background-color: #fafafa;
+}*/
+.navbar .nav-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    position: relative;
+    background-image: linear-gradient(
+            to left,
+            var(--main-color),
+            var(--main-color) 50%,
+            #000 50%
+    );
+    background-size: 200% 100%;
+    background-position: 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all var(--main-transition) ease-in-out;
+    overflow: hidden;
+}
+.navbar .nav-link:hover {
+    background-position: -100%;
+    left: 0;
+}
+.navbar .nav-link::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: var(--main-color);
+    bottom: 0px;
+    left: -100%;
+    transition: var(--main-transition);
+}
+.navbar .nav-link:hover:before {
+    left: 0;
+}
+@media (max-width: 991px) {
+    .navbar .nav-link {
+        margin: 0 auto;
+        width: fit-content;
+    }
+}
+.dropdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media (max-width: 991px) {
+    .dropdown {
+        padding: 8px 0;
+    }
+}
+.dropdown button {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 25px;
+}
+.dropdown button:hover {
+    background-color: #e9e3fc;
+    border-color: black;
+}
+/*.dropdown button:hover:after  {
+    !*color: white;*!
+}*/
+.dropdown button::after {
+    color: black;
+}
+/*.dropdown button[aria-expanded="true"]:hover {
+    !*border-color: transparent;*!
+}*/
+.dropdown .dropdown-menu {
+    margin-top: 8px;
+    width: 170px;
+}
+@media (max-width: 991px) {
+    .dropdown .dropdown-menu {
+        margin-top: 0;
+        left: 40%;
+    }
+}
+/* End Header */
+/* Start Dashboard */
+.dashboard {
+    padding-top: 8px;
+    /*height: calc(100vh - 75px);*/
+    background-color: #f1f5f9;
+}
+@media (max-width: 991px) {
+    .dashboard {
+        background-color: var(--main-background);
+    }
+}
+.custom-shape-divider-bottom-1680448949 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    /*z-index: -1;*/
+}
+@media (max-width: 991px) {
+    .custom-shape-divider-bottom-1680448949 {
+        display: none;
+    }
+}
+.custom-shape-divider-bottom-1680448949 svg {
+    position: relative;
+    display: block;
+    width: calc(161% + 1.3px);
+    height: 421px;
+}
+
+.custom-shape-divider-bottom-1680448949 .shape-fill {
+    fill: var(--main-color);
+}
+.dashboard .holder {
+    display: flex;
+    gap: 10px;
+}
+@media (max-width: 991px) {
+    .dashboard .holder {
+        flex-direction: column-reverse;
+    }
+}
+.dashboard h3 {
+    margin: 0;
+}
+/* Start Courses */
+.courses {
+    flex-basis: 70%;
+    border: 1px solid black;
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 10;
+}
+.courses .row {
+    margin: 0;
+    height: calc(100vh - 120px);
+    overflow: auto;
+    background-color: white;
+}
+@media (max-width: 991px) {
+    .courses .row {
+        height: auto;
+        overflow: visible;
+    }
+}
+.courses .col {
+    max-width: fit-content;
+    padding: 4px;
+}
+.courses .col .card {
+    height: 260px;
+}
+.courses .col .card .card-body {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /*background-color: #F8F8F8;*/
+}
+.courses .col .card .card-body .card-title {
+    /*display: flex;
+    justify-content: center;*/
+}
+.courses .col .card .card-body a {
+    text-decoration: none;
+    color: rgba(var(--bs-link-color-rgb));
+}
+.courses .col .card .card-body .card-text {
+    font-size: 15px;
+}
+.courses .col .card .card-body .progress {
+    height: 11px;
+}
+/* End Courses */
+/* Start Announcements */
+.announcements {
+    flex-basis: 30%;
+    /*min-width: 250px;*/
+    border: 1px solid black;
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 10;
+}
+@media (max-width: 991px) {
+    .announcements {
+        height: 200px;
+        flex-basis: auto;
+    }
+}
+.announcements ul {
+    list-style: none;
+    height: calc(100vh - 120px);
+    overflow: auto;
+    margin-bottom: 0;
+    padding-left: 0;
+    background-color: white;
+}
+@media (max-width: 991px) {
+    .announcements ul {
+        height: calc(200px - 51px);
+    }
+}
+.announcements ul li {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #F4F4F4;
+    transition: var(--main-transition);
+}
+.announcements ul li:hover {
+    background-color: #F1F5F9;
+}
+.announcements ul li:hover .annonce-text a {
+    color: rgba(var(--bs-link-color-rgb));
+}
+.announcements ul li img {
+    width: 50px;
+    height: 100%;
+    border: none;
+    border-radius: 50%;
+}
+.announcements ul li .annonce-text a {
+    text-decoration: none;
+    font-size: 16px;
+    color: black;
+}
+.announcements ul li .annonce-text .subject {
+    text-decoration: underline;
+}
+.announcements ul li .annonce-text .subject span {
+    font-weight: bold;
+}
+.announcements ul li .annonce-text .content {
+    text-align: justify;
+    font-size: 14px;
+    margin-bottom: 0;
+    color: #555;
+}
+.announcements ul li .annonce-text > span {
+    font-size: 12px;
+    color: #777;
+    display: block;
+    text-align: end;
+}
+/* End Announcements */
+/* End Dashboard */
