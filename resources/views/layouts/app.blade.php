@@ -6,16 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'FSA Online') }}</title>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{asset('/css/all.min.css')}}" />
-    <!-- Bootstrap 05 -->
-    <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />
-    <!-- Main CSS File -->
-    <link rel="stylesheet" href="{{asset('/css/Welcome.css')}}" />
-    <!-- Google Fonts - Work Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])

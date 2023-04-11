@@ -8,7 +8,7 @@
 /* End Variables */
 /* Start Global Rules */
 body {
-    font-family: "Work Sans", sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 /* End Global Rules */
 /* Start Header */
@@ -69,18 +69,17 @@ body {
     left: 0;
 }
 @media (max-width: 991px) {
-        .navbar .nav-link {
-            margin: 0 auto;
-            width: fit-content;
-        }
-    .login-btn {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 10px;
+    .navbar .nav-link {
+        margin: 0 auto;
+        width: fit-content;
+    }
+    .navbar .collapse > a {
+        display: block;
+        margin: 5px auto;
+        width: fit-content;
     }
 }
-.login-btn {
-    text-decoration: none;
+.navbar .collapse > a {
     border: none;
     color: #fff;
     background-image: linear-gradient(30deg, var(--main-color), var(--secondary-color));
@@ -91,8 +90,7 @@ body {
     padding: 0.6em 1.5em;
 }
 
-.login-btn:hover {
-    color: #fff;
+.navbar .collapse > a:hover {
     background-position: right center;
     background-size: 200% auto;
     -webkit-animation: pulse 2s infinite;
