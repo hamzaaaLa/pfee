@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Welcome</title>
     <!-- Website favicon-->
-    <link rel="shortcut icon" src="{{asset('images/fsa_agadir.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" src="{{asset('img/fsa_agadir.png')}}" type="image/x-icon">
     <!-- Bootstrap 05 -->
     <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />
     <!-- Main CSS File -->
@@ -51,7 +51,7 @@
                 <div class="row justify-content-center">
                     <div class="col">
                         <div class="card" style="width: 15rem;">
-                            <img src="{{asset('/images/bd.png')}}" class="card-img-top" alt="...">
+                            <img src="{{asset('/img/bd.png')}}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <a href="" class="card-title">Bases de Données</a>
                                 <p class="card-text">
@@ -79,7 +79,7 @@
                     </div>
                     <div class="col">
                         <div class="card" style="width: 15rem;">
-                            <img src="{{asset('/images/coo.png')}}" class="card-img-top" alt="...">
+                            <img src="{{asset('/img/coo.png')}}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <a href="" class="card-title">Conception Orienté Objet</a>
                                 <p class="card-text">
@@ -93,7 +93,7 @@
                     </div>
                     <div class="col">
                         <div class="card" style="width: 15rem;">
-                            <img src="{{asset('images/poo.png"')}} class="card-img-top" alt="...">
+                            <img src="{{asset('img/poo.png"')}} class="card-img-top" alt="...">
                             <div class="card-body">
                                 <a href="" class="card-title">Programmation Orienté Objet</a>
                                 <p class="card-text">
@@ -144,7 +144,7 @@
                 </div>
                 <ul>
                     <li>
-                        <img src="{{asset('/images/professeur.jpg')}}" alt="">
+                        <img src="{{asset('/img/professeur.jpg')}}" alt="">
                         <div class="annonce-text">
                             <a href="">Abdellah BOULOUZ</a>
                             <p class="subject"><span>Sujet: </span>Séance d'avancement</p>
