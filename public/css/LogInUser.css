@@ -36,10 +36,10 @@ body {
     height: 60px;
     position: relative;
     background-image: linear-gradient(
-            to left,
-            var(--main-color),
-            var(--main-color) 50%,
-            #000 50%
+        to left,
+        var(--main-color),
+        var(--main-color) 50%,
+        #000 50%
     );
     background-size: 200% 100%;
     background-position: 0%;
@@ -83,7 +83,7 @@ body {
     align-items: center;
     justify-content: center;
 }
-.login .form {
+.login .form-login {
     position: relative;
     border-radius: 0.75rem;
     background-color: white;

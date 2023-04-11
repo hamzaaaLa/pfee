@@ -16,7 +16,7 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', function () {
-    return view('WelcomePage');
+    return view('welcome');
 });
 
 Auth::routes([

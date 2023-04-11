@@ -1,22 +1,21 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />
-    <!-- Main CSS File -->
-    <link rel="stylesheet" href="{{asset('/css/HomePage.css')}}" />
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{asset('/css/all.min.css')}}" />
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ config('app.name', 'FSA Online') }}</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{asset('/css/all.min.css')}}" />
+    <!-- Bootstrap 05 -->
+    <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="{{asset('/css/Welcome.css')}}" />
+    <!-- Google Fonts - Work Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -26,7 +25,8 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <img src="img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
+                    {{ config('app.name', 'FSA-Online') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -37,7 +37,7 @@
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">
-                                Tableau de bord
+                                Acceuil
                             </a>
                         </li>
                         <li class="nav-item">
@@ -56,23 +56,13 @@
                             </a>
                         </li>
                     </ul>
-                    
-                    
-                    
+
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
+                                <a class="login-btn" href="{{ route('login') }}">{{ __('Se connecter') }}</a>
                             @endif
                         @else
                             <li class="nav-item dropdown">
@@ -90,8 +80,6 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-                                    
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
@@ -103,7 +91,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
     </div>
