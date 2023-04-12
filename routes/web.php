@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FiliereController;
+use App\Http\Controllers\ProfController;
+use App\Http\Controllers\ModuleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,6 +54,8 @@ Route::middleware(['auth','user-access:admin'])->group(function () {
     Route::get('admin/afficheEtud',[EtudiantController::class,'retriev'])->name('afficheEtud');
     Route::get('/edit/{id}',[EtudiantController::class,'edit'])->name('editEtud');
     Route::post('/{id}',[EtudiantController::class,'update'])->name('updateEtud');
-
+    Route::get('/consulter',[EtudiantController::class,'consulter'])->name('consulterEtud');
+    Route::get('/ajouterProfesseurForm',[ProfController::class,'ajoutView'])->name('ajouterProfView');
+    Route::get('/ajouterProfesseurForm',[ModuleController::class,'ajouterView'])->name('ajouterModuleView');
 });
 

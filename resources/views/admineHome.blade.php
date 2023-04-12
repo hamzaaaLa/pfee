@@ -61,7 +61,7 @@
                         <div class="accordion-body">
                             <ul>
                                 <li><a href="VisualiserProf.php">Consulter et Modifier</a></li>
-                                <li><a href="AjouterProfesseur.php">Ajouter Professeur</a></li>
+                                <li><a href="{{route('ajouterProfView')}}">Ajouter Professeur</a></li>
                             </ul>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                         <div class="accordion-body">
                             <ul>
                                 <li><a href="VisualiserModule.php">Consulter et Modifier</a></li>
-                                <li><a href="AjouterModule.php">Ajouter Module</a></li>
+                                <li><a href="{{route('ajouterModuleView')}}">Ajouter Module</a></li>
                             </ul>
                         </div>
                     </div>

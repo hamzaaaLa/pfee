@@ -5,10 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Etudiant;
+use App\Models\Filiere;
+use App\Models\Semestre;
 use App\Models\User;
 
 class EtudiantController extends Controller
 {
+    public function consulter(){
+        $filieres = Filiere::get();
+   $semestres=Semestre::get();
+   return view('ModifierEtudiant',['filieres'=>$filieres],['semestres'=>$semestres]);
+    }
     function add(Request $request){
         $request->validate([
             'name'=>'required',
