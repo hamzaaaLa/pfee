@@ -13,7 +13,7 @@ function updateSelect() {
     var filiere = filiereSelect.value;
     var semestre = semestreSelect.value;
 
-    if(filiere.length !== 0 && semestre.length === 0) {
+    /*if(filiere.length !== 0 && semestre.length === 0) {
         var xhr = new XMLHttpRequest();
         // Send an AJAX request to get the data for the select menues
         xhr.open("GET", "get_select_menu_data.php?filiere=" + filiere);
@@ -28,13 +28,14 @@ function updateSelect() {
             }
         };
         xhr.send();
-    } else if (filiere.length !== 0 && semestre.length !== 0) {
+    }*/
+    if (filiere.length !== 0 && semestre.length !== 0) {
         var xhr = new XMLHttpRequest();
         // Send an AJAX request to get the data for the select menues
         xhr.open("GET", "get_select_menu_data.php?filiere=" + filiere + "&semestre=" + semestre);
         xhr.onload = function() {
             // Parse the JSON response and update the selected menues
-            modules = JSON.parse(xhr.responseText);
+            var modules = JSON.parse(xhr.responseText);
             moduleSelect.innerHTML = "";
             for (var i = 0; modules.length; i++) {
                 var option = document.createElement("option");
