@@ -10,11 +10,11 @@
         <!-- Website favicon-->
         <link rel="shortcut icon" href="../img/fsa_agadir.png" type="image/x-icon">
         <!-- Bootstrap 05 -->
-        <link rel="stylesheet" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="../css/all.min.css" />
+        <link rel="stylesheet" href="{{asset('/css/all.min.css')}}" />
         <!-- Main CSS File -->
-        <link rel="stylesheet" href="../css/LogInUser.css" />
+        <link rel="stylesheet" href="{{asset('/css/LogInUser.css')}}" />
         <!-- Google Fonts - Open Sans -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

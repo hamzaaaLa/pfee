@@ -4,6 +4,7 @@ use App\Http\Controllers\EtudiantController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\FiliereController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,9 +47,7 @@ Route::middleware(['auth','user-access:prof'])->group(function () {
 Route::middleware(['auth','user-access:admin'])->group(function () {
 
     Route::get('/admin/dashboard', [HomeController::class, 'adminDashboard'])->name('admin.dashboard');
-    Route::get('/admin/ajouter',function(){
-            return view('adminAjoutEtud');
-    })->name('ajoutEtud');
+    Route::get('/admin/ajouter',[FiliereController::class,'dropDownShow'])->name('ajoutEtud');
     Route::post('/admin/ajoutetud',[EtudiantController::class,'add'])->name('ajouterEtudiant');
     Route::get('admin/afficheEtud',[EtudiantController::class,'retriev'])->name('afficheEtud');
     Route::get('/edit/{id}',[EtudiantController::class,'edit'])->name('editEtud');

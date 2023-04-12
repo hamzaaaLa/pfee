@@ -9,7 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Ajouter Etudiant</title>
         <!-- JQuery plugin for multi-select -->
-        <link rel="stylesheet" href="/css/chosen.min.css" />
+        <link rel="stylesheet" href="{{asset('/css/chosen.min.css')}}" />
         <!-- Website favicon-->
         <link rel="shortcut icon" href="../img/fsa_agadir.png" type="image/x-icon">
         <!-- Bootstrap 05 -->
@@ -19,9 +19,9 @@
         <!-- Font Awesome -->
         <link rel="stylesheet" href="{{asset('/css/all.min.css')}}" />
         <!-- Google Fonts - Open Sans -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="{{asset('https://fonts.googleapis.com')}}">
+        <link rel="preconnect" href="{{asset('https://fonts.gstatic.com')}}" crossorigin>
+        <link href="{{asset('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap')}}" rel="stylesheet">
     </head>
     <body>
         <div class="page">
@@ -190,8 +190,11 @@
                             <label for="filiere" class="form-label">Filière</label>
                             <select class="form-select" id="filiereSelect" name="filiereSelect" required>
                                 <option selected disabled value="">Choisir...</option>
-                                <option>Sience Mathématique et Informatique</option>
-                                <option>Sience Mathématisue Appliqués</option>
+                                @foreach($filieres as $key){
+                                    <option >{{$key->libellefiliere}}</option>
+                                }@endforeach
+                                
+                                
                             </select>
                             <div class="valid-feedback">
                                 C'est bon!
@@ -203,12 +206,9 @@
                         <div class="col-md-6">
                             <label for="semestre" class="form-label">Semestres</label>
                             <select class="form-select" id="semestreSelect" name="semestreSelect" multiple="" required>
-                                <option>S1</option>
-                                <option>S2</option>
-                                <option>S3</option>
-                                <option>S4</option>
-                                <option>S5</option>
-                                <option>S6</option>
+                                 @foreach($semestres as $key){
+                                    <option >{{$key->libelleSemestre}}</option>
+                                }@endforeach>
                             </select>
                             <div class="valid-feedback">
                                 C'est bon!
@@ -246,10 +246,10 @@
                 </div>
             </div>
         </div>
-        <script src="/js/jquery-3.6.4.min.js"></script>
-        <script src="/js/chosen.jquery.min.js"></script>
-        <script src="/js/bootstrap.bundle.min.js"></script>
-        <script src="/js/all.min.js"></script>
+        <script src="{{asset('/js/jquery-3.6.4.min.js')}}"></script>
+        <script src="{{asset('/js/chosen.jquery.min.js')}}"></script>
+        <script src="{{asset('/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{asset('/js/all.min.js')}}"></script>
         <script>
             (function () {
                 'use strict'
