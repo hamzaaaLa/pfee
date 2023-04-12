@@ -56,7 +56,7 @@
                             <div class="accordion-body test">
                                 <ul>
                                     <li><a href="VisualiserEtudiant.php">Consulter et Modifier</a></li>
-                                    <li class="active"><a href="AjouterEtudiant.php">Ajouter Etudiant</a></li>
+                                    <li class="active"><a href="{{route('ajoutEtud')}}">Ajouter Etudiant</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -99,10 +99,15 @@
                         <i class="fa-solid fa-user"></i>
                         Profile
                     </a>
-                    <a href="DashboardAdmin.php">
+                    <a href="{{ route('logout') }}"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fa-solid fa-power-off fa-lg"></i>
-                        Déconnexion
+
+                        {{ __('Déconnexion') }}
                     </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </div>
             </div>
             <!-- End Sidebar -->
@@ -121,7 +126,7 @@
                     <form name="f1" class="row g-3 needs-validation" action="{{route('ajouterEtudiant')}}" method = "POST" novalidate>
                         @csrf
                         <div class="col-md-6">
-                            <label for="nom" class="form-label">Nom</label>
+                            <label for="name" class="form-label">Nom</label>
                             <input type="text" class="form-control" name="name" id="name" required value="{{old('name')}}">
                             <div class="valid-feedback">
                                 C'est bon!
@@ -187,14 +192,12 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="filiere" class="form-label">Filière</label>
+                            <label for="filiereSelect" class="form-label">Filière</label>
                             <select class="form-select" id="filiereSelect" name="filiereSelect" required>
                                 <option selected disabled value="">Choisir...</option>
                                 @foreach($filieres as $key){
                                     <option >{{$key->libellefiliere}}</option>
                                 }@endforeach
-                                
-                                
                             </select>
                             <div class="valid-feedback">
                                 C'est bon!
@@ -204,7 +207,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="semestre" class="form-label">Semestres</label>
+                            <label for="semestreSelect" class="form-label">Semestres</label>
                             <select class="form-select" id="semestreSelect" name="semestreSelect" multiple="" required>
                                  @foreach($semestres as $key){
                                     <option >{{$key->libelleSemestre}}</option>
@@ -218,7 +221,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="module" class="form-label">Modules</label>
+                            <label for="moduleSelect" class="form-label">Modules</label>
                             <select class="form-select" id="moduleSelect" name="moduleSelect" multiple="" required>
                                 <option>Module 1</option>
                                 <option>Module 2</option>
