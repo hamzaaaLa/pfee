@@ -48,9 +48,11 @@ INSERT INTO `administrateur` (`id_admin`, `user_admin`) VALUES
 --
 
 CREATE TABLE `affectation_etud` (
+  `id_affect` int(11) NOT NULL,
   `id_etud` int(11) NOT NULL,
   `id_module` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -59,6 +61,7 @@ CREATE TABLE `affectation_etud` (
 --
 
 CREATE TABLE `affectation_prof` (
+  `id_affect` int(11) NOT NULL,
   `id_prof` int(11) NOT NULL,
   `id_module` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -70,10 +73,22 @@ CREATE TABLE `affectation_prof` (
 --
 
 CREATE TABLE `affectation_semestre` (
+  `id_affect` int(11) NOT NULL,
   `id_semestre` int(11) NOT NULL,
   `id_etud` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `affectation_semestre`
+--
+
+INSERT INTO `affectation_semestre` (`id_affect`, `id_semestre`, `id_etud`) VALUES
+(1, 1, 1),
+(2, 2, 1),
+(3, 3, 1),
+(4, 4, 1),
+(5, 5, 1),
+(6, 6, 1);
 -- --------------------------------------------------------
 
 --
@@ -302,22 +317,25 @@ ALTER TABLE `administrateur`
 -- Indexes for table `affectation_etud`
 --
 ALTER TABLE `affectation_etud`
-  ADD PRIMARY KEY (`id_etud`,`id_module`),
+  ADD PRIMARY KEY (`id_affect`),
+  ADD KEY `id_etud` (`id_etud`),
   ADD KEY `id_module` (`id_module`);
 
 --
 -- Indexes for table `affectation_prof`
 --
 ALTER TABLE `affectation_prof`
-  ADD PRIMARY KEY (`id_prof`,`id_module`),
+  ADD PRIMARY KEY (`id_affect`),
+  ADD KEY `id_prof` (`id_prof`),
   ADD KEY `id_module` (`id_module`);
 
 --
 -- Indexes for table `affectation_semestre`
 --
 ALTER TABLE `affectation_semestre`
-  ADD PRIMARY KEY (`id_semestre`,`id_etud`),
-  ADD KEY `id_etud` (`id_etud`);
+  ADD PRIMARY KEY (`id_affect`),
+  ADD KEY `id_etud` (`id_etud`),
+  ADD KEY `id_semestre` (`id_semestre`);
 
 --
 -- Indexes for table `annonce`
@@ -404,6 +422,24 @@ ALTER TABLE `administrateur`
   MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `affectation_etud`
+--
+ALTER TABLE `affectation_etud`
+  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `affectation_prof`
+--
+ALTER TABLE `affectation_prof`
+  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `affectation_semestre`
+--
+ALTER TABLE `affectation_semestre`
+  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `annonce`
 --
 ALTER TABLE `annonce`
@@ -485,8 +521,8 @@ ALTER TABLE `affectation_prof`
 -- Constraints for table `affectation_semestre`
 --
 ALTER TABLE `affectation_semestre`
-  ADD CONSTRAINT `affectation_semestre_ibfk_1` FOREIGN KEY (`id_semestre`) REFERENCES `semestre` (`id_semestre`),
-  ADD CONSTRAINT `affectation_semestre_ibfk_2` FOREIGN KEY (`id_etud`) REFERENCES `etudiant` (`id_etud`);
+  ADD CONSTRAINT `affectation_semestre_ibfk_1` FOREIGN KEY (`id_etud`) REFERENCES `etudiant` (`id_etud`),
+  ADD CONSTRAINT `affectation_semestre_ibfk_2` FOREIGN KEY (`id_semestre`) REFERENCES `semestre` (`id_semestre`);
 
 --
 -- Constraints for table `annonce`
