@@ -60,6 +60,8 @@ Route::middleware(['auth','user-access:admin'])->group(function () {
     Route::get('/admin/Dashboard',function(){
         return view('admineHome');
     })->name('admineHome');
+    Route::post('/admin/ajoutetud/get-modules', [ModuleController::class, 'getModules'])->name('modules.get');
+
     /*Route::get('/admin/ajouterProfForm',function(){
         return view('AjouterProfesseur');
     })->name('ajouterProfView');

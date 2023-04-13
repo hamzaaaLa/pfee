@@ -7,6 +7,7 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Ajouter Etudiant</title>
         <!-- JQuery plugin for multi-select -->
         <link rel="stylesheet" href="{{asset('/css/chosen.min.css')}}" />
@@ -223,7 +224,7 @@
                         <div class="col-md-6">
                             <label for="moduleSelect" class="form-label">Modules</label>
                             <select class="form-select" id="moduleSelect" name="moduleSelect" multiple="" required>
-                                <option>Module 1</option>
+                                {{-- <option>Module 1</option>
                                 <option>Module 2</option>
                                 <option>Module 3</option>
                                 <option>Module 3</option>
@@ -232,7 +233,7 @@
                                 <option>Module 3</option>
                                 <option>Module 3</option>
                                 <option>Module 3</option>
-                                <option>Module 3</option>
+                                <option>Module 3</option> --}}
                             </select>
                             <div class="valid-feedback">
                                 C'est bon!
@@ -251,6 +252,7 @@
         </div>
         <script src="{{asset('/js/jquery-3.6.4.min.js')}}"></script>
         <script src="{{asset('/js/chosen.jquery.min.js')}}"></script>
+        <script src="{{asset('/js/multi-select-menu-content.js')}}"></script>
         <script src="{{asset('/js/bootstrap.bundle.min.js')}}"></script>
         <script src="{{asset('/js/all.min.js')}}"></script>
         <script>
