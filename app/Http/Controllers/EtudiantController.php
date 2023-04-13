@@ -11,6 +11,11 @@ use App\Models\User;
 
 class EtudiantController extends Controller
 {
+    public function index()
+    {
+        $etudiant =\App\Models\etudiant::all();
+        return view('etudiant.VisualiserEtudiant', ['etudiant' => $etudiant]); 
+    }
     public function consulter(){
         $filieres = Filiere::get();
    $semestres=Semestre::get();

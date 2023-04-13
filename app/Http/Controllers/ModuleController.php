@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class ModuleController extends Controller
 {
+    public function index()
+    {
+        $module =\App\Models\module::all();
+        return view('module.VisualiserModule', ['module' => $module]);
+    }
+
     public function ajouterView(){
         $filieres = Filiere::get();
         $semestres=Semestre::get();
