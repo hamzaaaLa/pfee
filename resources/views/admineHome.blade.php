@@ -60,7 +60,7 @@
                     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
                         <div class="accordion-body">
                             <ul>
-                                <li><a href="VisualiserProf.php">Consulter et Modifier</a></li>
+                                <li><a href="{{route('afficheProf')}}">Consulter et Modifier</a></li>
                                 <li><a href="{{route('ajouterProfView')}}">Ajouter Professeur</a></li>
                             </ul>
                         </div>
@@ -77,7 +77,7 @@
                     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
                         <div class="accordion-body">
                             <ul>
-                                <li><a href="VisualiserModule.php">Consulter et Modifier</a></li>
+                                <li><a href="{{route('afficheModule')}}">Consulter et Modifier</a></li>
                                 <li><a href="{{route('ajouterModuleView')}}">Ajouter Module</a></li>
                             </ul>
                         </div>

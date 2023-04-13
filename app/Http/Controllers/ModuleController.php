@@ -11,7 +11,7 @@ class ModuleController extends Controller
     public function index()
     {
         $module =\App\Models\module::all();
-        return view('module.VisualiserModule', ['module' => $module]);
+        return view('visualiserModule', ['module' => $module]);
     }
 
     public function ajouterView(){

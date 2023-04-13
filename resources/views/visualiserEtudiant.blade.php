@@ -11,15 +11,15 @@
     <!-- Website favicon-->
     <link rel="shortcut icon" href="img/fsa_agadir.png" type="image/x-icon">
     <!-- Bootstrap 05 -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="css/HomePageAdmin.css" />
+    <link rel="stylesheet" href="{{asset('css/HomePageAdmin.css')}}" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="{{asset('css/all.min.css')}}" />
     <!-- Google Fonts - Open Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="{{asset('https://fonts.googleapis.com')}}">
+    <link rel="preconnect" href="{{asset('https://fonts.gstatic.com')}}" crossorigin>
+    <link href="{{asset('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap')}}" rel="stylesheet">
 </head>
 <body>
 <div class="page">
@@ -164,8 +164,8 @@
         </div>
     </div>
 </div>
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/all.min.js"></script>
+<script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('js/all.min.js')}}"></script>
 </body>
 </html>
 

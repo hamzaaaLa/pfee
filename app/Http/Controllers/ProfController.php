@@ -9,7 +9,7 @@ class ProfController extends Controller
     public function index()
     {
         $professeur =\App\Models\professeur::all();
-        return view('professeur.VisualiserProf', ['professeur' => $professeur]); 
+        return view('visualiserProf', ['professeur' => $professeur]); 
     }
 
     public function ajoutView(){

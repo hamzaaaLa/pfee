@@ -14,7 +14,7 @@ class EtudiantController extends Controller
     public function index()
     {
         $etudiant =\App\Models\etudiant::all();
-        return view('etudiant.VisualiserEtudiant', ['etudiant' => $etudiant]); 
+        return view('visualiserEtudiant', ['etudiant' => $etudiant]); 
     }
     public function consulter(){
         $filieres = Filiere::get();

@@ -51,7 +51,9 @@ Route::middleware(['auth','user-access:admin'])->group(function () {
     Route::get('/admin/dashboard', [HomeController::class, 'adminDashboard'])->name('admin.dashboard');
     Route::get('/admin/ajouter',[FiliereController::class,'dropDownShow'])->name('ajoutEtud');
     Route::post('/admin/ajoutetud',[EtudiantController::class,'add'])->name('ajouterEtudiant');
-    Route::get('admin/afficheEtud',[EtudiantController::class,'retriev'])->name('afficheEtud');
+    Route::get('admin/afficheEtud',[EtudiantController::class,'index'])->name('afficheEtud');
+    Route::get('admin/afficheProf',[ProfController::class,'index'])->name('afficheProf');
+    Route::get('admin/afficheModule',[ModuleController::class,'index'])->name('afficheModule');
     Route::get('/edit/{id}',[EtudiantController::class,'edit'])->name('editEtud');
     Route::post('/{id}',[EtudiantController::class,'update'])->name('updateEtud');
     Route::get('/consulter',[EtudiantController::class,'consulter'])->name('consulterEtud');
