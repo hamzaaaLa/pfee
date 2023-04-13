@@ -29,7 +29,7 @@
                 FSA-Online
             </a>
             <div class="accordion" id="accordionExample">
-                <a href="DashboardAdmin.php" class="active">
+                <a href="{{route('admineHome')}}" class="active">
                     <i class="fa-regular fa-chart-bar fa-fw"></i>
                     <span>Dashboard</span>
                 </a>

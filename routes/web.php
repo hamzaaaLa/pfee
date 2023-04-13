@@ -57,6 +57,9 @@ Route::middleware(['auth','user-access:admin'])->group(function () {
     Route::get('/consulter',[EtudiantController::class,'consulter'])->name('consulterEtud');
     Route::get('/admin/ajouterProfesseurForm',[ProfController::class,'ajoutView'])->name('ajouterProfView');
     Route::get('/admin/ajouterModuleForm',[ModuleController::class,'ajouterView'])->name('ajouterModuleView');
+    Route::get('/admin/Dashboard',function(){
+        return view('admineHome');
+    })->name('admineHome');
     /*Route::get('/admin/ajouterProfForm',function(){
         return view('AjouterProfesseur');
     })->name('ajouterProfView');
