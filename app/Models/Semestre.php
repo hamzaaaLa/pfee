@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Semestre extends Model
+class semestre extends Model
 {
     use HasFactory;
-    protected $table='semestre';
-   // @var array<int, string>
-     public $timestamps = false;
-     //protected $primaryKey='email';
-    // public $incrementing=false;
-     protected $primaryKey ='id_semestre';
-
-     //protected $keyType='string'; 
+    protected $table = "semestre";
+    protected $primaryKey = 'id_semestre';
+    
+    protected $fillable = ["libelleSemestre",];
+    
+    public function affectation()
+    {
+        return $this->hasMany(affectation_semestre::class, 'id_semestre')->with('etudiant');
+    }
+   
 }
