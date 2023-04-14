@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Visualiser Modules</title>
+    <title>Visualiser Professeurs</title>
     <!-- Website favicon-->
     <link rel="shortcut icon" href="img/fsa_agadir.png" type="image/x-icon">
     <!-- Bootstrap 05 -->
@@ -51,16 +51,16 @@
             </div>
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                         <i class="fa-solid fa-chalkboard-user"></i>
                         Professeurs
                     </button>
                 </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+                <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
                     <div class="accordion-body">
                         <ul>
-                            <li><a href="VisualiserProf.php">Consulter et Modifier</a></li>
+                            <li class="active"><a href="VisualiserProf.php">Consulter et Modifier</a></li>
                             <li><a href="">Ajouter Professeur</a></li>
                         </ul>
                     </div>
@@ -68,16 +68,16 @@
             </div>
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                         <i class="fa-solid fa-book"></i>
                         Modules
                     </button>
                 </h2>
-                <div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="headingThree">
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree">
                     <div class="accordion-body">
                         <ul>
-                            <li class="active"><a href="VisualiserModule.php">Consulter et Modifier</a></li>
+                            <li><a href="VisualiserModule.php">Consulter et Modifier</a></li>
                             <li><a href="">Ajouter Module</a></li>
                         </ul>
                     </div>
@@ -103,25 +103,27 @@
         </div>
         <div class="content">
             <div class="header">
-                <h2>Données Modules</h2>
+                <h2>Données Professeurs</h2>
                 <div class="search">
                     <input type="search" placeholder="Saisir un CIN">
                 </div>
-                <a href="" type="button" class="btn btn-primary">Ajouter Module</a>
+                <a href="" type="button" class="btn btn-primary">Ajouter Professeur</a>
             </div>
             <div class="table-responsive">
                 <table class="table table-hover table-bordered">
                     <thead>
                     <tr>
                         <th scope="col">Actions</th>
-                        <th scope="col">Libellé</th>
-                        <th scope="col">Semestre</th>
-                        <th scope="col">Filière</th>
-                        <th scope="col">Responsable</th>
+                        <th scope="col">CIN</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prenom</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Telephone</th>
+                        <th scope="col">Spécialité</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach ($module as $module)
+                        @foreach ($professeur as $professeur)
                     <tr>
                         <td>
                             <a href="">
@@ -131,15 +133,12 @@
                                 <i class="fa-solid fa-trash"></i>
                             </a>
                         </td>
-                        <td>{{ $module->libelleModule }} </td>
-                        <td>{{ $module->semestre }}</td>
-                        <td>{{ $module->filiere->libellefiliere }}</td>
-                        <td> 
-                             @foreach($module->affectation_prof as $affectation)
-                                {{$affectation->professeur->user->name}} {{$affectation->professeur->user->prenom}}
-                                    @if(!$loop->last),@endif
-                            @endforeach
-                    </td>
+                        <td>{{ $professeur->user->cin }}</td>
+                        <td>{{ $professeur->user->name }} </td>
+                        <td>{{ $professeur->user->prenom }}</td>
+                        <td>{{ $professeur->user->email }}</td>
+                        <td>{{ $professeur->user->telephone }}</td>
+                        <td>{{$professeur->specialite}}</td>
                     </tr>
                         @endforeach
                     </tbody>
