@@ -11,7 +11,7 @@ class affectation_semestre extends Model
 
     protected $table = "affectation_semestre";
     protected $primaryKey = 'id_affect';
-    public $incrementing = false; // Add this line to indicate composite primary key
+     // Add this line to indicate composite primary key
     protected $keyType = 'int'; // Add this line to specify primary key type
 
     protected $fillable = ["id_semestre", "id_etud"];

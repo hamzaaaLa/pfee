@@ -233,7 +233,7 @@
                             </div>
                         </div>
                         <div class="col-12 submit" id="submit">
-                            <input class="btn btn-primary" type="submit" value="Ajouter" onclick="sendDate()" />
+                            <button class="btn btn-primary"  onclick="sendDate()" >Ajouter</button>
                             <a href="{{route('afficheEtud')}}" class="btn btn-danger">Anuuler</a>
                         </div>
                     </form>
@@ -335,7 +335,7 @@
                 function sendData() {
 
                     $.ajax({
-                        url: '',
+                        url: '/admin/ajoutetud',
                         type: 'POST',
                         data: {
                             'nomValue': nom.value,
@@ -349,9 +349,9 @@
                             'moduleValues': $(moduleSelect).val()
                         },
                         success: function(response) {
-                            var r = JSON.parse(response);
+                            //var r = JSON.parse(response);
                             var submit = document.getElementById("submit");
-                            if(r == "success") {
+                            if(response == "success") {
                                 submit.innerHTML += '<span class="alert alert-success" role="alert">Ajout Réussit! </span>';
                             } else if(r == "echec") {
                                 submit.innerHTML += '<span class="alert alert-danger" role="alert">Echec! CNE ou CIN' +

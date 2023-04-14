@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\affectation_semestre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Etudiant;
 use App\Models\Filiere;
 use App\Models\Semestre;
 use App\Models\User;
+use App\Models\Affectation_etud;
+use App\Models\Module;
 
 class EtudiantController extends Controller
 {
@@ -25,7 +28,8 @@ class EtudiantController extends Controller
         $request->validate([
             'name'=>'required',
             'prenom'=>'required',
-            'email'=>'required|email|unique:etudiants',
+            'email'=>'required|email|unique:users',
+            
         ]);
 
 
@@ -34,41 +38,49 @@ class EtudiantController extends Controller
             'prenom'=>$request->input('prenom'),
             'email'=>$request->input('email'),
         ]);*/
-        $etudiant = new Etudiant;
-        $etudiant->nom = $request->input('name');
-        $etudiant->prenom = $request->input('prenom');
-        $etudiant->email = $request->input('email');
-        $etudiant->cne = $request->input('cne');
-        $etudiant->cin=$request->input('cne');
-        $etudiant->telephone=$request->input('telephone');
-        $etudiant->filiere=$request->input('filiere');
-        $etudiant->semestre=$request->input('semestre');
-        $etudiant->module1=$request->input('module1');
-        $etudiant->module2=$request->input('module2');
-        $etudiant->module3=$request->input('module3');
-        $etudiant->module4=$request->input('module4');
-        $etudiant->module5=$request->input('module5');
-        $etudiant->module6=$request->input('module6');
-        $etudiant->module7=$request->input('module7');
-
         $user=new User;
-        $user->name=$request->input('name');
-        $user->email=$request->input('email');
-        $user->email_verified_at=null;
-        $user->password = bcrypt($request->input('cne'));
+        $etudiant = new Etudiant;
         $user->type=0;
-        $user->remember_token=null;
-        $user->created_at=now();
-        $user->updated_at=now();
-        
-        
-        $etudiant->save();
+        $user->name= $request->input('name');
+        $user->prenom = $request->input('prenom');
+        $user->email = $request->input('email');
+        $user->cin = $request->input('cin');
+        $user->telephone=$request->input('tel');
+        $user->nomUtilisateur=$request->input('email');
+        $user->password = bcrypt($request->input('cin'));
         $user->save();
 
-        return redirect()->back()->with([
-            'message' => 'Etudiant added successfully!', 
-            'status' => 'success'
-        ]);
+        $etudiant->cne=$request->input('cne');
+        $etudiant->filiere=$request->input('semestreSelect');
+        $etudiant->user_etud=$user->id_user;
+        $etudiant->save();
+
+        
+        $semestreValues=$request->input('selectedSemestres');
+       // $semestreValues = implode(",", $semestreValues);
+        //$semestreValues = explode(",", $semestreValues);
+        
+        foreach($semestreValues as $key){
+            $affectSemestre=new affectation_semestre();
+            $affectSemestre->id_etud=$etudiant->id_etud;
+            $affectSemestre->id_semestre=Semestre::where($key,'libilleSemestre')->select('id_semestre')->get();
+            $affectSemestre->save();
+        }
+
+        $moduleValues=$request->input('moduleValues');
+        $moduleValues = implode(",", $moduleValues);
+        $moduleValues = explode(",", $moduleValues);
+        
+        foreach($moduleValues as $key){
+            $affectEtud=new Affectation_etud();
+            $affectEtud->id_etud=$etudiant->id_etud;
+            $affectEtud->id_module=Module::where($key,'libilleModule')->select('id_module')->get();
+            $affectEtud->save();
+        }
+
+
+
+        return response("success");
 
         /*if($query){
             return back()->with('success','data successufly inserted');
