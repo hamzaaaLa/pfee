@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\professeur;
 use App\Models\Module;
 use App\Models\Filiere;
 use App\Models\Semestre;
@@ -16,8 +17,9 @@ class ModuleController extends Controller
 
     public function ajouterView(){
         $filieres = Filiere::get();
-        $semestres=Semestre::get();
-   return view('AjouterModule',['filieres'=>$filieres],['semestres'=>$semestres]);
+        $semestres = Semestre::get();
+        $professeur = professeur::get();
+    return view('AjouterModule',['filieres'=>$filieres,'semestres'=>$semestres,'professeur'=>$professeur]);
     }
     //
     public function getModules(Request $request)

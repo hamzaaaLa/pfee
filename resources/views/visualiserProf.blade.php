@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Visualiser Professeurs</title>
     <!-- Website favicon-->
-    <link rel="shortcut icon" href="img/fsa_agadir.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/fsa_agadir.png" type="image/x-icon">
     <!-- Bootstrap 05 -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="css/HomePageAdmin.css" />
+    <link rel="stylesheet" href="/css/HomePageAdmin.css" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="/css/all.min.css" />
     <!-- Google Fonts - Open Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +28,7 @@
             FSA-Online
         </a>
         <div class="accordion" id="accordionExample">
-            <a href="DashboardAdmin.php">
+            <a href="{{route('admineHome')}}">
                 <i class="fa-regular fa-chart-bar fa-fw"></i>
                 <span>Dashboard</span>
             </a>
@@ -43,8 +43,8 @@
                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne">
                     <div class="accordion-body test">
                         <ul>
-                            <li><a href="VisualiserEtudiant.php">Consulter et Modifier</a></li>
-                            <li><a href="">Ajouter Etudiant</a></li>
+                            <li><a href="{{route('afficheEtud')}}">Consulter et Modifier</a></li>
+                            <li><a href="{{route('ajoutEtud')}}">Ajouter Etudiant</a></li>
                         </ul>
                     </div>
                 </div>
@@ -60,8 +60,8 @@
                 <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
                     <div class="accordion-body">
                         <ul>
-                            <li class="active"><a href="VisualiserProf.php">Consulter et Modifier</a></li>
-                            <li><a href="">Ajouter Professeur</a></li>
+                            <li class="active"><a href="{{route('afficheProf')}}">Consulter et Modifier</a></li>
+                            <li><a href="{{route('ajouterProfView')}}">Ajouter Professeur</a></li>
                         </ul>
                     </div>
                 </div>
@@ -77,8 +77,8 @@
                 <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree">
                     <div class="accordion-body">
                         <ul>
-                            <li><a href="VisualiserModule.php">Consulter et Modifier</a></li>
-                            <li><a href="">Ajouter Module</a></li>
+                            <li><a href="{{route('afficheModule')}}">Consulter et Modifier</a></li>
+                            <li><a href="{{route('ajouterModuleView')}}">Ajouter Module</a></li>
                         </ul>
                     </div>
                 </div>
@@ -87,14 +87,17 @@
                 <i class="fa-solid fa-user"></i>
                 Profile
             </a>
-            <a href="DashboardAdmin.php">
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fa-solid fa-power-off fa-lg"></i>
-                Déconnexion
+                {{ __('Déconnexion') }}
             </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
         </div>
     </div>
     <!-- End Sidebar -->
-    <div class="visualiser">
+    <div class="visualiser page-content">
         <div class="head">
             <a href="" type="button" class="btn">
                 <img src="../img/professeur.jpg" alt="">
@@ -107,7 +110,7 @@
                 <div class="search">
                     <input type="search" placeholder="Saisir un CIN">
                 </div>
-                <a href="" type="button" class="btn btn-primary">Ajouter Professeur</a>
+                <a href="{{route('ajouterProfView')}}" type="button" class="btn btn-primary">Ajouter Professeur</a>
             </div>
             <div class="table-responsive">
                 <table class="table table-hover table-bordered">
@@ -147,7 +150,7 @@
         </div>
     </div>
 </div>
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/all.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/all.min.js"></script>
 </body>
 </html>

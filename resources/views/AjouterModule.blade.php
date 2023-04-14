@@ -49,7 +49,7 @@
                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne">
                     <div class="accordion-body test">
                         <ul>
-                            <li><a href="VisualiserEtudiant.php">Consulter et Modifier</a></li>
+                            <li><a href="{{route('afficheEtud')}}">Consulter et Modifier</a></li>
                             <li><a href="{{route('ajoutEtud')}}">Ajouter Etudiant</a></li>
                         </ul>
                     </div>
@@ -66,7 +66,7 @@
                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
                     <div class="accordion-body">
                         <ul>
-                            <li><a href="VisualiserProf.php">Consulter et Modifier</a></li>
+                            <li><a href="{{route('afficheProf')}}">Consulter et Modifier</a></li>
                             <li><a href="{{route('ajouterProfView')}}">Ajouter Professeur</a></li>
                         </ul>
                     </div>
@@ -83,7 +83,7 @@
                 <div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="headingThree">
                     <div class="accordion-body">
                         <ul>
-                            <li><a href="VisualiserModule.php">Consulter et Modifier</a></li>
+                            <li><a href="{{route('afficheModule')}}">Consulter et Modifier</a></li>
                             <li class="active"><a href="{{route('ajouterModuleView')}}">Ajouter Module</a></li>
                         </ul>
                     </div>
@@ -150,7 +150,7 @@
                         <option selected disabled value="">Choisir...</option>
                         @foreach($semestres as $key){
                             <option >{{$key->libelleSemestre}}</option>
-                        }@endforeach>
+                        }@endforeach
                     </select>
                     <div class="valid-feedback">
                         C'est bon!
@@ -163,20 +163,20 @@
                     <label for="professeur" class="form-label">Professeur</label>
                     <select class="form-select" name="professeur" id="professeur" required>
                         <option selected disabled value="">Choisir...</option>
-                        <option>Professeur 1</option>
-                        <option>Professeur 2</option>
-                        <option>Professeur 3</option>
+                        @foreach($professeur as $professeur)
+                            <option>{{ $professeur->user->name }} {{ $professeur->user->prenom }}</option>
+                        @endforeach
                     </select>
                     <div class="valid-feedback">
                         C'est bon!
-                    </div>mp
+                    </div>
                     <div class="invalid-feedback">
                         Veuillez choisir un professeur.
                     </div>
                 </div>
                 <div class="col-12 submit">
                     <button class="btn btn-primary" type="submit">Ajouter</button>
-                    <a href="VisualiserModule.php" class="btn btn-danger">Anuuler</a>
+                    <a href="{{route('afficheModule')}}" class="btn btn-danger">Anuuler</a>
                 </div>
             </form>
         </div>

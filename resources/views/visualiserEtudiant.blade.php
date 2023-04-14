@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('content')
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,13 +9,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Visualiser Etudiants</title>
     <!-- Website favicon-->
-    <link rel="shortcut icon" href="img/fsa_agadir.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/fsa_agadir.png" type="image/x-icon">
     <!-- Bootstrap 05 -->
-    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="{{asset('css/HomePageAdmin.css')}}" />
+    <link rel="stylesheet" href="{{asset('/css/HomePageAdmin.css')}}" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{asset('css/all.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('/css/all.min.css')}}" />
     <!-- Google Fonts - Open Sans -->
     <link rel="preconnect" href="{{asset('https://fonts.googleapis.com')}}">
     <link rel="preconnect" href="{{asset('https://fonts.gstatic.com')}}" crossorigin>
@@ -26,11 +26,11 @@
     <!-- Start Sidebar -->
     <div class="sidebar">
         <a class="navbar-brand" href="#">
-            <img src="img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
+            <img src="../img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
             FSA-Online
         </a>
         <div class="accordion" id="accordionExample">
-            <a href="DashboardAdmin.php">
+            <a href="{{route('admineHome')}}">
                 <i class="fa-regular fa-chart-bar fa-fw"></i>
                 <span>Dashboard</span>
             </a>
@@ -45,8 +45,8 @@
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
                     <div class="accordion-body test">
                         <ul>
-                            <li class="active">Consulter et Modifier</li>
-                            <li>Ajouter Etudiant</li>
+                            <li class="active"><a href="{{route('afficheEtud')}}">Consulter et Modifier</a></li>
+                            <li><a href='{{route('ajoutEtud')}}'>Ajouter Etudiant</a></li>
                         </ul>
                     </div>
                 </div>
@@ -62,8 +62,8 @@
                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
                     <div class="accordion-body">
                         <ul>
-                            <li>Consulter et Modifier</li>
-                            <li>Ajouter Professeur</li>
+                            <li><a href="{{route('afficheProf')}}">Consulter et Modifier</a></li>
+                            <li><a href="{{route('ajouterProfView')}}">Ajouter Professeur</a></li>
                         </ul>
                     </div>
                 </div>
@@ -79,8 +79,8 @@
                 <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour">
                     <div class="accordion-body">
                         <ul>
-                            <li>Consulter et Modifier</li>
-                            <li>Ajouter Module</li>
+                            <li><a href="{{route('afficheModule')}}">Consulter et Modifier</a></li>
+                            <li><a href="{{route('ajouterModuleView')}}">Ajouter Module</a></li>
                         </ul>
                     </div>
                 </div>
@@ -89,14 +89,17 @@
                 <i class="fa-solid fa-user"></i>
                 Profile
             </a>
-            <a href="DashboardAdmin.php">
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fa-solid fa-power-off fa-lg"></i>
-                Déconnexion
+                {{ __('Déconnexion') }}
             </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
         </div>
     </div>
     <!-- End Sidebar -->
-    <div class="visualiser">
+    <div class="visualiser page-content">
 <!--        <div class="container-fluid">-->
             <div class="head">
                 <a href="" type="button" class="btn">
@@ -110,7 +113,7 @@
                     <div class="search">
                         <input type="search" placeholder="Saisir un CIN">
                     </div>
-                    <a href="" type="button" class="btn btn-primary">Ajouter Etudiant</a>
+                    <a href="{{route('ajoutEtud')}}" type="button" class="btn btn-primary">Ajouter Etudiant</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover table-bordered">
@@ -164,9 +167,8 @@
         </div>
     </div>
 </div>
-<script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('js/all.min.js')}}"></script>
+<script src="{{asset('/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('/js/all.min.js')}}"></script>
 </body>
 </html>
 
-@endsection

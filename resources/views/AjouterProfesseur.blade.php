@@ -51,7 +51,7 @@
                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne">
                     <div class="accordion-body test">
                         <ul>
-                            <li><a href="VisualiserEtudiant.php">Consulter et Modifier</a></li>
+                            <li><a href="{{route('afficheEtud')}}">Consulter et Modifier</a></li>
                             <li><a href="{{route('ajoutEtud')}}">Ajouter Etudiant</a></li>
                         </ul>
                     </div>
@@ -68,7 +68,7 @@
                 <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
                     <div class="accordion-body">
                         <ul>
-                            <li><a href="VisualiserProf.php">Consulter et Modifier</a></li>
+                            <li><a href="{{route('afficheProf')}}">Consulter et Modifier</a></li>
                             <li class="active"><a href="{{route('ajouterProfView')}}">Ajouter Professeur</a></li>
                         </ul>
                     </div>
@@ -85,7 +85,7 @@
                 <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree">
                     <div class="accordion-body">
                         <ul>
-                            <li><a href="VisualiserModule.php">Consulter et Modifier</a></li>
+                            <li><a href="{{route('afficheModule')}}">Consulter et Modifier</a></li>
                             <li><a href="{{route('ajouterModuleView')}}">Ajouter Module</a></li>
                         </ul>
                     </div>
@@ -191,7 +191,7 @@
                 </div>
                 <div class="col-12 submit">
                     <button class="btn btn-primary" type="submit">Ajouter</button>
-                    <a href="VisualiserProf.php" class="btn btn-danger">Anuuler</a>
+                    <a href="{{route('afficheProf')}}" class="btn btn-danger">Anuuler</a>
                 </div>
             </form>
         </div>

@@ -56,7 +56,7 @@
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
                             <div class="accordion-body test">
                                 <ul>
-                                    <li><a href="VisualiserEtudiant.php">Consulter et Modifier</a></li>
+                                    <li><a href="{{route('afficheEtud')}}">Consulter et Modifier</a></li>
                                     <li class="active"><a href="{{route('ajoutEtud')}}">Ajouter Etudiant</a></li>
                                 </ul>
                             </div>
@@ -73,7 +73,7 @@
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
                             <div class="accordion-body">
                                 <ul>
-                                    <li><a href="VisualiserProf.php">Consulter et Modifier</a></li>
+                                    <li><a href="{{route('afficheProf')}}">Consulter et Modifier</a></li>
                                     <li><a href="{{route('ajouterProfView')}}">Ajouter Professeur</a></li>
                                 </ul>
                             </div>
@@ -90,7 +90,7 @@
                         <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree">
                             <div class="accordion-body">
                                 <ul>
-                                    <li><a href="VisualiserModule.php">Consulter et Modifier</a></li>
+                                    <li><a href="{{route('afficheModule')}}">Consulter et Modifier</a></li>
                                     <li><a href="{{route('ajouterModuleView')}}">Ajouter Module</a></li>
                                 </ul>
                             </div>
@@ -224,16 +224,6 @@
                         <div class="col-md-6">
                             <label for="moduleSelect" class="form-label">Modules</label>
                             <select class="form-select" id="moduleSelect" name="moduleSelect" multiple="" required>
-                                {{-- <option>Module 1</option>
-                                <option>Module 2</option>
-                                <option>Module 3</option>
-                                <option>Module 3</option>
-                                <option>Module 3</option>
-                                <option>Module 3</option>
-                                <option>Module 3</option>
-                                <option>Module 3</option>
-                                <option>Module 3</option>
-                                <option>Module 3</option> --}}
                             </select>
                             <div class="valid-feedback">
                                 C'est bon!
@@ -244,7 +234,7 @@
                         </div>
                         <div class="col-12 submit">
                             <input class="btn btn-primary" type="submit" value="Ajouter" onclick="sendDate()" />
-                            <a href="VisualiserEtudiant.php" class="btn btn-danger">Anuuler</a>
+                            <a href="{{route('afficheEtud')}}" class="btn btn-danger">Anuuler</a>
                         </div>
                     </form>
                 </div>
