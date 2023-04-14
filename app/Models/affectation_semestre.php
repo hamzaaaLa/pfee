@@ -12,9 +12,10 @@ class affectation_semestre extends Model
     protected $table = "affectation_semestre";
     protected $primaryKey = 'id_affect';
      // Add this line to indicate composite primary key
-    protected $keyType = 'int'; // Add this line to specify primary key type
+    
 
     protected $fillable = ["id_semestre", "id_etud"];
+    public $timestamps = false;
 
     public function semestre()
     {
