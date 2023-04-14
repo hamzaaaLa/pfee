@@ -1,5 +1,3 @@
-{{--@extends('layouts.app')--}}
-{{--@section('content')--}}
 <!doctype html>
 <html>
     <head>
@@ -82,12 +80,12 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingThree">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                 <i class="fa-solid fa-book"></i>
                                 Modules
                             </button>
                         </h2>
-                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree">
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
                             <div class="accordion-body">
                                 <ul>
                                     <li><a href="{{route('afficheModule')}}">Consulter et Modifier</a></li>
@@ -127,8 +125,9 @@
                     <form name="f1" class="row g-3 needs-validation" action="{{route('ajouterEtudiant')}}" method = "POST" novalidate>
                         @csrf
                         <div class="col-md-6">
-                            <label for="name" class="form-label">Nom</label>
-                            <input type="text" class="form-control" name="name" id="name" required value="{{old('name')}}">
+                            <label for="nom" class="form-label">Nom</label>
+                            <input type="text" class="form-control" name="name" id="name" required value="{{old('name')
+                            }}">
                             <div class="valid-feedback">
                                 C'est bon!
                             </div>
@@ -224,6 +223,7 @@
                         <div class="col-md-6">
                             <label for="moduleSelect" class="form-label">Modules</label>
                             <select class="form-select" id="moduleSelect" name="moduleSelect" multiple="" required>
+
                             </select>
                             <div class="valid-feedback">
                                 C'est bon!
@@ -232,7 +232,7 @@
                                 Veuillez choisir un module.
                             </div>
                         </div>
-                        <div class="col-12 submit">
+                        <div class="col-12 submit" id="submit">
                             <input class="btn btn-primary" type="submit" value="Ajouter" onclick="sendDate()" />
                             <a href="{{route('afficheEtud')}}" class="btn btn-danger">Anuuler</a>
                         </div>
@@ -242,7 +242,6 @@
         </div>
         <script src="{{asset('/js/jquery-3.6.4.min.js')}}"></script>
         <script src="{{asset('/js/chosen.jquery.min.js')}}"></script>
-        <script src="{{asset('/js/multi-select-menu-content.js')}}"></script>
         <script src="{{asset('/js/bootstrap.bundle.min.js')}}"></script>
         <script src="{{asset('/js/all.min.js')}}"></script>
         <script>
@@ -270,6 +269,100 @@
                 $("#moduleSelect").chosen();
             });
         </script>
+        <script>
+            // Get references to the select menus
+            var nom = document.getElementById("name");
+            var prenom = document.getElementById("prenom");
+            var email = document.getElementById("email");
+            var cin = document.getElementById("cin");
+            var cne = document.getElementById("cne");
+            var tel = document.getElementById("tel");
+            var filiereSelect = document.getElementById("filiereSelect");
+            var semestreSelect = $("#semestreSelect").chosen();
+            var moduleSelect = $("#moduleSelect").chosen();
+
+            // Listen for changes to the 'filière' and 'semestre' select menu
+            filiereSelect.addEventListener("change", updateSelect);
+            semestreSelect.change(updateSelect);
+
+            // Function to update the select menus bases on the selected 'filière' or 'semestre'
+            function updateSelect() {
+                // Get the selected 'filiere' and 'module'
+                var filiere = filiereSelect.value;
+                var semestres = $(semestreSelect).val();
+
+                console.log(filiere);
+                console.log(semestres);
+
+                if (filiere.length !== 0 && semestres.length !== 0) {
+                    $.ajax({
+                        url: "/admin/ajoutetud/get-modules",
+                        type: 'POST',
+                        data: {
+                            'selectedFiliere': filiere,
+                            'selectedSemestres': semestres,
+                            '_token': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            moduleSelect.html("");
+
+                            for (var i = 0; i < response.length; i++) {
+                                var option = $("<option>").text(response[i].libelleModule).val(response[i].libelleModule);
+                                moduleSelect.append(option);
+                            }
+
+                            moduleSelect.trigger("chosen:updated");
+                        }
+                    });
+
+                    //     /*var xhr = new XMLHttpRequest();
+                    //     // Send an AJAX request to get the data for the select menues
+                    //     xhr.open("GET", "get_select_menu_data.php?filiere=" + filiere + "&semestre=" + semestre);
+                    //     xhr.onload = function() {
+                    //         // Parse the JSON response and update the selected menues
+                    //         modules = JSON.parse(xhr.responseText);
+                    //         moduleSelect.innerHTML = "";
+                    //         for (var i = 0; modules.length; i++) {
+                    //             var option = document.createElement("option");
+                    //             option.text = semestre[i];
+                    //             moduleSelect.add(option);
+                    //         }
+                    //     };
+                    //     xhr.send();*/
+                }
+
+                function sendData() {
+
+                    $.ajax({
+                        url: '',
+                        type: 'POST',
+                        data: {
+                            'nomValue': nom.value,
+                            'prenomValue': prenom.value,
+                            'emailValue': email.value,
+                            'cinValue': cin.value,
+                            'cneValue': cne.value,
+                            'telValue': tel.value,
+                            'filiereValue': filiereSelect.value,
+                            'semestreValues': $(semestreSelect).val(),
+                            'moduleValues': $(moduleSelect).val()
+                        },
+                        success: function(response) {
+                            var r = JSON.parse(response);
+                            var submit = document.getElementById("submit");
+                            if(r == "success") {
+                                submit.innerHTML += '<span class="alert alert-success" role="alert">Ajout Réussit! </span>';
+                            } else if(r == "echec") {
+                                submit.innerHTML += '<span class="alert alert-danger" role="alert">Echec! CNE ou CIN' +
+                                    ' existe déjà!</span>'
+                            }
+                        }
+                    });
+
+                }
+
+            }
+        </script>
     </body>
 </html>
-{{--@endsection--}}
