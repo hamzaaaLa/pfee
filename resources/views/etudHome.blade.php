@@ -198,7 +198,9 @@
             <div class="announcements">
                 <div class="section-header">
                     <h3>Annonces</h3>
-                    <a class="btn btn-light" href="#" role="button">Créer annonce</a>
+                    @if(Auth::user()->type=='prof')
+                        <a class="btn btn-light" href="#" role="button">Créer annonce</a>
+                    @endif
                 </div>
                 <ul>
                     <li>
