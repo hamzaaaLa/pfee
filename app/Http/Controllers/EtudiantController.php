@@ -51,36 +51,31 @@ class EtudiantController extends Controller
         $user->save();
 
         $etudiant->cne=$request->input('cne');
-        $etudiant->filiere=$request->input('semestreSelect');
+        $etudiant->filiere=$request->input('filiereSelect');
         $etudiant->user_etud=$user->id_user;
         $etudiant->save();
 
-        
-        $semestreValues=$request->input('selectedSemestres');
-       // $semestreValues = implode(",", $semestreValues);
-        //$semestreValues = explode(",", $semestreValues);
-        
+        $semestreValues=$request->input('semestreSelect');
         foreach($semestreValues as $key){
             $affectSemestre=new affectation_semestre();
             $affectSemestre->id_etud=$etudiant->id_etud;
-            $affectSemestre->id_semestre=Semestre::where($key,'libilleSemestre')->select('id_semestre')->get();
+            $affectSemestre->id_semestre=Semestre::where('libelleSemestre',$key)->value('id_semestre');
             $affectSemestre->save();
         }
 
-        $moduleValues=$request->input('moduleValues');
-        $moduleValues = implode(",", $moduleValues);
-        $moduleValues = explode(",", $moduleValues);
+        $moduleValues=$request->input('moduleSelect');
+        
         
         foreach($moduleValues as $key){
             $affectEtud=new Affectation_etud();
             $affectEtud->id_etud=$etudiant->id_etud;
-            $affectEtud->id_module=Module::where($key,'libilleModule')->select('id_module')->get();
+            $affectEtud->id_module=Module::where('libelleModule',$key)->value('id_module');
             $affectEtud->save();
         }
 
 
 
-        return response("success");
+        return redirect()->back();
 
         /*if($query){
             return back()->with('success','data successufly inserted');

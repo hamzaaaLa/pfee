@@ -208,7 +208,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="semestreSelect" class="form-label">Semestres</label>
-                            <select class="form-select" id="semestreSelect" name="semestreSelect" multiple="" required>
+                            <select class="form-select" id="semestreSelect" name="semestreSelect[]" multiple="" required>
                                  @foreach($semestres as $key){
                                     <option >{{$key->libelleSemestre}}</option>
                                 }@endforeach>
@@ -222,7 +222,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="moduleSelect" class="form-label">Modules</label>
-                            <select class="form-select" id="moduleSelect" name="moduleSelect" multiple="" required>
+                            <select class="form-select" id="moduleSelect" name="moduleSelect[]" multiple="" required>
 
                             </select>
                             <div class="valid-feedback">
@@ -233,7 +233,7 @@
                             </div>
                         </div>
                         <div class="col-12 submit" id="submit">
-                            <button class="btn btn-primary"  onclick="sendDate()" >Ajouter</button>
+                            <input type="submit" class="btn btn-primary" value="Ajouter">
                             <a href="{{route('afficheEtud')}}" class="btn btn-danger">Anuuler</a>
                         </div>
                     </form>

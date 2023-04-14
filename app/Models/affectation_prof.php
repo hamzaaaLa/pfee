@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class affectation_prof extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = "affectation_prof";
     protected $primaryKey = 'id_affect';
      // Add this line to indicate composite primary key
-    protected $keyType = 'int'; // Add this line to specify primary key type
+
     protected $fillable = ["id_prof", "id_module"];
     public function professeur()
     {

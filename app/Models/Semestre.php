@@ -11,7 +11,7 @@ class semestre extends Model
     protected $table = "semestre";
     protected $primaryKey = 'id_semestre';
     
-    protected $fillable = ["libelleSemestre",];
+    protected $fillable = ["libelleSemestre"];
     
     public function affectation()
     {

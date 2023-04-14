@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Affectation_etud extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = "affectation_etud";
     protected $primaryKey = 'id_affect';
          // Add this line to indicate composite primary key
-    protected $keyType = 'int'; // Add this line to specify primary key type
+    
     protected $fillable = [ "id_etud","id_module"];
 }

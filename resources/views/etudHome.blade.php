@@ -1,6 +1,4 @@
-@extends('layouts.app')
 
-@section('content')
 
 <!doctype html>
 <html lang="en">
@@ -26,7 +24,67 @@
 <body>
 
 <!-- Start Header -->
+<nav class="navbar navbar-expand-lg header">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="../img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
+            FSA-Online
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">
+                        Tableau de bord
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Formations
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        A propos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Contactez-nous
+                    </a>
+                </li>
+            </ul>
+            <div class="dropdown" >
+                <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="../img/fsa_agadir.png" alt="" width="40" height="30" >
+                        {{ Auth::user()->name }} {{ Auth::user()->prenom }}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <i class="fa-solid fa-user"></i>
+                            Profile
+                        </a>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fa-solid fa-power-off fa-lg"></i>
 
+                        {{ __('Déconnexion') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
 <!-- End Header -->
 <!-- Start Dashboard -->
 
@@ -199,4 +257,4 @@
 <script src="../js/all.min.js"></script>
 </body>
 </html>
-@endsection
+
