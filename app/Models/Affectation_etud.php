@@ -14,4 +14,13 @@ class Affectation_etud extends Model
          // Add this line to indicate composite primary key
     
     protected $fillable = [ "id_etud","id_module"];
+    public function module()
+    {
+        return $this->belongsTo(module::class, 'id_module');
+    }
+
+    public function etudiant()
+    {
+        return $this->belongsTo(etudiant::class, 'id_etud');
+    }
 }

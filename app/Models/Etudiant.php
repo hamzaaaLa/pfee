@@ -26,5 +26,10 @@ class etudiant extends Model
         return $this->hasMany(affectation_semestre::class, 'id_etud')->with('semestre');
     }
 
+    public function affectation_etud()
+    {
+        return $this->hasMany(affectation_etud::class, 'id_etud')->with('module');
+    }
+
 
 }

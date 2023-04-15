@@ -15,15 +15,23 @@ class module extends Model
     protected $dates = [
         'dernierAcces'
     ];
+    //relation between filiere|module
     public function filiere()
     {
         return $this->belongsTo(filiere::class, 'id_filiere');
     }
+    
+    //relation between affectation_prof|module
     public function affectation_prof()
     {
         return $this->hasMany(affectation_prof::class, 'id_module')->with('professeur');
     }
 
+    public function affectation_mod()
+    {
+        return $this->hasMany(affectation_semestre::class, 'id_module')->with('etudiant');
+    }
+    //images
     public function getImageModuleAttribute($value)
     {
         return base64_encode($value);

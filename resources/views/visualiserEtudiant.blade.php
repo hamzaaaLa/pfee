@@ -128,6 +128,7 @@
                             <th scope="col">CNE</th>
                             <th scope="col">Filière</th>
                             <th scope="col">Semestres</th>
+                            <th scope="col">Modules</th>
                             {{-- <th scope="col">Modules</th> --}}
                         </tr>
                         </thead>
@@ -150,11 +151,22 @@
                             <td>{{$etudiant->cne}}</td>
                             <td>{{$etudiant->filiere}}</td> 
                             <td>         
-                                
-                                    @foreach ($etudiant->affectation_semestre as $affectation)
-                                       {{ $affectation->semestre->libelleSemestre }}<br>
-                                    @endforeach
-                               
+                                <ul>
+                                    <li>
+                                        @foreach ($etudiant->affectation_semestre as $affectation)
+                                            {{ $affectation->semestre->libelleSemestre }}<br>
+                                        @endforeach
+                                    </li>
+                                </ul>
+                            </td>
+                            <td> 
+                                <ul>
+                                    <li>
+                                        @foreach ($etudiant->affectation_etud as $affectation_mod)
+                                            {{ $affectation_mod->module->libelleModule }}<br>
+                                        @endforeach
+                                    </li>
+                                </ul>
                             </td>
                             {{-- <td><img src="data:image/jpg;base64,{{ $etudiant->imageProfile }}" width="100"></td> --}}
                            
