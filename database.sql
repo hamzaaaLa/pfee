@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 14 avr. 2023 à 22:58
+-- Généré le : sam. 15 avr. 2023 à 15:06
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -259,7 +259,8 @@ CREATE TABLE `professeur` (
 INSERT INTO `professeur` (`id_prof`, `specialite`, `user_prof`) VALUES
 (1, 'data scientist', 7),
 (2, 'data scientist', 8),
-(3, 'daat scientist', 6);
+(3, 'daat scientist', 6),
+(5, 'data science', 30);
 
 -- --------------------------------------------------------
 
@@ -343,7 +344,8 @@ INSERT INTO `users` (`id_user`, `type`, `name`, `prenom`, `email`, `cin`, `telep
 (9, 1, 'admin1', 'admin1', 'admin1@gmail.com', 'JB555666', '0654678645', 'admin1@gmail.com', '$2y$10$2APYbT8qK2hq.JEJ9GmpxenFClHxk4d5fHSdgez389fJPGwFCb/CO', '2023-04-11 16:58:25', NULL),
 (25, 0, 'ali', 'lmd', 'ali@gmail.com', 'JE000000', '0600000000', 'ali@gmail.com', '$2y$10$VMNErZb6nfzcR.8OboV6MunWcSkENofchmUK0vPwmNU657Rv92OBC', '2023-04-14 15:38:16', NULL),
 (26, 0, 'chahika', 'lll', 'chahika@gmail.com', 'JE111111', '0700000000', 'chahika@gmail.com', '$2y$10$IeqRQOOsC5rZ1geJMqZ9Z.KZbruB/rGutd8VfJ/8MN8TygRRVz7Om', '2023-04-14 15:59:12', NULL),
-(28, 0, 'hassan', 'sss', 'hassan@gmail.com', 'JE0008', '0600000000', 'hassan@gmail.com', '$2y$10$1v/fzGnLnIwuUHGYgcd4u.gGlValWJ0k.xIAkEpHy.6gECuA5OKZ.', '2023-04-14 16:01:39', NULL);
+(28, 0, 'hassan', 'sss', 'hassan@gmail.com', 'JE0008', '0600000000', 'hassan@gmail.com', '$2y$10$1v/fzGnLnIwuUHGYgcd4u.gGlValWJ0k.xIAkEpHy.6gECuA5OKZ.', '2023-04-14 16:01:39', NULL),
+(30, 2, 'Othmane', 'nnn', 'othmane@gmail.com', 'JE222222', '0610000000', 'othmane@gmail.com', '$2y$10$njb2Yvnpl1BiekRDd/7U..YtRHJ/MtvjTEjVkb0Qlgm4U1bg82X1C', '2023-04-15 13:04:11', NULL);
 
 --
 -- Index pour les tables déchargées
@@ -516,7 +518,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT pour la table `professeur`
 --
 ALTER TABLE `professeur`
-  MODIFY `id_prof` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_prof` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `reply`
@@ -534,7 +536,7 @@ ALTER TABLE `semestre`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Contraintes pour les tables déchargées

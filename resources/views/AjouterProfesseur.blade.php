@@ -119,7 +119,7 @@
             <div class="header">
                 <h2>Ajouter Professeur</h2>
             </div>
-            <form class="row g-3 needs-validation" action="#" method="post" novalidate>
+            <form class="row g-3 needs-validation" action="{{route('ajouterProf')}}" method="post" novalidate>
                 @csrf
                 <div class="col-md-6">
                     <label for="nom" class="form-label">Nom</label>

@@ -41,7 +41,7 @@ Route::middleware(['auth','user-access:user'])->group(function () {
 
 Route::middleware(['auth','user-access:prof'])->group(function () {
 
-    Route::get('/prof/dashboard', [HomeController::class, 'profDashboard'])->name('prof.dashboard');
+    Route::get('/prof/dashboard', [HomeController::class, 'etudDashboard'])->name('prof.dashboard');
 });
 
 // Super Admin Routes
@@ -63,6 +63,7 @@ Route::middleware(['auth','user-access:admin'])->group(function () {
         return view('admineHome');
     })->name('admineHome');
     Route::post('/admin/ajoutetud/get-modules', [ModuleController::class, 'getModules'])->name('modules.get');
+    Route::post('/admin/ajoutProfesseur',[ProfController::class,'add'])->name('ajouterProf');
 
     /*Route::get('/admin/ajouterProfForm',function(){
         return view('AjouterProfesseur');

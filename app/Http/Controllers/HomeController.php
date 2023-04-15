@@ -40,7 +40,7 @@ class HomeController extends Controller
     }
     public function profDashboard()
     {
-        return view('profHome');
+        return view('etudHome');
     }
 
     public function adminDashboard()
