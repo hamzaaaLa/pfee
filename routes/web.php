@@ -42,6 +42,8 @@ Route::middleware(['auth','user-access:user'])->group(function () {
 Route::middleware(['auth','user-access:prof'])->group(function () {
 
     Route::get('/prof/dashboard', [HomeController::class, 'etudDashboard'])->name('prof.dashboard');
+    Route::post('/prof/dashboard/get-modules', [HomeController::class, 'getModules'])->name('get.modules');
+    Route::post('/prof/dashboard/annonce_store', [HomeController::class, 'store'])->name('annonce.store');
 });
 
 // Super Admin Routes

@@ -193,8 +193,89 @@
                 <div class="section-header">
                     <h3>Annonces</h3>
                     @if(Auth::user()->type=='prof')
-                        <a class="btn btn-light" href="#" role="button">Créer annonce</a>
+                        {{-- <a class="btn btn-light" href="#" role="button">Créer annonce</a> --}}
+                        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            Créer Annonce
+                        </button>
                     @endif
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="false" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="container">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Créer Annonce</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form class="row g-3 needs-validation" action="{{route('annonce.store')}}" method="post" novalidate>
+                                    @csrf
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="titreInput" class="form-label">Titre</label>
+                                            <input type="text" name="titre" class="form-control" id="titreInput" required>
+                                            <div class="valid-feedback">
+                                                C'est bon!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Veuillez insérer un titre.
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="validationTextarea" class="form-label">Contenue</label>
+                                            <textarea class="form-control" name="contenue"
+                                                      id="validationTextarea"
+                                                      rows="5" required></textarea>
+                                            <div class="valid-feedback">
+                                                C'est bon!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Veuillez insérer du context.
+                                            </div>
+                                        </div>
+                                        {{-- Filiere --}}
+                                        <div class="mb-3">
+                                            <label for="filiere" class="form-label">Filière</label>
+                                            <select class="form-select" name="filiereSelect" id="filiereSelect" required>
+                                                <option selected disabled value="">Choisir...</option>
+                                                     @foreach($filieres as $key){
+                                                         <option >{{$key->libellefiliere}}</option>
+                                                     }@endforeach
+                                            </select>
+                                            <div class="valid-feedback">
+                                                C'est bon!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Veuillez choisir une filière.
+                                            </div>
+                                        </div>
+                                        {{-- Module --}}
+                                        <div class="mb-3">
+                                            <label for="module" class="form-label">Modules</label>
+                                            <select class="form-select" name="moduleSelect" id="moduleSelect" required>
+                                                <option selected disabled value="">Choisir...</option>
+                                            </select>
+                                            <div class="valid-feedback">
+                                                C'est bon!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Veuillez choisir un module.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Annuler</button>
+                                        <button type="button" class="btn btn-primary"><input
+                                                    type="submit" value="Créer"></button>
+                                                {{-- <button type="submit" class="btn btn-primary">Créer</button> --}}
+                                    </div>
+                                </form>
+         
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <ul>
                     <li>
@@ -249,8 +330,58 @@
     </div>
 </div>
 <!-- End Dashboard -->
-<script src="../js/bootstrap.bundle.min.js"></script>
-<script src="../js/all.min.js"></script>
+<script src="/js/jquery-3.6.4.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/all.min.js"></script>
+<script>
+    (function () {
+        'use strict'
+
+        var forms = document.querySelectorAll('.needs-validation')
+
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+<script>
+    var filiereSelect = document.getElementById("filiereSelect");
+    var moduleSelect = $("#moduleSelect");
+    
+    filiereSelect.addEventListener("change", updateModule);
+
+    function updateModule() {
+        var filiere = filiereSelect.value;
+        console.log(filiere);
+
+        $.ajax({
+            url: "/prof/dashboard/get-modules",
+            type: 'POST',
+            data: {
+                'selectedFiliere': filiere,
+                '_token': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
+                moduleSelect.html("");
+
+                for(var i = 0; i < response.length; i++) {
+                    var option = $("<option>").text(response[i].libelleModule).val(response[i].libelleModule);
+                        moduleSelect.append(option);
+                }
+
+            }
+        });
+    }
+</script>
 </body>
 </html>
+
 

@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class annonce extends Model
 {
     use HasFactory;
-    
+    public $timestamps = false;
     protected $table = "annonce";
     protected $primaryKey = 'id_annonce';
     protected $fillable = ["id_prof","id_module","titre","contenue",];
-
+    
     protected $dates = [
         'datecreation'
     ];

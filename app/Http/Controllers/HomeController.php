@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\annonce;
+use App\Models\Filiere;
+use App\Models\Module;
+use App\Models\Professeur;
 
 class HomeController extends Controller
 {
@@ -15,7 +19,6 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-
     /**
      * Show the application dashboard.
      *
@@ -36,7 +39,8 @@ class HomeController extends Controller
     }
     public function etudDashboard()
     {
-        return view('etudHome');
+        $filieres = Filiere::get();
+        return view('etudHome', ['filieres' => $filieres]);
     }
     public function profDashboard()
     {
@@ -47,4 +51,45 @@ class HomeController extends Controller
     {
         return view('admineHome');
     }
+    //displaying modules commande
+    public function getModules(Request $request) {
+
+        $professeur = auth()->user();
+
+        $selectedFiliere = $request->input('selectedFiliere');
+
+        $modules = Module::select('module.libelleModule')
+                ->join('affectation_prof', 'module.id_module', '=', 'affectation_prof.id_module')
+                ->join('professeur', 'affectation_prof.id_prof', '=', 'professeur.id_prof')
+                ->join('filiere', 'module.id_filiere', '=', 'filiere.id_filiere')
+                ->where('professeur.user_prof', '=', $professeur->id_user)
+                ->where('filiere.libellefiliere', '=', $selectedFiliere)
+                ->get();
+
+        return response()->json($modules);
+    }
+    //annonce store
+    public function store(Request $request)
+    {
+        
+        $professeur = auth()->user();
+        $id_prof = professeur::where('user_prof', $professeur->id_user)->value('id_prof');
+
+        $module = $request->input('moduleSelect');
+        
+        $annonce= new annonce;
+        $annonce->id_prof=$id_prof;
+        $annonce->id_module = module::where('libelleModule', $module)->value('id_module');
+        $annonce->titre = $request->input('titre');
+        $annonce->contenue = $request->input('contenue');
+        dd($annonce);
+        if ($annonce->id_module) {
+            $annonce->save();
+            return redirect()->back()->with('success', 'Annonce créée avec succès.');
+        } else {
+            return redirect()->back()->with('error', 'Module invalide.');
+        }
+        return redirect()->back()->with('success', 'Annonce créée avec succès.');
+    }
 }
+

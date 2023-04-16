@@ -205,9 +205,10 @@ body {
     justify-content: space-between;
     /*background-color: #F8F8F8;*/
 }
-.courses .col .card .card-body .card-title {
-    /*display: flex;
-    justify-content: center;*/
+input[type="submit"] {
+    background-color: transparent;
+    border: none;
+    color: white;
 }
 .courses .col .card .card-body a {
     text-decoration: none;
