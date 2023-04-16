@@ -11,7 +11,6 @@ class affectation_prof extends Model
     public $timestamps = false;
     protected $table = "affectation_prof";
     protected $primaryKey = 'id_affect';
-     // Add this line to indicate composite primary key
 
     protected $fillable = ["id_prof", "id_module"];
     public function professeur()

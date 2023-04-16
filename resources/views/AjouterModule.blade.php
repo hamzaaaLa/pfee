@@ -117,7 +117,7 @@
             <div class="header">
                 <h2>Ajouter Module</h2>
             </div>
-            <form class="row g-3 needs-validation" action="#" method="post" novalidate>
+            <form class="row g-3 needs-validation" action="{{route('ajouterModule')}}" method="post" novalidate>
                 @csrf
                 <div class="col-md-6">
                     <label for="libelle" class="form-label">Libellé</label>

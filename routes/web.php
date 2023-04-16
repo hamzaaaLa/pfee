@@ -64,6 +64,7 @@ Route::middleware(['auth','user-access:admin'])->group(function () {
     })->name('admineHome');
     Route::post('/admin/ajoutetud/get-modules', [ModuleController::class, 'getModules'])->name('modules.get');
     Route::post('/admin/ajoutProfesseur',[ProfController::class,'add'])->name('ajouterProf');
+    Route::post('/admin/ajoutModule',[ModuleController::class,'add'])->name('ajouterModule');
 
     /*Route::get('/admin/ajouterProfForm',function(){
         return view('AjouterProfesseur');
