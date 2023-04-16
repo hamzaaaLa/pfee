@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 15 avr. 2023 à 15:06
+-- Généré le : dim. 16 avr. 2023 à 12:11
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -89,7 +89,9 @@ INSERT INTO `affectation_prof` (`id_affect`, `id_prof`, `id_module`) VALUES
 (3, 2, 3),
 (4, 2, 4),
 (5, 3, 5),
-(6, 3, 6);
+(6, 3, 6),
+(7, 5, 14),
+(8, 1, 15);
 
 -- --------------------------------------------------------
 
@@ -223,7 +225,9 @@ INSERT INTO `module` (`id_module`, `libelleModule`, `id_filiere`, `imageModule`,
 (7, 'Bases de Données 2', 1, NULL, 'S6'),
 (8, 'Java 2', 1, NULL, 'S6'),
 (9, 'Sécurité Informatique', 1, NULL, 'S6'),
-(10, 'Web Dynamique', 1, NULL, 'S6');
+(10, 'Web Dynamique', 1, NULL, 'S6'),
+(14, 'Probabilité', 1, NULL, 'S3'),
+(15, 'Algébre 1', 2, NULL, 'S1');
 
 -- --------------------------------------------------------
 
@@ -476,7 +480,7 @@ ALTER TABLE `affectation_etud`
 -- AUTO_INCREMENT pour la table `affectation_prof`
 --
 ALTER TABLE `affectation_prof`
-  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `affectation_semestre`
@@ -506,7 +510,7 @@ ALTER TABLE `filiere`
 -- AUTO_INCREMENT pour la table `module`
 --
 ALTER TABLE `module`
-  MODIFY `id_module` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_module` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pour la table `posts`
