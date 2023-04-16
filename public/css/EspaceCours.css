@@ -1,0 +1,285 @@
+/* Start Variables */
+:root {
+    --main-color: #2196f3;
+    --secondary-color: #2c59be;
+    --main-background: #fafafb;
+    --main-transition: 0.3s;
+}
+/* End Variables */
+/* Start Global Rules */
+body {
+    /*font-family: "Work Sans", sans-serif;*/
+    font-family: 'Open Sans', sans-serif;
+}
+a {
+    text-decoration: none;
+}
+ul {
+    list-style: none;
+}
+/* End Global Rules */
+/* Start Components*/
+.add-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.add-btn {
+    border: 2px solid var(--main-color);
+    background-color: var(--main-color);
+    border-radius: 0.9em;
+    padding: 0.7em 1.1em 0.7em 0.9em;
+    transition: all ease-in-out 0.2s;
+    font-size: 16px;
+}
+
+.add-btn span {
+    color: #fff;
+    font-weight: 600;
+}
+input[type="submit"] {
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+/* Start Components*/
+/* Start Header */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 55;
+    background-color: white;
+    -webkit-box-shadow: 0 0 10px #ddd;
+    -moz-box-shadow: 0 0 10px #ddd;
+    box-shadow: 0 0 10px #ddd;
+    padding: 0;
+}
+.navbar .navbar-brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    color: var(--main-color);
+    font-weight: bold;
+    font-size: 26px;
+}
+/*.navbar .nav-item:hover {
+    background-color: #fafafa;
+}*/
+.navbar .nav-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    position: relative;
+    font-weight: 500;
+    background-image: linear-gradient(
+            to left,
+            var(--main-color),
+            var(--main-color) 50%,
+            #000 50%
+    );
+    background-size: 200% 100%;
+    background-position: 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all var(--main-transition) ease-in-out;
+    overflow: hidden;
+}
+.navbar .nav-link:hover {
+    background-position: -100%;
+    left: 0;
+}
+.navbar .nav-link::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: var(--main-color);
+    bottom: 0px;
+    left: -100%;
+    transition: var(--main-transition);
+}
+.navbar .nav-link:hover:before {
+    left: 0;
+}
+@media (max-width: 991px) {
+    .navbar .nav-link {
+        margin: 0 auto;
+        width: fit-content;
+    }
+}
+.dropdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media (max-width: 991px) {
+    .dropdown {
+        padding: 8px 0;
+    }
+}
+.dropdown button {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 25px;
+    font-weight: 500;
+}
+.dropdown button:hover {
+    background-color: #e9e3fc;
+    border-color: black;
+}
+/*.dropdown button:hover:after  {
+    !*color: white;*!
+}*/
+.dropdown button::after {
+    color: black;
+}
+/*.dropdown button[aria-expanded="true"]:hover {
+    !*border-color: transparent;*!
+}*/
+.dropdown .dropdown-menu {
+    margin-top: 8px;
+    width: 170px;
+}
+@media (max-width: 991px) {
+    .dropdown .dropdown-menu {
+        margin-top: 0;
+        left: 40%;
+    }
+}
+/* End Header */
+/* Start Content */
+.cours {
+    min-height: calc(100vh - 60px);
+    background-color: #f1f5f9;
+    padding: 30px 0;
+}
+.cours .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+@media (max-width: 991px) {
+
+}
+.cours .header h1 {
+    position: relative;
+}
+.cours .header h1::before, .cours .header h1::after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    bottom: -10px;
+    left: 0;
+}
+.cours .header h1::before {
+    background-color: white;
+    width: 100%;
+}
+.cours .header h1::after {
+    background-color: var(--main-color);
+    width: 35%;
+}
+.cours .header .buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cours .header .forum-btn {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+    width: 15rem;
+    height: auto;
+}
+
+.cours .header .forum-btn .circle {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: relative;
+    display: block;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    background: var(--main-color);
+    border-radius: 1.625rem;
+}
+
+.cours .header .forum-btn .circle .icon {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #fff;
+}
+
+.cours .header .forum-btn .circle .icon.arrow {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    left: 0.625rem;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+}
+
+.cours .header .forum-btn .circle .icon.arrow::before {
+    position: absolute;
+    content: "";
+    top: -0.28rem;
+    right: 0.0625rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-top: 0.125rem solid #fff;
+    border-right: 0.125rem solid #fff;
+    transform: rotate(45deg);
+}
+
+.cours .header .forum-btn .button-text {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.75rem 0;
+    margin: 0 0 0 1.85rem;
+    color: var(--main-color);
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.cours .header .forum-btn:hover .circle {
+    width: 100%;
+}
+
+.cours .header .forum-btn:hover .circle .icon.arrow {
+    background: #fff;
+    transform: translate(1rem, 0);
+}
+
+.cours .header .forum-btn:hover .button-text {
+    color: #fff;
+}
+.cours .content .accordion .accordion-collapse li {
+    padding: 7px 0;
+}
+.cours .content .accordion .accordion-collapse li a {
+    padding-left: 7px;
+    color: var(--main-color);
+}
+/* End Content */

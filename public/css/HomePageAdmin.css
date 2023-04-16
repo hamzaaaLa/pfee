@@ -51,8 +51,9 @@ ul {
 }
 .page-content .content {
     background-color: var(--main-background);
-    min-height: calc(100vh - 70px);
+    height: calc(100vh - 70px);
     padding: 30px 50px;
+    overflow: auto;
 }
 .page-content .content .header {
     display: flex;
