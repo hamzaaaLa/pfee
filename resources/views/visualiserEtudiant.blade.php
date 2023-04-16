@@ -149,27 +149,23 @@
                             <td>{{ $etudiant->user->email }}</td>
                             <td>{{ $etudiant->user->telephone }}</td>
                             <td>{{$etudiant->cne}}</td>
-                            <td>{{$etudiant->filiere}}</td> 
-                            <td>         
-                                <ul>
-                                    <li>
-                                        @foreach ($etudiant->affectation_semestre as $affectation)
-                                            {{ $affectation->semestre->libelleSemestre }}<br>
-                                        @endforeach
-                                    </li>
+                            <td>{{$etudiant->filiere}}</td>
+                            <td>
+                                <ul class="disc">
+                                    @foreach ($etudiant->affectation_semestre as $affectation)
+                                        <li>{{ $affectation->semestre->libelleSemestre }}</li>
+                                    @endforeach
                                 </ul>
                             </td>
-                            <td> 
-                                <ul>
-                                    <li>
-                                        @foreach ($etudiant->affectation_etud as $affectation_mod)
-                                            {{ $affectation_mod->module->libelleModule }}<br>
-                                        @endforeach
-                                    </li>
+                            <td>
+                                <ul class="disc">
+                                    @foreach ($etudiant->affectation_etud as $affectation_mod)
+                                        <li>{{ $affectation_mod->module->libelleModule }}</li>
+                                    @endforeach
                                 </ul>
                             </td>
                             {{-- <td><img src="data:image/jpg;base64,{{ $etudiant->imageProfile }}" width="100"></td> --}}
-                           
+
                         </tr>
                         @endforeach
                         </tbody>

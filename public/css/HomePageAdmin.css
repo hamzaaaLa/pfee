@@ -16,6 +16,10 @@ ul {
     list-style: none;
     padding: 0;
 }
+.disc {
+    list-style-type: disc;
+    padding-left: 20px;
+}
 .active, .sidebar .accordion a:hover, .accordion-button:not(.collapsed), .sidebar .accordion-item .accordion-collapse .accordion-body li:hover {
     background-color: #f6f6f6;
     border-radius: 7px;
