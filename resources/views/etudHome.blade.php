@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Welcome</title>
     <!-- Website favicon-->
-    <link rel="shortcut icon" src="{{asset('img/fsa_agadir.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('../img/fsa_agadir.png')}}" type="image/x-icon">
     <!-- Bootstrap 05 -->
     <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />
     <!-- Main CSS File -->
@@ -71,25 +71,19 @@
                     <li><hr class="dropdown-divider"></li>
                     <li>
                         <a class="dropdown-item" href="{{ route('logout') }}"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <i class="fa-solid fa-power-off fa-lg"></i>
-
-                        {{ __('Déconnexion') }}
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fa-solid fa-power-off fa-lg"></i>
+                            {{ __('Déconnexion') }}
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 </nav>
-<!-- End Header -->
-<!-- Start Dashboard -->
-
-<!-- Start Header -->
-
 <!-- End Header -->
 <!-- Start Dashboard -->
 <div class="dashboard">
@@ -111,13 +105,13 @@
                         <div class="card" style="width: 15rem;">
                             <img src="{{asset('/img/bd.png')}}" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <a href="" class="card-title">Bases de Données</a>
+                                <a href="#" class="card-title">Bases de Données</a>
                                 <p class="card-text">
                                     Enseignant: <a href="">Mustapha Machkour</a>
                                 </p>
-                                <div class="progress">
+                                {{--<div class="progress">
                                     <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
-                                </div>
+                                </div>--}}
                             </div>
                         </div>
                     </div>
@@ -129,9 +123,9 @@
                                 <p class="card-text">
                                     Enseignant: <a href="">Mustapha Machkour</a>
                                 </p>
-                                <div class="progress">
+                                {{--<div class="progress">
                                     <div class="progress-bar" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">10%</div>
-                                </div>
+                                </div>--}}
                             </div>
                         </div>
                     </div>
@@ -143,23 +137,23 @@
                                 <p class="card-text">
                                     Enseignant: <a href="">Ayoub Sebraoui</a>
                                 </p>
-                                <div class="progress">
+                                {{--<div class="progress">
                                     <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
-                                </div>
+                                </div>--}}
                             </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="card" style="width: 15rem;">
-                            <img src="{{asset('img/poo.png"')}} class="card-img-top" alt="...">
+                            <img src="{{asset('/img/poo.png')}}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <a href="" class="card-title">Programmation Orienté Objet</a>
                                 <p class="card-text">
                                     Enseignant: <a href="">Said Charfi</a>
                                 </p>
-                                <div class="progress">
+                                {{--<div class="progress">
                                     <div class="progress-bar" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">40%</div>
-                                </div>
+                                </div>--}}
                             </div>
                         </div>
                     </div>
@@ -171,9 +165,9 @@
                                 <p class="card-text">
                                     Enseignant: <a href="">Fouad El Ouafdi</a>
                                 </p>
-                                <div class="progress">
+                                {{--<div class="progress">
                                     <div class="progress-bar" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">15%</div>
-                                </div>
+                                </div>--}}
                             </div>
                         </div>
                     </div>
@@ -185,9 +179,9 @@
                                 <p class="card-text">
                                     Enseignant: <a href="">Abdellah BOULOUZ</a>
                                 </p>
-                                <div class="progress">
+                                {{--<div class="progress">
                                     <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
-                                </div>
+                                </div>--}}
                             </div>
                         </div>
                     </div>
