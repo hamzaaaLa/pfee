@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\annonce;
+use App\Models\Annonce;
 use App\Models\Filiere;
 use App\Models\Module;
 use App\Models\Professeur;
@@ -40,10 +40,11 @@ class HomeController extends Controller
     public function etudDashboard()
     {
         $filieres = Filiere::get();
-        return view('etudHome', ['filieres' => $filieres]);
+        $annonces = Annonce::orderBy('datecreation', 'desc')->get();
+        return view('etudHome', ['annonces' => $annonces, 'filieres' => $filieres]);
     }
     public function profDashboard()
-    {
+    {   
         return view('etudHome');
     }
 
@@ -77,12 +78,12 @@ class HomeController extends Controller
 
         $module = $request->input('moduleSelect');
         
-        $annonce= new annonce;
+        $annonce= new Annonce;
         $annonce->id_prof=$id_prof;
         $annonce->id_module = module::where('libelleModule', $module)->value('id_module');
         $annonce->titre = $request->input('titre');
         $annonce->contenue = $request->input('contenue');
-        dd($annonce);
+    
         if ($annonce->id_module) {
             $annonce->save();
             return redirect()->back()->with('success', 'Annonce créée avec succès.');

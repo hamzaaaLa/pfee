@@ -7,6 +7,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Welcome</title>
     <!-- Website favicon-->
     <link rel="shortcut icon" href="{{asset('../img/fsa_agadir.png')}}" type="image/x-icon">
@@ -278,51 +279,17 @@
                     </div>
                 </div>
                 <ul>
-                    <li>
-                        <img src="{{asset('/img/professeur.jpg')}}" alt="">
-                        <div class="annonce-text">
-                            <a href="">Abdellah BOULOUZ</a>
-                            <p class="subject"><span>Sujet: </span>Séance d'avancement</p>
-                            <p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, perspiciatis, veniam. Accusantium aliquam commodi libero nulla!</p>
-                            <span>18:01 02/04/2023</span>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="../img/professeur.jpg" alt="">
-                        <div class="annonce-text">
-                            <a href="">Abdellah BOULOUZ</a>
-                            <p class="subject"><span>Sujet: </span>Séance d'avancement</p>
-                            <p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, perspiciatis, veniam. Accusantium aliquam commodi libero nulla!</p>
-                            <span>18:01 02/04/2023</span>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="../img/professeur.jpg" alt="">
-                        <div class="annonce-text">
-                            <a href="">Abdellah BOULOUZ</a>
-                            <p class="subject"><span>Sujet: </span>Séance d'avancement</p>
-                            <p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, perspiciatis, veniam. Accusantium aliquam commodi libero nulla!</p>
-                            <span>18:01 02/04/2023</span>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="../img/professeur.jpg" alt="">
-                        <div class="annonce-text">
-                            <a href="">Abdellah BOULOUZ</a>
-                            <p class="subject"><span>Sujet: </span>Séance d'avancement</p>
-                            <p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, perspiciatis, veniam. Accusantium aliquam commodi libero nulla!</p>
-                            <span>18:01 02/04/2023</span>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="../img/professeur.jpg" alt="">
-                        <div class="annonce-text">
-                            <a href="">Abdellah BOULOUZ</a>
-                            <p class="subject"><span>Sujet: </span>Séance d'avancement</p>
-                            <p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, perspiciatis, veniam. Accusantium aliquam commodi libero nulla!</p>
-                            <span>18:01 02/04/2023</span>
-                        </div>
-                    </li>
+                    @foreach($annonces as $annonce)
+                        <li>
+                                <img src="{{asset('/img/professeur.jpg')}}" alt="">
+                                <div class="annonce-text">
+                                    <a href="">{{ $annonce->professeur->user->name }}</a>
+                                    <p class="subject"><span>Sujet: </span>{{ $annonce->titre }}</p>
+                                    <p class="content">{{ $annonce->contenue }}</p>
+                                    <span>{{ date('H:i d/m/Y', strtotime($annonce->datecreation)) }}</span>
+                                </div>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
             <!-- End Announcements -->

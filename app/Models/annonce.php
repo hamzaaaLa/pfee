@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class annonce extends Model
+class Annonce extends Model
 {
     use HasFactory;
     public $timestamps = false;
@@ -20,6 +20,8 @@ class annonce extends Model
     {
         return $this->belongsTo(professeur::class, 'id_prof');
     }
-
-
+    public function module()
+    {
+        return $this->belongsTo(Module::class, 'id_module');
+    }
 }

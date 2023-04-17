@@ -20,6 +20,11 @@ class module extends Model
     {
         return $this->belongsTo(filiere::class, 'id_filiere');
     }
+    //relation with annonce 
+    public function Annonce()
+    {
+        return $this->hasMany(Annonce::class, 'id_module');
+    }
     
     //relation between affectation_prof|module
     public function affectation_prof()
