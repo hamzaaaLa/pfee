@@ -34,40 +34,39 @@
                 FSA-Online
             </a>
             <div class="accordion" id="accordionExample">
-                <a href="{{route('admineHome')}}">
+                <a href="{{route('admineHome')}}" class="active">
                     <i class="fa-regular fa-chart-bar fa-fw"></i>
                     <span>Dashboard</span>
                 </a>
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                             <i class="fa-solid fa-graduation-cap"></i>
-                            <span>Etudiants</span>
+                            <span>Etudiant</span>
                         </button>
                     </h2>
                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne">
                         <div class="accordion-body test">
                             <ul>
-                                <li><a href="VisualiserEtudiant.php">Consulter et Modifier</a></li>
-                                <li><a href="{{route('ajoutEtud')}}">Ajouter Etudiant</a></li>
+                                <li><a href="{{route('afficheEtud')}}">Consulter et Modifier</a></li>
+                                <li><a href='{{route('ajoutEtud')}}'>Ajouter Etudiant</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             <i class="fa-solid fa-chalkboard-user"></i>
                             Professeurs
                         </button>
                     </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
                         <div class="accordion-body">
                             <ul>
-                                <li class="active"><a href="VisualiserProf.php">Consulter et Modifier</a></li>
-                                <li><a href="AjouterProfesseur.php">Ajouter Professeur</a></li>
+                                <li><a href="{{route('afficheProf')}}">Consulter et Modifier</a></li>
+                                <li><a href="{{route('ajouterProfView')}}">Ajouter Professeur</a></li>
                             </ul>
                         </div>
                     </div>
@@ -75,16 +74,16 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingThree">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                             <i class="fa-solid fa-book"></i>
                             Modules
                         </button>
                     </h2>
-                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree">
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
                         <div class="accordion-body">
                             <ul>
-                                <li><a href="VisualiserModule.php">Consulter et Modifier</a></li>
-                                <li><a href="AjouterModule.php">Ajouter Module</a></li>
+                                <li><a href="{{route('afficheModule')}}">Consulter et Modifier</a></li>
+                                <li><a href="{{route('ajouterModuleView')}}">Ajouter Module</a></li>
                             </ul>
                         </div>
                     </div>
@@ -186,7 +185,7 @@
                     </div>
                     <div class="col-12 submit">
                         <button class="btn btn-primary" type="submit">Modifier</button>
-                        <a href="VisualiserProf.php" class="btn btn-danger">Anuuler</a>
+                        <a href="{{route('afficheProf')}}" class="btn btn-danger">Anuuler</a>
                     </div>
                 </form>
             </div>

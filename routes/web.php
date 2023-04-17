@@ -56,7 +56,7 @@ Route::middleware(['auth','user-access:admin'])->group(function () {
     Route::get('admin/afficheEtud',[EtudiantController::class,'index'])->name('afficheEtud');
     Route::get('admin/afficheProf',[ProfController::class,'index'])->name('afficheProf');
     Route::get('admin/afficheModule',[ModuleController::class,'index'])->name('afficheModule');
-    Route::get('/edit/{id_user}',[EtudiantController::class,'edit'])->name('editerEtudiant');
+    Route::get('/editEtudiant/{id_user}',[EtudiantController::class,'edit'])->name('editerEtudiant');
     Route::post('/{id_user}',[EtudiantController::class,'update'])->name('updateEtud');
     Route::get('/consulter',[EtudiantController::class,'consulter'])->name('consulterEtud');
     Route::get('/admin/ajouterProfesseurForm',[ProfController::class,'ajoutView'])->name('ajouterProfView');
@@ -67,7 +67,7 @@ Route::middleware(['auth','user-access:admin'])->group(function () {
     Route::post('/admin/ajoutetud/get-modules', [ModuleController::class, 'getModules'])->name('modules.get');
     Route::post('/admin/ajoutProfesseur',[ProfController::class,'add'])->name('ajouterProf');
     Route::post('/admin/ajoutModule',[ModuleController::class,'add'])->name('ajouterModule');
-    Route::get('/edit/{id_user}',[ProfController::class,'edit'])->name('editerProf');
+    Route::get('/editProf/{id_user}',[ProfController::class,'edit'])->name('editerProf');
     Route::post('/{id_user}',[ProfController::class,'update'])->name('updateProf');
     Route::get('/supprimer/{id_user}',[ProfController::class,'delete'])->name('deleteProf');
 
