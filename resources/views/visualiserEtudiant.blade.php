@@ -136,7 +136,7 @@
                         @foreach ($etudiant as $etudiant)
                         <tr>
                             <td>
-                                <a href="">
+                                <a href="{{route('editerEtudiant',$etudiant->user->id_user)}}">
                                     <i class="fa-solid fa-pen"></i>
                                 </a>
                                 <a href="">
