@@ -129,10 +129,10 @@
                         @foreach ($professeur as $professeur)
                     <tr>
                         <td>
-                            <a href="">
+                            <a href="{{route('editerProf',$professeur->user->id_user)}}">
                                 <i class="fa-solid fa-pen"></i>
                             </a>
-                            <a href="">
+                            <a href="{{route('deleteProf',$professeur->user->id_user)}}">
                                 <i class="fa-solid fa-trash"></i>
                             </a>
                         </td>

@@ -91,19 +91,52 @@ class EtudiantController extends Controller
         return view('visualiserEtudiant',['etudiants'=>$etudiants]);
         }
         
-    public function edit($id_etud){
-        return view('adminEditEtud',[
-            'etudiant'=>Etudiant::where('id_etud',$id_etud)->first()
-        ]);
+    public function edit($id_user){
+        $filieres=Filiere::get();
+        $semestres=Semestre::get();
+        $users=User::where('id_user',$id_user)->first();
+        //'users'=>User::where('id_user',$id_user)->first()
+        $etudiant=User::join('etudiant','users.id_user','=','etudiant.user_etud')->where('id_user',$id_user)->first();
+        /*return view('ModifierEtudiant',['filieres'=>$filieres],[
+            'users'=>User::where('id_user',$id_user)->first()
+        ],['semestres'=>$semestres]);*/
+        return view('ModifierEtudiant',compact(['filieres','semestres','etudiant','users']));
     }
 
-    public function update(Request $request,$id_etud){
-        Etudiant::where('id_etud',$id_etud)->update([
-            'nom'=>$request->name,
-            'prenom'=>$request->prenom,
-            'email'=>$request->email,
-            'cne'=>$request->cne
+    public function update(Request $request,$id_user){
+        
+        $id_etud=User::join('etudiant','users.id_user','=','etudiant.user_etud')->where('users.id_user',$id_user)->value('etudiant.id_etud');
+        User::where('id_user',$id_user)->update([
+        'name'=>$request->input('name'),
+        'prenom'=>$request->input('prenom'),
+        'email'=>$request->input('email'),
+        'cin'=>$request->input('cin'),
+        'telephone'=>$request->input('tel'),
+        'nomUtilisateur'=>$request->input('email'),
         ]);
+
+        Etudiant::where('user_etud',$id_user)->update([
+        'filiere'=>$request->input('filiereSelect'),
+        ]);
+
+        $semestreValues=$request->input('semestreSelect');
+        foreach($semestreValues as $key){
+            affectation_semestre::where('id_etud',$id_etud)->updateOrCreate([
+            'id_etud'=>$id_etud,
+            'id_semestre'=>Semestre::where('libelleSemestre',$key)->value('id_semestre'),
+            ]);
+        }
+
+        $moduleValues=$request->input('moduleSelect');
+        
+        
+        foreach($moduleValues as $key){
+            Affectation_etud::where('id_etud',$id_etud)->updateOrCreate([
+            'id_etud'=>$id_etud,
+            'id_module'=>Module::where('libelleModule',$key)->value('id_module'),
+            ]);
+            
+        }
         
         return redirect(route('afficheEtud'));
     }

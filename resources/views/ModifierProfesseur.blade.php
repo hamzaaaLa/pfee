@@ -116,11 +116,11 @@
                 <div class="header">
                     <h2>Modifier Professeur</h2>
                 </div>
-                <form class="row g-3 needs-validation" action="#" method="post" novalidate>
+                <form class="row g-3 needs-validation" action="{{route('updateProf',$users->id_user)}}" method="post" novalidate>
                     @csrf
                     <div class="col-md-6">
                         <label for="name" class="form-label">Nom</label>
-                        <input type="text" class="form-control" name="name" id="name" required>
+                        <input type="text" class="form-control" name="name" id="name" value="{{$prof->name}}"  required>
                         <div class="valid-feedback">
                             C'est bon!
                         </div>
@@ -130,7 +130,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="prenom" class="form-label">Prénom</label>
-                        <input type="text" class="form-control" name="prenom" id="prenom" required>
+                        <input type="text" class="form-control" name="prenom" id="prenom" value="{{$prof->prenom}}" required>
                         <div class="valid-feedback">
                             C'est bon!
                         </div>
@@ -142,7 +142,7 @@
                         <label for="email" class="form-label">Email</label>
                         <div class="input-group has-validation">
                             <span class="input-group-text" id="inputGroupPrepend">@</span>
-                            <input type="Email" class="form-control" name="email" id="email" aria-describedby="inputGroupPrepend" required>
+                            <input type="Email" class="form-control" name="email" id="email" aria-describedby="inputGroupPrepend" value="{{$prof->email}}"required>
                             <div class="valid-feedback">
                                 C'est bon!
                             </div>
@@ -153,7 +153,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="cin" class="form-label">CIN</label>
-                        <input type="text" class="form-control" name="cin" id="cin" required>
+                        <input type="text" class="form-control" name="cin" id="cin" value="{{$prof->cin}}" required>
                         <div class="valid-feedback">
                             C'est bon!
                         </div>
@@ -165,7 +165,7 @@
                         <label for="tel" class="form-label">GSM</label>
                         <div class="input-group has-validation">
                             <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-phone"></i></span>
-                            <input type="tel" class="form-control" name="tel" id="tel" aria-describedby="inputGroupPrepend" required>
+                            <input type="tel" class="form-control" name="tel" id="tel" value="{{$prof->telephone}}" aria-describedby="inputGroupPrepend" required>
                             <div class="valid-feedback">
                                 C'est bon!
                             </div>
@@ -176,7 +176,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="specialite" class="form-label">Spécialité</label>
-                        <input type="text" class="form-control" name="specialite" id="specialite" required>
+                        <input type="text" class="form-control" name="specialite" id="specialite" value="{{$prof->specialite}}"  required>
                         <div class="valid-feedback">
                             C'est bon!
                         </div>

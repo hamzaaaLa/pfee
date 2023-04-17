@@ -119,11 +119,11 @@
             <div class="header">
                 <h2>Modifier Etudiant</h2>
             </div>
-            <form class="row g-3 needs-validation" action="#" method="post" novalidate>
+            <form class="row g-3 needs-validation" action="{{route('updateEtud',$users->id_user)}}" method="post" novalidate>
                 @csrf
                 <div class="col-md-6">
                     <label for="name" class="form-label">Nom</label>
-                    <input type="text" class="form-control" name="name" id="name" required>
+                    <input type="text" class="form-control" name="name" id="name" value="{{$etudiant->name}}" required>
                     <div class="valid-feedback">
                         C'est bon!
                     </div>
@@ -133,7 +133,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="prenom" class="form-label">Prénom</label>
-                    <input type="text" class="form-control" name="prenom" id="prenom" required>
+                    <input type="text" class="form-control" name="prenom" id="prenom" value="{{$etudiant->prenom}}" required>
                     <div class="valid-feedback">
                         C'est bon!
                     </div>
@@ -145,7 +145,7 @@
                     <label for="email" class="form-label">Email</label>
                     <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="Email" class="form-control" name="email" id="email" aria-describedby="inputGroupPrepend" required>
+                        <input type="Email" class="form-control" name="email" id="email" aria-describedby="inputGroupPrepend" value="{{$etudiant->email}}" required>
                         <div class="valid-feedback">
                             C'est bon!
                         </div>
@@ -156,7 +156,7 @@
                 </div>
                 <div class="col-md-3">
                     <label for="cin" class="form-label">CIN</label>
-                    <input type="text" class="form-control" name="cin" id="cin" required>
+                    <input type="text" class="form-control" name="cin" id="cin" value="{{$etudiant->cin}}" required>
                     <div class="valid-feedback">
                         C'est bon!
                     </div>
@@ -168,7 +168,7 @@
                     <label for="tel" class="form-label">GSM</label>
                     <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-phone"></i></span>
-                        <input type="tel" class="form-control" name="tel" id="tel" aria-describedby="inputGroupPrepend" required>
+                        <input type="tel" class="form-control" name="tel" id="tel" aria-describedby="inputGroupPrepend" value="{{$etudiant->telephone}}" required>
                         <div class="valid-feedback">
                             C'est bon!
                         </div>
@@ -179,7 +179,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="filiereSelect" class="form-label">Filière</label>
-                    <select class="form-select" id="filiereSelect" name="filiereSelect" required>
+                    <select class="form-select" id="filiereSelect" name="filiereSelect"  required>
                         <option selected disabled value="">Choisir...</option>
                         @foreach($filieres as $key){
                             <option >{{$key->libellefiliere}}</option>
@@ -194,7 +194,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="semestre" class="form-label">Semestre</label>
-                    <select class="form-select" id="semestreSelect" name="semestreSelect" multiple="" required>
+                    <select class="form-select" id="semestreSelect" name="semestreSelect[]" multiple="" required>
                         @foreach($semestres as $key){
                         <option >{{$key->libelleSemestre}}</option>
                         }@endforeach>
@@ -208,7 +208,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="moduleSelect" class="form-label">Modules</label>
-                    <select class="form-select" id="moduleSelect" name="moduleSelect" multiple="" required>
+                    <select class="form-select" id="moduleSelect" name="moduleSelect[]" multiple="" required>
                         <option>Module 1</option>
                         <option>Module 2</option>
                         <option>Module 3</option>
