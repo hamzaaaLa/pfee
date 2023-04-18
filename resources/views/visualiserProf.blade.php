@@ -123,6 +123,8 @@
                         <th scope="col">Email</th>
                         <th scope="col">Telephone</th>
                         <th scope="col">Spécialité</th>
+                        <th scope="col">Filiére</th>
+                        <th scope="col">Modules</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -159,7 +161,21 @@
                         <td>{{ $professeur->user->prenom }}</td>
                         <td>{{ $professeur->user->email }}</td>
                         <td>{{ $professeur->user->telephone }}</td>
-                        <td>{{$professeur->specialite}}</td>
+                        <td>{{ $professeur->specialite }}</td>
+                        <td>  
+                            <ul class="disc">
+                                @foreach ($professeur->affectation_prof as $affectation_prof)
+                                    <li>{{ $affectation_prof->module->filiere->libellefiliere }}</li>
+                                @endforeach
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="disc">
+                                @foreach ($professeur->affectation_prof as $affectation_prof)
+                                    <li>{{ $affectation_prof->module->libelleModule }}</li>
+                                @endforeach
+                            </ul>
+                        </td>
                     </tr>
                         @endforeach
                     </tbody>
