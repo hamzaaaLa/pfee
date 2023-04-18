@@ -241,13 +241,11 @@ ul {
     padding: 8px 10px 0;
 }
 .visualiser .table td.actions {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px 10px 13px;
+    text-align: center;
 }
 .visualiser .table td.actions > a {
     color: black;
+    padding: 0 5px;
 }
 .visualiser .table td > a:hover {
     color: var(--main-color);
