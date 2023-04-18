@@ -166,8 +166,10 @@
                                     <form class="row g-3 needs-validation" action="" method="post" novalidate>
                                         <div class="modal-body">
                                             <div class="mb-3">
-                                                <label for="nom" class="form-label">Nom</label>
-                                                <input type="text" name="nom" class="form-control" id="nom" required>
+                                                <label for="nomSection" class="form-label">Nom</label>
+                                                <input type="text" name="nomSection" class="form-control"
+                                                       id="nomSection"
+                                                       required>
                                                 <div class="valid-feedback">
                                                     C'est bon!
                                                 </div>
@@ -298,22 +300,30 @@
     <script>
         function addSection() {
 
-            nom = $("#nom").val();
+            nomSection = $("#nomSection").val();
 
-            if(nom !== "") {
-                var newSection =    '<div class="accordion-item">' +
-                    '<h2 class="accordion-header" id="panelsStayOpen-headingOne">' +
-                    '<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">' +
-                     nom +
-                    '</button>' +
-                    '</h2>' +
-                    '<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">' +
-                    '<div class="accordion-body">' +
-                    'smth' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>';
-                $("#accordionSection").append(newSection);
+            if(nomSection !== "") {
+                $.ajax({
+                   url: "",
+                   type: 'post',
+                   data: {
+                       'nomSection': nomSection
+                   },
+                    success: function (response) {
+                        var newSection =    '<div class="accordion-item">' +
+                            '<h2 class="accordion-header" id="panelsStayOpen-headingOne">' +
+                            '<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">' +
+                            nomSection +
+                            '</button>' +
+                            '</h2>' +
+                            '<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">' +
+                            '<div class="accordion-body">' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
+                        $("#accordionSection").append(newSection);
+                    }
+                });
             }
         }
     </script>
