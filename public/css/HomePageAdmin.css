@@ -234,14 +234,22 @@ ul {
     background-color: var(--main-color);
     color: white;
 }
-.visualiser .table td, .visualiser .table th {
+.visualiser .table th {
     padding: 10px;
 }
-.visualiser .table td a {
-    padding: 0 7px;
+.visualiser .table td {
+    padding: 8px 10px 0;
+}
+.visualiser .table td.actions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 10px 13px;
+}
+.visualiser .table td.actions > a {
     color: black;
 }
-.visualiser .table td a:hover {
+.visualiser .table td > a:hover {
     color: var(--main-color);
 }
 /* End Visualiser */

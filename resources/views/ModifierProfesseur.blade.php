@@ -56,16 +56,16 @@
                 </div>
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                             <i class="fa-solid fa-chalkboard-user"></i>
                             Professeurs
                         </button>
                     </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+                    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
                         <div class="accordion-body">
                             <ul>
-                                <li><a href="{{route('afficheProf')}}">Consulter et Modifier</a></li>
+                                <li class="active"><a href="{{route('afficheProf')}}">Consulter et Modifier</a></li>
                                 <li><a href="{{route('ajouterProfView')}}">Ajouter Professeur</a></li>
                             </ul>
                         </div>
