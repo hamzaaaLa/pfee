@@ -127,10 +127,10 @@
                         @foreach ($module as $module)
                     <tr>
                         <td>
-                            <a href="">
+                            <a href="{{route('editerModule',$module->id_module)}}">
                                 <i class="fa-solid fa-pen"></i>
                             </a>
-                            <a href="">
+                            <a href="{{route('deleteModule',$module->id_module)}}">
                                 <i class="fa-solid fa-trash"></i>
                             </a>
                         </td>

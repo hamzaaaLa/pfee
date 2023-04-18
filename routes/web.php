@@ -57,7 +57,7 @@ Route::middleware(['auth','user-access:admin'])->group(function () {
     Route::get('admin/afficheProf',[ProfController::class,'index'])->name('afficheProf');
     Route::get('admin/afficheModule',[ModuleController::class,'index'])->name('afficheModule');
     Route::get('/editEtudiant/{id_user}',[EtudiantController::class,'edit'])->name('editerEtudiant');
-    Route::post('/{id_user}',[EtudiantController::class,'update'])->name('updateEtud');
+    Route::post('/updatEtud/{id_user}',[EtudiantController::class,'update'])->name('updateEtud');
     Route::get('/consulter',[EtudiantController::class,'consulter'])->name('consulterEtud');
     Route::get('/admin/ajouterProfesseurForm',[ProfController::class,'ajoutView'])->name('ajouterProfView');
     Route::get('/admin/ajouterModuleForm',[ModuleController::class,'ajouterView'])->name('ajouterModuleView');
@@ -68,8 +68,12 @@ Route::middleware(['auth','user-access:admin'])->group(function () {
     Route::post('/admin/ajoutProfesseur',[ProfController::class,'add'])->name('ajouterProf');
     Route::post('/admin/ajoutModule',[ModuleController::class,'add'])->name('ajouterModule');
     Route::get('/editProf/{id_user}',[ProfController::class,'edit'])->name('editerProf');
-    Route::post('/{id_user}',[ProfController::class,'update'])->name('updateProf');
-    Route::get('/supprimer/{id_user}',[ProfController::class,'delete'])->name('deleteProf');
+    Route::post('/updateProf/{id_user}',[ProfController::class,'update'])->name('updateProf');
+    Route::get('/supprimerProf/{id_user}',[ProfController::class,'delete'])->name('deleteProf');
+    Route::get('/editModule/{id_module}',[ModuleController::class,'edit'])->name('editerModule');
+    Route::post('/updateModule/{id_module}',[ModuleController::class,'update'])->name('updateModule');
+    Route::get('/supprimerModule/{id_module}',[ModuleController::class,'delete'])->name('deleteModule');
+    Route::get('/supprimerEtudiant/{id_user}',[EtudiantController::class,'delete'])->name('deleteEtudiant');
 
     /*Route::get('/admin/ajouterProfForm',function(){
         return view('AjouterProfesseur');

@@ -106,13 +106,17 @@ class EtudiantController extends Controller
     public function update(Request $request,$id_user){
         
         $id_etud=User::join('etudiant','users.id_user','=','etudiant.user_etud')->where('users.id_user',$id_user)->value('etudiant.id_etud');
+        affectation_semestre::where('id_etud','=',$id_etud)->delete();
+        Affectation_etud::where('id_etud','=',$id_etud)->delete();
         User::where('id_user',$id_user)->update([
-        'name'=>$request->input('name'),
-        'prenom'=>$request->input('prenom'),
-        'email'=>$request->input('email'),
-        'cin'=>$request->input('cin'),
-        'telephone'=>$request->input('tel'),
-        'nomUtilisateur'=>$request->input('email'),
+        'name'=>$request->name,
+        'prenom'=>$request->prenom,
+        'email'=>$request->email,
+        'cin'=>$request->cin,
+        'telephone'=>$request->tel,
+        'password'=>bcrypt($request->cin),
+        'nomUtilisateur'=>$request->email,
+
         ]);
 
         Etudiant::where('user_etud',$id_user)->update([
@@ -140,6 +144,16 @@ class EtudiantController extends Controller
         
         return redirect(route('afficheEtud'));
     }
+
+    public function delete($id_user) {
+        $id_etud=User::join('etudiant','users.id_user','=','etudiant.user_etud')->where('users.id_user',$id_user)->value('etudiant.id_etud');
+        affectation_semestre::where('id_etud','=',$id_etud)->delete();
+        Affectation_etud::where('id_etud','=',$id_etud)->delete();
+        Etudiant::where('user_etud','=',$id_user)->delete();
+        User::where('id_user','=',$id_user)->delete();
+
+            return redirect(route('afficheEtud'));
+        }
 
     function test(){
         echo "bonjour";

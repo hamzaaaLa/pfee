@@ -117,10 +117,11 @@
                 <div class="header">
                     <h2>Modifier Module</h2>
                 </div>
-                <form class="row g-3 needs-validation" action="#" method="post" novalidate>
+                <form class="row g-3 needs-validation" action="{{route('updateModule',$module->id_module)}}" method="post" novalidate>
+                    @csrf
                     <div class="col-md-6">
                         <label for="libelle" class="form-label">Libellé</label>
-                        <input type="text" class="form-control" name="libelle" id="libelle" required>
+                        <input type="text" class="form-control" name="libelle" id="libelle" value="{{$module->libelleModule}}"required>
                         <div class="valid-feedback">
                             C'est bon!
                         </div>
@@ -131,9 +132,11 @@
                     <div class="col-md-6">
                         <label for="filiereSelect" class="form-label">Filière</label>
                         <select class="form-select" id="filiereSelect" name="filiereSelect" required>
-                            <option selected disabled value="">Choisir...</option>
+                            <option selected >{{$module->libellefiliere}}</option>
                             @foreach($filieres as $key){
-                            <option >{{$key->libellefiliere}}</option>
+                                @if($key->libellefiliere != $module->libellefiliere)
+                                    <option>{{$key->libellefiliere}}</option>
+                                @endif
                             }@endforeach
                         </select>
                         <div class="valid-feedback">
@@ -162,9 +165,9 @@
                         <label for="professeur" class="form-label">Professeur</label>
                         <select class="form-select" name="professeur" id="professeur" required>
                             <option selected disabled value="">Choisir...</option>
-                            <option>Professeur 1</option>
-                            <option>Professeur 2</option>
-                            <option>Professeur 3</option>
+                            @foreach($professeur as $professeur)
+                                <option>{{ $professeur->user->name }} {{ $professeur->user->prenom }}</option>
+                            @endforeach
                         </select>
                         <div class="valid-feedback">
                             C'est bon!

@@ -270,13 +270,7 @@
             });
         </script>
         <script>
-            // Get references to the select menus
-            var nom = document.getElementById("name");
-            var prenom = document.getElementById("prenom");
-            var email = document.getElementById("email");
-            var cin = document.getElementById("cin");
-            var cne = document.getElementById("cne");
-            var tel = document.getElementById("tel");
+            // Get references to the select menu
             var filiereSelect = document.getElementById("filiereSelect");
             var semestreSelect = $("#semestreSelect").chosen();
             var moduleSelect = $("#moduleSelect").chosen();
@@ -331,37 +325,6 @@
                     //     };
                     //     xhr.send();*/
                 }
-
-                function sendData() {
-
-                    $.ajax({
-                        url: '/admin/ajoutetud',
-                        type: 'POST',
-                        data: {
-                            'nomValue': nom.value,
-                            'prenomValue': prenom.value,
-                            'emailValue': email.value,
-                            'cinValue': cin.value,
-                            'cneValue': cne.value,
-                            'telValue': tel.value,
-                            'filiereValue': filiereSelect.value,
-                            'semestreValues': $(semestreSelect).val(),
-                            'moduleValues': $(moduleSelect).val()
-                        },
-                        success: function(response) {
-                            //var r = JSON.parse(response);
-                            var submit = document.getElementById("submit");
-                            if(response == "success") {
-                                submit.innerHTML += '<span class="alert alert-success" role="alert">Ajout Réussit! </span>';
-                            } else if(r == "echec") {
-                                submit.innerHTML += '<span class="alert alert-danger" role="alert">Echec! CNE ou CIN' +
-                                    ' existe déjà!</span>'
-                            }
-                        }
-                    });
-
-                }
-
             }
         </script>
     </body>

@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Visualiser Etudiants</title>
     <!-- JQuery plugin for multi-select -->
     <link rel="stylesheet" href="{{asset('/css/chosen.min.css')}}" />
@@ -179,9 +180,11 @@
                 <div class="col-md-6">
                     <label for="filiereSelect" class="form-label">Filière</label>
                     <select class="form-select" id="filiereSelect" name="filiereSelect"  required>
-                        <option selected disabled value="">Choisir...</option>
+                        <option selected >{{$etudiant->filiere}}</option>
                         @foreach($filieres as $key){
-                            <option >{{$key->libellefiliere}}</option>
+                            @if($key->libellefiliere != $etudiant->filiere)
+                                <option>{{$key->libellefiliere}}</option>
+                            @endif
                         }@endforeach
                     </select>
                     <div class="valid-feedback">
@@ -196,7 +199,7 @@
                     <select class="form-select" id="semestreSelect" name="semestreSelect[]" multiple="" required>
                         @foreach($semestres as $key){
                         <option >{{$key->libelleSemestre}}</option>
-                        }@endforeach>
+                        }@endforeach
                     </select>
                     <div class="valid-feedback">
                         C'est bon!
@@ -263,6 +266,64 @@
             $("#semestreSelect").chosen();
             $("#moduleSelect").chosen();
         });
+    </script>
+    <script>
+        // Get references to the select menu
+        var filiereSelect = document.getElementById("filiereSelect");
+        var semestreSelect = $("#semestreSelect").chosen();
+        var moduleSelect = $("#moduleSelect").chosen();
+
+        // Listen for changes to the 'filière' and 'semestre' select menu
+        filiereSelect.addEventListener("change", updateSelect);
+        semestreSelect.change(updateSelect);
+
+        // Function to update the select menus bases on the selected 'filière' or 'semestre'
+        function updateSelect() {
+            // Get the selected 'filiere' and 'module'
+            var filiere = filiereSelect.value;
+            var semestres = $(semestreSelect).val();
+
+            console.log(filiere);
+            console.log(semestres);
+
+            if (filiere.length !== 0 && semestres.length !== 0) {
+                $.ajax({
+                    url: "/admin/ajoutetud/get-modules",
+                    type: 'POST',
+                    data: {
+                        'selectedFiliere': filiere,
+                        'selectedSemestres': semestres,
+                        '_token': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        moduleSelect.html("");
+
+                        for (var i = 0; i < response.length; i++) {
+                            var option = $("<option>").text(response[i].libelleModule).val(response[i].libelleModule);
+                            moduleSelect.append(option);
+                        }
+
+                        moduleSelect.trigger("chosen:updated");
+                    }
+                });
+
+                //     /*var xhr = new XMLHttpRequest();
+                //     // Send an AJAX request to get the data for the select menues
+                //     xhr.open("GET", "get_select_menu_data.php?filiere=" + filiere + "&semestre=" + semestre);
+                //     xhr.onload = function() {
+                //         // Parse the JSON response and update the selected menues
+                //         modules = JSON.parse(xhr.responseText);
+                //         moduleSelect.innerHTML = "";
+                //         for (var i = 0; modules.length; i++) {
+                //             var option = document.createElement("option");
+                //             option.text = semestre[i];
+                //             moduleSelect.add(option);
+                //         }
+                //     };
+                //     xhr.send();*/
+            }
+        }
     </script>
 </body>
 </html>

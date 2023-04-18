@@ -57,6 +57,33 @@ class ModuleController extends Controller
         $affectProf->save();
 
         return redirect()->back();
+    }
 
+    public function edit($id_module){
+        $professeur=professeur::get();
+        $filieres=Filiere::get();
+        $semestres=Semestre::get();
+        $module=module::join('filiere','module.id_filiere','=','filiere.id_filiere')->where('module.id_module',$id_module)->first();
+        return view('modifierModule',compact(['module','filieres','semestres','professeur']));
+    }
+
+    public function update(Request $request,$id_module){
+        module::where('id_module',$id_module)->update([
+            'libelleModule'=>$request->libelle,
+            'id_filiere'=>Filiere::where('libellefiliere',($request->input('filiereSelect')))->value('id_filiere'),
+            'semestre'=>$request->semestreSelect,
+        ]);
+
+        affectation_prof::where('id_module',$id_module)->updateORCreate([
+            'id_module'=>$id_module,
+            'id_prof'=>User::join('professeur','users.id_user','=','professeur.user_prof')->where((DB::raw("CONCAT(users.name,' ',users.prenom)")),$request->input('professeur'))->value('professeur.id_prof'),
+        ]);
+        return redirect(route('afficheModule'));
+    }
+
+    public function delete($id_module){
+        affectation_prof::where('id_module','=',$id_module)->delete();
+        module::where('id_module','=',$id_module)->delete();
+        return redirect(route('afficheModule'));
     }
 }
