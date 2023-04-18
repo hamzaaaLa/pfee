@@ -165,6 +165,16 @@
                     </div>
                 </div>
                 <div class="col-md-3">
+                    <label for="cne" class="form-label">CNE</label>
+                    <input type="text" class="form-control" name="cne" id="cne" required value="{{old('cne')}}">
+                    <div class="valid-feedback">
+                        C'est bon!
+                    </div>
+                    <div class="invalid-feedback">
+                        Veuillez insérer un cne.
+                    </div>
+                </div>
+                <div class="col-md-6">
                     <label for="tel" class="form-label">GSM</label>
                     <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-phone"></i></span>
