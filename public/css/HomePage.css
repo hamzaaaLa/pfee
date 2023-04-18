@@ -103,6 +103,11 @@ a {
     border: 1px solid black;
     border-radius: 25px;
 }
+.dropdown img{
+    width: 40px;
+    border: none;
+    border-radius: 50%;
+}
 .dropdown button:hover {
     background-color: #e9e3fc;
     border-color: black;

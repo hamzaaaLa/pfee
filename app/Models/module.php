@@ -37,14 +37,14 @@ class module extends Model
         return $this->hasMany(affectation_semestre::class, 'id_module')->with('etudiant');
     }
     //images
-    public function getImageModuleAttribute($value)
+    public function getImageModuleAttribute(): string
     {
-        return base64_encode($value);
+        return $this->attributes['imageModule'] ?? asset('/img/module.png');
     }
 
-    public function setImageModuleAttribute($value)
+    public function setImageModuleAttribute(string $value): void
     {
-        $this->attributes['imageModule'] = base64_decode($value);
+        $this->attributes['imageModule'] = $value;
     }
     public $timestamps = false;
     

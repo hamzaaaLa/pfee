@@ -24,7 +24,7 @@
     <nav class="navbar navbar-expand-lg header">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="../img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
+                <img src="/img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
                 FSA-Online
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,7 @@
                 </ul>
                 <div class="dropdown" >
                     <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="../img/fsa_agadir.png" alt="" width="40" height="30" >
+                        <img src="{{ Auth::user()->imageProfile}}" alt="" width="40" height="30" >
                         {{ Auth::user()->name }} {{ Auth::user()->prenom }}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -95,100 +95,100 @@
                 </a>
             </div>
             <div class="content">
-                <div class="add-container">
-                    <!-- Ajouter Cours -->
-                    <button class="add-btn" type="button" data-bs-toggle="modal" data-bs-target="#coursModal">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg>
-                            Ajouter Fichier
-                        </span>
-                    </button>
-                    <!-- Modal Cours -->
-                    <div class="modal fade" id="coursModal" tabindex="-1" aria-labelledby="coursModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="container">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="coursModalLabel">Ajouter Cours</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                @if(Auth::user()->type=='prof')
+                    <div class="add-container">
+                        <!-- Ajouter Cours -->
+                        <button class="add-btn" type="button" data-bs-toggle="modal" data-bs-target="#coursModal">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg>
+                                Ajouter Fichier
+                            </span>
+                        </button>
+                        <!-- Modal Cours -->
+                        <div class="modal fade" id="coursModal" tabindex="-1" aria-labelledby="coursModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="container">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="coursModalLabel">Ajouter Cours</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form class="row g-3 needs-validation" action="" method="post" novalidate>
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                    <label for="titre" class="form-label">Titre</label>
+                                                    <input type="text" name="titre" class="form-control" id="titre" required>
+                                                    <div class="valid-feedback">
+                                                        C'est bon!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Veuillez insérer un titre.
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="formFile" class="form-label">Fichier</label>
+                                                    <input class="form-control" type="file" id="formFile" required>
+                                                    <div class="valid-feedback">
+                                                        C'est bon!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Veuillez insérer un fichier.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger"
+                                                        data-bs-dismiss="modal">Annuler</button>
+                                                <button type="button" class="btn btn-primary"><input type="submit" value="Ajouter"></button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <form class="row g-3 needs-validation" action="" method="post" novalidate>
-                                        <div class="modal-body">
-                                            <div class="mb-3">
-                                                <label for="titre" class="form-label">Titre</label>
-                                                <input type="text" name="titre" class="form-control" id="titre" required>
-                                                <div class="valid-feedback">
-                                                    C'est bon!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Veuillez insérer un titre.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Ajouter Section -->
+                        <button class="add-btn" type="button" data-bs-toggle="modal" data-bs-target="#sectionModal">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg>
+                                Ajouter Section
+                            </span>
+                        </button>
+                        <!-- Modal Section -->
+                        <div class="modal fade" id="sectionModal" tabindex="-1" aria-labelledby="sectionModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="container">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="sectionModalLabel">Ajouter Section</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form class="row g-3 needs-validation" action="" method="post" novalidate>
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                    <label for="nom" class="form-label">Nom</label>
+                                                    <input type="text" name="nom" class="form-control" id="nom" required>
+                                                    <div class="valid-feedback">
+                                                        C'est bon!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Veuillez insérer un nom.
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="formFile" class="form-label">Fichier</label>
-                                                <input class="form-control" type="file" id="formFile" required>
-                                                <div class="valid-feedback">
-                                                    C'est bon!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Veuillez insérer un fichier.
-                                                </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger"
+                                                        data-bs-dismiss="modal">Annuler</button>
+                                                <button type="button" class="btn btn-primary" onclick="addSection()"><input type="submit" value="Ajouter"></button>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger"
-                                                    data-bs-dismiss="modal">Annuler</button>
-                                            <button type="button" class="btn btn-primary"><input type="submit" value="Ajouter"></button>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Ajouter Section -->
-                    <button class="add-btn" type="button" data-bs-toggle="modal" data-bs-target="#sectionModal">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg>
-                            Ajouter Section
-                        </span>
-                    </button>
-                    <!-- Modal Section -->
-                    <div class="modal fade" id="sectionModal" tabindex="-1" aria-labelledby="sectionModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="container">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="sectionModalLabel">Ajouter Section</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <form class="row g-3 needs-validation" action="" method="post" novalidate>
-                                        <div class="modal-body">
-                                            <div class="mb-3">
-                                                <label for="nomSection" class="form-label">Nom</label>
-                                                <input type="text" name="nomSection" class="form-control"
-                                                       id="nomSection"
-                                                       required>
-                                                <div class="valid-feedback">
-                                                    C'est bon!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Veuillez insérer un nom.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger"
-                                                    data-bs-dismiss="modal">Annuler</button>
-                                            <button type="button" class="btn btn-primary" onclick="addSection()"><input type="submit" value="Ajouter"></button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endif
                 <div class="accordion" id="accordionSection">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">

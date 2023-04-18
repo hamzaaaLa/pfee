@@ -18,10 +18,11 @@ class professeur extends Model
         return $this->belongsTo(User::class, 'user_prof');
     }
     //relation between professeur and module
-    public function affectation_mod()
+    public function affectation_prof()
     {
         return $this->hasMany(affectation_prof::class, 'id_prof')->with('module');
     }
+    
     //relation between profeseur and annonce
     public function annonce()
     {

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -23,17 +22,16 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = ['type','name','prenom','email','cin','telephone','nomUtilisateur','password',];
-    
-    //relation between etud and user
-    public function etudiant()
-    {
-        return $this->hasMany(etudiant::class, 'user_etud');
-    }
-    public function professeur()
-    {
-        return $this->hasMany(professeur::class, 'user_prof');
-    }
+    protected $fillable = [
+        'type',
+        'name',
+        'prenom',
+        'email',
+        'cin',
+        'telephone',
+        'nomUtilisateur',
+        'password',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -44,9 +42,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-    protected $dates = [
-        'dernierAcces'
-    ];
+
     /**
      * The attributes that should be cast.
      *
@@ -55,6 +51,39 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * The accessors for the user's image.
+     *
+     * @return string
+     */
+    public function getImageProfileAttribute(): string
+    {
+        return $this->attributes['imageProfile'] ?? asset('/img/professeur.jpg');
+    }
+
+    /**
+     * The mutator for the user's image.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setImageProfileAttribute(string $value): void
+    {
+        $this->attributes['imageProfile'] = $value;
+    }
+
+    //relation between etud and user
+    public function etudiant()
+    {
+        return $this->hasMany(etudiant::class, 'user_etud');
+    }
+
+    public function professeur()
+    {
+        return $this->hasMany(professeur::class, 'user_prof');
+    }
+    
     protected function type(): Attribute
     {
         return new Attribute(

@@ -59,7 +59,7 @@
             </ul>
             <div class="dropdown" >
                 <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="../img/fsa_agadir.png" alt="" width="40" height="30" >
+                    <img src="{{ Auth::user()->imageProfile}}" alt="" width="40" height="30" >
                         {{ Auth::user()->name }} {{ Auth::user()->prenom }}
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -102,108 +102,51 @@
                     <a class="btn btn-light" href="#" role="button">Voir tous</a>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col">
-                        <div class="card" style="width: 15rem;">
-                            <img src="{{asset('/img/bd.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <div class="content">
-                                    <p class="card-title">Bases de Données</p>
-                                    <p class="card-text">
-                                        <a href="">Mustapha Machkour</a>
-                                    </p>
-                                </div>
-                                <div class="acceder">
-                                    <a href="EspaceCours.php">Visiter</a>
-                                    <i class="fas fa-long-arrow-alt-right"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 15rem;">
-                            <img src="{{asset('../img/compilation.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <div class="content">
-                                    <p class="card-title">Compilation</p>
-                                    <p class="card-text">
-                                        <a href="">Mustapha Machkour</a>
-                                    </p>
-                                </div>
-                                <div class="acceder">
-                                    <a href="EspaceCours.php">Visiter</a>
-                                    <i class="fas fa-long-arrow-alt-right"></i>
+                    @if (Auth::user()->type=='prof')
+                    @foreach (Auth::user()->professeur as $prof)
+                        @foreach ($prof->affectation_prof as $af)
+                            <div class="col">
+                                <div class="card" style="width: 15rem;">
+                                    <img src="{{ $af->module->imageModule}}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <div class="content">
+                                            <p class="card-title">{{$af->module->libelleModule}}</p>
+                                            <p class="card-text">
+                                                <a href="">{{Auth::user()->name}} {{Auth::user()->prenom}}</a>
+                                            </p>
+                                        </div>
+                                        <div class="acceder">
+                                            <a href="{{route('prof.EspaceCours', $af->module->id_module)}}">Visiter</a>
+                                            <i class="fas fa-long-arrow-alt-right"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 15rem;">
-                            <img src="{{asset('/img/coo.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <div class="content">
-                                    <p class="card-title">Conception Orienté Objet</p>
-                                    <p class="card-text">
-                                        <a href="">Ayoub Sebraoui</a>
-                                    </p>
-                                </div>
-                                <div class="acceder">
-                                    <a href="EspaceCours.php">Visiter</a>
-                                    <i class="fas fa-long-arrow-alt-right"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 15rem;">
-                            <img src="{{asset('/img/poo.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <div class="content">
-                                    <p class="card-title">Programmation Orienté Objet</p>
-                                    <p class="card-text">
-                                        <a href="">Said Charfi</a>
-                                    </p>
-                                </div>
-                                <div class="acceder">
-                                    <a href="EspaceCours.php">Visiter</a>
-                                    <i class="fas fa-long-arrow-alt-right"></i>
+                        @endforeach
+                    @endforeach
+                    @else
+                    @foreach (Auth::user()->etudiant as $etud)
+                        @foreach ($etud->affectation_etud as $af_etud)
+                            <div class="col">
+                                <div class="card" style="width: 15rem;">
+                                    <img src="{{ $af_etud->module->imageModule}}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <div class="content">
+                                            <p class="card-title">{{$af_etud->module->libelleModule}}</p>
+                                            <p class="card-text">
+                                                <a href="">{{Auth::user()->name}} {{Auth::user()->prenom}}</a>
+                                            </p>
+                                        </div>
+                                        <div class="acceder">
+                                            <a href="{{route('etud.EspaceCours', $af_etud->module->id_module)}}">Visiter</a>
+                                            <i class="fas fa-long-arrow-alt-right"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 15rem;">
-                            <img src="{{asset('../img/ro.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <div class="content">
-                                    <p class="card-title">Recharche Opérationnelle</p>
-                                    <p class="card-text">
-                                        <a href="">Fouad El Ouafdi</a>
-                                    </p>
-                                </div>
-                                <div class="acceder">
-                                    <a href="EspaceCours.php">Visiter</a>
-                                    <i class="fas fa-long-arrow-alt-right"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 15rem;">
-                            <img src="../img/rsx.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <div class="content">
-                                    <p class="card-title">Réseau Informatique</p>
-                                    <p class="card-text">
-                                        <a href="">Abdellah BOULOUZ</a>
-                                    </p>
-                                </div>
-                                <div class="acceder">
-                                    <a href="EspaceCours.php">Visiter</a>
-                                    <i class="fas fa-long-arrow-alt-right"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        @endforeach
+                    @endforeach
+                    @endif
                 </div>
             </div>
             <!-- End Courses -->
@@ -218,9 +161,8 @@
                     @endif
                 </div>
                 <!-- Modal -->
-                <!-- Modal -->
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="false" data-bs-keyboard="false"
-                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="container">
@@ -259,8 +201,8 @@
                                             <select class="form-select" name="filiereSelect" id="filiereSelect" required>
                                                 <option selected disabled value="">Choisir...</option>
                                                 @foreach($filieres as $key){
-                                                <option >{{$key->libellefiliere}}</option>
-                                                }@endforeach
+                                                    <option >{{$key->libellefiliere}}</option>
+                                                    }@endforeach
                                             </select>
                                             <div class="valid-feedback">
                                                 C'est bon!
@@ -287,10 +229,9 @@
                                         <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Annuler</button>
                                         <button type="button" class="btn btn-primary"><input
-                                                type="submit" value="Créer"></button>
+                                            type="submit" value="Créer"></button>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
@@ -299,7 +240,7 @@
                     @foreach($annonces as $annonce)
                         <li>
                             <div class="img-content">
-                                <img src="{{asset('/img/professeur.jpg')}}" alt="">
+                                <img src="{{ Auth::user()->imageProfile}}" alt="">
                                 <a type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
                                     <i class="fa-solid fa-trash"></i>
                                 </a>
@@ -320,7 +261,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>    
                             </div>
                             <div class="annonce-text">
                                 <a href="">{{ $annonce->professeur->user->name }}</a>
@@ -359,7 +300,7 @@
 <script>
     var filiereSelect = document.getElementById("filiereSelect");
     var moduleSelect = $("#moduleSelect");
-
+    
     filiereSelect.addEventListener("change", updateModule);
     function updateModule() {
         var filiere = filiereSelect.value;

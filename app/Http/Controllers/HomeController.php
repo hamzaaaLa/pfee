@@ -24,7 +24,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    
+
     public function index()
     {
         if (auth()->user()->type =='admin') {
@@ -39,10 +39,15 @@ class HomeController extends Controller
     }
     public function etudDashboard()
     {
+        $modules = Module::get();
         $filieres = Filiere::get();
         $annonces = Annonce::orderBy('datecreation', 'desc')->get();
-        return view('etudHome', ['annonces' => $annonces, 'filieres' => $filieres]);
+        return view('etudHome', ['annonces' => $annonces, 'filieres' => $filieres, 'modules' => $modules],);
     }
+    public function EspaceCours(){
+        return view('EspaceCours');
+    }
+    
     public function profDashboard()
     {   
         return view('etudHome');

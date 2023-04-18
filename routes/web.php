@@ -34,6 +34,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['auth','user-access:user'])->group(function () {
 
     Route::get('/dashboard', [HomeController::class, 'etudDashboard'])->name('dashboard');
+    Route::get('/dashboard/EspaceCours', [HomeController::class, 'EspaceCours'])->name('etud.EspaceCours');
 
 });
 
@@ -44,6 +45,7 @@ Route::middleware(['auth','user-access:prof'])->group(function () {
     Route::get('/prof/dashboard', [HomeController::class, 'etudDashboard'])->name('prof.dashboard');
     Route::post('/prof/dashboard/get-modules', [HomeController::class, 'getModules'])->name('get.modules');
     Route::post('/prof/dashboard/annonce_store', [HomeController::class, 'store'])->name('annonce.store');
+    Route::get('/prof/dashboard/EspaceCours', [HomeController::class, 'EspaceCours'])->name('prof.EspaceCours');
 });
 
 // Super Admin Routes

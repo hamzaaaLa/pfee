@@ -12,7 +12,7 @@ class filiere extends Model
      public $timestamps = false;
      protected $primaryKey ='id_filiere';
     protected $fillable = [
-        'libellefiiere',  
+        'libellefiliere',  
     ];
     
     public function module()
