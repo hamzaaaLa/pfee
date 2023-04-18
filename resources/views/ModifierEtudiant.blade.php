@@ -231,7 +231,7 @@
                 </div>
                 <div class="col-12 submit">
                     <button class="btn btn-primary" type="submit">Modifier</button>
-                    <a href="VisualiserEtudiant.php" class="btn btn-danger">Anuuler</a>
+                    <a href="{{route('afficheEtud')}}" class="btn btn-danger">Anuuler</a>
                 </div>
             </form>
         </div>
