@@ -160,7 +160,8 @@
                         <p>Etudiant</p>
                     </div>
                     <div class="profile-content">
-                        <form class="needs-validation" novalidate>
+                        <form class="needs-validation" action="{{route('modifierProfile',$etudiant->id_user)}}" method="post" novalidate>
+                            @csrf
                             <div class="my-box">
                                 <h4>Informations Personnalisées</h4>
                                 <div class="row g-3">
@@ -198,7 +199,7 @@
                                         <label for="email" class="form-label">Email</label>
                                         <div class="input-group has-validation">
                                             <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                            <input type="Email" class="form-control" id="email" aria-describedby="inputGroupPrepend" value="{{$etudiant->email}}" required>
+                                            <input type="Email" class="form-control" id="email" name="email" aria-describedby="inputGroupPrepend" value="{{$etudiant->email}}" required>
                                             <div class="valid-feedback">
                                                 C'est bon!
                                             </div>

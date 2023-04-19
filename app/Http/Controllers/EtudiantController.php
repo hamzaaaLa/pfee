@@ -163,6 +163,14 @@ class EtudiantController extends Controller
         return view('Profile',compact(['etudiant','semestre','module']));
     }
 
+    public function modifierProfile(Request $request,$id_user){
+        User::where('id_user',$id_user)->update([
+            'email'=>$request->email,
+            'nomUtilisateur'=>$request->email,
+        ]);
+        return redirect()->back();
+    }
+
     function test(){
         echo "bonjour";
     }
