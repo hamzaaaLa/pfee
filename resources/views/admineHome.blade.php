@@ -98,8 +98,35 @@
                 </form>
             </div>
         </div>
-        <div class="content">
-            Dashboard
+        <div class="dashboard page-content">
+            <div class="head">
+                <a href="" type="button" class="btn">
+                    <img src="../img/professeur.jpg" alt="">
+                    Admin
+                </a>
+            </div>
+            <div class="content">
+                <div class="header">
+                    <h2>Tableau de bord</h2>
+                </div>
+                <div class="info">
+                    <a class="box" href="{{route('afficheEtud')}}">
+                        <i class="fa-solid fa-user fa-2x"></i>
+                        <span class="number">850</span>
+                        <span class="text">Etudiants</span>
+                    </a>
+                    <a class="box" href="{{route('afficheProf')}}">
+                        <i class="fa-solid fa-user fa-2x"></i>
+                        <span class="number">40</span>
+                        <span class="text">Professeurs</span>
+                    </a>
+                    <a class="box" href="{{route('afficheModule')}}">
+                        <i class="fa-solid fa-book fa-2x"></i>
+                        <span class="number">25</span>
+                        <span class="text">Modules</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
     <script src="../js/bootstrap.bundle.min.js"></script>
