@@ -111,7 +111,8 @@
                 <div class="header">
                     <h2>Données Etudiants</h2>
                     <div class="search">
-                        <input type="search" placeholder="Saisir un CIN">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="search" id="search" placeholder="Saisir un CIN">
                     </div>
                     <a href="{{route('ajoutEtud')}}" type="button" class="btn btn-primary">Ajouter Etudiant</a>
                 </div>
@@ -129,7 +130,6 @@
                             <th scope="col">Filière</th>
                             <th scope="col">Semestres</th>
                             <th scope="col">Modules</th>
-                            {{-- <th scope="col">Modules</th> --}}
                         </tr>
                         </thead>
                         <tbody>
@@ -161,7 +161,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>{{ $etudiant->user->cin }}</td>
+                            <td class="row-cin">{{ $etudiant->user->cin }}</td>
                             <td>{{ $etudiant->user->name }} </td>
                             <td>{{ $etudiant->user->prenom }}</td>
                             <td>{{ $etudiant->user->email }}</td>
@@ -195,6 +195,24 @@
 </div>
 <script src="{{asset('/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('/js/all.min.js')}}"></script>
+<script>
+    var searchInput = document.getElementById('search');
+    var rows = document.querySelectorAll('table tbody tr');
+
+    searchInput.addEventListener('input', function (event) {
+        var searchText = event.target.value.toLowerCase();
+
+        rows.forEach(function(row) {
+            var cin = row.querySelector('td.row-cin').textContent.toLowerCase();
+
+            if(cin.includes(searchText)) {
+                row.style.display = 'table-row';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
 </body>
 </html>
 

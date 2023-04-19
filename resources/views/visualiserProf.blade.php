@@ -108,75 +108,76 @@
             <div class="header">
                 <h2>Données Professeurs</h2>
                 <div class="search">
-                    <input type="search" placeholder="Saisir un CIN">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="search" id="search" placeholder="Saisir un CIN">
                 </div>
                 <a href="{{route('ajouterProfView')}}" type="button" class="btn btn-primary">Ajouter Professeur</a>
             </div>
             <div class="table-responsive">
                 <table class="table table-hover table-bordered">
                     <thead>
-                    <tr>
-                        <th scope="col">Actions</th>
-                        <th scope="col">CIN</th>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Prenom</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Telephone</th>
-                        <th scope="col">Spécialité</th>
-                        <th scope="col">Modules</th>
-                        <th scope="col">Filiére</th>
-                    </tr>
+                        <tr>
+                            <th scope="col">Actions</th>
+                            <th scope="col">CIN</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prenom</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Telephone</th>
+                            <th scope="col">Spécialité</th>
+                            <th scope="col">Modules</th>
+                            <th scope="col">Filiére</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach ($professeur as $professeur)
-                    <tr>
-                        <td class="actions">
-                            <a href="{{route('editerProf',$professeur->user->id_user)}}">
-                                <i class="fa-solid fa-pen"></i>
-                            </a>
-                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
-                            <!-- Modal Supprimer -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Supprimer Etudiant</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Voulez-vous vraiment supprimer cet étudiant?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                            <a type="button" class="btn btn-danger" href="{{route('deleteProf',$professeur->user->id_user)}}">Supprimer</a>
+                            <tr>
+                                <td class="actions">
+                                    <a href="{{route('editerProf',$professeur->user->id_user)}}">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                    <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                    <!-- Modal Supprimer -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Supprimer Etudiant</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Voulez-vous vraiment supprimer cet étudiant?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                    <a type="button" class="btn btn-danger" href="{{route('deleteProf',$professeur->user->id_user)}}">Supprimer</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>{{ $professeur->user->cin }}</td>
-                        <td>{{ $professeur->user->name }} </td>
-                        <td>{{ $professeur->user->prenom }}</td>
-                        <td>{{ $professeur->user->email }}</td>
-                        <td>{{ $professeur->user->telephone }}</td>
-                        <td>{{ $professeur->specialite }}</td>
-                        <td>
-                            <ul class="disc">
-                                @foreach ($professeur->affectation_prof as $affectation_prof)
-                                    <li>{{ $affectation_prof->module->libelleModule }}</li>
-                                @endforeach
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="disc">
-                                @foreach ($professeur->affectation_prof as $affectation_prof)
-                                    <li>{{ $affectation_prof->module->filiere->libellefiliere }}</li>
-                                @endforeach
-                            </ul>
-                        </td>
-                    </tr>
+                                </td>
+                                <td class="row-cin">{{ $professeur->user->cin }}</td>
+                                <td>{{ $professeur->user->name }} </td>
+                                <td>{{ $professeur->user->prenom }}</td>
+                                <td>{{ $professeur->user->email }}</td>
+                                <td>{{ $professeur->user->telephone }}</td>
+                                <td>{{ $professeur->specialite }}</td>
+                                <td>
+                                    <ul class="disc">
+                                        @foreach ($professeur->affectation_prof as $affectation_prof)
+                                            <li>{{ $affectation_prof->module->libelleModule }}</li>
+                                        @endforeach
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="disc">
+                                        @foreach ($professeur->affectation_prof as $affectation_prof)
+                                            <li>{{ $affectation_prof->module->filiere->libellefiliere }}</li>
+                                        @endforeach
+                                    </ul>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -186,5 +187,23 @@
 </div>
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/all.min.js"></script>
+<script>
+    var searchInput = document.getElementById('search');
+    var rows = document.querySelectorAll('table tbody tr');
+
+    searchInput.addEventListener('input', function (event) {
+       var searchText = event.target.value.toLowerCase();
+
+       rows.forEach(function(row) {
+           var cin = row.querySelector('td.row-cin').textContent.toLowerCase();
+
+           if(cin.includes(searchText)) {
+               row.style.display = 'table-row';
+           } else {
+               row.style.display = 'none';
+           }
+       });
+    });
+</script>
 </body>
 </html>

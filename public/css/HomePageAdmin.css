@@ -224,16 +224,14 @@ ul {
 .visualiser .header .search {
     position: relative;
 }
-.visualiser .header .search::before {
-    font-family: var(--fa-style-family-classic);
-    content: "\f002";
-    font-weight: 900;
+.visualiser .header .search svg {
     position: absolute;
     left: 15px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 14px;
     color: #888;
+
 }
 .visualiser .header .search input {
     height: 40px;
@@ -269,9 +267,6 @@ ul {
 }
 .visualiser .table th {
     padding: 10px;
-}
-.visualiser .table td {
-    padding: 8px 10px 0;
 }
 .visualiser .table td.actions {
     text-align: center;

@@ -108,7 +108,8 @@
             <div class="header">
                 <h2>Données Modules</h2>
                 <div class="search">
-                    <input type="search" placeholder="Saisir un CIN">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="search" id="search" placeholder="Saisir un CIN">
                 </div>
                 <a href="{{route('ajouterModuleView')}}" type="button" class="btn btn-primary">Ajouter Module</a>
             </div>
@@ -152,7 +153,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td>{{ $module->libelleModule }} </td>
+                        <td class="row-name">{{ $module->libelleModule }} </td>
                         <td>{{ $module->semestre }}</td>
                         <td>{{ $module->filiere->libellefiliere }}</td>
                         <td>
@@ -171,5 +172,23 @@
 </div>
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/all.min.js"></script>
+<script>
+    var searchInput = document.getElementById('search');
+    var rows = document.querySelectorAll('table tbody tr');
+
+    searchInput.addEventListener('input', function (event) {
+        var searchText = event.target.value.toLowerCase();
+
+        rows.forEach(function(row) {
+            var name = row.querySelector('td.row-name').textContent.toLowerCase();
+
+            if(name.includes(searchText)) {
+                row.style.display = 'table-row';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
 </body>
 </html>
