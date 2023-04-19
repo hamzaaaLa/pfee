@@ -323,7 +323,7 @@
                                 <div class="row g-3">
                                     <div class="col-md-4">
                                         <label for="nom" class="form-label">Nom</label>
-                                        <input type="text" class="form-control" id="nom" value={{$etudiant->name}} required disabled>
+                                        <input type="text" class="form-control" id="nom" value="{{$etudiant->name}}" required disabled>
                                         <div class="valid-feedback">
                                             C'est bon!
                                         </div>
@@ -333,7 +333,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="prenom" class="form-label">Prénom</label>
-                                        <input type="text" class="form-control" id="prenom" value={{$etudiant->prenom}} required disabled>
+                                        <input type="text" class="form-control" id="prenom" value="{{$etudiant->prenom}}" required disabled>
                                         <div class="valid-feedback">
                                             C'est bon!
                                         </div>
@@ -343,7 +343,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="cin" class="form-label">CIN</label>
-                                        <input type="text" class="form-control" id="cin" value={{$etudiant->cin}} required disabled>
+                                        <input type="text" class="form-control" id="cin" value="{{$etudiant->cin}}" required disabled>
                                         <div class="valid-feedback">
                                             C'est bon!
                                         </div>
@@ -355,7 +355,7 @@
                                         <label for="email" class="form-label">Email</label>
                                         <div class="input-group has-validation">
                                             <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                            <input type="Email" class="form-control" id="email" aria-describedby="inputGroupPrepend" value={{$etudiant->email}} required>
+                                            <input type="Email" class="form-control" id="email" aria-describedby="inputGroupPrepend" value="{{$etudiant->email}}" required>
                                             <div class="valid-feedback">
                                                 C'est bon!
                                             </div>
@@ -368,7 +368,7 @@
                                         <label for="tel" class="form-label">GSM</label>
                                         <div class="input-group has-validation">
                                             <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-phone"></i></span>
-                                            <input type="tel" class="form-control" id="tel" aria-describedby="inputGroupPrepend" value={{$etudiant->telephone}} required disabled>
+                                            <input type="tel" class="form-control" id="tel" aria-describedby="inputGroupPrepend" value="{{$etudiant->telephone}}" required disabled>
                                             <div class="valid-feedback">
                                                 C'est bon!
                                             </div>
@@ -384,7 +384,7 @@
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label for="cne" class="form-label">CNE</label>
-                                        <input type="text" class="form-control" name="cne" id="cne" required value={{$etudiant->cne}} disabled>
+                                        <input type="text" class="form-control" name="cne" id="cne" required value="{{$etudiant->cne}}" disabled>
                                         <div class="valid-feedback">
                                             C'est bon!
                                         </div>
