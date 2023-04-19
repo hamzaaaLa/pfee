@@ -109,7 +109,7 @@
                 <h2>Données Modules</h2>
                 <div class="search">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="search" id="search" placeholder="Saisir un CIN">
+                    <input type="search" id="search" placeholder="Saisir un nom">
                 </div>
                 <a href="{{route('ajouterModuleView')}}" type="button" class="btn btn-primary">Ajouter Module</a>
             </div>
