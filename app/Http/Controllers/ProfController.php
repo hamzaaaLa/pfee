@@ -90,5 +90,13 @@ class ProfController extends Controller
         $module=affectation_prof::join('module','affectation_prof.id_module','=','module.id_module')->where('affectation_prof.id_prof',$id_prof)->get();
         return view('profProfile',compact(['prof','module']));
     }
+
+    public function modifierProfile(Request $request,$id_user){
+        User::where('id_user',$id_user)->update([
+            'email'=>$request->email,
+            'nomUtilisateur'=>$request->email,
+        ]);
+        return redirect()->back();
+    }
     //
 }
