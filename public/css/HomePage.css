@@ -8,7 +8,8 @@
 /* End Variables */
 /* Start Global Rules */
 body {
-    font-family: "Open Sans", sans-serif;
+    /*font-family: "Work Sans", sans-serif;*/
+    font-family: 'Open Sans', sans-serif;
 }
 a {
     text-decoration: none;
@@ -23,6 +24,30 @@ a {
     padding: 5px 2px;
     background-color: var(--main-color);
     color: white;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.header h1 {
+    position: relative;
+}
+.header h1::before, .header h1::after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    bottom: -10px;
+    left: 0;
+}
+.header h1::before {
+    background-color: white;
+    width: 100%;
+}
+.header h1::after {
+    background-color: var(--main-color);
+    width: 35%;
 }
 /* End Components */
 /* Start Header */
@@ -51,6 +76,7 @@ a {
     align-items: center;
     height: 60px;
     position: relative;
+    font-weight: 500;
     background-image: linear-gradient(
             to left,
             var(--main-color),
@@ -102,11 +128,7 @@ a {
     background-color: white;
     border: 1px solid black;
     border-radius: 25px;
-}
-.dropdown img{
-    width: 40px;
-    border: none;
-    border-radius: 50%;
+    font-weight: 500;
 }
 .dropdown button:hover {
     background-color: #e9e3fc;
@@ -179,6 +201,7 @@ a {
 .dashboard h3 {
     margin: 0;
 }
+/* End Dashboard */
 /* Start Courses */
 .courses {
     flex-basis: 70%;
@@ -214,9 +237,7 @@ a {
 .courses .col .card .card-body .content {
     padding: 15px;
 }
-.courses .col .card .card-body .card-title {
-    color: black;
-    font-weight: bold;
+.courses .col .card .card-body .content a {
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
@@ -224,17 +245,14 @@ a {
     white-space: normal;
     text-overflow: ellipsis;
 }
+.courses .col .card .card-body .card-title {
+    color: black;
+    font-weight: bold;
+}
 .courses .col .card .card-body .card-text a {
     color: #6a6f73;
     font-size: 13px;
     text-decoration: underline;
-    width: fit-content;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    white-space: normal;
-    text-overflow: ellipsis;
 }
 .courses .col .card .card-body .acceder {
     padding: 20px;
@@ -294,29 +312,30 @@ a {
 .announcements ul li:hover {
     background-color: #F1F5F9;
 }
+.announcements ul li:hover .annonce-text a {
+    color: rgba(var(--bs-link-color-rgb));
+}
 .announcements ul li .img-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    flex-basis: 10%;
 }
-.announcements ul li img {
+.announcements ul li .img-content img {
     width: 50px;
-    height: auto;
     border: none;
     border-radius: 50%;
 }
-.announcements ul li .annonce-text {
-    flex-basis: 90%;
+.announcements ul li .img-content a {
+    color: #777;
+}
+.announcements ul li .img-content a:hover {
+    color: #777;
 }
 .announcements ul li .annonce-text a {
-    text-decoration: none;
     font-size: 16px;
     color: black;
-}
-.announcements ul li:hover .annonce-text a {
-    color: rgba(var(--bs-link-color-rgb));
+    font-weight: 500;
 }
 .announcements ul li .annonce-text .subject {
     text-decoration: underline;
@@ -337,7 +356,73 @@ a {
     text-align: end;
 }
 /* End Announcements */
-/* End Dashboard */
+/* Start More */
+.more {
+    padding: 30px 0;
+    min-height: calc(100vh - 75px);
+    background-color: #f1f5f9;
+}
+.more .row {
+    margin: 0;
+    gap: 20px;
+}
+@media (max-width: 991px) {
+    .more .row {
+        height: auto;
+    }
+}
+.more .col {
+    max-width: fit-content;
+    padding: 4px;
+}
+.more .col .card {
+    border: none;
+    -webkit-box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
+    -moz-box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
+    box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
+}
+.more .col .card .card-body {
+    padding: 0;
+}
+.more .col .card .card-body .content {
+    padding: 15px;
+}
+.more .col .card .card-body .content a {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+}
+.more .col .card .card-body .card-title {
+    color: black;
+    font-weight: bold;
+}
+.more .col .card .card-body .card-text a {
+    color: #6a6f73;
+    font-size: 13px;
+    text-decoration: underline;
+}
+.more .col .card .card-body .acceder {
+    padding: 20px;
+    border-top: 1px solid #e6e6e7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+.more .col .card .card-body .acceder a {
+    color: var(--main-color);
+    font-weight: bold;
+}
+.more .col .card .card-body .acceder svg {
+    color: var(--main-color);
+}
+.more .col:hover .card .card-body .acceder svg {
+    animation: moving-arrow 0.6s linear infinite;
+}
+/* End More */
 /* Start Animation */
 @keyframes moving-arrow {
     100% {

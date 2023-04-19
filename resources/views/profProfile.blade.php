@@ -26,7 +26,7 @@
     <nav class="navbar navbar-expand-lg header">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="../img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
+                <img src="/img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
                 FSA-Online
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,7 +57,7 @@
                 </ul>
                 <div class="dropdown" >
                     <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ Auth::user()->imageProfile}}" alt="" width="40" height="30" >
+                        <img src="{{ Auth::user()->imageProfile}}" alt="" width="40" height="30" style="border-radius: 50%;">
                             {{ Auth::user()->name }} {{ Auth::user()->prenom }}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -96,7 +96,7 @@
                 <!-- if user is prof -->
                 <div class="profile-container">
                     <div class="img-box">
-                        <img src="../img/professeur.jpg" alt="">
+                        <img src="/img/professeur.jpg" alt="">
                         <h3>{{$prof->name}} {{$prof->prenom}}</h3>
                         <p>Professeur</p>
                     </div>
@@ -143,7 +143,7 @@
                 <br>
                 <div class="profile-container">
                     <div class="img-box">
-                        <img src="../img/professeur.jpg" alt="">
+                        <img src="/img/professeur.jpg" alt="">
                         <h3>{{$prof->name}} {{$prof->prenom}}</h3>
                         <p>Professeur</p>
                     </div>

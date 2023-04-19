@@ -26,7 +26,7 @@
     <nav class="navbar navbar-expand-lg header">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="../img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
+                <img src="/img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
                 FSA-Online
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,7 +57,7 @@
                 </ul>
                 <div class="dropdown" >
                     <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ Auth::user()->imageProfile}}" alt="" width="40" height="30" >
+                        <img src="{{ Auth::user()->imageProfile}}" alt="" width="40" height="30" style="border-radius: 50%">
                             {{ Auth::user()->name }} {{ Auth::user()->prenom }}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -93,54 +93,9 @@
                 <div class="header">
                     <h2>Profile</h2>
                 </div>
-                <!-- if user is prof -->
-                <!--<div class="profile-container">
-                    <div class="img-box">
-                        <img src="../img/professeur.jpg" alt="">
-                        <h3>Ismail Berriss</h3>
-                        <p>Professeur</p>
-                    </div>
-                    <div class="profile-content">
-                        <div class="my-box">
-                            <h4>Informations Personnalisées</h4>
-                            <div>
-                                <span>Nom Complet:</span>
-                                <span>Ismail Berriss</span>
-                            </div>
-                            <div>
-                                <span>CIN:</span>
-                                <span>JB123456</span>
-                            </div>
-                            <div>
-                                <span>Email:</span>
-                                <span>ismailberriss@gmail.com</span>
-                            </div>
-                            <div>
-                                <span>GSM:</span>
-                                <span>0657090441</span>
-                            </div>
-                            <div>
-                                <span>Dernier Acces:</span>
-                                <span>22:25 17/04/2024</span>
-                            </div>
-                        </div>
-                        <div class="my-box">
-                            <h4>Informations Scolaires</h4>
-                            <div>
-                                <span>Spécialité:</span>
-                                <span>Data Analyst</span>
-                            </div>
-                            <div>
-                                <span>Modules:</span>
-                                <span>Analyse 1: Suites Numériques et Fonctions, Algebre 1: Généralités et Arithmétique dans Z, Programmation 1, Algorithmique 2</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
-                <!-- if user is etudiant -->
                 <div class="profile-container">
                     <div class="img-box">
-                        <img src="../img/professeur.jpg" alt="">
+                        <img src="/img/professeur.jpg" alt="">
                         <h3>{{Auth::user()->name}} {{Auth::user()->prenom}}</h3>
                         <p>Etudiant</p>
                     </div>
@@ -198,121 +153,9 @@
                 <div class="header">
                     <h2>Modifier Profile</h2>
                 </div>
-                <!-- if user is prof -->
-                <!--<div class="profile-container">
-                    <div class="img-box">
-                        <img src="../img/professeur.jpg" alt="">
-                        <h3>Ismail Berriss</h3>
-                        <p>Professeur</p>
-                    </div>
-                    <div class="profile-content">
-                        <form class="needs-validation" novalidate>
-                            <div class="my-box">
-                                <h4>Informations Personnalisées</h4>
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <label for="nom" class="form-label">Nom</label>
-                                        <input type="text" class="form-control" id="nom" value="Berriss" required disabled>
-                                        <div class="valid-feedback">
-                                            C'est bon!
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Veuillez insérer un nom.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="prenom" class="form-label">Prénom</label>
-                                        <input type="text" class="form-control" id="prenom" value="Ismail" required disabled>
-                                        <div class="valid-feedback">
-                                            C'est bon!
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Veuillez insérer un prénom.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="cin" class="form-label">CIN</label>
-                                        <input type="text" class="form-control" id="cin" value="JB123456" required disabled>
-                                        <div class="valid-feedback">
-                                            C'est bon!
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Veuillez insérer un cin.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="email" class="form-label">Email</label>
-                                        <div class="input-group has-validation">
-                                            <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                            <input type="Email" class="form-control" id="email" aria-describedby="inputGroupPrepend" value="ismailberriss@gmail.com" required>
-                                            <div class="valid-feedback">
-                                                C'est bon!
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Veuillez insérer un email.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="tel" class="form-label">GSM</label>
-                                        <div class="input-group has-validation">
-                                            <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-phone"></i></span>
-                                            <input type="tel" class="form-control" id="tel" aria-describedby="inputGroupPrepend" value="0657090441" required disabled
-                                            >
-                                            <div class="valid-feedback">
-                                                C'est bon!
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Veuillez insérer un GSM.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="my-box">
-                                <h4>Informations Scolaires</h4>
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label for="specialite" class="form-label">Spécialité</label>
-                                        <input type="text" class="form-control" id="specialite" required value="Data Analyst" disabled>
-                                        <div class="valid-feedback">
-                                            C'est bon!
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Veuillez insérer une spécialité.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="module" class="form-label">Modules</label>
-                                        <select class="form-select" id="moduleSelect" multiple="" required disabled>
-                                            <option selected>Analyse 1: Suites Numériques et Fonctions</option>
-                                            <option selected>Algebre 1: Généralités et Arithmétique dans Z</option>
-                                            <option selected>Programmation 1</option>
-                                            <option selected>Algorithmique 2</option>
-                                        </select>
-                                        <div class="valid-feedback">
-                                            C'est bon!
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Veuillez choisir un module.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="my-box">
-                                <div class="row g-3">
-                                    <div class="col-12">
-                                        <button class="btn btn-primary" type="submit">Modifier</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>-->
-                <!-- if user is etudiant -->
                 <div class="profile-container">
                     <div class="img-box">
-                        <img src="../img/professeur.jpg" alt="">
+                        <img src="/img/professeur.jpg" alt="">
                         <h3>{{$etudiant->name}} {{$etudiant->prenom}}</h3>
                         <p>Etudiant</p>
                     </div>
