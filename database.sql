@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : dim. 16 avr. 2023 à 12:11
--- Version du serveur : 10.4.27-MariaDB
--- Version de PHP : 8.2.0
+-- Host: 127.0.0.1
+-- Generation Time: Apr 19, 2023 at 05:49 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `pfe`
+-- Database: `pfe`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `administrateur`
+-- Table structure for table `administrateur`
 --
 
 CREATE TABLE `administrateur` (
@@ -33,7 +33,7 @@ CREATE TABLE `administrateur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `administrateur`
+-- Dumping data for table `administrateur`
 --
 
 INSERT INTO `administrateur` (`id_admin`, `user_admin`) VALUES
@@ -44,7 +44,7 @@ INSERT INTO `administrateur` (`id_admin`, `user_admin`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `affectation_etud`
+-- Table structure for table `affectation_etud`
 --
 
 CREATE TABLE `affectation_etud` (
@@ -54,7 +54,7 @@ CREATE TABLE `affectation_etud` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `affectation_etud`
+-- Dumping data for table `affectation_etud`
 --
 
 INSERT INTO `affectation_etud` (`id_affect`, `id_etud`, `id_module`) VALUES
@@ -70,7 +70,7 @@ INSERT INTO `affectation_etud` (`id_affect`, `id_etud`, `id_module`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `affectation_prof`
+-- Table structure for table `affectation_prof`
 --
 
 CREATE TABLE `affectation_prof` (
@@ -80,7 +80,7 @@ CREATE TABLE `affectation_prof` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `affectation_prof`
+-- Dumping data for table `affectation_prof`
 --
 
 INSERT INTO `affectation_prof` (`id_affect`, `id_prof`, `id_module`) VALUES
@@ -96,7 +96,19 @@ INSERT INTO `affectation_prof` (`id_affect`, `id_prof`, `id_module`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `affectation_semestre`
+-- Table structure for table `affectation_section`
+--
+
+CREATE TABLE `affectation_section` (
+  `id_affect` int(11) NOT NULL,
+  `id_module` int(11) DEFAULT NULL,
+  `id_section` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `affectation_semestre`
 --
 
 CREATE TABLE `affectation_semestre` (
@@ -106,7 +118,7 @@ CREATE TABLE `affectation_semestre` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `affectation_semestre`
+-- Dumping data for table `affectation_semestre`
 --
 
 INSERT INTO `affectation_semestre` (`id_affect`, `id_semestre`, `id_etud`) VALUES
@@ -125,7 +137,7 @@ INSERT INTO `affectation_semestre` (`id_affect`, `id_semestre`, `id_etud`) VALUE
 -- --------------------------------------------------------
 
 --
--- Structure de la table `annonce`
+-- Table structure for table `annonce`
 --
 
 CREATE TABLE `annonce` (
@@ -140,20 +152,21 @@ CREATE TABLE `annonce` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `cours`
+-- Table structure for table `cours`
 --
 
 CREATE TABLE `cours` (
   `id_cour` int(11) NOT NULL,
   `libelleCour` varchar(50) NOT NULL,
   `contenu` blob DEFAULT NULL,
-  `id_module` int(11) NOT NULL
+  `id_module` int(11) NOT NULL,
+  `id_section` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `etudiant`
+-- Table structure for table `etudiant`
 --
 
 CREATE TABLE `etudiant` (
@@ -164,7 +177,7 @@ CREATE TABLE `etudiant` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `etudiant`
+-- Dumping data for table `etudiant`
 --
 
 INSERT INTO `etudiant` (`id_etud`, `cne`, `filiere`, `user_etud`) VALUES
@@ -176,7 +189,7 @@ INSERT INTO `etudiant` (`id_etud`, `cne`, `filiere`, `user_etud`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `filiere`
+-- Table structure for table `filiere`
 --
 
 CREATE TABLE `filiere` (
@@ -185,7 +198,7 @@ CREATE TABLE `filiere` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `filiere`
+-- Dumping data for table `filiere`
 --
 
 INSERT INTO `filiere` (`id_filiere`, `libellefiliere`) VALUES
@@ -195,7 +208,7 @@ INSERT INTO `filiere` (`id_filiere`, `libellefiliere`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `module`
+-- Table structure for table `module`
 --
 
 CREATE TABLE `module` (
@@ -207,7 +220,7 @@ CREATE TABLE `module` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `module`
+-- Dumping data for table `module`
 --
 
 INSERT INTO `module` (`id_module`, `libelleModule`, `id_filiere`, `imageModule`, `semestre`) VALUES
@@ -232,7 +245,7 @@ INSERT INTO `module` (`id_module`, `libelleModule`, `id_filiere`, `imageModule`,
 -- --------------------------------------------------------
 
 --
--- Structure de la table `posts`
+-- Table structure for table `posts`
 --
 
 CREATE TABLE `posts` (
@@ -247,7 +260,7 @@ CREATE TABLE `posts` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `professeur`
+-- Table structure for table `professeur`
 --
 
 CREATE TABLE `professeur` (
@@ -257,7 +270,7 @@ CREATE TABLE `professeur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `professeur`
+-- Dumping data for table `professeur`
 --
 
 INSERT INTO `professeur` (`id_prof`, `specialite`, `user_prof`) VALUES
@@ -269,7 +282,7 @@ INSERT INTO `professeur` (`id_prof`, `specialite`, `user_prof`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `reply`
+-- Table structure for table `reply`
 --
 
 CREATE TABLE `reply` (
@@ -284,7 +297,19 @@ CREATE TABLE `reply` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `semestre`
+-- Table structure for table `section`
+--
+
+CREATE TABLE `section` (
+  `id_section` int(11) NOT NULL,
+  `titre_section` varchar(50) NOT NULL,
+  `id_prof` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `semestre`
 --
 
 CREATE TABLE `semestre` (
@@ -293,7 +318,7 @@ CREATE TABLE `semestre` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `semestre`
+-- Dumping data for table `semestre`
 --
 
 INSERT INTO `semestre` (`id_semestre`, `libelleSemestre`) VALUES
@@ -307,7 +332,7 @@ INSERT INTO `semestre` (`id_semestre`, `libelleSemestre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -325,7 +350,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id_user`, `type`, `name`, `prenom`, `email`, `cin`, `telephone`, `nomUtilisateur`, `password`, `dernierAcces`, `imageProfile`) VALUES
@@ -352,18 +377,18 @@ INSERT INTO `users` (`id_user`, `type`, `name`, `prenom`, `email`, `cin`, `telep
 (30, 2, 'Othmane', 'nnn', 'othmane@gmail.com', 'JE222222', '0610000000', 'othmane@gmail.com', '$2y$10$njb2Yvnpl1BiekRDd/7U..YtRHJ/MtvjTEjVkb0Qlgm4U1bg82X1C', '2023-04-15 13:04:11', NULL);
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `administrateur`
+-- Indexes for table `administrateur`
 --
 ALTER TABLE `administrateur`
   ADD PRIMARY KEY (`id_admin`),
   ADD KEY `user_admin` (`user_admin`);
 
 --
--- Index pour la table `affectation_etud`
+-- Indexes for table `affectation_etud`
 --
 ALTER TABLE `affectation_etud`
   ADD PRIMARY KEY (`id_affect`),
@@ -371,7 +396,7 @@ ALTER TABLE `affectation_etud`
   ADD KEY `id_module` (`id_module`);
 
 --
--- Index pour la table `affectation_prof`
+-- Indexes for table `affectation_prof`
 --
 ALTER TABLE `affectation_prof`
   ADD PRIMARY KEY (`id_affect`),
@@ -379,7 +404,15 @@ ALTER TABLE `affectation_prof`
   ADD KEY `id_module` (`id_module`);
 
 --
--- Index pour la table `affectation_semestre`
+-- Indexes for table `affectation_section`
+--
+ALTER TABLE `affectation_section`
+  ADD PRIMARY KEY (`id_affect`),
+  ADD KEY `id_module` (`id_module`),
+  ADD KEY `id_section` (`id_section`);
+
+--
+-- Indexes for table `affectation_semestre`
 --
 ALTER TABLE `affectation_semestre`
   ADD PRIMARY KEY (`id_affect`),
@@ -387,7 +420,7 @@ ALTER TABLE `affectation_semestre`
   ADD KEY `id_semestre` (`id_semestre`);
 
 --
--- Index pour la table `annonce`
+-- Indexes for table `annonce`
 --
 ALTER TABLE `annonce`
   ADD PRIMARY KEY (`id_annonce`),
@@ -395,34 +428,35 @@ ALTER TABLE `annonce`
   ADD KEY `id_module` (`id_module`);
 
 --
--- Index pour la table `cours`
+-- Indexes for table `cours`
 --
 ALTER TABLE `cours`
   ADD PRIMARY KEY (`id_cour`),
-  ADD KEY `id_module` (`id_module`);
+  ADD KEY `id_module` (`id_module`),
+  ADD KEY `id_section` (`id_section`);
 
 --
--- Index pour la table `etudiant`
+-- Indexes for table `etudiant`
 --
 ALTER TABLE `etudiant`
   ADD PRIMARY KEY (`id_etud`),
   ADD KEY `user_etud` (`user_etud`);
 
 --
--- Index pour la table `filiere`
+-- Indexes for table `filiere`
 --
 ALTER TABLE `filiere`
   ADD PRIMARY KEY (`id_filiere`);
 
 --
--- Index pour la table `module`
+-- Indexes for table `module`
 --
 ALTER TABLE `module`
   ADD PRIMARY KEY (`id_module`),
   ADD KEY `id_filiere` (`id_filiere`);
 
 --
--- Index pour la table `posts`
+-- Indexes for table `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id_post`),
@@ -430,14 +464,14 @@ ALTER TABLE `posts`
   ADD KEY `id_etud` (`id_etud`);
 
 --
--- Index pour la table `professeur`
+-- Indexes for table `professeur`
 --
 ALTER TABLE `professeur`
   ADD PRIMARY KEY (`id_prof`),
   ADD KEY `user_prof` (`user_prof`);
 
 --
--- Index pour la table `reply`
+-- Indexes for table `reply`
 --
 ALTER TABLE `reply`
   ADD PRIMARY KEY (`id_reply`),
@@ -446,13 +480,20 @@ ALTER TABLE `reply`
   ADD KEY `id_etud` (`id_etud`);
 
 --
--- Index pour la table `semestre`
+-- Indexes for table `section`
+--
+ALTER TABLE `section`
+  ADD PRIMARY KEY (`id_section`),
+  ADD KEY `id_prof` (`id_prof`);
+
+--
+-- Indexes for table `semestre`
 --
 ALTER TABLE `semestre`
   ADD PRIMARY KEY (`id_semestre`);
 
 --
--- Index pour la table `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id_user`),
@@ -461,163 +502,189 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `nomUtilisateur` (`nomUtilisateur`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `administrateur`
+-- AUTO_INCREMENT for table `administrateur`
 --
 ALTER TABLE `administrateur`
   MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `affectation_etud`
+-- AUTO_INCREMENT for table `affectation_etud`
 --
 ALTER TABLE `affectation_etud`
   MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT pour la table `affectation_prof`
+-- AUTO_INCREMENT for table `affectation_prof`
 --
 ALTER TABLE `affectation_prof`
   MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT pour la table `affectation_semestre`
+-- AUTO_INCREMENT for table `affectation_section`
+--
+ALTER TABLE `affectation_section`
+  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `affectation_semestre`
 --
 ALTER TABLE `affectation_semestre`
   MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT pour la table `annonce`
+-- AUTO_INCREMENT for table `annonce`
 --
 ALTER TABLE `annonce`
   MODIFY `id_annonce` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `etudiant`
+-- AUTO_INCREMENT for table `etudiant`
 --
 ALTER TABLE `etudiant`
   MODIFY `id_etud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT pour la table `filiere`
+-- AUTO_INCREMENT for table `filiere`
 --
 ALTER TABLE `filiere`
   MODIFY `id_filiere` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT pour la table `module`
+-- AUTO_INCREMENT for table `module`
 --
 ALTER TABLE `module`
   MODIFY `id_module` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT pour la table `posts`
+-- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
   MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `professeur`
+-- AUTO_INCREMENT for table `professeur`
 --
 ALTER TABLE `professeur`
   MODIFY `id_prof` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT pour la table `reply`
+-- AUTO_INCREMENT for table `reply`
 --
 ALTER TABLE `reply`
   MODIFY `id_reply` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `semestre`
+-- AUTO_INCREMENT for table `section`
+--
+ALTER TABLE `section`
+  MODIFY `id_section` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `semestre`
 --
 ALTER TABLE `semestre`
   MODIFY `id_semestre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT pour la table `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `administrateur`
+-- Constraints for table `administrateur`
 --
 ALTER TABLE `administrateur`
   ADD CONSTRAINT `administrateur_ibfk_1` FOREIGN KEY (`user_admin`) REFERENCES `users` (`id_user`);
 
 --
--- Contraintes pour la table `affectation_etud`
+-- Constraints for table `affectation_etud`
 --
 ALTER TABLE `affectation_etud`
   ADD CONSTRAINT `affectation_etud_ibfk_1` FOREIGN KEY (`id_etud`) REFERENCES `etudiant` (`id_etud`),
   ADD CONSTRAINT `affectation_etud_ibfk_2` FOREIGN KEY (`id_module`) REFERENCES `module` (`id_module`);
 
 --
--- Contraintes pour la table `affectation_prof`
+-- Constraints for table `affectation_prof`
 --
 ALTER TABLE `affectation_prof`
   ADD CONSTRAINT `affectation_prof_ibfk_1` FOREIGN KEY (`id_prof`) REFERENCES `professeur` (`id_prof`),
   ADD CONSTRAINT `affectation_prof_ibfk_2` FOREIGN KEY (`id_module`) REFERENCES `module` (`id_module`);
 
 --
--- Contraintes pour la table `affectation_semestre`
+-- Constraints for table `affectation_section`
+--
+ALTER TABLE `affectation_section`
+  ADD CONSTRAINT `affectation_section_ibfk_1` FOREIGN KEY (`id_module`) REFERENCES `module` (`id_module`),
+  ADD CONSTRAINT `affectation_section_ibfk_2` FOREIGN KEY (`id_section`) REFERENCES `section` (`id_section`);
+
+--
+-- Constraints for table `affectation_semestre`
 --
 ALTER TABLE `affectation_semestre`
   ADD CONSTRAINT `affectation_semestre_ibfk_1` FOREIGN KEY (`id_etud`) REFERENCES `etudiant` (`id_etud`),
   ADD CONSTRAINT `affectation_semestre_ibfk_2` FOREIGN KEY (`id_semestre`) REFERENCES `semestre` (`id_semestre`);
 
 --
--- Contraintes pour la table `annonce`
+-- Constraints for table `annonce`
 --
 ALTER TABLE `annonce`
   ADD CONSTRAINT `annonce_ibfk_1` FOREIGN KEY (`id_prof`) REFERENCES `professeur` (`id_prof`),
   ADD CONSTRAINT `annonce_ibfk_2` FOREIGN KEY (`id_module`) REFERENCES `module` (`id_module`);
 
 --
--- Contraintes pour la table `cours`
+-- Constraints for table `cours`
 --
 ALTER TABLE `cours`
-  ADD CONSTRAINT `cours_ibfk_1` FOREIGN KEY (`id_module`) REFERENCES `module` (`id_module`);
+  ADD CONSTRAINT `cours_ibfk_1` FOREIGN KEY (`id_module`) REFERENCES `module` (`id_module`),
+  ADD CONSTRAINT `cours_ibfk_2` FOREIGN KEY (`id_section`) REFERENCES `section` (`id_section`);
 
 --
--- Contraintes pour la table `etudiant`
+-- Constraints for table `etudiant`
 --
 ALTER TABLE `etudiant`
   ADD CONSTRAINT `etudiant_ibfk_1` FOREIGN KEY (`user_etud`) REFERENCES `users` (`id_user`);
 
 --
--- Contraintes pour la table `module`
+-- Constraints for table `module`
 --
 ALTER TABLE `module`
   ADD CONSTRAINT `module_ibfk_1` FOREIGN KEY (`id_filiere`) REFERENCES `filiere` (`id_filiere`);
 
 --
--- Contraintes pour la table `posts`
+-- Constraints for table `posts`
 --
 ALTER TABLE `posts`
   ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`id_prof`) REFERENCES `professeur` (`id_prof`),
   ADD CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`id_etud`) REFERENCES `etudiant` (`id_etud`);
 
 --
--- Contraintes pour la table `professeur`
+-- Constraints for table `professeur`
 --
 ALTER TABLE `professeur`
   ADD CONSTRAINT `professeur_ibfk_1` FOREIGN KEY (`user_prof`) REFERENCES `users` (`id_user`);
 
 --
--- Contraintes pour la table `reply`
+-- Constraints for table `reply`
 --
 ALTER TABLE `reply`
   ADD CONSTRAINT `reply_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `posts` (`id_post`),
   ADD CONSTRAINT `reply_ibfk_2` FOREIGN KEY (`id_prof`) REFERENCES `professeur` (`id_prof`),
   ADD CONSTRAINT `reply_ibfk_3` FOREIGN KEY (`id_etud`) REFERENCES `etudiant` (`id_etud`);
+
+--
+-- Constraints for table `section`
+--
+ALTER TABLE `section`
+  ADD CONSTRAINT `section_ibfk_1` FOREIGN KEY (`id_prof`) REFERENCES `professeur` (`id_prof`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

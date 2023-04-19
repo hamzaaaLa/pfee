@@ -10,7 +10,6 @@ class semestre extends Model
     use HasFactory;
     protected $table = "semestre";
     protected $primaryKey = 'id_semestre';
-    
     protected $fillable = ["libelleSemestre"];
     
     public function affectation()

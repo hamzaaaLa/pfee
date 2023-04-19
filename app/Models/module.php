@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class module extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = "module";
     protected $primaryKey = 'id_module';
-    
     protected $fillable = ["libelleModule","semester","id_filiere"];
     protected $dates = [
         'dernierAcces'
     ];
+
     //relation between filiere|module
     public function filiere()
     {
@@ -36,6 +37,17 @@ class module extends Model
     {
         return $this->hasMany(affectation_semestre::class, 'id_module')->with('etudiant');
     }
+
+    //relation with cours
+    public function cours()
+    {
+        return $this->hasMany(cours::class, 'id_module');
+    }
+    //relation with section & affectation_section
+    public function affectation_section()
+    {
+        return $this->hasMany(affectation_section::class, 'id_module')->with('section');
+    }
     //images
     public function getImageModuleAttribute(): string
     {
@@ -46,6 +58,5 @@ class module extends Model
     {
         $this->attributes['imageModule'] = $value;
     }
-    public $timestamps = false;
     
 }

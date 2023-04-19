@@ -11,10 +11,9 @@ class etudiant extends Model
 
     protected $table = "etudiant";
     protected $primaryKey = 'id_etud';
-    
     protected $fillable = ["cne","filiere","user_etud",];
-    
     public $timestamps = false;
+    
     public function user()
     {
         return $this->belongsTo(User::class, 'user_etud');

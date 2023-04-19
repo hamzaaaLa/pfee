@@ -5,21 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Affectation_etud extends Model
+class affectation_section extends Model
 {
     use HasFactory;
-    public $timestamps = false;
-    protected $table = "affectation_etud";
+    protected $table = "affectation_section";
     protected $primaryKey = 'id_affect';
-    protected $fillable = [ "id_etud","id_module"];
+    protected $fillable = ["id_module", "id_section"];
+    public $timestamps = false;
     
+    //relation with module || section
     public function module()
     {
         return $this->belongsTo(module::class, 'id_module');
     }
 
-    public function etudiant()
+    public function section()
     {
-        return $this->belongsTo(etudiant::class, 'id_etud');
+        return $this->belongsTo(section::class, 'id_section');
     }
 }

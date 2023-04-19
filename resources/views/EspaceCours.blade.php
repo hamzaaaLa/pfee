@@ -19,6 +19,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    {{-- <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script> --}}
 </head>
 <body>
     <!-- Start Header -->
@@ -165,36 +172,37 @@
                                             <h5 class="modal-title" id="sectionModalLabel">Ajouter Section</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <form class="row g-3 needs-validation" action="" method="post" novalidate>
-                                            <div class="modal-body">
-                                                <div class="mb-3">
-                                                    <label for="nom" class="form-label">Nom</label>
-                                                    <input type="text" name="nom" class="form-control" id="nom" required>
-                                                    <div class="valid-feedback">
-                                                        C'est bon!
-                                                    </div>
-                                                    <div class="invalid-feedback">
-                                                        Veuillez insérer un nom.
-                                                    </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="nomSection" class="form-label">Nom</label>
+                                                <input type="text" name="nomSection" class="form-control" id="nomSection" required>
+                                                <div class="valid-feedback">
+                                                    C'est bon!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Veuillez insérer un nom.
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger"
-                                                        data-bs-dismiss="modal">Annuler</button>
-                                                <button type="button" class="btn btn-primary" onclick="addSection()"><input type="submit" value="Ajouter"></button>
-                                            </div>
-                                        </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger"
+                                            data-bs-dismiss="modal">Annuler</button>
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="addSection()">Ajouter</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endif
-                <div class="accordion" id="accordionSection">
+                <div class="accordion" id="accordionPanelsStayOpen">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
-                                Chapitre 1
+                                {{-- @foreach ($modules->affectation_section->section as $section)
+                                    {{$section->titre_section}}
+                                @endforeach --}}
+                                smth
                             </button>
                         </h2>
                         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
@@ -224,109 +232,57 @@
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                Chapitre 2
-                            </button>
-                        </h2>
-                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                            <div class="accordion-body">
-                                <ul>
-                                    <li>
-                                        <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                        <a href="#">Chapitre 2 (Cours)</a>
-                                    </li>
-                                    <li>
-                                        <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                        <a href="#">TD Mécanique_ Série 2_ 2020-2021</a>
-                                    </li>
-                                    <li>
-                                        <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                        <a href="#">TD Mécanique_ Série 2_ 2020-2021_ Correction</a>
-                                    </li>
-                                    <li>
-                                        <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                        <a href="#">TP Mécanique_ Série 2_ 2020-2021</a>
-                                    </li>
-                                    <li>
-                                        <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                        <a href="#">TP Mécanique_ Série 2_ 2020-2021_ Correction</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                                Chapitre 3
-                            </button>
-                        </h2>
-                        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-                            <div class="accordion-body">
-                                <ul>
-                                    <li>
-                                        <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                        <a href="#">Chapitre 2 (Cours)</a>
-                                    </li>
-                                    <li>
-                                        <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                        <a href="#">TD Mécanique_ Série 2_ 2020-2021</a>
-                                    </li>
-                                    <li>
-                                        <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                        <a href="#">TD Mécanique_ Série 2_ 2020-2021_ Correction</a>
-                                    </li>
-                                    <li>
-                                        <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                        <a href="#">TP Mécanique_ Série 2_ 2020-2021</a>
-                                    </li>
-                                    <li>
-                                        <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                        <a href="#">TP Mécanique_ Série 2_ 2020-2021_ Correction</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
+        {{-- <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Accordion Item #3
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+              </div>
+            </div>
+          </div> --}}
     </div>
     <!-- End Cours -->
-    <script src="/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/all.min.js"></script>
-    <script src="/js/jquery-3.6.4.min.js"></script>
+    
     <script>
         function addSection() {
-
             nomSection = $("#nomSection").val();
+            var i=0;
 
-            if(nomSection !== "") {
+            if(nomSection != "") {
                 $.ajax({
-                   url: "",
-                   type: 'post',
+                   url: "{{route('section.store',$id_module)}}",
+                   type: 'POST',
                    data: {
-                       'nomSection': nomSection
+                       'nomSection': nomSection,
                        '_token': $('meta[name="csrf-token"]').attr('content')
                    },
                     success: function (response) {
-                        var newSection =    '<div class="accordion-item">' +
-                            '<h2 class="accordion-header" id="panelsStayOpen-headingOne">' +
-                            '<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">' +
-                            nomSection +
-                            '</button>' +
-                            '</h2>' +
-                            '<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">' +
-                            '<div class="accordion-body">' +
-                            '</div>' +
-                            '</div>' +
+                        if(response == 'success'){
+                            var newSection = '<div class="accordion-item">' +
+                                '<h2 class="accordion-header" id="panelsStayOpen-heading' + i + '">' +
+                                    '<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse' +  i + '" aria-expanded="true" aria-controls="#panelsStayOpen-collapse' +  i + '">' +
+                                        nomSection +
+                                    '</button>' +
+                                '</h2>' +
+                                '<div id="panelsStayOpen-collapse' +  i + '" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-heading' + i + '">' +
+                                    '<div class="accordion-body">' +
+                                        'smth' +
+                                    '</div>' +
+                                '</div>' +
                             '</div>';
-                        $("#accordionSection").append(newSection);
+                        $("#accordionPanelsStayOpen").append(newSection);
+                        }
                     }
                 });
             }
+            i++;
         }
     </script>
     <script>
@@ -348,5 +304,8 @@
                 })
         })()
     </script>
+    <script src="/js/jquery-3.6.4.min.js"></script>g
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/all.min.js"></script>
 </body>
 </html>

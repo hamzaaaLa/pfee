@@ -28,5 +28,10 @@ class professeur extends Model
     {
         return $this->hasMany(annonce::class, 'id_prof');
     }
+    //relation between professeur and section
+    public function section()
+    {
+        return $this->hasMany(section::class, 'id_prof');
+    }
 
 }

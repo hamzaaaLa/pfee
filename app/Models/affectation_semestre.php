@@ -8,12 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class affectation_semestre extends Model
 {
     use HasFactory;
-
     protected $table = "affectation_semestre";
     protected $primaryKey = 'id_affect';
-     // Add this line to indicate composite primary key
-    
-
     protected $fillable = ["id_semestre", "id_etud"];
     public $timestamps = false;
 

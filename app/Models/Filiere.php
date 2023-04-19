@@ -9,8 +9,8 @@ class filiere extends Model
 {
     use HasFactory;
     protected $table='filiere';
-     public $timestamps = false;
-     protected $primaryKey ='id_filiere';
+    public $timestamps = false;
+    protected $primaryKey ='id_filiere';
     protected $fillable = [
         'libellefiliere',  
     ];

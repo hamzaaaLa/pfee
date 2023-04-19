@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FiliereController;
 use App\Http\Controllers\ProfController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\espaceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,8 +47,10 @@ Route::middleware(['auth','user-access:prof'])->group(function () {
     Route::get('/prof/dashboard', [HomeController::class, 'etudDashboard'])->name('prof.dashboard');
     Route::post('/prof/dashboard/get-modules', [HomeController::class, 'getModules'])->name('get.modules');
     Route::post('/prof/dashboard/annonce_store', [HomeController::class, 'store'])->name('annonce.store');
-    Route::get('/prof/dashboard/EspaceCours', [HomeController::class, 'EspaceCours'])->name('prof.EspaceCours');
+    Route::get('/prof/dashboard/EspaceCours/{id_module}', [HomeController::class, 'EspaceCours'])->name('prof.EspaceCours');
     Route::get('prof/profile/{id_user}',[ProfController::class,'getProfile'])->name('profProfile');
+    Route::post('/prof/dashboard/EspaceCours/section_store/{id_module}', [espaceController::class, 'store'])->name('section.store');
+
 });
 
 // Super Admin Routes
