@@ -35,6 +35,7 @@ Route::middleware(['auth','user-access:user'])->group(function () {
 
     Route::get('/dashboard', [HomeController::class, 'etudDashboard'])->name('dashboard');
     Route::get('/dashboard/EspaceCours', [HomeController::class, 'EspaceCours'])->name('etud.EspaceCours');
+    Route::get('etudiant/profile/{id_user}',[EtudiantController::class,'getProfile'])->name('etudiantProfile');
 
 });
 
@@ -46,6 +47,7 @@ Route::middleware(['auth','user-access:prof'])->group(function () {
     Route::post('/prof/dashboard/get-modules', [HomeController::class, 'getModules'])->name('get.modules');
     Route::post('/prof/dashboard/annonce_store', [HomeController::class, 'store'])->name('annonce.store');
     Route::get('/prof/dashboard/EspaceCours', [HomeController::class, 'EspaceCours'])->name('prof.EspaceCours');
+    Route::get('prof/profile/{id_user}',[ProfController::class,'getProfile'])->name('profProfile');
 });
 
 // Super Admin Routes
@@ -76,6 +78,7 @@ Route::middleware(['auth','user-access:admin'])->group(function () {
     Route::post('/updateModule/{id_module}',[ModuleController::class,'update'])->name('updateModule');
     Route::get('/supprimerModule/{id_module}',[ModuleController::class,'delete'])->name('deleteModule');
     Route::get('/supprimerEtudiant/{id_user}',[EtudiantController::class,'delete'])->name('deleteEtudiant');
+    
 
     /*Route::get('/admin/ajouterProfForm',function(){
         return view('AjouterProfesseur');

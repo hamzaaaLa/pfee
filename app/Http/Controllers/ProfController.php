@@ -83,5 +83,12 @@ class ProfController extends Controller
         
         return redirect(route('afficheProf'));
     }
+
+    public function getProfile($id_user){
+        $id_prof=$id_prof=User::join('professeur','users.id_user','=','professeur.user_prof')->where('users.id_user',$id_user)->value('professeur.id_prof');
+        $prof=User::join('professeur','users.id_user','=','professeur.user_prof')->where('users.id_user',$id_user)->first();
+        $module=affectation_prof::join('module','affectation_prof.id_module','=','module.id_module')->where('affectation_prof.id_prof',$id_prof)->get();
+        return view('profProfile',compact(['prof','module']));
+    }
     //
 }

@@ -155,6 +155,14 @@ class EtudiantController extends Controller
             return redirect(route('afficheEtud'));
         }
 
+    public function getProfile($id_user){
+        $id_etud=User::join('etudiant','users.id_user','=','etudiant.user_etud')->where('users.id_user',$id_user)->value('etudiant.id_etud');
+        $etudiant=User::join('etudiant','users.id_user','=','etudiant.user_etud')->where('users.id_user',$id_user)->first();
+        $semestre=affectation_semestre::join('semestre','affectation_semestre.id_semestre','=','semestre.id_semestre')->where('affectation_semestre.id_etud',$id_etud)->get();
+        $module=Affectation_etud::join('module','affectation_etud.id_module','=','module.id_module')->where('affectation_etud.id_etud',$id_etud)->get();
+        return view('Profile',compact(['etudiant','semestre','module']));
+    }
+
     function test(){
         echo "bonjour";
     }

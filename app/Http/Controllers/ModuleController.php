@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Affectation_etud;
 use Illuminate\Support\Facades\DB;
 use App\Models\affectation_prof;
 use App\Models\professeur;
@@ -82,6 +83,7 @@ class ModuleController extends Controller
     }
 
     public function delete($id_module){
+        Affectation_etud::where('id_module','=',$id_module)->delete();
         affectation_prof::where('id_module','=',$id_module)->delete();
         module::where('id_module','=',$id_module)->delete();
         return redirect(route('afficheModule'));

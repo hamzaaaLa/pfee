@@ -7,19 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Profile</title>
     <!-- Website favicon-->
-    <link rel="shortcut icon" href="../img/fsa_agadir.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('/img/fsa_agadir.png')}}" type="image/x-icon">
     <!-- JQuery plugin for multi-select -->
-    <link rel="stylesheet" href="../css/chosen.min.css" />
+    <link rel="stylesheet" href="{{asset('/css/chosen.min.css')}}" />
     <!-- Bootstrap 05 -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="../css/Profile.css" />
+    <link rel="stylesheet" href="{{asset('/css/Profile.css')}}" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../css/all.min.css" />
+    <link rel="stylesheet" href="{{asset('/css/all.min.css')}}" />
     <!-- Google Fonts - Open Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="{{asset('https://fonts.googleapis.com')}}">
+    <link rel="preconnect" href="{{asset('https://fonts.gstatic.com')}}" crossorigin>
+    <link href="{{asset('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap')}}" rel="stylesheet">
 </head>
 <body>
     <!-- Start Header -->
@@ -57,22 +57,29 @@
                 </ul>
                 <div class="dropdown" >
                     <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="../img/fsa_agadir.png" alt="" width="40" height="30" >
-                        Ismail Berriss
+                        <img src="{{ Auth::user()->imageProfile}}" alt="" width="40" height="30" >
+                            {{ Auth::user()->name }} {{ Auth::user()->prenom }}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li>
-                            <a class="dropdown-item" href="#">
+                            @php
+                            $id_user=Auth::user()->id_user
+                            @endphp
+                            <a class="dropdown-item" href="{{route('etudiantProfile',Auth::user()->id_user)}}">
                                 <i class="fa-solid fa-user"></i>
                                 Profile
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item" href="#">
-                                <i class="fa-solid fa-power-off fa-lg"></i>
-                                Déconnexion
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fa-solid fa-power-off fa-lg"></i>
+                                {{ __('Déconnexion') }}
                             </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -134,7 +141,7 @@
                 <div class="profile-container">
                     <div class="img-box">
                         <img src="../img/professeur.jpg" alt="">
-                        <h3>Ismail Berriss</h3>
+                        <h3>{{Auth::user()->name}} {{Auth::user()->prenom}}</h3>
                         <p>Etudiant</p>
                     </div>
                     <div class="profile-content">
@@ -142,42 +149,46 @@
                             <h4>Informations Personnalisées</h4>
                             <div>
                                 <span>Nom Complet:</span>
-                                <span>Ismail Berriss</span>
+                                <span>{{$etudiant->name}} {{$etudiant->prenom}}</span>
                             </div>
                             <div>
                                 <span>CIN:</span>
-                                <span>JB123456</span>
+                                <span>{{$etudiant->cin}}</span>
                             </div>
                             <div>
                                 <span>Email:</span>
-                                <span>ismailberriss@gmail.com</span>
+                                <span>{{$etudiant->email}}</span>
                             </div>
                             <div>
                                 <span>GSM:</span>
-                                <span>0657090441</span>
+                                <span>{{$etudiant->telephone}}</span>
                             </div>
                             <div>
                                 <span>Dernier Acces:</span>
-                                <span>22:25 17/04/2024</span>
+                                <span>{{$etudiant->dernierAcces}}</span>
                             </div>
                         </div>
                         <div class="my-box">
                             <h4>Informations Scolaires</h4>
                             <div>
                                 <span>CNE:</span>
-                                <span>D123456789</span>
+                                <span>{{$etudiant->cne}}</span>
                             </div>
                             <div>
                                 <span>Filière:</span>
-                                <span>Science Mathématique et Informatique</span>
+                                <span>{{$etudiant->filiere}}</span>
                             </div>
                             <div>
                                 <span>Semestres:</span>
-                                <span>S1, S3</span>
+                                @foreach($semestre as $key)
+                                <span>{{$key->libelleSemestre}},</span>
+                            @endforeach
                             </div>
                             <div>
                                 <span>Modules:</span>
-                                <span>Analyse 1: Suites Numériques et Fonctions, Algebre 1: Généralités et Arithmétique dans Z, Programmation 1, Algorithmique 2</span>
+                                @foreach($module as $key)
+                                <span>{{$key->libelleModule}},</span>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -302,7 +313,7 @@
                 <div class="profile-container">
                     <div class="img-box">
                         <img src="../img/professeur.jpg" alt="">
-                        <h3>Ismail Berriss</h3>
+                        <h3>{{$etudiant->name}} {{$etudiant->prenom}}</h3>
                         <p>Etudiant</p>
                     </div>
                     <div class="profile-content">
@@ -312,7 +323,7 @@
                                 <div class="row g-3">
                                     <div class="col-md-4">
                                         <label for="nom" class="form-label">Nom</label>
-                                        <input type="text" class="form-control" id="nom" value="Berriss" required disabled>
+                                        <input type="text" class="form-control" id="nom" value={{$etudiant->name}} required disabled>
                                         <div class="valid-feedback">
                                             C'est bon!
                                         </div>
@@ -322,7 +333,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="prenom" class="form-label">Prénom</label>
-                                        <input type="text" class="form-control" id="prenom" value="Ismail" required disabled>
+                                        <input type="text" class="form-control" id="prenom" value={{$etudiant->prenom}} required disabled>
                                         <div class="valid-feedback">
                                             C'est bon!
                                         </div>
@@ -332,7 +343,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="cin" class="form-label">CIN</label>
-                                        <input type="text" class="form-control" id="cin" value="JB123456" required disabled>
+                                        <input type="text" class="form-control" id="cin" value={{$etudiant->cin}} required disabled>
                                         <div class="valid-feedback">
                                             C'est bon!
                                         </div>
@@ -344,7 +355,7 @@
                                         <label for="email" class="form-label">Email</label>
                                         <div class="input-group has-validation">
                                             <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                            <input type="Email" class="form-control" id="email" aria-describedby="inputGroupPrepend" value="ismailberriss@gmail.com" required>
+                                            <input type="Email" class="form-control" id="email" aria-describedby="inputGroupPrepend" value={{$etudiant->email}} required>
                                             <div class="valid-feedback">
                                                 C'est bon!
                                             </div>
@@ -357,7 +368,7 @@
                                         <label for="tel" class="form-label">GSM</label>
                                         <div class="input-group has-validation">
                                             <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-phone"></i></span>
-                                            <input type="tel" class="form-control" id="tel" aria-describedby="inputGroupPrepend" value="0657090441" required disabled>
+                                            <input type="tel" class="form-control" id="tel" aria-describedby="inputGroupPrepend" value={{$etudiant->telephone}} required disabled>
                                             <div class="valid-feedback">
                                                 C'est bon!
                                             </div>
@@ -373,8 +384,7 @@
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label for="cne" class="form-label">CNE</label>
-                                        <input type="text" class="form-control" name="cne" id="cne" required
-                                               value="D123456789" disabled>
+                                        <input type="text" class="form-control" name="cne" id="cne" required value={{$etudiant->cne}} disabled>
                                         <div class="valid-feedback">
                                             C'est bon!
                                         </div>
@@ -386,7 +396,7 @@
                                         <label for="filiereSelect" class="form-label">Filière</label>
                                         <select class="form-select" id="filiereSelect" name="filiereSelect" required
                                                 disabled>
-                                            <option selected>Science Mathématique et Informatique</option>
+                                            <option selected>{{$etudiant->filiere}}</option>
                                         </select>
                                         <div class="valid-feedback">
                                             C'est bon!
@@ -398,12 +408,9 @@
                                     <div class="col-md-6">
                                         <label for="semestre" class="form-label">Semestres</label>
                                         <select class="form-select" id="semestreSelect" multiple="" required disabled>
-                                            <option selected>1</option>
-                                            <option>2</option>
-                                            <option selected>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                            <option>6</option>
+                                            @foreach($semestre as $key)
+                                            <option selected>{{$key->libelleSemestre}}</option>
+                                            @endforeach
                                         </select>
                                         <div class="valid-feedback">
                                             C'est bon!
@@ -415,10 +422,9 @@
                                     <div class="col-md-6">
                                         <label for="module" class="form-label">Modules</label>
                                         <select class="form-select" id="moduleSelect" multiple="" required disabled>
-                                            <option selected>Analyse 1: Suites Numériques et Fonctions</option>
-                                            <option selected>Algebre 1: Généralités et Arithmétique dans Z</option>
-                                            <option selected>Programmation 1</option>
-                                            <option selected>Algorithmique 2</option>
+                                            @foreach($module as $key)
+                                            <option selected>{{$key->libelleModule}}</option>
+                                            @endforeach
                                         </select>
                                         <div class="valid-feedback">
                                             C'est bon!
@@ -443,10 +449,10 @@
             </div>
         </div>
     </div>
-    <script src="../js/jquery-3.6.4.min.js"></script>
-    <script src="../js/chosen.jquery.min.js"></script>
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="../js/all.min.js"></script>
+    <script src="{{asset('/js/jquery-3.6.4.min.js')}}"></script>
+    <script src="{{asset('/js/chosen.jquery.min.js')}}"></script>
+    <script src="{{asset('/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('/js/all.min.js')}}"></script>
     <script>
         (function () {
             'use strict'

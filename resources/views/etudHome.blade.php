@@ -64,10 +64,20 @@
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li>
-                        <a class="dropdown-item" href="#">
+                        @php
+                        $id_user=Auth::user()->id_user
+                        @endphp
+                        @if(Auth::user()->type=='prof')
+                        <a class="dropdown-item" href="{{route('profProfile',Auth::user()->id_user)}}">
                             <i class="fa-solid fa-user"></i>
                             Profile
                         </a>
+                        @else
+                        <a class="dropdown-item" href="{{route('etudiantProfile',Auth::user()->id_user)}}">
+                            <i class="fa-solid fa-user"></i>
+                            Profile
+                        </a>
+                        @endif
                     </li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
@@ -278,9 +288,9 @@
     </div>
 </div>
 <!-- End Dashboard -->
-<script src="/js/jquery-3.6.4.min.js"></script>
-<script src="/js/bootstrap.bundle.min.js"></script>
-<script src="/js/all.min.js"></script>
+<script src="{{asset('/js/jquery-3.6.4.min.js')}}"></script>
+<script src="{{asset('/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('/js/all.min.js')}}"></script>
 <script>
     (function () {
         'use strict'

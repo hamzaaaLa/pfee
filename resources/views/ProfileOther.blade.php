@@ -134,7 +134,7 @@
                             <h4>Informations Personnalisées</h4>
                             <div>
                                 <span>Nom Complet:</span>
-                                <span>Ismail Berriss</span>
+                                <span>{{$etudiant->name}}</span>
                             </div>
                             <div>
                                 <span>Email:</span>
