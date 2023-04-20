@@ -114,7 +114,7 @@
                 <div class="row justify-content-center">
                     @if (Auth::user()->type=='prof')
                     @foreach (Auth::user()->professeur as $prof)
-                        @foreach ($prof->affectation_prof as $af)
+                        @foreach ($prof->affectation_prof as $af)  
                             <div class="col">
                                 <div class="card" style="width: 15rem;">
                                     <img src="{{ $af->module->imageModule}}" class="card-img-top" alt="...">
@@ -122,7 +122,7 @@
                                         <div class="content">
                                             <p class="card-title">{{$af->module->libelleModule}}</p>
                                             <p class="card-text">
-                                                <a href="">{{Auth::user()->name}} {{Auth::user()->prenom}}</a>
+                                                <a href="">{{ $af->professeur->user->name}} {{ $af->professeur->user->prenom }}</a>
                                             </p>
                                         </div>
                                         <div class="acceder">
@@ -137,23 +137,25 @@
                     @else
                     @foreach (Auth::user()->etudiant as $etud)
                         @foreach ($etud->affectation_etud as $af_etud)
-                            <div class="col">
-                                <div class="card" style="width: 15rem;">
-                                    <img src="{{ $af_etud->module->imageModule}}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="content">
-                                            <p class="card-title">{{$af_etud->module->libelleModule}}</p>
-                                            <p class="card-text">
-                                                <a href="">{{Auth::user()->name}} {{Auth::user()->prenom}}</a>
-                                            </p>
-                                        </div>
-                                        <div class="acceder">
-                                            <a href="{{route('etud.EspaceCours', $af_etud->module->id_module)}}">Visiter</a>
-                                            <i class="fas fa-long-arrow-alt-right"></i>
+                            @foreach ( $af_etud->module->affectation_prof as $af_prof)
+                                <div class="col">
+                                    <div class="card" style="width: 15rem;">
+                                        <img src="{{ $af_etud->module->imageModule}}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="content">
+                                                <p class="card-title">{{$af_etud->module->libelleModule}}</p>
+                                                <p class="card-text">
+                                                    <a href="">{{$af_prof->professeur->user->name}} {{$af_prof->professeur->user->prenom}}</a>
+                                                </p>
+                                            </div>
+                                            <div class="acceder">
+                                                <a href="{{route('etud.EspaceCours', $af_etud->module->id_module)}}">Visiter</a>
+                                                <i class="fas fa-long-arrow-alt-right"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                         @endforeach
                     @endforeach
                     @endif

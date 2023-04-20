@@ -44,8 +44,12 @@ class HomeController extends Controller
         $annonces = Annonce::orderBy('datecreation', 'desc')->get();
         return view('etudHome', ['annonces' => $annonces, 'filieres' => $filieres, 'modules' => $modules],);
     }
-    public function EspaceCours(){
-        return view('EspaceCours');
+    public function EspaceCours($id_module){
+        
+        $id_module = Module::where('id_module',$id_module)->first();
+        $filieres = Filiere::get();
+        $annonces = Annonce::orderBy('datecreation', 'desc')->get();
+        return view('EspaceCours', ['annonces' => $annonces, 'filieres' => $filieres, 'id_module' => $id_module],);
     }
     
     public function profDashboard()
