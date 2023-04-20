@@ -94,7 +94,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="DashboardAdmin.php">
+                    <a href="{{route('adminProfile',Auth::user()->id_user)}}">
                         <i class="fa-solid fa-user"></i>
                         Profile
                     </a>

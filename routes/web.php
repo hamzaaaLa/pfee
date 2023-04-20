@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EtudiantController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -81,6 +82,8 @@ Route::middleware(['auth','user-access:admin'])->group(function () {
     Route::post('/updateModule/{id_module}',[ModuleController::class,'update'])->name('updateModule');
     Route::get('/supprimerModule/{id_module}',[ModuleController::class,'delete'])->name('deleteModule');
     Route::get('/supprimerEtudiant/{id_user}',[EtudiantController::class,'delete'])->name('deleteEtudiant');
+    Route::get('admin/profile/{id_user}',[AdminController::class,'getProfile'])->name('adminProfile');
+    Route::post('admin/profile/modifier/{id_user}',[AdminController::class,'updateProfile'])->name('adminUpdateProfile');
     
 
     /*Route::get('/admin/ajouterProfForm',function(){

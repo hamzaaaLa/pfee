@@ -7,19 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Profile</title>
     <!-- Website favicon-->
-    <link rel="shortcut icon" href="../img/fsa_agadir.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('/img/fsa_agadir.png')}}" type="image/x-icon">
     <!-- JQuery plugin for multi-select -->
-    <link rel="stylesheet" href="../css/chosen.min.css" />
+    <link rel="stylesheet" href="{{asset('/css/chosen.min.css')}}" />
     <!-- Bootstrap 05 -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="../css/ProfileAdmin.css" />
+    <link rel="stylesheet" href="{{asset('/css/ProfileAdmin.css')}}" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../css/all.min.css" />
+    <link rel="stylesheet" href="{{asset('/css/all.min.css')}}" />
     <!-- Google Fonts - Open Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="{{asset('https://fonts.googleapis.com')}}">
+    <link rel="preconnect" href="{{asset('https://fonts.gstatic.com')}}" crossorigin>
+    <link href="{{asset('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap')}}" rel="stylesheet">
 </head>
 <body>
     <div class="page">
@@ -30,7 +30,7 @@
                 FSA-Online
             </a>
             <div class="accordion" id="accordionExample">
-                <a href="DashboardAdmin.php">
+                <a href="{{route('admineHome')}}">
                     <i class="fa-regular fa-chart-bar fa-fw"></i>
                     <span>Dashboard</span>
                 </a>
@@ -45,8 +45,8 @@
                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne">
                         <div class="accordion-body test">
                             <ul>
-                                <li><a href="VisualiserEtudiant.php">Consulter et Modifier</a></li>
-                                <li><a href="AjouterEtudiant.php">Ajouter Etudiant</a></li>
+                                <li><a href="{{route('afficheEtud')}}">Consulter et Modifier</a></li>
+                                <li><a href="{{route('ajoutEtud')}}">Ajouter Etudiant</a></li>
                             </ul>
                         </div>
                     </div>
@@ -62,37 +62,42 @@
                     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
                         <div class="accordion-body">
                             <ul>
-                                <li><a href="VisualiserProf.php">Consulter et Modifier</a></li>
-                                <li><a href="AjouterProfesseur.php">Ajouter Professeur</a></li>
+                                <li><a href="{{route('afficheProf')}}">Consulter et Modifier</a></li>
+                                <li><a href="{{route('ajouterProfView')}}">Ajouter Professeur</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
                             <i class="fa-solid fa-book"></i>
                             Modules
                         </button>
                     </h2>
-                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree">
+                    <div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="headingThree">
                         <div class="accordion-body">
                             <ul>
-                                <li><a href="VisualiserModule.php">Consulter et Modifier</a></li>
-                                <li><a href="AjouterModule.php">Ajouter Module</a></li>
+                                <li><a href="{{route('afficheModule')}}">Consulter et Modifier</a></li>
+                                <li class="active"><a href="{{route('ajouterModuleView')}}">Ajouter Module</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <a href="DashboardAdmin.php" class="active">
+                <a href="DashboardAdmin.php">
                     <i class="fa-solid fa-user"></i>
                     Profile
                 </a>
-                <a href="DashboardAdmin.php">
+                <a href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="fa-solid fa-power-off fa-lg"></i>
-                    Déconnexion
+    
+                    {{ __('Déconnexion') }}
                 </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
         </div>
         <!-- End Sidebar -->
@@ -100,7 +105,7 @@
             <div class="page-content">
                 <div class="head">
                     <a href="" type="button" class="btn">
-                        <img src="../img/professeur.jpg" alt="">
+                        <img src="{{asset('/img/professeur.jpg')}}" alt="">
                         Admin
                     </a>
                 </div>
@@ -112,7 +117,7 @@
                         <div class="profile-container">
                             <div class="img-box">
                                 <img src="../img/professeur.jpg" alt="">
-                                <h3>Ismail Berriss</h3>
+                                <h3>{{$admin->name}} {{$admin->prenom}}</h3>
                                 <p>Administrateur</p>
                             </div>
                             <div class="profile-content">
@@ -120,30 +125,30 @@
                                     <h4>Informations Personnalisées</h4>
                                     <div>
                                         <span>Nom Complet:</span>
-                                        <span>Ismail Berriss</span>
+                                        <span>{{$admin->name}} {{$admin->prenom}}</span>
                                     </div>
                                     <div>
                                         <span>CIN:</span>
-                                        <span>JB123456</span>
+                                        <span>{{$admin->cin}}</span>
                                     </div>
                                     <div>
                                         <span>Email:</span>
-                                        <span>ismailberriss@gmail.com</span>
+                                        <span>{{$admin->email}}</span>
                                     </div>
                                     <div>
                                         <span>GSM:</span>
-                                        <span>0657090441</span>
+                                        <span>{{$admin->telephone}}</span>
                                     </div>
                                     <div>
                                         <span>Dernier Acces:</span>
-                                        <span>22:25 17/04/2024</span>
+                                        <span>{{$admin->dernierAcces}}</span>
                                     </div>
                                 </div>
                                 <div class="my-box">
                                     <h4>Informations Professionnelles</h4>
                                     <div>
                                         <span>Date d'embauche:</span>
-                                        <span>18/04/2023</span>
+                                        <span>{{$admin->dateEmbauche}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -160,13 +165,14 @@
                                 <p>Administrateur</p>
                             </div>
                             <div class="profile-content">
-                                <form class="needs-validation" novalidate>
+                                <form class="needs-validation" action="{{route('adminUpdateProfile',$admin->id_user)}}" method="post" novalidate>
+                                    @csrf
                                     <div class="my-box">
                                         <h4>Informations Personnalisées</h4>
                                         <div class="row g-3">
                                             <div class="col-md-4">
                                                 <label for="nom" class="form-label">Nom</label>
-                                                <input type="text" class="form-control" id="nom" value="Berriss" required>
+                                                <input type="text" class="form-control" id="name" name="name" value="{{$admin->name}}" required>
                                                 <div class="valid-feedback">
                                                     C'est bon!
                                                 </div>
@@ -176,7 +182,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="prenom" class="form-label">Prénom</label>
-                                                <input type="text" class="form-control" id="prenom" value="Ismail" required>
+                                                <input type="text" class="form-control" id="prenom" name="prenom" value="{{$admin->prenom}}" required>
                                                 <div class="valid-feedback">
                                                     C'est bon!
                                                 </div>
@@ -186,7 +192,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="cin" class="form-label">CIN</label>
-                                                <input type="text" class="form-control" id="cin" value="JB123456" required>
+                                                <input type="text" class="form-control" id="cin" name="cin" value="{{$admin->cin}}" required>
                                                 <div class="valid-feedback">
                                                     C'est bon!
                                                 </div>
@@ -198,7 +204,7 @@
                                                 <label for="email" class="form-label">Email</label>
                                                 <div class="input-group has-validation">
                                                     <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                    <input type="Email" class="form-control" id="email" aria-describedby="inputGroupPrepend" value="ismailberriss@gmail.com" required>
+                                                    <input type="Email" class="form-control" id="email" name="email" aria-describedby="inputGroupPrepend" value="{{$admin->email}}" required>
                                                     <div class="valid-feedback">
                                                         C'est bon!
                                                     </div>
@@ -211,7 +217,7 @@
                                                 <label for="tel" class="form-label">GSM</label>
                                                 <div class="input-group has-validation">
                                                     <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-phone"></i></span>
-                                                    <input type="tel" class="form-control" id="tel" aria-describedby="inputGroupPrepend" value="0657090441" required>
+                                                    <input type="tel" class="form-control" id="tel" name="tel" aria-describedby="inputGroupPrepend" value="{{$admin->telephone}}" required>
                                                     <div class="valid-feedback">
                                                         C'est bon!
                                                     </div>
@@ -227,10 +233,10 @@
                                         <div class="row g-3">
                                             <div class="col-md-12">
                                                 <label for="dateEmbauche" class="form-label">Date d'embauche</label>
-                                                <input type="text" class="form-control" name="dateEmbauche"
+                                                <input type="date" class="form-control" name="dateEmbauche"
                                                        id="dateEmbauche"
                                                        required
-                                                       value="18/04/2023">
+                                                       value="{{$admin->dateEmbauche}}">
                                                 <div class="valid-feedback">
                                                     C'est bon!
                                                 </div>
@@ -261,10 +267,10 @@
         </div>-->
         <!-- End Profile -->
     </div>
-    <script src="../js/jquery-3.6.4.min.js"></script>
-    <script src="../js/chosen.jquery.min.js"></script>
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="../js/all.min.js"></script>
+    <script src="{{asset('/js/jquery-3.6.4.min.js')}}"></script>
+    <script src="{{asset('/js/chosen.jquery.min.js')}}"></script>
+    <script src="{{asset('/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('/js/all.min.js')}}"></script>
     <script>
         (function () {
             'use strict'
