@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
 
 use App\Models\Annonce;
 use App\Models\Cours;
@@ -39,5 +41,50 @@ class espaceController extends Controller
         $affectation->save();
 
         return response('success');
+    }
+
+    public function add_cour(Request $request, $id_module)
+    {
+        // dd($request->all());
+
+        $nomCours = $request->input('nomCours');
+        $sectionCours = $request->input('sectionCours');
+        
+        if ($request->hasFile('fichierCours')) {
+            $file = $request->file('fichierCours');
+            // dd($file);
+            $fileName = time().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('cours'), $fileName);
+            $contents = file_get_contents(public_path('cours').'/'.$fileName);
+        } else {
+            return response('error', 400);
+        }
+        
+        $id_section = Section::select('id_section')
+            ->where('titre_section', '=', $sectionCours)
+            ->value('id_section');
+    
+        $cours = new Cours();
+        $cours->libelleCour = $nomCours;
+        $cours->contenu = $contents;
+        $cours->id_module = $id_module;
+        $cours->id_section = $id_section;
+        $cours->save();
+    
+        // return response('success');
+        return redirect()->back()->with('success', 'Cours créée avec succès.');
+    }
+
+    public function download($id_cour)
+    {
+        $cours = DB::table('cours')->select('contenu')->where('id_cour', $id_cour)->first();
+        if ($cours) {
+            $response = new Response($cours->contenu, 200);
+            $response->header('Content-Type', 'application/octet-stream');
+            $response->header('Content-Disposition', 'attachment; filename="' . $id_cour . '.pdf"');
+            return $response;
+        } else {
+            abort(404);
+        }
     }
 }

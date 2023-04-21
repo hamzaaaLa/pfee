@@ -11,7 +11,7 @@ class cours extends Model
     public $timestamps = false;
     protected $table = "cours";
     protected $primaryKey = 'id_cour';
-    protected $fillable = ["libelleCour","contenue","id_module","id_section"];
+    protected $fillable = ["libelleCour","contenu","id_module","id_section"];
     
     //relation with section
     public function section()

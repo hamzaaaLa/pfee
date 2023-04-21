@@ -94,7 +94,7 @@
     <div class="cours">
         <div class="container">
             <div class="header">
-                <h1>Bases De Données 2</h1>
+                <h1>{{$id_module->libelleModule}}</h1>
                 <a class="forum-btn" href="#">
                     <span class="circle" aria-hidden="true">
                     <span class="icon arrow"></span>
@@ -118,58 +118,60 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="container">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="coursModalLabel">Ajouter Cours</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="mb-3">
-                                                <label for="nomCours" class="form-label">Titre</label>
-                                                <input type="text" name="nomCours" class="form-control" id="nomCours" required>
-                                                <div class="valid-feedback">
-                                                    C'est bon!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Veuillez insérer un titre.
-                                                </div>
+                                        <form class="row g-3 needs-validation" action="{{route('section.add_cour', $id_module)}}" method="post" enctype="multipart/form-data" novalidate>
+                                            @csrf
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="coursModalLabel">Ajouter Cours</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="fichierCours" class="form-label">Fichier</label>
-                                                <input class="form-control" type="file" id="fichierCours" required>
-                                                <div class="valid-feedback">
-                                                    C'est bon!
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                    <label for="nomCours" class="form-label">Titre</label>
+                                                    <input type="text" name="nomCours" class="form-control" id="nomCours" required>
+                                                    <div class="valid-feedback">
+                                                        C'est bon!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Veuillez insérer un titre.
+                                                    </div>
                                                 </div>
-                                                <div class="invalid-feedback">
-                                                    Veuillez insérer un fichier.
+                                                <div class="mb-3">
+                                                    <label for="fichierCours" class="form-label">Fichier</label>
+                                                    <input class="form-control" type="file" name="fichierCours" id="fichierCours" required>
+                                                    <div class="valid-feedback">
+                                                        C'est bon!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Veuillez insérer un fichier.
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="sectionCours" class="form-label">Section</label>
-                                                <select class="form-select" id="sectionCours" aria-label="Default select example">
-                                                    <option selected>Choisir...</option>
-                                                    @foreach (Auth::user()->professeur as $prof)
-                                                        @foreach ($prof->affectation_prof as $affectation)
-                                                            @foreach ($affectation->module->affectation_section as $sec)
-                                                                <option>
-                                                                    {{ $sec->section->titre_section }}
-                                                                </option>
+                                                <div class="mb-3">
+                                                    <label for="sectionCours" class="form-label">Section</label>
+                                                    <select class="form-select" name="sectionCours" id="sectionCours" aria-label="Default select example">
+                                                        <option selected>Choisir...</option>
+                                                        @foreach (Auth::user()->professeur as $prof)
+                                                            @foreach ($prof->affectation_prof as $affectation)
+                                                                @foreach ($affectation->module->affectation_section as $sec)
+                                                                    <option>
+                                                                        {{ $sec->section->titre_section }}
+                                                                    </option>
+                                                                @endforeach
                                                             @endforeach
                                                         @endforeach
-                                                    @endforeach
-                                                </select>
-                                                <div class="valid-feedback">
-                                                    C'est bon!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Veuillez insérer une section.
+                                                    </select>
+                                                    <div class="valid-feedback">
+                                                        C'est bon!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Veuillez insérer une section.
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger"
-                                                    data-bs-dismiss="modal">Annuler</button>
-                                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="addCours()">Ajouter</button>
-                                        </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
+                                                <button type="button" class="btn btn-primary" {{-- data-bs-dismiss="modal" --}} {{-- onclick="addCours()" --}}><input type="submit" value="Ajouter"></button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -226,27 +228,14 @@
                                     </h2>
                                     <div id="panelsStayOpen-collapse{{ $sec->section->id_section}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-{{ $sec->section->titre_section }}">
                                         <div class="accordion-body">
-                                            <ul id="ulCours{{$sec->section->titre_section}}">
-                                                <li>
-                                                    <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                                    <a href="#">Chapitre 1 (Cours)</a>
-                                                </li>
-                                                <li>
-                                                    <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                                    <a href="#">TD Mécanique_ Série 1_ 2020-2021</a>
-                                                </li>
-                                                <li>
-                                                    <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                                    <a href="#">TD Mécanique_ Série 1_ 2020-2021_ Correction</a>
-                                                </li>
-                                                <li>
-                                                    <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                                    <a href="#">TP Mécanique_ Série 1_ 2020-2021</a>
-                                                </li>
-                                                <li>
-                                                    <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                                    <a href="#">TP Mécanique_ Série 1_ 2020-2021_ Correction</a>
-                                                </li>
+                                            <ul>
+                                                @foreach ($sec->section->cours as $cours )
+                                                    <li>
+                                                        <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
+                                                        <a href="{{ route('cour.download', ['id_cour' => $cours->id_cour]) }}">{{$cours->libelleCour }}</a>
+                                                        {{-- <a href="{{ route('cours.download', ['id_cour' => $cours->id_cour]) }}">Download Contenu</a> --}}
+                                                    </li>
+                                                @endforeach
                                             </ul>
                                         </div>
                                     </div>
@@ -299,46 +288,16 @@
                                     '</div>' +
                                 '</div>' +
                             '</div>';
+                        // Ading the section in the accordion
                         $("#accordionPanelsStayOpen").append(newSection);
+                        // Ading the section in the add course form
+                        var option = $("<option>").text(nomSection).val(nomSection);
+                        $("#sectionCours").append(option);
                         }
                     }
                 });
             }
             i++;
-        }
-    </script>
-    <script>
-        function addCours() {
-            var nomCours = $("#nomCours").val();
-        var fichierCours = $("#fichierCours").val();
-        var sectionCours = $("#sectionCours").val();
-
-        console.log(nomCours);
-        console.log(fichierCours);
-        console.log(sectionCours);
-
-        if (nomCours != "" && fichierCours != "" && sectionCours != "") {
-            $.ajax({
-                url: "",
-                type: 'post',
-                data: {
-                    'nomCours': nomCours,
-                    'fichierCours': fichierCours,
-                    'sectionCours': sectionCours,
-                    '_token': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-                    if(response == 'success') {
-                        var newCours = '<li>' +
-                                            '<i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>' +
-                                            '<a href="#">' + /* Chapitre 1 (Cours) */ + '</a>' +
-                                        '</li>';
-
-                        $("#ulCours" + sectionCours).append(newCours)
-                    }
-                }
-            });
-        }
         }
     </script>
     <script>
@@ -360,8 +319,8 @@
                 })
         })()
     </script>
-    <script src="/js/jquery-3.6.4.min.js"></script>g
     <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/jquery-3.6.4.min.js"></script>
     <script src="/js/all.min.js"></script>
 </body>
 </html>
