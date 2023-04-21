@@ -80,7 +80,7 @@
     <div class="forum">
         <div class="container">
             <div class="header">
-                <h1>Forum</h1>
+                <h1>Discussion - Bases de Données 2</h1>
             </div>
             <div class="content">
                 <div class="add-container">
@@ -142,10 +142,10 @@
                         <div class="img-container">
                             <img src="../img/professeur.jpg" alt="">
                             <span>Ismail Berriss<span>.</span></span>
-                            <span>1 hour ago</span>
+                            <span>Il ya 1 heure</span>
                         </div>
                         <div class="post-content">
-                            <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4>
+                            <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus malesuada et ipsum non malesuada. Nullam nec vestibulum augue, eget placerat nisl. Aenean nec lectus ut nunc malesuada vulputate. Sed dignissim, tortor id mollis ullamcorper, dui ipsum aliquet purus, sed ornare velit dui nec libero. Mauris sit amet ex purus. In interdum urna at augue sollicitudin, nec mollis tellus efficitur. Sed laoreet nunc odio, sed sollicitudin lacus bibendum quis. Nulla euismod enim eget est interdum, non consectetur diam viverra. Nam quam est, varius eu ultricies eget, tempor id quam. Nulla justo orci, suscipit id tristique at, fermentum convallis quam.</p>
                             <div class="reply">
                                 <i class="fa-regular fa-comment"></i>
@@ -157,10 +157,10 @@
                         <div class="img-container">
                             <img src="../img/professeur.jpg" alt="">
                             <span>Ismail Berriss<span>.</span></span>
-                            <span>1 hour ago</span>
+                            <span>Il ya 1 heure</span>
                         </div>
                         <div class="post-content">
-                            <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4>
+                            <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus malesuada et ipsum non malesuada. Nullam nec vestibulum augue, eget placerat nisl. Aenean nec lectus ut nunc malesuada vulputate. Sed dignissim, tortor id mollis ullamcorper, dui ipsum aliquet purus, sed ornare velit dui nec libero. Mauris sit amet ex purus. In interdum urna at augue sollicitudin, nec mollis tellus efficitur. Sed laoreet nunc odio, sed sollicitudin lacus bibendum quis. Nulla euismod enim eget est interdum, non consectetur diam viverra. Nam quam est, varius eu ultricies eget, tempor id quam. Nulla justo orci, suscipit id tristique at, fermentum convallis quam.</p>
                             <div class="reply">
                                 <i class="fa-regular fa-comment"></i>
@@ -172,10 +172,10 @@
                         <div class="img-container">
                             <img src="../img/professeur.jpg" alt="">
                             <span>Ismail Berriss<span>.</span></span>
-                            <span>1 hour ago</span>
+                            <span>Il ya 1 heure</span>
                         </div>
                         <div class="post-content">
-                            <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4>
+                            <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus malesuada et ipsum non malesuada. Nullam nec vestibulum augue, eget placerat nisl. Aenean nec lectus ut nunc malesuada vulputate. Sed dignissim, tortor id mollis ullamcorper, dui ipsum aliquet purus, sed ornare velit dui nec libero. Mauris sit amet ex purus. In interdum urna at augue sollicitudin, nec mollis tellus efficitur. Sed laoreet nunc odio, sed sollicitudin lacus bibendum quis. Nulla euismod enim eget est interdum, non consectetur diam viverra. Nam quam est, varius eu ultricies eget, tempor id quam. Nulla justo orci, suscipit id tristique at, fermentum convallis quam.</p>
                             <div class="reply">
                                 <i class="fa-regular fa-comment"></i>
