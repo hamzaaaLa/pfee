@@ -95,7 +95,7 @@
                 <a href="{{ route('logout') }}"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="fa-solid fa-power-off fa-lg"></i>
-    
+
                     {{ __('Déconnexion') }}
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -107,7 +107,7 @@
         <!-- Start Formulaire -->
         <div class="Ajouter page-content">
             <div class="head">
-                <a href="" type="button" class="btn">
+                <a href="{{route('adminProfile',Auth::user()->id_user)}}" type="button" class="btn">
                     <img src="../img/professeur.jpg" alt="">
                     Admin
                 </a>

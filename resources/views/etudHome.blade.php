@@ -25,7 +25,7 @@
 <body>
 
 <!-- Start Header -->
-<nav class="navbar navbar-expand-lg header">
+<nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="#">
             <img src="../img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
@@ -114,7 +114,7 @@
                 <div class="row justify-content-center">
                     @if (Auth::user()->type=='prof')
                     @foreach (Auth::user()->professeur as $prof)
-                        @foreach ($prof->affectation_prof as $af)  
+                        @foreach ($prof->affectation_prof as $af)
                             <div class="col">
                                 <div class="card" style="width: 15rem;">
                                     <img src="{{ $af->module->imageModule}}" class="card-img-top" alt="...">
@@ -273,7 +273,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>    
+                                </div>
                             </div>
                             <div class="annonce-text">
                                 <a href="">{{ $annonce->professeur->user->name }}</a>
@@ -312,7 +312,7 @@
 <script>
     var filiereSelect = document.getElementById("filiereSelect");
     var moduleSelect = $("#moduleSelect");
-    
+
     filiereSelect.addEventListener("change", updateModule);
     function updateModule() {
         var filiere = filiereSelect.value;

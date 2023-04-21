@@ -99,7 +99,7 @@
     <!-- End Sidebar -->
     <div class="visualiser page-content">
         <div class="head">
-            <a href="" type="button" class="btn">
+            <a href="{{route('adminProfile',Auth::user()->id_user)}}" type="button" class="btn">
                 <img src="../img/professeur.jpg" alt="">
                 Admin
             </a>

@@ -99,6 +99,9 @@ a {
     background-color: #e9e3fc;
     border-color: black;
 }
+.dropdown button img {
+    border-radius: 50%;
+}
 /*.dropdown button:hover:after  {
     !*color: white;*!
 }*/

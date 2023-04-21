@@ -26,7 +26,7 @@
         <!-- Start Sidebar -->
         <div class="sidebar">
             <a class="navbar-brand" href="#">
-                <img src="../img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
+                <img src="/img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
                 FSA-Online
             </a>
             <div class="accordion" id="accordionExample">
@@ -70,29 +70,29 @@
                 </div>
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                             <i class="fa-solid fa-book"></i>
                             Modules
                         </button>
                     </h2>
-                    <div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="headingThree">
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree">
                         <div class="accordion-body">
                             <ul>
                                 <li><a href="{{route('afficheModule')}}">Consulter et Modifier</a></li>
-                                <li class="active"><a href="{{route('ajouterModuleView')}}">Ajouter Module</a></li>
+                                <li><a href="{{route('ajouterModuleView')}}">Ajouter Module</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <a href="DashboardAdmin.php">
+                <a href="{{route('adminProfile',Auth::user()->id_user)}}" class="active">
                     <i class="fa-solid fa-user"></i>
                     Profile
                 </a>
                 <a href="{{ route('logout') }}"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="fa-solid fa-power-off fa-lg"></i>
-    
+
                     {{ __('Déconnexion') }}
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -104,7 +104,7 @@
         <!-- Start Profile -->
             <div class="page-content">
                 <div class="head">
-                    <a href="" type="button" class="btn">
+                    <a href="{{route('adminProfile',Auth::user()->id_user)}}" type="button" class="btn">
                         <img src="{{asset('/img/professeur.jpg')}}" alt="">
                         Admin
                     </a>
@@ -116,7 +116,7 @@
                         </div>
                         <div class="profile-container">
                             <div class="img-box">
-                                <img src="../img/professeur.jpg" alt="">
+                                <img src="/img/professeur.jpg" alt="">
                                 <h3>{{$admin->name}} {{$admin->prenom}}</h3>
                                 <p>Administrateur</p>
                             </div>
@@ -160,8 +160,8 @@
                         </div>
                         <div class="profile-container">
                             <div class="img-box">
-                                <img src="../img/professeur.jpg" alt="">
-                                <h3>Ismail Berriss</h3>
+                                <img src="/img/professeur.jpg" alt="">
+                                <h3>{{$admin->name}} {{$admin->prenom}}</h3>
                                 <p>Administrateur</p>
                             </div>
                             <div class="profile-content">
