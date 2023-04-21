@@ -39,6 +39,7 @@ Route::middleware(['auth','user-access:user'])->group(function () {
     Route::get('/dashboard/EspaceCours', [HomeController::class, 'EspaceCours'])->name('etud.EspaceCours');
     Route::get('etudiant/profile/{id_user}',[EtudiantController::class,'getProfile'])->name('etudiantProfile');
     Route::post('etudiant/profile/modifier/{id_user}',[EtudiantController::class,'modifierProfile'])->name('modifierProfile');
+    Route::get('etudiant/prof/profile/{id_user}',[EtudiantController::class,'getProfProfile'])->name('etudProfProfile');
 });
 
 // Manager Routes

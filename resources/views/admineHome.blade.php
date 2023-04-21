@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dashboard</title>
     <!-- Website favicon-->
-    <link rel="shortcut icon" href="../img/fsa_agadir.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('/img/fsa_agadir.png')}}" type="image/x-icon">
     <!-- Bootstrap 05 -->
     <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />
     <!-- Main CSS File -->
@@ -17,15 +17,15 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('/css/all.min.css')}}" />
     <!-- Google Fonts - Open Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="{{('https://fonts.googleapis.com')}}">
+    <link rel="preconnect" href="{{('https://fonts.gstatic.com')}}" crossorigin>
+    <link href="{{('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap')}}" rel="stylesheet">
 </head>
 <body>
     <div class="page">
         <div class="sidebar">
             <a class="navbar-brand" href="#">
-                <img src="../img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
+                <img src="{{asset('/img/fsa_agadir.png')}}" alt="" width="40" height="30" class="d-inline-block align-text-top">
                 FSA-Online
             </a>
             <div class="accordion" id="accordionExample">
@@ -112,17 +112,17 @@
                 <div class="info">
                     <a class="box" href="{{route('afficheEtud')}}">
                         <i class="fa-solid fa-user fa-2x"></i>
-                        <span class="number">850</span>
+                        <span class="number">{{$etud}}</span>
                         <span class="text">Etudiants</span>
                     </a>
                     <a class="box" href="{{route('afficheProf')}}">
                         <i class="fa-solid fa-user fa-2x"></i>
-                        <span class="number">40</span>
+                        <span class="number">{{$prof}}</span>
                         <span class="text">Professeurs</span>
                     </a>
                     <a class="box" href="{{route('afficheModule')}}">
                         <i class="fa-solid fa-book fa-2x"></i>
-                        <span class="number">25</span>
+                        <span class="number">{{$mod}}</span>
                         <span class="text">Modules</span>
                     </a>
                 </div>

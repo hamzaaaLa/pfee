@@ -145,7 +145,7 @@
                                             <div class="content">
                                                 <p class="card-title">{{$af_etud->module->libelleModule}}</p>
                                                 <p class="card-text">
-                                                    <a href="">{{$af_prof->professeur->user->name}} {{$af_prof->professeur->user->prenom}}</a>
+                                                    <a href="{{route('etudProfProfile',$af_prof->professeur->user->id_user)}}">{{$af_prof->professeur->user->name}} {{$af_prof->professeur->user->prenom}}</a>
                                                 </p>
                                             </div>
                                             <div class="acceder">

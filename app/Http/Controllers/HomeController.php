@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Annonce;
+use App\Models\etudiant;
 use App\Models\Filiere;
 use App\Models\Module;
 use App\Models\Professeur;
@@ -58,8 +59,11 @@ class HomeController extends Controller
     }
 
     public function adminDashboard()
-    {
-        return view('admineHome');
+    {   
+        $prof=Professeur::count();
+        $etud=etudiant::count();
+        $mod=Module::count();
+        return view('admineHome',compact(['prof','etud','mod']));
     }
     //displaying modules commande
     public function getModules(Request $request) {
