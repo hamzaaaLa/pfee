@@ -261,6 +261,35 @@ ul {
 .modifier {
     margin-bottom: 20px;
 }
+.modifier .img-box > a {
+    border-radius: 50%;
+    position: relative;
+}
+.modifier .img-box > a::before {
+    content: "";
+    position: absolute;
+    background-color: black;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    opacity: 0;
+}
+.modifier .img-box > a:hover:before {
+    opacity: .7;
+}
+.modifier .img-box > a .img-modif {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    opacity: 0;
+}
+.modifier .img-box > a:hover .img-modif {
+    opacity: .9;
+}
 .modifier h4 {
     margin-bottom: 10px !important;
 }

@@ -160,7 +160,42 @@
                         </div>
                         <div class="profile-container">
                             <div class="img-box">
-                                <img src="/img/professeur.jpg" alt="">
+                                <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <img src="/img/professeur.jpg" alt="">
+                                    <div class="img-modif">
+                                        <i class="fa-solid fa-pen"></i>
+                                        Modifier
+                                    </div>
+                                </a>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form class="needs-validation" novalidate>
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Modifier l'image</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="col">
+                                                        <label for="image" class="form-label">Image:</label>
+                                                        <input type="file" class="form-control" id="image" name="image" required>
+                                                        <div class="valid-feedback">
+                                                            C'est bon!
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            Veuillez insérer une image.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
+                                                    <button type="button" class="btn btn-primary">Modifier</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                                 <h3>{{$admin->name}} {{$admin->prenom}}</h3>
                                 <p>Administrateur</p>
                             </div>
