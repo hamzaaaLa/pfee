@@ -81,6 +81,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(professeur::class, 'user_prof');
     }
+
+    public function reply()
+    {
+        return $this->hasMany(reply::class,'id_user');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(posts::class,'id_user');
+    }
     
     protected function type(): Attribute
     {

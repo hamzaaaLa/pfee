@@ -48,6 +48,11 @@ class module extends Model
     {
         return $this->hasMany(affectation_section::class, 'id_module')->with('section');
     }
+    //relation with posts
+    public function posts()
+    {
+        return $this->hasMany(posts::class,'id_module');
+    }
     //images
     public function getImageModuleAttribute(): string
     {

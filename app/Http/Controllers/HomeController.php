@@ -8,6 +8,9 @@ use App\Models\etudiant;
 use App\Models\Filiere;
 use App\Models\Module;
 use App\Models\Professeur;
+use App\Models\posts;
+use App\Models\reply;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -54,6 +57,29 @@ class HomeController extends Controller
         $filieres = Filiere::get();
         $annonces = Annonce::orderBy('datecreation', 'desc')->get();
         return view('EspaceCours', ['annonces' => $annonces, 'filieres' => $filieres, 'id_module' => $id_module,'module_name' => $module_name],);
+    }
+    //Forum
+        //post
+    public function Forum($id_module){
+        $module = Module::where('id_module', $id_module)->first();
+        $module_name = Module::select('libelleModule')
+        ->where('id_module', '=', $id_module)
+        ->get();
+        $module_name = $module->libelleModule;
+        $posts = Posts::withCount('reply')->get();
+        return view('Forum', ['id_module' => $id_module, 'module_name' => $module_name,'posts' => $posts],);
+    }
+        //reply
+    public function ForumPost($id_module,$id_post){
+        $id_post = posts::where('id_post',$id_post)->first();
+        $module = Module::where('id_module', $id_module)->first();
+        $module_name = Module::select('libelleModule')
+        ->where('id_module', '=', $id_module)
+        ->get();
+        $module_name = $module->libelleModule;
+        $posts = Posts::with('user')->find($id_post);
+        $reply = reply::with('posts')->find($id_post);
+        return view('ForumPost', [  'id_module' => $id_module, 'module_name' => $module_name,'id_post' => $id_post,'posts' => $posts,'reply' => $reply]);
     }
     
     public function profDashboard()

@@ -23,7 +23,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <?php
+        function time_elapsed_string($datetime) {
+            $now = new DateTime();
+            $ago = new DateTime($datetime);
+            $diff = $now->diff($ago);
 
+            if ($diff->y > 0) {
+                return $ago->format('d/m/Y');
+            } elseif ($diff->m > 0) {
+                return $ago->format('d/m/Y');
+            } elseif ($diff->d > 0) {
+                return $ago->format('d/m/Y');
+            } elseif ($diff->h > 0) {
+                return $diff->h . ' hour' . ($diff->h > 1 ? 's' : '') . ' ago';
+            } elseif ($diff->i > 0) {
+                return $diff->i . ' minute' . ($diff->i > 1 ? 's' : '') . ' ago';
+            } else {
+                return 'just now';
+            }
+        }
+    ?>
 <!-- Start Header -->
 <nav class="navbar navbar-expand-lg">
     <div class="container">
@@ -279,7 +299,8 @@
                                 <a href="">{{ $annonce->professeur->user->name }}</a>
                                 <p class="subject"><span>Sujet: </span>{{ $annonce->titre }}</p>
                                 <p class="content">{{ $annonce->contenue }}</p>
-                                <span>{{ date('H:i d/m/Y', strtotime($annonce->datecreation)) }}</span>
+                                {{-- <span>{{ date('H:i d/m/Y', strtotime($annonce->datecreation)) }}</span> --}}
+                                <span>{{ time_elapsed_string($annonce->datecreation) }}</span>
                             </div>
                         </li>
                     @endforeach

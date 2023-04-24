@@ -95,12 +95,29 @@
         <div class="container">
             <div class="header">
                 <h1>{{$id_module->libelleModule}}</h1>
-                <a class="forum-btn" href="#">
-                    <span class="circle" aria-hidden="true">
-                    <span class="icon arrow"></span>
-                    </span>
-                    <span class="button-text">Accéder au Forum</span>
-                </a>
+                @if(Auth::user()->type=='prof')
+                    @foreach (Auth::user()->professeur as $prof)
+                        @foreach ($prof->affectation_prof as $af)
+                        <a class="forum-btn" href="{{route('prof.Forum',$af->module->id_module)}}">
+                            <span class="circle" aria-hidden="true">
+                            <span class="icon arrow"></span>
+                            </span>
+                            <span class="button-text">Accéder au Forum</span>
+                        </a>
+                        @endforeach
+                    @endforeach
+                @else
+                    @foreach (Auth::user()->etudiant as $etud)
+                        @foreach ($etud->affectation_etud as $af_etud)
+                        <a class="forum-btn" href="{{route('etud.Forum',$af_etud->module->id_module)}}">
+                            <span class="circle" aria-hidden="true">
+                            <span class="icon arrow"></span>
+                            </span>
+                            <span class="button-text">Accéder au Forum</span>
+                        </a>
+                        @endforeach
+                    @endforeach
+                @endif
             </div>
             <div class="content">
                 @if(Auth::user()->type=='prof')
@@ -215,35 +232,64 @@
                             </div>
                         </div>
                     </div>
-                @endif
-                <div class="accordion" id="accordionPanelsStayOpen">
-                    @foreach (Auth::user()->professeur as $prof)
-                        @foreach ($prof->affectation_prof as $affectation)
-                            @foreach ($affectation->module->affectation_section as $sec)
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="panelsStayOpen-{{ $sec->section->titre_section }}">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ $sec->section->id_section }}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{ $sec->section->id_section }}">
-                                                        {{ $sec->section->titre_section }}
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapse{{ $sec->section->id_section}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-{{ $sec->section->titre_section }}">
-                                        <div class="accordion-body">
-                                            <ul>
-                                                @foreach ($sec->section->cours as $cours )
-                                                    <li>
-                                                        <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                                        <a href="{{ route('cour.download', ['id_cour' => $cours->id_cour]) }}">{{$cours->libelleCour }}</a>
-                                                        {{-- <a href="{{ route('cours.download', ['id_cour' => $cours->id_cour]) }}">Download Contenu</a> --}}
-                                                    </li>
-                                                @endforeach
-                                            </ul>
+                    <div class="accordion" id="accordionPanelsStayOpen">
+                        @foreach (Auth::user()->professeur as $prof)
+                            @foreach ($prof->affectation_prof as $affectation)
+                                @foreach ($affectation->module->affectation_section as $sec)
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="panelsStayOpen-{{ $sec->section->titre_section }}">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ $sec->section->id_section }}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{ $sec->section->id_section }}">
+                                                            {{ $sec->section->titre_section }}
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapse{{ $sec->section->id_section}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-{{ $sec->section->titre_section }}">
+                                            <div class="accordion-body">
+                                                <ul>
+                                                    @foreach ($sec->section->cours as $cours )
+                                                        <li>
+                                                            <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
+                                                            <a href="{{ route('prof.cour.download', ['id_cour' => $cours->id_cour]) }}">{{$cours->libelleCour }}</a>
+                                                            {{-- <a href="{{ route('cours.download', ['id_cour' => $cours->id_cour]) }}">Download Contenu</a> --}}
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                             @endforeach
+                                 @endforeach
+                            @endforeach
                         @endforeach
-                    @endforeach
-                </div>
+                    </div>
+                @else
+                    <div class="accordion" id="accordionPanelsStayOpen">
+                        @foreach (Auth::user()->etudiant as $etud)
+                            @foreach ($etud->affectation_etud as $affectation)
+                                @foreach ($affectation->module->affectation_section as $sec)
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="panelsStayOpen-{{ $sec->section->titre_section }}">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ $sec->section->id_section }}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{ $sec->section->id_section }}">
+                                                            {{ $sec->section->titre_section }}
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapse{{ $sec->section->id_section}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-{{ $sec->section->titre_section }}">
+                                            <div class="accordion-body">
+                                                <ul>
+                                                    @foreach ($sec->section->cours as $cours )
+                                                        <li>
+                                                            <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
+                                                            <a href="{{ route('etud.cour.download', ['id_cour' => $cours->id_cour]) }}">{{$cours->libelleCour }}</a>
+                                                            {{-- <a href="{{ route('cours.download', ['id_cour' => $cours->id_cour]) }}">Download Contenu</a> --}}
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endforeach
+                        @endforeach
+                    </div>
+                @endif
             </div>
         </div>
         {{-- <div class="accordion-item">
@@ -264,7 +310,7 @@
     <script>
         function addSection() {
             var nomSection = $("#nomSection").val();
-            var i=0;
+            var i=1000;
 
             if(nomSection != "") {
                 $.ajax({
@@ -284,7 +330,6 @@
                                 '</h2>' +
                                 '<div id="panelsStayOpen-collapse' +  i + '" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-heading' + i + '">' +
                                     '<div class="accordion-body">' +
-                                        'smth' +
                                     '</div>' +
                                 '</div>' +
                             '</div>';

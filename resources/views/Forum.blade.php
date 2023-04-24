@@ -5,21 +5,52 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Forum - Bases de Données</title>
     <!-- Website favicon-->
-    <link rel="shortcut icon" href="../img/fsa_agadir.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/img/fsa_agadir.png" type="image/x-icon">
     <!-- Bootstrap 05 -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="../css/Forum.css" />
+    <link rel="stylesheet" href="/css/Forum.css" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../css/all.min.css" />
+    <link rel="stylesheet" href="/css/all.min.css" />
     <!-- Google Fonts - Open Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <?php
+        function time_elapsed_string($datetime, $full = false) {
+            $now = new DateTime;
+            $ago = new DateTime($datetime);
+            $diff = $now->diff($ago);
+
+            $diff->w = floor($diff->d / 7);
+            $diff->d -= $diff->w * 7;
+
+            $string = array(
+                'y' => 'année',
+                'm' => 'mois',
+                'w' => 'semaine',
+                'd' => 'jour',
+                'h' => 'heure',
+                'i' => 'minute',
+                's' => 'seconde',
+            );
+            foreach ($string as $k => &$v) {
+                if ($diff->$k) {
+                    $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+                } else {
+                    unset($string[$k]);
+                }
+            }
+
+            if (!$full) $string = array_slice($string, 0, 1);
+            return $string ? 'Il y a ' . implode(', ', $string) : 'à l\'instant';
+        }
+    ?>
     <!-- Start Header -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
@@ -55,8 +86,8 @@
                 </ul>
                 <div class="dropdown" >
                     <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="../img/fsa_agadir.png" alt="" width="40" height="30" >
-                        Ismail Berriss
+                        <img src="{{Auth::user()->imageProfile}}" alt="" width="40" height="30" >
+                        {{Auth::user()->prenom}} {{Auth::user()->name}}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li>
@@ -80,7 +111,7 @@
     <div class="forum">
         <div class="container">
             <div class="header">
-                <h1>Discussion - Bases de Données 2</h1>
+                <h1>Discussion - {{$module_name}}</h1>
             </div>
             <div class="content">
                 <div class="add-container">
@@ -101,94 +132,136 @@
                                         <h5 class="modal-title" id="postModalLabel">Ajouter une publication</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <form class="row g-3 needs-validation" action="" method="post" novalidate>
-                                        <div class="modal-body">
-                                            <div class="mb-3">
-                                                <label for="titre" class="form-label">Titre</label>
-                                                <input type="text" name="titre" class="form-control" id="titre" required>
-                                                <div class="valid-feedback">
-                                                    C'est bon!
+                                    @if(Auth::user()->type=='prof')
+                                        <form class="row g-3 needs-validation" action="{{route('prof.add_post',$id_module)}}" method="post" novalidate>
+                                            @csrf
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                    <label for="titre" class="form-label">Titre</label>
+                                                    <input type="text" name="titre" class="form-control" id="titre" required>
+                                                    <div class="valid-feedback">
+                                                        C'est bon!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Veuillez insérer un titre.
+                                                    </div>
                                                 </div>
-                                                <div class="invalid-feedback">
-                                                    Veuillez insérer un titre.
+                                                <div class="mb-3">
+                                                    <label for="validationTextarea" class="form-label">Contenue</label>
+                                                    <textarea class="form-control" name="contenue"
+                                                            id="validationTextarea"
+                                                            rows="5" required></textarea>
+                                                    <div class="valid-feedback">
+                                                        C'est bon!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Veuillez insérer du context.
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="validationTextarea" class="form-label">Contenue</label>
-                                                <textarea class="form-control" name="contenue"
-                                                          id="validationTextarea"
-                                                          rows="5" required></textarea>
-                                                <div class="valid-feedback">
-                                                    C'est bon!
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger"
+                                                        data-bs-dismiss="modal">Annuler</button>
+                                                <button type="submit" class="btn btn-primary"><input type="submit" value="Ajouter"></button>
+                                            </div>
+                                        </form>
+                                    @else
+                                        <form class="row g-3 needs-validation" action="{{route('etud.add_post',$id_module)}}" method="post" novalidate>
+                                            @csrf
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                    <label for="titre" class="form-label">Titre</label>
+                                                    <input type="text" name="titre" class="form-control" id="titre" required>
+                                                    <div class="valid-feedback">
+                                                        C'est bon!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Veuillez insérer un titre.
+                                                    </div>
                                                 </div>
-                                                <div class="invalid-feedback">
-                                                    Veuillez insérer du context.
+                                                <div class="mb-3">
+                                                    <label for="validationTextarea" class="form-label">Contenue</label>
+                                                    <textarea class="form-control" name="contenue"
+                                                            id="validationTextarea"
+                                                            rows="5" required></textarea>
+                                                    <div class="valid-feedback">
+                                                        C'est bon!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Veuillez insérer du context.
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger"
-                                                    data-bs-dismiss="modal">Annuler</button>
-                                            <button type="button" class="btn btn-primary"><input type="submit" value="Ajouter"></button>
-                                        </div>
-                                    </form>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger"
+                                                        data-bs-dismiss="modal">Annuler</button>
+                                                <button type="button" class="btn btn-primary"><input type="submit" value="Ajouter"></button>
+                                            </div>
+                                        </form>
+                                    @endif    
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="posts">
-                    <a class="box" href="">
-                        <div class="img-container">
-                            <img src="../img/professeur.jpg" alt="">
-                            <span>Ismail Berriss<span>.</span></span>
-                            <span>Il ya 1 heure</span>
-                        </div>
-                        <div class="post-content">
-                            <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus malesuada et ipsum non malesuada. Nullam nec vestibulum augue, eget placerat nisl. Aenean nec lectus ut nunc malesuada vulputate. Sed dignissim, tortor id mollis ullamcorper, dui ipsum aliquet purus, sed ornare velit dui nec libero. Mauris sit amet ex purus. In interdum urna at augue sollicitudin, nec mollis tellus efficitur. Sed laoreet nunc odio, sed sollicitudin lacus bibendum quis. Nulla euismod enim eget est interdum, non consectetur diam viverra. Nam quam est, varius eu ultricies eget, tempor id quam. Nulla justo orci, suscipit id tristique at, fermentum convallis quam.</p>
-                            <div class="reply">
-                                <i class="fa-regular fa-comment"></i>
-                                <span>12 Responses</span>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="box">
-                        <div class="img-container">
-                            <img src="../img/professeur.jpg" alt="">
-                            <span>Ismail Berriss<span>.</span></span>
-                            <span>Il ya 1 heure</span>
-                        </div>
-                        <div class="post-content">
-                            <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus malesuada et ipsum non malesuada. Nullam nec vestibulum augue, eget placerat nisl. Aenean nec lectus ut nunc malesuada vulputate. Sed dignissim, tortor id mollis ullamcorper, dui ipsum aliquet purus, sed ornare velit dui nec libero. Mauris sit amet ex purus. In interdum urna at augue sollicitudin, nec mollis tellus efficitur. Sed laoreet nunc odio, sed sollicitudin lacus bibendum quis. Nulla euismod enim eget est interdum, non consectetur diam viverra. Nam quam est, varius eu ultricies eget, tempor id quam. Nulla justo orci, suscipit id tristique at, fermentum convallis quam.</p>
-                            <div class="reply">
-                                <i class="fa-regular fa-comment"></i>
-                                <span>12 Responses</span>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="box">
-                        <div class="img-container">
-                            <img src="../img/professeur.jpg" alt="">
-                            <span>Ismail Berriss<span>.</span></span>
-                            <span>Il ya 1 heure</span>
-                        </div>
-                        <div class="post-content">
-                            <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus malesuada et ipsum non malesuada. Nullam nec vestibulum augue, eget placerat nisl. Aenean nec lectus ut nunc malesuada vulputate. Sed dignissim, tortor id mollis ullamcorper, dui ipsum aliquet purus, sed ornare velit dui nec libero. Mauris sit amet ex purus. In interdum urna at augue sollicitudin, nec mollis tellus efficitur. Sed laoreet nunc odio, sed sollicitudin lacus bibendum quis. Nulla euismod enim eget est interdum, non consectetur diam viverra. Nam quam est, varius eu ultricies eget, tempor id quam. Nulla justo orci, suscipit id tristique at, fermentum convallis quam.</p>
-                            <div class="reply">
-                                <i class="fa-regular fa-comment"></i>
-                                <span>12 Responses</span>
-                            </div>
-                        </div>
-                    </a>
+                    @foreach ($posts as $post)
+                        @if(Auth::user()->type=='prof')
+                        <a class="box" href="{{ route('prof.ForumPost', ['id_module' => $id_module, 'id_post' => $post->id_post]) }}">
+                            <div class="img-container">
+                                    <img src="{{ Auth::user()->imageProfile}}" alt="">
+                                    <span>{{Auth::user()->name}} {{Auth::user()->prenom}}<span>.</span></span>
+                                    <span>{{time_elapsed_string($post->date_created)}}</span>
+                                </div>
+                                <div class="post-content">
+                                    <h5>{{$post->titre}}</h5>
+                                    <p>{{$post->contenu}}.</p>
+                                    <div class="reply">
+                                        <i class="fa-regular fa-comment"></i>
+                                        <span>{{ $post->reply_count }} Reponses</span>
+                                    </div>
+                                </div>
+                            </a>
+                        @else
+                            <a class="box" href="{{route('etud.ForumPost',['id_module' => $id_module, 'id_post' => $post->id_post])}}">
+                                <div class="img-container">
+                                    <img src="{{ Auth::user()->imageProfile}}" alt="">
+                                    <span>{{Auth::user()->name}} {{Auth::user()->prenom}}<span>.</span></span>
+                                    <span>{{time_elapsed_string($post->date_created)}}</span>
+                                </div>
+                                <div class="post-content">
+                                    <h5>{{$post->titre}}</h5>
+                                    <p>{{$post->contenu}}.</p>
+                                    <div class="reply">
+                                        <i class="fa-regular fa-comment"></i>
+                                        <span>{{ $post->reply_count }} Reponses</span>
+                                    </div>
+                                </div>
+                            </a>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
     <!-- End Header -->
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="../js/all.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/all.min.js"></script>
+    <script>
+        (function () {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
 </body>
 </html>

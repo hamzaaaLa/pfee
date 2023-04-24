@@ -13,6 +13,8 @@ use App\Models\affectation_section;
 use App\Models\Filiere;
 use App\Models\Module;
 use App\Models\Professeur;
+use App\Models\posts;
+use App\Models\reply;
 
 class espaceController extends Controller
 {
@@ -86,5 +88,26 @@ class espaceController extends Controller
         } else {
             abort(404);
         }
+    }
+    public function store_posts(Request $request,$id_module){
+        $id_user = auth()->user()->id_user;
+        $posts = new posts();
+        $posts->id_user = $id_user;
+        $posts->titre = $request->input('titre');
+        $posts->contenu = $request->input('contenue');
+        $posts->id_module = $id_module;
+        $posts->save();
+        return back()->with('success', 'Post added successfully!');
+    }
+
+    public function store_reply(Request $request,$id_module,$id_post){
+        $id_user = auth()->user()->id_user;
+        $reply = new reply();
+        $reply->id_post = $id_post;
+        $reply->id_user = $id_user;
+        $reply->contenu = $request->input('reply');
+        $reply->id_module = $id_module;
+        $reply->save();
+        return back()->with('success', 'Post added successfully!');
     }
 }
