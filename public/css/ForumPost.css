@@ -1,0 +1,292 @@
+/* Start Variables */
+:root {
+    --main-color: #2196f3;
+    --secondary-color: #2c59be;
+    --main-background: #fafafb;
+    --main-transition: 0.3s;
+}
+/* End Variables */
+/* Start Global Rules */
+body {
+    /*font-family: "Work Sans", sans-serif;*/
+    font-family: 'Open Sans', sans-serif;
+}
+a {
+    text-decoration: none;
+}
+/* End Global Rules */
+/* Start Components */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.header h1 {
+    position: relative;
+}
+.header h1::before, .header h1::after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    bottom: -10px;
+    left: 0;
+}
+.header h1::before {
+    background-color: white;
+    width: 100%;
+}
+.header h1::after {
+    background-color: var(--main-color);
+    width: 35%;
+}
+.add-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 40px;
+    margin-bottom: 25px;
+}
+.add-btn {
+    border: 2px solid var(--main-color);
+    background-color: var(--main-color);
+    border-radius: 0.9em;
+    padding: 0.7em 1.1em 0.7em 0.9em;
+    transition: all ease-in-out 0.2s;
+    font-size: 16px;
+    color: white;
+}
+
+.add-btn span {
+    color: #fff;
+    font-weight: 600;
+    margin-right: 5px;
+}
+input[type="submit"] {
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 0;
+}
+/* End Components */
+/* Start Header */
+.navbar {
+    background-color: white;
+    -webkit-box-shadow: 0 0 10px #ddd;
+    -moz-box-shadow: 0 0 10px #ddd;
+    box-shadow: 0 0 10px #ddd;
+    padding: 0;
+}
+.navbar .navbar-brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    color: var(--main-color);
+    font-weight: bold;
+    font-size: 26px;
+}
+.navbar .nav-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    position: relative;
+    font-weight: 500;
+    background-image: linear-gradient(
+            to left,
+            var(--main-color),
+            var(--main-color) 50%,
+            #000 50%
+    );
+    background-size: 200% 100%;
+    background-position: 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all var(--main-transition) ease-in-out;
+    overflow: hidden;
+}
+.navbar .nav-link:hover {
+    background-position: -100%;
+    left: 0;
+}
+.navbar .nav-link::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: var(--main-color);
+    bottom: 0px;
+    left: -100%;
+    transition: var(--main-transition);
+}
+.navbar .nav-link:hover:before {
+    left: 0;
+}
+@media (max-width: 991px) {
+    .navbar .nav-link {
+        margin: 0 auto;
+        width: fit-content;
+    }
+}
+.dropdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media (max-width: 991px) {
+    .dropdown {
+        padding: 8px 0;
+    }
+}
+.dropdown button {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 25px;
+    font-weight: 500;
+}
+.dropdown button:hover {
+    background-color: #e9e3fc;
+    border-color: black;
+}
+.dropdown button::after {
+    color: black;
+}
+.dropdown .dropdown-menu {
+    margin-top: 8px;
+    width: 170px;
+}
+@media (max-width: 991px) {
+    .dropdown .dropdown-menu {
+        margin-top: 0;
+        left: 40%;
+    }
+}
+/* End Header */
+/* Start reply */
+.reply {
+    padding: 30px 0;
+    min-height: calc(100vh - 60px);
+    background-color: #f1f5f9;
+}
+.reply .post {
+    background-color: white;
+    border-radius: 10px;
+}
+.reply .post .box {
+    padding: 25px 40px;
+}
+.reply .post .box h5 {
+
+}
+.reply .post .box .content {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.reply .post .box .content img {
+    width: 45px;
+    height: 100%;
+    border-radius: 5px;
+}
+.reply .post .box .content .content-text {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+}
+.reply .post .box .content .content-text span:nth-child(2) {
+    color: #777;
+}
+.reply .replies .box {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 30px;
+}
+.reply .replies .box .img-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 150px;
+    height: fit-content;
+    padding-top: 25px;
+}
+.reply .replies .box .img-container img {
+    width: 100px;
+    height: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+.reply .replies .box .img-container span:nth-child(3) {
+    font-size: 14px;
+    color: #777;
+}
+.reply .replies .box .content {
+    background-color: white;
+    padding: 10px 20px;
+}
+.reply .replies .box .content span {
+    font-size: 14px;
+    color: #777;
+}
+.reply .replies .box .content p {
+    margin-top: 10px;
+}
+.reply-form {
+    display: flex;
+    gap: 20px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px 20px;
+}
+.reply-form .image {
+    height: fit-content;
+    position: relative;
+    color: var(--bs-border-color);
+}
+.reply-form .image::before {
+    content: "";
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent var(--bs-border-color) transparent transparent;
+    background-color: white;
+    position: absolute;
+    top: calc(50% - 10px);
+    right: -20px;
+}
+.reply-form .image::after {
+    content: "";
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent white transparent transparent;
+    position: absolute;
+    top: calc(50% - 10px);
+    right: -21px;
+}
+.reply-form .image img {
+    width: 60px;
+    height: 100%;
+    border-radius: 10px;
+}
+.reply-form form {
+    width: 100%;
+}
+.reply-form form textarea:hover {
+    border-color: #b8bfca;
+}
+.reply-form form textarea:hover .reply-form .image::before {
+    border-color: transparent #b8bfca transparent transparent;
+}
+.reply-form form textarea:focus {
+    border-color: var(--bs-border-color);
+    box-shadow: none;
+}
+.reply-form form .submit {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+/* End reply */
