@@ -78,8 +78,9 @@ class HomeController extends Controller
         ->get();
         $module_name = $module->libelleModule;
         $posts = Posts::with('user')->find($id_post);
-        $reply = reply::with('posts')->find($id_post);
-        return view('ForumPost', [  'id_module' => $id_module, 'module_name' => $module_name,'id_post' => $id_post,'posts' => $posts,'reply' => $reply]);
+        $post = Posts::with('user')->where('id_post', $id_post->id_post)->first();
+        $reply = Reply::with('user')->where('id_post', $id_post->id_post)->get();
+        return view('ForumPost', [  'id_module' => $id_module, 'module_name' => $module_name,'id_post' => $id_post,'posts' => $posts,'post' => $post,'reply' => $reply]);
     }
     
     public function profDashboard()

@@ -133,11 +133,11 @@
                 </a>
             </div>
             <div class="replies">
-                @foreach ($reply as $reply )
+                @foreach ($reply as $r )
                     <div class="box">
                         <div class="img-container">
-                            <img src="{{$reply->user->imageProfile}}" alt="">
-                            <span>{{$reply->user->name}} {{$reply->user->prenom}}</span>
+                            <img src="{{$r->user->imageProfile}}" alt="">
+                            <span>{{$r->user->name}} {{$r->user->prenom}}</span>
                             <span>
                                 @if (Auth::user()->type=='prof')
                                     Professeur
@@ -147,8 +147,8 @@
                             </span>
                         </div>
                         <div class="content">
-                            <span>Publié {{time_elapsed_string($reply->date_created)}}</span>
-                            <p>{{$reply->contenu}}</p>
+                            <span>Publié {{time_elapsed_string($r->date_created)}}</span>
+                            <p>{{$r->contenu}}</p>
                         </div>
                     </div>
                 @endforeach
