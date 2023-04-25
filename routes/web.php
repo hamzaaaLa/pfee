@@ -45,6 +45,8 @@ Route::middleware(['auth','user-access:user'])->group(function () {
     Route::get('etudiant/profile/{id_user}',[EtudiantController::class,'getProfile'])->name('etudiantProfile');
     Route::post('etudiant/profile/modifier/{id_user}',[EtudiantController::class,'modifierProfile'])->name('modifierProfile');
     Route::get('etudiant/prof/profile/{id_user}',[EtudiantController::class,'getProfProfile'])->name('etudProfProfile');
+    Route::get('etudiant/modules/voirTous/{id_user}',[EtudiantController::class,'tousLesModules'])->name('voirTous');
+    Route::post('etudiant/profile/modifierPhotoProfile/{id_user}',[EtudiantController::class,'modifierPhoto'])->name('modifierProfile');
 });
 
 // Manager Routes
@@ -64,6 +66,7 @@ Route::middleware(['auth','user-access:prof'])->group(function () {
     Route::post('/prof/dashboard/EspaceCours/{id_module}/Forum/ForumPost/{id_post}/replies', [espaceController::class, 'store_reply'])->name('prof.add_reply');
     Route::get('prof/profile/{id_user}',[ProfController::class,'getProfile'])->name('profProfile');
     Route::post('prof/profile/modifier/{id_user}',[ProfController::class,'modifierProfile'])->name('profModifierProfile');
+    Route::post('prof/profile/modifierPhotoProfile/{id_user}',[ProfController::class,'modifierPhoto'])->name('profModifierPhoto');
 });
 
 // Super Admin Routes

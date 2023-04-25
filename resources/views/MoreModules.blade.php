@@ -7,17 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tous Modules</title>
     <!-- Website favicon-->
-    <link rel="shortcut icon" href="../img/fsa_agadir.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('/img/fsa_agadir.png')}}" type="image/x-icon">
     <!-- Bootstrap 05 -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="../css/HomePage.css" />
+    <link rel="stylesheet" href="{{asset('/css/HomePage.css')}}" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../css/all.min.css" />
+    <link rel="stylesheet" href="{{asset('/css/all.min.css')}}" />
     <!-- Google Fonts - Open Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="{{asset('https://fonts.googleapis.com')}}">
+    <link rel="preconnect" href="{{asset('https://fonts.gstatic.com')}}" crossorigin>
+    <link href="{{asset('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap')}}" rel="stylesheet">
 </head>
 <body>
     <!-- Start Header -->
@@ -55,22 +55,36 @@
                 </ul>
                 <div class="dropdown" >
                     <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="../img/fsa_agadir.png" alt="" width="40" height="30" >
-                        Ismail Berriss
+                        <img src="{{ Auth::user()->imagePath}}" alt="" width="40" height="30" >
+                            {{ Auth::user()->name }} {{ Auth::user()->prenom }}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li>
-                            <a class="dropdown-item" href="Profile.php">
+                            @php
+                            $id_user=Auth::user()->id_user
+                            @endphp
+                            @if(Auth::user()->type=='prof')
+                            <a class="dropdown-item" href="{{route('profProfile',Auth::user()->id_user)}}">
                                 <i class="fa-solid fa-user"></i>
                                 Profile
                             </a>
+                            @else
+                            <a class="dropdown-item" href="{{route('etudiantProfile',Auth::user()->id_user)}}">
+                                <i class="fa-solid fa-user"></i>
+                                Profile
+                            </a>
+                            @endif
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item" href="#">
-                                <i class="fa-solid fa-power-off fa-lg"></i>
-                                Déconnexion
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fa-solid fa-power-off fa-lg"></i>
+                                {{ __('Déconnexion') }}
                             </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -83,14 +97,29 @@
                 <h1>Tous les Modules</h1>
             </div>
             <div class="row justify-content-center">
+                @php
+                /*for($i=0;$i<$moduleAct->count();$i++)
+                if($moduleAct[$i]->semestre<$moduleAct[$i+1]->semestre);
+                $moduleMin=$moduleAct[$i]->semestre;*/
+                for($i=0;$i<$moduleAct->count();$i++){
+                    $semestre[$i]=$moduleAct[$i]->semestre;
+                }
+                $minSemestre=min($semestre);
+                @endphp
+                @foreach($moduleAct as $key)
                 <div class="col">
                     <div class="card" style="width: 15rem;">
-                        <img src="../img/bd.png" class="card-img-top" alt="...">
+                        <img src="{{$key->imageModule}}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <div class="content">
-                                <p class="card-title">Bases de Données</p>
+                               
+                                <p class="card-title">{{$key->libelleModule}}</p>
                                 <p class="card-text">
-                                    <a href="">Mustapha Machkour</a>
+                                    @foreach($profs as $prof)
+                                    @if($prof->id_module==$key->id_module)
+                                    <a href="{{route('etudProfProfile',$prof->id_user)}}">{{$prof->name}} {{$prof->prenom}}</a>
+                                    @endif
+                                    @endforeach
                                 </p>
                             </div>
                             <div class="acceder">
@@ -100,14 +129,24 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
+                @foreach($allModule as $key)
+
+                @if($key->semestre<$minSemestre)
+                
                 <div class="col">
                     <div class="card" style="width: 15rem;">
-                        <img src="../img/bd.png" class="card-img-top" alt="...">
+                        <img src="{{$key->imageModule}}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <div class="content">
-                                <p class="card-title">Bases de Données</p>
+                               
+                                <p class="card-title">{{$key->libelleModule}}</p>
                                 <p class="card-text">
-                                    <a href="">Mustapha Machkour</a>
+                                    @foreach($profs as $prof)
+                                    @if($prof->id_module==$key->id_module)
+                                    <a href="{{route('etudProfProfile',$prof->id_user)}}">{{$prof->name}} {{$prof->prenom}}</a>
+                                    @endif
+                                    @endforeach
                                 </p>
                             </div>
                             <div class="acceder">
@@ -117,115 +156,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="../img/compilation.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <div class="content">
-                                <a href="" class="card-title">Compilation</a>
-                                <p class="card-text">
-                                    <a href="">Mustapha Machkour</a>
-                                </p>
-                            </div>
-                            <div class="acceder">
-                                <a href="EspaceCours.php">Visiter</a>
-                                <i class="fas fa-long-arrow-alt-right"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="../img/coo.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <div class="content">
-                                <a href="" class="card-title">Conception Orienté Objet</a>
-                                <p class="card-text">
-                                    <a href="">Ayoub Sebraoui</a>
-                                </p>
-                            </div>
-                            <div class="acceder">
-                                <a href="EspaceCours.php">Visiter</a>
-                                <i class="fas fa-long-arrow-alt-right"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="../img/poo.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <div class="content">
-                                <a href="" class="card-title">Programmation Orienté Objet</a>
-                                <p class="card-text">
-                                    <a href="">Said Charfi</a>
-                                </p>
-                            </div>
-                            <div class="acceder">
-                                <a href="EspaceCours.php">Visiter</a>
-                                <i class="fas fa-long-arrow-alt-right"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="../img/ro.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <div class="content">
-                                <a href="" class="card-title">Recharche Opérationnelle</a>
-                                <p class="card-text">
-                                    <a href="">Fouad El Ouafdi</a>
-                                </p>
-                            </div>
-                            <div class="acceder">
-                                <a href="EspaceCours.php">Visiter</a>
-                                <i class="fas fa-long-arrow-alt-right"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="../img/rsx.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <div class="content">
-                                <a href="" class="card-title">Réseau Informatique</a>
-                                <p class="card-text">
-                                    <a href="">Abdellah Boulouz</a>
-                                </p>
-                            </div>
-                            <div class="acceder">
-                                <a href="EspaceCours.php">Visiter</a>
-                                <i class="fas fa-long-arrow-alt-right"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="../img/rsx.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <div class="content">
-                                <a href="" class="card-title">Réseau Informatique</a>
-                                <p class="card-text">
-                                    <a href="">Abdellah Boulouz</a>
-                                </p>
-                            </div>
-                            <div class="acceder">
-                                <a href="EspaceCours.php">Visiter</a>
-                                <i class="fas fa-long-arrow-alt-right"></i>
-                            </div>
-                        </div>
-                    </div>
+                @endif
+                @endforeach
                 </div>
             </div>
         </div>
     </div>
     <!-- End Header -->
     <!-- Start More -->
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="../js/all.min.js"></script>
+    <script src="{{asset('/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('/js/all.min.js')}}"></script>
     <!-- End More -->
 </body>
 </html>

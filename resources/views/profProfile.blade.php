@@ -57,7 +57,7 @@
                 </ul>
                 <div class="dropdown" >
                     <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ Auth::user()->imageProfile}}" alt="" width="40" height="30" style="border-radius: 50%;">
+                        <img src="{{ Auth::user()->imagePath}}" alt="" width="40" height="30" style="border-radius: 50%;">
                             {{ Auth::user()->name }} {{ Auth::user()->prenom }}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -96,7 +96,7 @@
                 <!-- if user is prof -->
                 <div class="profile-container">
                     <div class="img-box">
-                        <img src="/img/professeur.jpg" alt="">
+                        <img src="{{$prof->imagePath}}" alt="">
                         <h3>{{$prof->name}} {{$prof->prenom}}</h3>
                         <p>Professeur</p>
                     </div>
@@ -147,7 +147,7 @@
                 <div class="profile-container">
                     <div class="img-box">
                         <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <img src="/img/professeur.jpg" alt="">
+                            <img src="{{$prof->imagePath}}" alt="">
                             <div class="img-modif">
                                 <i class="fa-solid fa-pen"></i>
                                 Modifier
@@ -157,7 +157,8 @@
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <form class="needs-validation" novalidate>
+                                    <form class="needs-validation" enctype="multipart/form-data" method="post" action="{{route('profModifierPhoto',$prof->id_user)}}" novalidate>
+                                        @csrf
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Modifier l'image</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -176,7 +177,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
-                                            <button type="button" class="btn btn-primary">Modifier</button>
+                                            <button type="submit" class="btn btn-primary">Modifier</button>
                                         </div>
                                     </form>
                                 </div>

@@ -98,5 +98,27 @@ class ProfController extends Controller
         ]);
         return redirect()->back();
     }
+    public function modifierPhoto(Request $request,$id_user){
+    
+        /*$destinationPath = 'images';
+        $myimage = $request->image->getClientOriginalName();
+        $request->image->move(public_path($destinationPath), $myimage);*/
+        $file = $request->file('image');
+        $filename = $file->hashName();
+
+        // File upload location
+        $location = 'profImagesProfile';
+
+        // Upload file
+        $file->move($location,$filename);
+
+        // File path
+        $filepath = url('profImagesProfile/'.$filename);
+
+        // Insert record
+        User::where('id_user',$id_user)->update([
+            'imagePath'=>$filepath,
+        ]);
+        return redirect()->back();}
     //
 }

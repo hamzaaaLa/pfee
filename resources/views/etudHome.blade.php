@@ -79,7 +79,7 @@
             </ul>
             <div class="dropdown" >
                 <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ Auth::user()->imageProfile}}" alt="" width="40" height="30" >
+                    <img src="{{ Auth::user()->imagePath}}" alt="" width="40" height="30" >
                         {{ Auth::user()->name }} {{ Auth::user()->prenom }}
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -129,7 +129,11 @@
             <div class="courses">
                 <div class="section-header">
                     <h3>Modules</h3>
+                    @if(Auth::user()->type=='user')
+                    <a class="btn btn-light" href="{{route('voirTous',Auth::user()->id_user)}}" role="button">Voir tous</a>
+                    @else
                     <a class="btn btn-light" href="#" role="button">Voir tous</a>
+                    @endif
                 </div>
                 <div class="row justify-content-center">
                     @if (Auth::user()->type=='prof')
