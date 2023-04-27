@@ -129,7 +129,7 @@
                                 Ajouter Fichier
                             </span>
                         </button>
-                        <!-- Modal Cours -->
+                        <!-- Modal Ajouter Cours -->
                         <div class="modal fade" id="coursModal" tabindex="-1" aria-labelledby="coursModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
@@ -200,7 +200,7 @@
                                 Ajouter Section
                             </span>
                         </button>
-                        <!-- Modal Section -->
+                        <!-- Modal Ajouter Section -->
                         <div class="modal fade" id="sectionModal" tabindex="-1" aria-labelledby="sectionModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
@@ -252,6 +252,145 @@
                                                             {{-- <a href="{{ route('cours.download', ['id_cour' => $cours->id_cour]) }}">Download Contenu</a> --}}
                                                         </li>
                                                     @endforeach
+                                                        <li>
+                                                            <div class="content">
+                                                                <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
+                                                                <a href="#">smth1</a>
+                                                            </div>
+                                                            <div class="actions">
+                                                                <!-- Modifier Cours -->
+                                                                <button type="button" class="add-btn modif" data-bs-toggle="modal" data-bs-target="#modifierCours1">
+                                                                    <i class="fa-solid fa-pen"></i>
+                                                                </button>
+
+                                                                <!-- Modal Modifier Cours -->
+                                                                <div class="modal fade" id="modifierCours1" tabindex="-1" aria-labelledby="modifierCours1Label" aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="container">
+                                                                                <form class="row g-3 needs-validation"
+                                                                                      action="" method="post" novalidate>
+                                                                                    @csrf
+                                                                                    <div class="modal-header">
+                                                                                        <h5 class="modal-title" id="modifierCours1Label">Modifer Titre Cours</h5>
+                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <div class="mb-3">
+                                                                                            <label for="nomCours" class="form-label">Titre</label>
+                                                                                            <input type="text" name="nomCours" class="form-control" id="nomCours" required>
+                                                                                            <div class="valid-feedback">
+                                                                                                C'est bon!
+                                                                                            </div>
+                                                                                            <div class="invalid-feedback">
+                                                                                                Veuillez insérer un titre.
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                                                        <button type="button" class="btn btn-primary"><input type="submit" value="Modifier"></button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- Supprimer Cours -->
+                                                                <button type="button" class="add-btn del" data-bs-toggle="modal" data-bs-target="#supprimerCours1">
+                                                                    <i class="fa-solid fa-trash"></i>
+                                                                </button>
+
+                                                                <!-- Modal Supprimer Cours -->
+                                                                <div class="modal fade" id="supprimerCours1" tabindex="-1" aria-labelledby="supprimerCours1Label" aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="supprimerCours1Label">Supprimer Cours</h5>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                Voulez-vous vraiment supprimer ce cours?
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                                                <a type="button" class="btn btn-danger" href="#" style="color: white;">Supprimer</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    <li>
+                                                        <!-- Modifier Section -->
+                                                        <button type="button" class="add-btn" data-bs-toggle="modal"
+                                                                data-bs-target="#modifierSection1">
+                                                            <i class="fa-solid fa-pen"></i>
+                                                            Modifier Section
+                                                        </button>
+
+                                                        <!-- Modal Modifier Section -->
+                                                        <div class="modal fade" id="modifierSection1" tabindex="-1"
+                                                             aria-labelledby="modifierSection1Label" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="container">
+                                                                        <form class="row g-3 needs-validation" action="" method="post" novalidate>
+                                                                            @csrf
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="modifierSection1Label">Modifier Titre Section</h5>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <div class="mb-3">
+                                                                                    <label for="nomSection" class="form-label">Titre</label>
+                                                                                    <input type="text" name="nomSection" class="form-control" id="nomSection" required>
+                                                                                    <div class="valid-feedback">
+                                                                                        C'est bon!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Veuillez insérer un titre.
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                                                <button type="button" class="btn btn-primary"><input type="submit" value="Modifier"></button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Supprimer Section -->
+                                                        <button type="button" class="add-btn" data-bs-toggle="modal"
+                                                                data-bs-target="#supprimerSection1">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                            Supprimer Section
+                                                        </button>
+
+                                                        <!-- Modal Supprimer Section -->
+                                                        <div class="modal fade" id="supprimerSection1" tabindex="-1"
+                                                             aria-labelledby="supprimerSection1Label"
+                                                             aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title"
+                                                                            id="supprimerSection1Label">Supprimer Section</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        Voulez-vous vraiment supprimer cette section?
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        <a type="button" class="btn btn-danger" href="#" style="color: white;">Supprimer</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -306,7 +445,7 @@
           </div> --}}
     </div>
     <!-- End Cours -->
-    
+
     <script>
         function addSection() {
             var nomSection = $("#nomSection").val();

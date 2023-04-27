@@ -195,7 +195,6 @@ input[type="submit"] {
     justify-content: space-between;
     align-items: center;
 }
-
 .cours .header .forum-btn {
     position: relative;
     display: inline-block;
@@ -211,7 +210,6 @@ input[type="submit"] {
     width: 15rem;
     height: auto;
 }
-
 .cours .header .forum-btn .circle {
     transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
     position: relative;
@@ -222,7 +220,6 @@ input[type="submit"] {
     background: var(--main-color);
     border-radius: 1.625rem;
 }
-
 .cours .header .forum-btn .circle .icon {
     transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
     position: absolute;
@@ -231,7 +228,6 @@ input[type="submit"] {
     margin: auto;
     background: #fff;
 }
-
 .cours .header .forum-btn .circle .icon.arrow {
     transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
     left: 0.625rem;
@@ -239,7 +235,6 @@ input[type="submit"] {
     height: 0.125rem;
     background: none;
 }
-
 .cours .header .forum-btn .circle .icon.arrow::before {
     position: absolute;
     content: "";
@@ -251,7 +246,6 @@ input[type="submit"] {
     border-right: 0.125rem solid #fff;
     transform: rotate(45deg);
 }
-
 .cours .header .forum-btn .button-text {
     transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
     position: absolute;
@@ -267,24 +261,66 @@ input[type="submit"] {
     text-align: center;
     text-transform: uppercase;
 }
-
 .cours .header .forum-btn:hover .circle {
     width: 100%;
 }
-
 .cours .header .forum-btn:hover .circle .icon.arrow {
     background: #fff;
     transform: translate(1rem, 0);
 }
-
 .cours .header .forum-btn:hover .button-text {
     color: #fff;
 }
-.cours .content .accordion .accordion-collapse li {
-    padding: 7px 0;
+.cours .content .accordion .accordion-body {
+    padding-bottom: 0;
 }
-.cours .content .accordion .accordion-collapse li a {
+.cours .content .accordion .accordion-body li:not(:last-child) {
+    padding: 7px 0;
+    display: flex;
+    justify-content: space-between;
+}
+.cours .content .accordion .accordion-body li:not(:last-child) a {
     padding-left: 7px;
     color: var(--main-color);
+}
+.cours .content .accordion .accordion-body li:not(:last-child) .add-btn {
+    padding: 0.4rem 0.6rem;
+    /*position: relative;*/
+}
+/*.cours .content .accordion .accordion-body li:not(:last-child) .add-btn::before,  .cours .content .accordion .accordion-body li:not(:last-child) .add-btn::after{
+    content: "";
+    position: absolute;
+    z-index: 5;
+    transition: var(--main-transition);
+}
+.cours .content .accordion .accordion-body li:not(:last-child) .add-btn::before {
+    width: 70px;
+    height: 30px;
+    top: -40px;
+    left: -50%;
+    border-radius: 3px;
+    background-color: black;
+    opacity: 0;
+}
+.cours .content .accordion .accordion-body li:not(:last-child) .add-btn::after {
+    border-width: 10px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+    top: 10px;
+    opacity: 0;
+}
+.cours .content .accordion .accordion-body li:not(:last-child) .add-btn:hover:before,  .cours .content .accordion .accordion-body li:not(:last-child) .add-btn:hover:after{
+    opacity: 1;
+}*/
+.cours .content .accordion .accordion-body li:last-child {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    margin-top: 20px;
+}
+.cours .content .accordion .accordion-body .add-btn {
+    color: white;
+    padding: 0.5rem 0.9rem 0.5rem 0.7rem;
+
 }
 /* End Content */
