@@ -20,7 +20,7 @@ use App\Http\Controllers\espaceController;
 |
 */
 
-Route::get('/',[App\Http\Controllers\WelcomeController::class, 'stat']);
+Route::get('/',[App\Http\Controllers\WelcomeController::class, 'stat'])->name('acceuil');
 Auth::routes([
     'register'=>false
 ]);
