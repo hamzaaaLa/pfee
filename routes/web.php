@@ -20,10 +20,7 @@ use App\Http\Controllers\espaceController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/',[App\Http\Controllers\WelcomeController::class, 'stat']);
 Auth::routes([
     'register'=>false
 ]);

@@ -135,5 +135,6 @@ class HomeController extends Controller
         }
         return redirect()->back()->with('success', 'Annonce créée avec succès.');
     }
+
 }
 

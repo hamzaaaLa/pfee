@@ -40,9 +40,11 @@
                         </a>
                     </li>
                     <li class="nav-item" alt="Formation">
-                        <a class="nav-link" href="#">
+                        @auth
+                        <a class="nav-link" href="{{ url('/home') }}">
                             Tableau de bord
                         </a>
+                        @endauth
                     </li>
                     {{--<li class="nav-item" alt="A propos">
                         <a class="nav-link" href="#">
@@ -125,17 +127,17 @@
         <div class="info">
             <div class="box">
                 <i class="fa-solid fa-user fa-2x"></i>
-                <span class="number">556{{--{{$etud}}--}}</span>
+                <span class="number">{{$etud}}</span>
                 <span class="text">Etudiants</span>
             </div>
             <div class="box">
                 <i class="fa-solid fa-user fa-2x"></i>
-                <span class="number">67{{--{{$prof}}--}}</span>
+                <span class="number">{{$prof}}</span>
                 <span class="text">Professeurs</span>
             </div>
             <div class="box">
                 <i class="fa-solid fa-book fa-2x"></i>
-                <span class="number">70{{--{{$mod}}--}}</span>
+                <span class="number">{{$mod}}</span>
                 <span class="text">Modules</span>
             </div>
         </div>
