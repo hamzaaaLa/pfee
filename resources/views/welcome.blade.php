@@ -45,6 +45,11 @@
                             Tableau de bord
                         </a>
                         @endauth
+                        @guest
+                        <a class="nav-link" href="{{ route('login') }}">
+                            Tableau de bord
+                        </a>
+                        @endguest
                     </li>
                     {{--<li class="nav-item" alt="A propos">
                         <a class="nav-link" href="#">
