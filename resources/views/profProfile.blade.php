@@ -57,7 +57,7 @@
                 </ul>
                 <div class="dropdown" >
                     <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ Auth::user()->imagePath}}" alt="" width="40" height="30" style="border-radius: 50%;">
+                        <img src="{{ Auth::user()->profile_image_url}}" alt="">
                             {{ Auth::user()->name }} {{ Auth::user()->prenom }}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -96,7 +96,7 @@
                 <!-- if user is prof -->
                 <div class="profile-container">
                     <div class="img-box">
-                        <img src="{{$prof->imagePath}}" alt="">
+                        <img src="{{$prof->profile_image_url}}" alt="">
                         <h3>{{$prof->name}} {{$prof->prenom}}</h3>
                         <p>Professeur</p>
                     </div>
@@ -131,10 +131,12 @@
                                 <span>{{$prof->specialite}}</span>
                             </div>
                             <div>
-                                <span>Modules:</span>
-                                @foreach($module as $key)
-                                <span>{{$key->libelleModule}},</span>
-                                @endforeach
+                                <ul>
+                                    <span>Modules:</span>
+                                    @foreach($module as $key)
+                                    <li>{{$key->libelleModule}}</li>
+                                    @endforeach
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -147,7 +149,7 @@
                 <div class="profile-container">
                     <div class="img-box">
                         <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <img src="{{$prof->imagePath}}" alt="">
+                            <img src="{{$prof->profile_image_url}}" alt="">
                             <div class="img-modif">
                                 <i class="fa-solid fa-pen"></i>
                                 Modifier
@@ -268,7 +270,7 @@
                                         <label for="module" class="form-label">Modules</label>
                                         <select class="form-select" id="moduleSelect" multiple="" required disabled>
                                             @foreach($module as $key)
-                                            <option selected>{{$key->libelleModule}}</option>
+                                            <option selected>{{$key->libelleModule}} </option>
                                             @endforeach
                                         </select>
                                         <div class="valid-feedback">

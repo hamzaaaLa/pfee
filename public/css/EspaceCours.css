@@ -207,7 +207,7 @@ input[type="submit"] {
     padding: 0;
     font-size: inherit;
     font-family: inherit;
-    width: 15rem;
+    width: 17rem;
     height: auto;
 }
 .cours .header .forum-btn .circle {
@@ -274,45 +274,20 @@ input[type="submit"] {
 .cours .content .accordion .accordion-body {
     padding-bottom: 0;
 }
-.cours .content .accordion .accordion-body li:not(:last-child) {
+.cours .content .accordion .accordion-body li:not(.actions) {
     padding: 7px 0;
     display: flex;
     justify-content: space-between;
 }
-.cours .content .accordion .accordion-body li:not(:last-child) a {
+.cours .content .accordion .accordion-body li:not(.actions) a {
     padding-left: 7px;
     color: var(--main-color);
 }
-.cours .content .accordion .accordion-body li:not(:last-child) .add-btn {
+.cours .content .accordion .accordion-body li:not(.actions) .add-btn {
     padding: 0.4rem 0.6rem;
     /*position: relative;*/
 }
-/*.cours .content .accordion .accordion-body li:not(:last-child) .add-btn::before,  .cours .content .accordion .accordion-body li:not(:last-child) .add-btn::after{
-    content: "";
-    position: absolute;
-    z-index: 5;
-    transition: var(--main-transition);
-}
-.cours .content .accordion .accordion-body li:not(:last-child) .add-btn::before {
-    width: 70px;
-    height: 30px;
-    top: -40px;
-    left: -50%;
-    border-radius: 3px;
-    background-color: black;
-    opacity: 0;
-}
-.cours .content .accordion .accordion-body li:not(:last-child) .add-btn::after {
-    border-width: 10px;
-    border-style: solid;
-    border-color: black transparent transparent transparent;
-    top: 10px;
-    opacity: 0;
-}
-.cours .content .accordion .accordion-body li:not(:last-child) .add-btn:hover:before,  .cours .content .accordion .accordion-body li:not(:last-child) .add-btn:hover:after{
-    opacity: 1;
-}*/
-.cours .content .accordion .accordion-body li:last-child {
+.cours .content .accordion .accordion-body .actions {
     display: flex;
     justify-content: flex-end;
     gap: 5px;

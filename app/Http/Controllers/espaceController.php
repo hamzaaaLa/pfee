@@ -47,17 +47,14 @@ class espaceController extends Controller
 
     public function add_cour(Request $request, $id_module)
     {
-        // dd($request->all());
-
         $nomCours = $request->input('nomCours');
         $sectionCours = $request->input('sectionCours');
         
         if ($request->hasFile('fichierCours')) {
             $file = $request->file('fichierCours');
-            // dd($file);
             $fileName = time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path('cours'), $fileName);
-            $contents = file_get_contents(public_path('cours').'/'.$fileName);
+            $file->storeAs('cours', $fileName, 'public');
+            $filePath = ''.$fileName;
         } else {
             return response('error', 400);
         }
@@ -68,27 +65,29 @@ class espaceController extends Controller
     
         $cours = new Cours();
         $cours->libelleCour = $nomCours;
-        $cours->contenu = $contents;
+        $cours->contenu = $filePath;
         $cours->id_module = $id_module;
         $cours->id_section = $id_section;
         $cours->save();
     
-        // return response('success');
-        return redirect()->back()->with('success', 'Cours créée avec succès.');
+        return redirect()->back()->with('success', 'Cours créé avec succès.');
     }
 
     public function download($id_cour)
     {
-        $cours = DB::table('cours')->select('contenu')->where('id_cour', $id_cour)->first();
+        $cours = Cours::find($id_cour);
         if ($cours) {
-            $response = new Response($cours->contenu, 200);
-            $response->header('Content-Type', 'application/octet-stream');
-            $response->header('Content-Disposition', 'attachment; filename="' . $id_cour . '.pdf"');
-            return $response;
+            $pathToFile = storage_path('app/public/cours/'.$cours->contenu);
+            $headers = [
+                'Content-Type' => mime_content_type($pathToFile),
+                'Content-Disposition' => 'attachment; filename="' . $cours->libelleCour . '"'
+            ];
+            return response()->download($pathToFile, $cours->libelleCour, $headers);
         } else {
             abort(404);
         }
     }
+    
     public function store_posts(Request $request,$id_module){
         $id_user = auth()->user()->id_user;
         $posts = new posts();

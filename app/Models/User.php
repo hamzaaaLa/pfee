@@ -55,9 +55,15 @@ class User extends Authenticatable
      *
      * @return string
      */
-    public function getImageProfileAttribute(): string
+    public function getProfileImageUrlAttribute(): string
     {
-        return $this->attributes['imageProfile'] ?? asset('/img/professeur.jpg');
+        $filename = $this->attributes['imageProfile'];
+    
+        if ($filename) {
+            return asset('imagesProfile/' . $filename);
+        } else {
+            return asset('img/professeur.jpg');
+        }
     }
 
     /**
@@ -66,10 +72,7 @@ class User extends Authenticatable
      * @param  string  $value
      * @return void
      */
-    public function setImageProfileAttribute(string $value): void
-    {
-        $this->attributes['imageProfile'] = $value;
-    }
+
 
     //relation between etud and user
     public function etudiant()

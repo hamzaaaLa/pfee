@@ -101,16 +101,12 @@ a {
 }
 .dropdown button img {
     border-radius: 50%;
+    width: 35px;
+    height: 35px;
 }
-/*.dropdown button:hover:after  {
-    !*color: white;*!
-}*/
 .dropdown button::after {
     color: black;
 }
-/*.dropdown button[aria-expanded="true"]:hover {
-    !*border-color: transparent;*!
-}*/
 .dropdown .dropdown-menu {
     margin-top: 8px;
     width: 170px;
@@ -215,10 +211,17 @@ a {
 }
 .profile .profile-container .profile-content .my-box > div {
     min-width: 250px;
-    padding: 10px 0 0;
+    padding: 10px 10px 0;
 }
 .profile .profile-container .profile-content .my-box > div span:first-child {
     color: #888;
+}
+.profile .profile-container .profile-content .my-box > div ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    padding-left: 0;
+    margin-bottom: 0;
 }
 /* End Profile */
 /* Start Visualiser */

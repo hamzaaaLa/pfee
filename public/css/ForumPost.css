@@ -147,6 +147,11 @@ input[type="submit"] {
     border-radius: 25px;
     font-weight: 500;
 }
+.dropdown img{
+    width: 40px;
+    border: none;
+    border-radius: 50%;
+}
 .dropdown button:hover {
     background-color: #e9e3fc;
     border-color: black;
@@ -178,9 +183,6 @@ input[type="submit"] {
 .reply .post .box {
     padding: 25px 40px;
 }
-.reply .post .box h5 {
-
-}
 .reply .post .box .content {
     margin-top: 15px;
     display: flex;
@@ -189,7 +191,7 @@ input[type="submit"] {
 }
 .reply .post .box .content img {
     width: 45px;
-    height: 100%;
+    height: 45px;
     border-radius: 5px;
 }
 .reply .post .box .content .content-text {
@@ -216,7 +218,7 @@ input[type="submit"] {
 }
 .reply .replies .box .img-container img {
     width: 100px;
-    height: 100%;
+    height: 100px;
     border-radius: 10px;
     margin-bottom: 15px;
 }
@@ -227,6 +229,7 @@ input[type="submit"] {
 .reply .replies .box .content {
     background-color: white;
     padding: 10px 20px;
+    width: 100%;
 }
 .reply .replies .box .content span {
     font-size: 14px;
@@ -268,7 +271,7 @@ input[type="submit"] {
 }
 .reply-form .image img {
     width: 60px;
-    height: 100%;
+    height: 60px;
     border-radius: 10px;
 }
 .reply-form form {

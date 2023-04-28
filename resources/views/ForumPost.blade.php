@@ -55,7 +55,7 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="../img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
+                <img src="/img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
                 FSA-Online
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,8 +86,8 @@
                 </ul>
                 <div class="dropdown" >
                     <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{Auth::user()->imageProfile}}" alt="" width="40" height="30" >
-                        Ismail Berriss
+                        <img src="{{Auth::user()->profile_image_url}}" alt="" width="40" height="30" >
+                        {{Auth::user()->prenom}} {{Auth::user()->name}}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li>
@@ -98,10 +98,14 @@
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item" href="#">
-                                <i class="fa-solid fa-power-off fa-lg"></i>
-                                Déconnexion
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fa-solid fa-power-off fa-lg"></i>
+                                {{ __('Déconnexion') }}
                             </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -115,7 +119,7 @@
                     @foreach ($posts as $post)
                         <h5>{{$id_post->titre}}</h5>
                         <div class="content">
-                            <img src="{{$post->user->imageProfile}}" alt="">
+                            <img src="{{$post->user->profile_image_url}}" alt="">
                             <div class="content-text">
                                 <span>Par {{$post->user->name}} {{$post->user->prenom}}</span>
                                 <span>{{time_elapsed_string($post->date_created)}} dans Bases de Données</span>
@@ -136,10 +140,10 @@
                 @foreach ($reply as $r )
                     <div class="box">
                         <div class="img-container">
-                            <img src="{{$r->user->imageProfile}}" alt="">
+                            <img src="{{$r->user->profile_image_url}}" alt="">
                             <span>{{$r->user->name}} {{$r->user->prenom}}</span>
                             <span>
-                                @if (Auth::user()->type=='prof')
+                                @if ($r->user->type=='prof')
                                     Professeur
                                 @else
                                     etudiant
@@ -155,7 +159,7 @@
                @if(Auth::user()->type=='prof')
                     <div class="reply-form" id="reply-form">
                         <div class="image">
-                            <img src="{{Auth::user()->imageProfile}}" alt="">
+                            <img src="{{Auth::user()->profile_image_url}}" alt="">
                         </div>
                         <form class="needs-validation" action="{{route('prof.add_reply',['id_module' => $id_module, 'id_post' => $post->id_post])}}" method="post">
                             @csrf
@@ -182,7 +186,7 @@
                 @else
                     <div class="reply-form" id="reply-form">
                         <div class="image">
-                            <img src="{{Auth::user()->imageProfile}}" alt="">
+                            <img src="{{Auth::user()->profile_image_url}}" alt="">
                         </div>
                         <form class="needs-validation" action="{{route('etud.add_reply',['id_module' => $id_module, 'id_post' => $post->id_post])}}" method="post">
                             @csrf

@@ -14,6 +14,11 @@ body {
 a {
     text-decoration: none;
 }
+input[type=submit] {
+    border: none;
+    background: none;
+    color: white;
+}
 /* End Global Rules */
 /* Start Components */
 .section-header {
@@ -257,6 +262,8 @@ a {
 .courses .col .card .card-body .card-text a {
     color: #6a6f73;
     font-size: 13px;
+}
+.courses .col .card .card-body .card-text a:hover {
     text-decoration: underline;
 }
 .courses .col .card .card-body .acceder {
@@ -308,7 +315,6 @@ a {
 }
 .announcements ul li {
     display: flex;
-    justify-content: space-between;
     gap: 10px;
     padding: 10px;
     border-bottom: 1px solid #F4F4F4;
@@ -337,10 +343,16 @@ a {
 .announcements ul li .img-content a:hover {
     color: #777;
 }
+.announcements ul li .annonce-text {
+    width: 100%;
+}
 .announcements ul li .annonce-text a {
     font-size: 16px;
     color: black;
     font-weight: 500;
+}
+.announcements ul li .annonce-text a:hover {
+    text-decoration: underline;
 }
 .announcements ul li .annonce-text .subject {
     text-decoration: underline;

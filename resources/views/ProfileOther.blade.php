@@ -57,7 +57,7 @@
                 </ul>
                 <div class="dropdown" >
                     <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ Auth::user()->imageProfile}}" alt="" width="40" height="30" >
+                        <img src="{{ Auth::user()->imageProfile}}" alt="">
                             {{ Auth::user()->name }} {{ Auth::user()->prenom }}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -130,10 +130,12 @@
                                 <span>{{$prof->specialite}}</span>
                             </div>
                             <div>
-                                <span>Modules:</span>
-                                @foreach($module as $key)
-                                <span>{{$key->libelleModule}},</span>
-                                @endforeach
+                                <ul>
+                                    <span>Modules:</span>
+                                    @foreach($module as $key)
+                                    <li>{{$key->libelleModule}}</li>
+                                    @endforeach
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -168,12 +170,20 @@
                                 <span>{{$prof->specialite}}</span>
                             </div>
                             <div>
-                                <span>Semestres:</span>
-                                <span>S1, S3</span>
+                                <ul>
+                                    <span>Semestres:</span>
+                                    {{-- @foreach($semestre as $key) --}}
+                                    <li>{{$key->libelleSemestre}}</li>
+                                    {{-- @endforeach --}}
+                                </ul>
                             </div>
                             <div>
-                                <span>Modules:</span>
-                                <span>Analyse 1: Suites Numériques et Fonctions, Algebre 1: Généralités et Arithmétique dans Z, Programmation 1, Algorithmique 2</span>
+                                <ul>
+                                    <span>Modules:</span>
+                                    {{-- @foreach($module as $key) --}}
+                                    <li>{{$key->libelleModule}}</li>
+                                    {{-- @endforeach --}}
+                                </ul>
                             </div>
                         </div>
                     </div>

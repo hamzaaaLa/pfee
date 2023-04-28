@@ -63,7 +63,7 @@
                 </ul>
                 <div class="dropdown" >
                     <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ Auth::user()->imageProfile}}" alt="" width="40" height="30" >
+                        <img src="{{ Auth::user()->profile_image_url}}" alt="" width="40" height="30" >
                         {{ Auth::user()->name }} {{ Auth::user()->prenom }}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -98,25 +98,25 @@
                 @if(Auth::user()->type=='prof')
                     @foreach (Auth::user()->professeur as $prof)
                         @foreach ($prof->affectation_prof as $af)
+                        @endforeach
+                    @endforeach
                         <a class="forum-btn" href="{{route('prof.Forum',$af->module->id_module)}}">
                             <span class="circle" aria-hidden="true">
                             <span class="icon arrow"></span>
                             </span>
-                            <span class="button-text">Accéder au Forum</span>
+                            <span class="button-text">Accéder au discussion</span>
                         </a>
-                        @endforeach
-                    @endforeach
                 @else
                     @foreach (Auth::user()->etudiant as $etud)
                         @foreach ($etud->affectation_etud as $af_etud)
+                        @endforeach
+                    @endforeach
                         <a class="forum-btn" href="{{route('etud.Forum',$af_etud->module->id_module)}}">
                             <span class="circle" aria-hidden="true">
                             <span class="icon arrow"></span>
                             </span>
-                            <span class="button-text">Accéder au Forum</span>
+                            <span class="button-text">Accéder au discussion</span>
                         </a>
-                        @endforeach
-                    @endforeach
                 @endif
             </div>
             <div class="content">
@@ -247,24 +247,18 @@
                                                 <ul>
                                                     @foreach ($sec->section->cours as $cours )
                                                         <li>
-                                                            <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                                            <a href="{{ route('prof.cour.download', ['id_cour' => $cours->id_cour]) }}">{{$cours->libelleCour }}</a>
-                                                            {{-- <a href="{{ route('cours.download', ['id_cour' => $cours->id_cour]) }}">Download Contenu</a> --}}
-                                                        </li>
-                                                    @endforeach
-                                                        <li>
                                                             <div class="content">
                                                                 <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                                                <a href="#">smth1</a>
+                                                                <a href="{{ route('prof.cour.download', ['id_cour' => $cours->id_cour]) }}">{{$cours->libelleCour }}</a>
                                                             </div>
                                                             <div class="actions">
                                                                 <!-- Modifier Cours -->
-                                                                <button type="button" class="add-btn modif" data-bs-toggle="modal" data-bs-target="#modifierCours1">
+                                                                <button type="button" class="add-btn modif" data-bs-toggle="modal" data-bs-target="#modifierCours{{$cours->id_cour}}">
                                                                     <i class="fa-solid fa-pen"></i>
                                                                 </button>
 
                                                                 <!-- Modal Modifier Cours -->
-                                                                <div class="modal fade" id="modifierCours1" tabindex="-1" aria-labelledby="modifierCours1Label" aria-hidden="true">
+                                                                <div class="modal fade" id="modifierCours{{$cours->id_cour}}" tabindex="-1" aria-labelledby="modifierCours{{$cours->id_cour}}Label" aria-hidden="true">
                                                                     <div class="modal-dialog">
                                                                         <div class="modal-content">
                                                                             <div class="container">
@@ -272,7 +266,7 @@
                                                                                       action="" method="post" novalidate>
                                                                                     @csrf
                                                                                     <div class="modal-header">
-                                                                                        <h5 class="modal-title" id="modifierCours1Label">Modifer Titre Cours</h5>
+                                                                                        <h5 class="modal-title" id="modifierCours{{$cours->id_cour}}Label">Modifer Titre Cours</h5>
                                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                     </div>
                                                                                     <div class="modal-body">
@@ -297,16 +291,16 @@
                                                                     </div>
                                                                 </div>
                                                                 <!-- Supprimer Cours -->
-                                                                <button type="button" class="add-btn del" data-bs-toggle="modal" data-bs-target="#supprimerCours1">
+                                                                <button type="button" class="add-btn del" data-bs-toggle="modal" data-bs-target="#supprimerCours{{$cours->id_cour}}">
                                                                     <i class="fa-solid fa-trash"></i>
                                                                 </button>
 
                                                                 <!-- Modal Supprimer Cours -->
-                                                                <div class="modal fade" id="supprimerCours1" tabindex="-1" aria-labelledby="supprimerCours1Label" aria-hidden="true">
+                                                                <div class="modal fade" id="supprimerCours{{$cours->id_cour}}" tabindex="-1" aria-labelledby="supprimerCours{{$cours->id_cour}}Label" aria-hidden="true">
                                                                     <div class="modal-dialog">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title" id="supprimerCours1Label">Supprimer Cours</h5>
+                                                                                <h5 class="modal-title" id="supprimerCours{{$cours->id_cour}}Label">Supprimer Cours</h5>
                                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                             </div>
                                                                             <div class="modal-body">
@@ -321,24 +315,23 @@
                                                                 </div>
                                                             </div>
                                                         </li>
-                                                    <li>
+                                                    @endforeach
+                                                    <li class="actions">
                                                         <!-- Modifier Section -->
-                                                        <button type="button" class="add-btn" data-bs-toggle="modal"
-                                                                data-bs-target="#modifierSection1">
+                                                        <button type="button" class="add-btn" data-bs-toggle="modal" data-bs-target="#modifierSection{{ $sec->section->id_section}}">
                                                             <i class="fa-solid fa-pen"></i>
                                                             Modifier Section
                                                         </button>
 
                                                         <!-- Modal Modifier Section -->
-                                                        <div class="modal fade" id="modifierSection1" tabindex="-1"
-                                                             aria-labelledby="modifierSection1Label" aria-hidden="true">
+                                                        <div class="modal fade" id="modifierSection{{ $sec->section->id_section}}" tabindex="-1" aria-labelledby="modifierSection{{ $sec->section->id_section}}Label" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="container">
                                                                         <form class="row g-3 needs-validation" action="" method="post" novalidate>
                                                                             @csrf
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title" id="modifierSection1Label">Modifier Titre Section</h5>
+                                                                                <h5 class="modal-title" id="modifierSection{{ $sec->section->id_section}}Label">Modifier Titre Section</h5>
                                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                             </div>
                                                                             <div class="modal-body">
@@ -363,21 +356,17 @@
                                                             </div>
                                                         </div>
                                                         <!-- Supprimer Section -->
-                                                        <button type="button" class="add-btn" data-bs-toggle="modal"
-                                                                data-bs-target="#supprimerSection1">
+                                                        <button type="button" class="add-btn" data-bs-toggle="modal" data-bs-target="#supprimerSection{{ $sec->section->id_section}}">
                                                             <i class="fa-solid fa-trash"></i>
                                                             Supprimer Section
                                                         </button>
 
                                                         <!-- Modal Supprimer Section -->
-                                                        <div class="modal fade" id="supprimerSection1" tabindex="-1"
-                                                             aria-labelledby="supprimerSection1Label"
-                                                             aria-hidden="true">
+                                                        <div class="modal fade" id="supprimerSection{{ $sec->section->id_section}}" tabindex="-1" aria-labelledby="supprimerSection{{ $sec->section->id_section}}Label" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title"
-                                                                            id="supprimerSection1Label">Supprimer Section</h5>
+                                                                        <h5 class="modal-title" id="supprimerSection{{ $sec->section->id_section}}Label">Supprimer Section</h5>
                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                     </div>
                                                                     <div class="modal-body">
@@ -415,9 +404,10 @@
                                                 <ul>
                                                     @foreach ($sec->section->cours as $cours )
                                                         <li>
-                                                            <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                                            <a href="{{ route('etud.cour.download', ['id_cour' => $cours->id_cour]) }}">{{$cours->libelleCour }}</a>
-                                                            {{-- <a href="{{ route('cours.download', ['id_cour' => $cours->id_cour]) }}">Download Contenu</a> --}}
+                                                            <div class="content">
+                                                                <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
+                                                                <a href="{{ route('etud.cour.download', ['id_cour' => $cours->id_cour]) }}">{{$cours->libelleCour }}</a>
+                                                            </div>
                                                         </li>
                                                     @endforeach
                                                 </ul>
@@ -445,7 +435,7 @@
           </div> --}}
     </div>
     <!-- End Cours -->
-
+    
     <script>
         function addSection() {
             var nomSection = $("#nomSection").val();

@@ -55,7 +55,7 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="../img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
+                <img src="/img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
                 FSA-Online
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,7 +86,7 @@
                 </ul>
                 <div class="dropdown" >
                     <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{Auth::user()->imageProfile}}" alt="" width="40" height="30" >
+                        <img src="{{Auth::user()->profile_image_url}}" alt="" width="40" height="30" >
                         {{Auth::user()->prenom}} {{Auth::user()->name}}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -98,10 +98,14 @@
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item" href="#">
-                                <i class="fa-solid fa-power-off fa-lg"></i>
-                                Déconnexion
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fa-solid fa-power-off fa-lg"></i>
+                                {{ __('Déconnexion') }}
                             </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -207,10 +211,10 @@
                 <div class="posts">
                     @foreach ($posts as $post)
                         @if(Auth::user()->type=='prof')
-                        <a class="box" href="{{ route('prof.ForumPost', ['id_module' => $id_module, 'id_post' => $post->id_post]) }}">
-                            <div class="img-container">
-                                    <img src="{{ Auth::user()->imageProfile}}" alt="">
-                                    <span>{{Auth::user()->name}} {{Auth::user()->prenom}}<span>.</span></span>
+                            <a class="box" href="{{ route('prof.ForumPost', ['id_module' => $id_module, 'id_post' => $post->id_post]) }}">
+                                <div class="img-container">
+                                    <img src="{{ $post->user->profile_image_url}}" alt="">
+                                    <span>{{$post->user->name}} {{$post->user->prenom}}<span>.</span></span>
                                     <span>{{time_elapsed_string($post->date_created)}}</span>
                                 </div>
                                 <div class="post-content">
@@ -223,21 +227,21 @@
                                 </div>
                             </a>
                         @else
-                            <a class="box" href="{{route('etud.ForumPost',['id_module' => $id_module, 'id_post' => $post->id_post])}}">
-                                <div class="img-container">
-                                    <img src="{{ Auth::user()->imageProfile}}" alt="">
-                                    <span>{{Auth::user()->name}} {{Auth::user()->prenom}}<span>.</span></span>
-                                    <span>{{time_elapsed_string($post->date_created)}}</span>
+                        <a class="box" href="{{ route('etud.ForumPost', ['id_module' => $id_module, 'id_post' => $post->id_post]) }}">
+                            <div class="img-container">
+                                <img src="{{ $post->user->profile_image_url}}" alt="">
+                                <span>{{$post->user->name}} {{$post->user->prenom}}<span>.</span></span>
+                                <span>{{time_elapsed_string($post->date_created)}}</span>
+                            </div>
+                            <div class="post-content">
+                                <h5>{{$post->titre}}</h5>
+                                <p>{{$post->contenu}}.</p>
+                                <div class="reply">
+                                    <i class="fa-regular fa-comment"></i>
+                                    <span>{{ $post->reply_count }} Reponses</span>
                                 </div>
-                                <div class="post-content">
-                                    <h5>{{$post->titre}}</h5>
-                                    <p>{{$post->contenu}}.</p>
-                                    <div class="reply">
-                                        <i class="fa-regular fa-comment"></i>
-                                        <span>{{ $post->reply_count }} Reponses</span>
-                                    </div>
-                                </div>
-                            </a>
+                            </div>
+                        </a>
                         @endif
                     @endforeach
                 </div>

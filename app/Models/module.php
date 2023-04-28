@@ -54,14 +54,13 @@ class module extends Model
         return $this->hasMany(posts::class,'id_module');
     }
     //images
-    public function getImageModuleAttribute(): string
+    public function getModuleImageUrlAttribute(): string
     {
-        return $this->attributes['imageModule'] ?? asset('/img/module.png');
-    }
-
-    public function setImageModuleAttribute(string $value): void
-    {
-        $this->attributes['imageModule'] = $value;
-    }
+        $filename = $this->attributes['imageModule'];
+        $url = asset('img/module.png');
     
+      
+    
+        return $url;
+    }
 }

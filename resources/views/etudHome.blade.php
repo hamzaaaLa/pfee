@@ -79,7 +79,7 @@
             </ul>
             <div class="dropdown" >
                 <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ Auth::user()->imagePath}}" alt="" width="40" height="30" >
+                    <img src="{{ Auth::user()->profile_image_url}}" alt="" width="40" height="30" >
                         {{ Auth::user()->name }} {{ Auth::user()->prenom }}
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -118,11 +118,6 @@
 <!-- End Header -->
 <!-- Start Dashboard -->
 <div class="dashboard">
-    <!--<div class="custom-shape-divider-bottom-1680448949">
-        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
-        </svg>
-    </div>-->
     <div class="container">
         <div class="holder">
             <!-- Start Courses -->
@@ -130,9 +125,7 @@
                 <div class="section-header">
                     <h3>Modules</h3>
                     @if(Auth::user()->type=='user')
-                    <a class="btn btn-light" href="{{route('voirTous',Auth::user()->id_user)}}" role="button">Voir tous</a>
-                    @else
-                    <a class="btn btn-light" href="#" role="button">Voir tous</a>
+                        <a class="btn btn-light" href="{{route('voirTous',Auth::user()->id_user)}}" role="button">Voir tous</a>
                     @endif
                 </div>
                 <div class="row justify-content-center">
@@ -141,12 +134,12 @@
                         @foreach ($prof->affectation_prof as $af)
                             <div class="col">
                                 <div class="card" style="width: 15rem;">
-                                    <img src="{{ $af->module->imageModule}}" class="card-img-top" alt="...">
+                                    <img src="{{ $af->module->module_image_url}}" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <div class="content">
                                             <p class="card-title">{{$af->module->libelleModule}}</p>
                                             <p class="card-text">
-                                                <a href="">{{ $af->professeur->user->name}} {{ $af->professeur->user->prenom }}</a>
+                                                <a href="{{route('profProfile',$af->professeur->user->id_user)}}">{{ $af->professeur->user->name}} {{ $af->professeur->user->prenom }}</a>
                                             </p>
                                         </div>
                                         <div class="acceder">
@@ -164,7 +157,7 @@
                             @foreach ( $af_etud->module->affectation_prof as $af_prof)
                                 <div class="col">
                                     <div class="card" style="width: 15rem;">
-                                        <img src="{{ $af_etud->module->imageModule}}" class="card-img-top" alt="...">
+                                        <img src="{{ $af_etud->module->module_image_url}}" class="card-img-top" alt="...">
                                         <div class="card-body">
                                             <div class="content">
                                                 <p class="card-title">{{$af_etud->module->libelleModule}}</p>
@@ -276,7 +269,7 @@
                     @foreach($annonces as $annonce)
                         <li>
                             <div class="img-content">
-                                <img src="{{ Auth::user()->imageProfile}}" alt="">
+                                <img src="{{ $annonce->professeur->user->profile_image_url}}" alt="">
                                 <a type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
                                     <i class="fa-solid fa-trash"></i>
                                 </a>

@@ -98,27 +98,27 @@ class ProfController extends Controller
         ]);
         return redirect()->back();
     }
-    public function modifierPhoto(Request $request,$id_user){
-    
-        /*$destinationPath = 'images';
-        $myimage = $request->image->getClientOriginalName();
-        $request->image->move(public_path($destinationPath), $myimage);*/
+    public function modifierPhoto(Request $request, $id_user)
+    {
+        // Get the file from the request
         $file = $request->file('image');
-        $filename = $file->hashName();
-
-        // File upload location
-        $location = 'profImagesProfile';
-
-        // Upload file
-        $file->move($location,$filename);
-
-        // File path
-        $filepath = url('profImagesProfile/'.$filename);
-
-        // Insert record
-        User::where('id_user',$id_user)->update([
-            'imagePath'=>$filepath,
-        ]);
-        return redirect()->back();}
+    
+        // Check if a file was uploaded
+        if ($file) {
+            // Generate a unique file name
+            $filename = uniqid('profile_') . '.' . $file->getClientOriginalExtension();
+    
+            // Save the file to the imagesProfile folder
+            $file->move('imagesProfile', $filename);
+    
+            // Update the user's imageProfile attribute with the file path
+            User::where('id_user', $id_user)->update([
+                'imageProfile' => $filename,
+            ]);
+        }
+    
+        // Redirect back to the page
+        return redirect()->back();
+    }
     //
 }

@@ -57,7 +57,7 @@
                 </ul>
                 <div class="dropdown" >
                     <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ Auth::user()->imagePath}}" alt="" width="40" height="30" style="border-radius: 50%">
+                        <img src="{{ Auth::user()->profile_image_url}}" alt="">
                             {{ Auth::user()->name }} {{ Auth::user()->prenom }}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -95,7 +95,7 @@
                 </div>
                 <div class="profile-container">
                     <div class="img-box">
-                        <img src="{{$etudiant->imagePath}}" alt="">
+                        <img src="{{$etudiant->profile_image_url}}" alt="">
                         <h3>{{Auth::user()->name}} {{Auth::user()->prenom}}</h3>
                         <p>Etudiant</p>
                     </div>
@@ -134,16 +134,20 @@
                                 <span>{{$etudiant->filiere}}</span>
                             </div>
                             <div>
-                                <span>Semestres:</span>
-                                @foreach($semestre as $key)
-                                <span>{{$key->libelleSemestre}},</span>
-                            @endforeach
+                                <ul>
+                                    <span>Semestres:</span>
+                                    @foreach($semestre as $key)
+                                    <li>{{$key->libelleSemestre}}</li>
+                                    @endforeach
+                                </ul>
                             </div>
                             <div>
-                                <span>Modules:</span>
-                                @foreach($module as $key)
-                                <span>{{$key->libelleModule}},</span>
-                                @endforeach
+                                <ul>
+                                    <span>Modules:</span>
+                                    @foreach($module as $key)
+                                    <li>{{$key->libelleModule}}</li>
+                                    @endforeach
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -156,7 +160,7 @@
                 <div class="profile-container">
                     <div class="img-box">
                         <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <img src="{{$etudiant->imagePath}}" alt="">
+                            <img src="{{$etudiant->profile_image_url}}" alt="">
                             <div class="img-modif">
                                 <i class="fa-solid fa-pen"></i>
                                 Modifier
