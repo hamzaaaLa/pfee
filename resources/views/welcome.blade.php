@@ -14,9 +14,9 @@
         <!-- Main CSS File -->
         <link rel="stylesheet" href="{{asset('/css/Welcome.css')}}" />
         <!-- Google Fonts - Work Sans -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="{{asset('https://fonts.googleapis.com')}}" />
+        <link rel="preconnect" href="{{asset('https://fonts.gstatic.com')}}" crossorigin />
+        <link href="{{asset('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700;900&display=swap')}}" rel="stylesheet" />
     </head>
     <!-- Start Header -->
     <nav class="navbar navbar-expand-lg header">
@@ -58,6 +58,43 @@
                         <a class="btn btn-outline-success" href="{{ route('login') }}">{{ __('Se connecter') }}</a>
                     @endif
                 @endguest
+                @auth
+                <div class="dropdown" >
+                    <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{{ Auth::user()->profile_image_url}}" alt="" width="40" height="30" >
+                            {{ Auth::user()->name }} {{ Auth::user()->prenom }}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li>
+                            @php
+                            $id_user=Auth::user()->id_user
+                            @endphp
+                            @if(Auth::user()->type=='prof')
+                            <a class="dropdown-item" href="{{route('profProfile',Auth::user()->id_user)}}">
+                                <i class="fa-solid fa-user"></i>
+                                Profile
+                            </a>
+                            @else
+                            <a class="dropdown-item" href="{{route('etudiantProfile',Auth::user()->id_user)}}">
+                                <i class="fa-solid fa-user"></i>
+                                Profile
+                            </a>
+                            @endif
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fa-solid fa-power-off fa-lg"></i>
+                                {{ __('Déconnexion') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                @endauth
             </div>
         </div>
     </nav>
