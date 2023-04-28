@@ -272,27 +272,29 @@
                         <li>
                             <div class="img-content">
                                 <img src="{{ $annonce->professeur->user->profile_image_url}}" alt="">
-                                <a type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
-                                <!-- Modal -->
-                                <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel1">Supprimer Annonce</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Voulez-vous vraiment supprimer cette annonce?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                                <button type="button" class="btn btn-danger">Supprimer</button>
+                                @if(Auth::user()->type=='prof')
+                                    <a type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticBackdropLabel1">Supprimer Annonce</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Voulez-vous vraiment supprimer cette annonce?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                    <button type="button" class="btn btn-danger">Supprimer</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                             </div>
                             <div class="annonce-text">
                                 <a href="">{{ $annonce->professeur->user->name }}</a>

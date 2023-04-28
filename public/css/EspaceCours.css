@@ -275,6 +275,7 @@ input[type="submit"] {
     padding: 7px 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .cours .content .accordion .accordion-body li:not(.actions) a {
     padding-left: 7px;
@@ -284,7 +285,7 @@ input[type="submit"] {
     padding: 0.4rem 0.6rem;
     /*position: relative;*/
 }
-.cours .content .accordion .accordion-body .actions {
+.cours .content .accordion .accordion-body li.actions {
     display: flex;
     justify-content: flex-end;
     gap: 5px;

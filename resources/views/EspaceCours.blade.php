@@ -457,14 +457,14 @@
                                             '<li class="actions">' +
                                                 // Modifier Section
                                                 '<button type="button" class="add-btn" data-bs-toggle="modal" ' +
-                                                    'data-bs-target="#modifierSection{{ $sec->section->id_section}}">' +
+                                                    'data-bs-target="#modifierSection' + i + '">' +
                                                     '<i class="fa-solid fa-pen"></i>' +
                                                     'Modifier Section' +
                                                 '</button>' +
 
                                                 // Modal Modifier Section
-                                                '<div class="modal fade" id="modifierSection{{$sec->section->id_section}}" tabindex="-1" "' +
-                                                    '"aria-labelledby="modifierSection{{ $sec->section->id_section}}Label"' +
+                                                '<div class="modal fade" id="modifierSection' + i + '" tabindex="-1" "' +
+                                                    '"aria-labelledby="modifierSection' + i + 'Label"' +
                                                     '"aria-hidden="true">' +
                                                     '<div class="modal-dialog">' +
                                                         '<div class="modal-content">' +
@@ -473,7 +473,7 @@
                                                                     'method="post" novalidate>' +
                                                                     '@csrf' +
                                                                     '<div class="modal-header">' +
-                                                                    '<h5 class="modal-title" id="modifierSection{{$sec->section->id_section}}Label">Modifier Titre Section</h5>' +
+                                                                    '<h5 class="modal-title" id="modifierSection' + i + 'Label">Modifier Titre Section</h5>' +
                                                                     '<button type="button" class="btn-close" ' +
                                                                         'data-bs-dismiss="modal" aria-label="Close"></button>' +
                                                                     '</div>' +
@@ -504,17 +504,17 @@
                                                 '</div>' +
                                                 // Supprimer Section
                                                 '<button type="button" class="add-btn" data-bs-toggle="modal" ' +
-                                                    'data-bs-target="#supprimerSection{{ $sec->section->id_section}}">' +
+                                                    'data-bs-target="#supprimerSection' + i + '">' +
                                                     '<i class="fa-solid fa-trash"></i>' +
                                                     'Supprimer Section' +
                                                 '</button>' +
 
                                                 // Modal Supprimer Section
-                                                '<div class="modal fade" id="supprimerSection{{$sec->section->id_section}}" tabindex="-1" aria-labelledby="supprimerSection{{ $sec->section->id_section}}Label" aria-hidden="true">' +
+                                                '<div class="modal fade" id="supprimerSection' + i + '" tabindex="-1" aria-labelledby="supprimerSection' + i + 'Label" aria-hidden="true">' +
                                                     '<div class="modal-dialog">' +
                                                         '<div class="modal-content">' +
                                                             '<div class="modal-header">' +
-                                                                '<h5 class="modal-title" id="supprimerSection{{$sec->section->id_section}}Label">Supprimer Section</h5>' +
+                                                                '<h5 class="modal-title" id="supprimerSection' + i + 'Label">Supprimer Section</h5>' +
                                                                 '<button type="button" class="btn-close" ' +
                                                                     'data-bs-dismiss="modal" aria-label="Close"></button>' +
                                                             '</div>' +
@@ -531,6 +531,7 @@
                                                     '</div>' +
                                                 '</div>' +
                                             '</li>' +
+                                        '</ul>' +
                                     '</div>' +
                                 '</div>' +
                             '</div>';

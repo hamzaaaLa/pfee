@@ -111,7 +111,7 @@
                 @foreach($moduleAct as $key)
                 <div class="col">
                     <div class="card" style="width: 15rem;">
-                        <img src="{{$key->imageModule}}" class="card-img-top" alt="...">
+                        <img src="{{$key->module_image_url}}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <div class="content">
 
@@ -125,7 +125,7 @@
                                 </p>
                             </div>
                             <div class="acceder">
-                                <a href="EspaceCours.php">Visiter</a>
+                                <a href="{{route('etud.EspaceCours', $key->id_module)}}">Visiter</a>
                                 <i class="fas fa-long-arrow-alt-right"></i>
                             </div>
                         </div>
@@ -138,7 +138,7 @@
 
                 <div class="col">
                     <div class="card" style="width: 15rem;">
-                        <img src="{{$key->imageModule}}" class="card-img-top" alt="...">
+                        <img src="{{$key->module_image_url}}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <div class="content">
 

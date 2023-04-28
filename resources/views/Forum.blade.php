@@ -93,10 +93,20 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li>
-                            <a class="dropdown-item" href="Profile.php">
-                                <i class="fa-solid fa-user"></i>
-                                Profile
-                            </a>
+                            @php
+                                $id_user=Auth::user()->id_user
+                            @endphp
+                            @if(Auth::user()->type=='prof')
+                                <a class="dropdown-item" href="{{route('profProfile',Auth::user()->id_user)}}">
+                                    <i class="fa-solid fa-user"></i>
+                                    Profile
+                                </a>
+                            @else
+                                <a class="dropdown-item" href="{{route('etudiantProfile',Auth::user()->id_user)}}">
+                                    <i class="fa-solid fa-user"></i>
+                                    Profile
+                                </a>
+                            @endif
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>

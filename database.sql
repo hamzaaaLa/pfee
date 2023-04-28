@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2023 at 03:57 AM
+-- Generation Time: Apr 29, 2023 at 01:28 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -45,6 +45,39 @@ CREATE TABLE `affectation_etud` (
   `id_module` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `affectation_etud`
+--
+
+INSERT INTO `affectation_etud` (`id_affect`, `id_etud`, `id_module`) VALUES
+(20, 17, 16),
+(21, 17, 17),
+(22, 17, 18),
+(23, 17, 19),
+(24, 17, 20),
+(25, 17, 21),
+(26, 17, 22),
+(27, 18, 53),
+(28, 18, 17),
+(29, 18, 18),
+(30, 18, 19),
+(31, 18, 20),
+(32, 18, 21),
+(33, 18, 22),
+(34, 19, 23),
+(35, 19, 24),
+(36, 19, 25),
+(37, 19, 26),
+(38, 19, 27),
+(39, 19, 28),
+(40, 20, 23),
+(41, 20, 24),
+(42, 20, 25),
+(43, 20, 26),
+(44, 20, 27),
+(45, 20, 28),
+(46, 20, 29);
+
 -- --------------------------------------------------------
 
 --
@@ -56,6 +89,26 @@ CREATE TABLE `affectation_prof` (
   `id_prof` int(11) NOT NULL,
   `id_module` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `affectation_prof`
+--
+
+INSERT INTO `affectation_prof` (`id_affect`, `id_prof`, `id_module`) VALUES
+(9, 6, 16),
+(10, 6, 17),
+(11, 6, 18),
+(12, 7, 19),
+(13, 7, 20),
+(14, 10, 21),
+(15, 9, 22),
+(16, 8, 53),
+(17, 8, 54),
+(18, 8, 55),
+(19, 7, 56),
+(20, 7, 57),
+(21, 10, 58),
+(22, 9, 59);
 
 -- --------------------------------------------------------
 
@@ -69,6 +122,13 @@ CREATE TABLE `affectation_section` (
   `id_section` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `affectation_section`
+--
+
+INSERT INTO `affectation_section` (`id_affect`, `id_module`, `id_section`) VALUES
+(3, 19, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -80,6 +140,16 @@ CREATE TABLE `affectation_semestre` (
   `id_semestre` int(11) NOT NULL,
   `id_etud` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `affectation_semestre`
+--
+
+INSERT INTO `affectation_semestre` (`id_affect`, `id_semestre`, `id_etud`) VALUES
+(19, 1, 17),
+(20, 1, 18),
+(21, 2, 19),
+(22, 2, 20);
 
 -- --------------------------------------------------------
 
@@ -96,6 +166,13 @@ CREATE TABLE `annonce` (
   `datecreation` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `annonce`
+--
+
+INSERT INTO `annonce` (`id_annonce`, `id_prof`, `id_module`, `titre`, `contenue`, `datecreation`) VALUES
+(3, 7, 19, 'Scéance d\'avancement', 'lorum ipsum lorum ipsum lorum ipsum lorum ipsum lorum ipsum lorum ipsum lorum ipsum lorum ipsum', '2023-04-28 14:16:51');
+
 -- --------------------------------------------------------
 
 --
@@ -110,6 +187,13 @@ CREATE TABLE `cours` (
   `contenu` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `cours`
+--
+
+INSERT INTO `cours` (`id_cour`, `libelleCour`, `id_module`, `id_section`, `contenu`) VALUES
+(6, 'Cours Chapitre 1 Mécanique', 19, 3, '1682695788.pdf');
+
 -- --------------------------------------------------------
 
 --
@@ -122,6 +206,16 @@ CREATE TABLE `etudiant` (
   `filiere` varchar(50) NOT NULL,
   `user_etud` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `etudiant`
+--
+
+INSERT INTO `etudiant` (`id_etud`, `cne`, `filiere`, `user_etud`) VALUES
+(17, 'D123123123', 'Sciences Mathématiques et Informatique', 32),
+(18, 'D123123121', 'Sciences Mathématiques et applications', 33),
+(19, 'D123123122', 'Sciences Mathématiques et applications', 34),
+(20, 'D123123120', 'Sciences Mathématiques et Informatique', 35);
 
 -- --------------------------------------------------------
 
@@ -255,6 +349,13 @@ CREATE TABLE `posts` (
   `id_module` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`id_post`, `id_user`, `titre`, `contenu`, `date_created`, `id_module`) VALUES
+(4, 37, 'test', 'ddddddddddddddddd', '2023-04-28 15:37:49', 57);
+
 -- --------------------------------------------------------
 
 --
@@ -266,6 +367,17 @@ CREATE TABLE `professeur` (
   `specialite` varchar(50) NOT NULL,
   `user_prof` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `professeur`
+--
+
+INSERT INTO `professeur` (`id_prof`, `specialite`, `user_prof`) VALUES
+(6, 'Analyse', 36),
+(7, 'Physique', 37),
+(8, 'Chimie', 38),
+(9, 'Langue Française', 39),
+(10, 'Data Scientist', 40);
 
 -- --------------------------------------------------------
 
@@ -282,6 +394,13 @@ CREATE TABLE `reply` (
   `id_module` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `reply`
+--
+
+INSERT INTO `reply` (`id_reply`, `id_post`, `id_user`, `contenu`, `date_created`, `id_module`) VALUES
+(3, 4, 37, 'xxxxxxxxxxxxxxxxxxxxxxxx', '2023-04-28 15:37:59', 57);
+
 -- --------------------------------------------------------
 
 --
@@ -293,6 +412,13 @@ CREATE TABLE `section` (
   `titre_section` varchar(50) NOT NULL,
   `id_prof` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `section`
+--
+
+INSERT INTO `section` (`id_section`, `titre_section`, `id_prof`) VALUES
+(3, 'Chapitre 1', 7);
 
 -- --------------------------------------------------------
 
@@ -342,7 +468,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `type`, `name`, `prenom`, `email`, `cin`, `telephone`, `nomUtilisateur`, `password`, `dernierAcces`, `imageProfile`) VALUES
-(9, 1, 'admin', 'hani', 'admin1@gmail.com', '12345', '0654678645', 'admin1@gmail.com', '$2y$10$3sG0vN7dbz6bFff2itl6iebN1avM1JnKp3PridG1oJSyvoPxYevGW', '2023-04-20 11:17:02', NULL);
+(9, 1, 'admin', 'hani', 'admin1@gmail.com', '12345', '0654678645', 'admin1@gmail.com', '$2y$10$3sG0vN7dbz6bFff2itl6iebN1avM1JnKp3PridG1oJSyvoPxYevGW', '2023-04-20 11:17:02', NULL),
+(32, 0, 'Depp', 'Johnny', 'johnnydepp@gmail.com', 'JB111111', '0657009012', 'johnnydepp@gmail.com', '$2y$10$mZFwH/hdmLMmDn0Juc.ukOktVV/2V8SVjwK/NMNLbPeoMcpuF/GgC', '2023-04-28 13:57:21', NULL),
+(33, 0, 'Abid', 'Nasrolah', 'nasrolahabid@gmail.com', 'JB222222', '0647893412', 'nasrolahabid@gmail.com', '$2y$10$wJ6/IBmnGQQVYfbr.62kgeztbh7hrm9D5W2mYHF3bmlswL8BulOgu', '2023-04-28 13:58:50', NULL),
+(34, 0, 'Abid', 'Ayoub', 'ayoubabid@gmail.com', 'JB111110', '0756458700', 'ayoubabid@gmail.com', '$2y$10$EzWgvyUOs305cChX5vel6uN2MGmIV.J7Xome.nLEokCEbubfqtCq.', '2023-04-28 14:03:45', NULL),
+(35, 0, 'Abid', 'Soufaine', 'soufianeabid@gmail.com', 'JB111112', '0623413467', 'soufianeabid@gmail.com', '$2y$10$YF2u3bz12rnfK1IMH8AigOpOc4gQZXfMep/EDSrAMgraz7Nj2mv2K', '2023-04-28 14:05:14', NULL),
+(36, 2, 'Bamo', 'Abderrahman', 'bamo@gmail.com', 'JB111114', '0661476812', 'bamo@gmail.com', '$2y$10$mx7hfXDDJhLjWeHVAQYUEOUClWv9OB/CoiVE/AEan894K8yuRB/1G', '2023-04-28 14:06:55', NULL),
+(37, 2, 'Shengli', 'Hamza', 'shengli@gmail.com', 'JB111115', '0765678906', 'shengli@gmail.com', '$2y$10$i1ayvlGD0rYwA0ByQo89r./a.jLFfT7WopxC4SyTmQn7ncwvIvjMO', '2023-04-28 15:44:02', 'profile_644be9c2d6d56.jpg'),
+(38, 2, 'Alami', 'Youssef', 'Alami@gmail.com', 'JB111116', '0676459809', 'Alami@gmail.com', '$2y$10$DC.F9DgaFuu5ln7UhCxpIuCYKen1/9XCvop3d1OrFTEA43UFPlEZS', '2023-04-28 14:08:29', NULL),
+(39, 2, 'Fouks', 'Abderahman', 'fouks@gmail.com', 'JB111117', '0768095743', 'fouks@gmail.com', '$2y$10$P2bzJwG4NFiXuHBndYL8rOmt0fo.Ijx2EWBamLQ002l/yDGaMn6AW', '2023-04-28 14:09:19', NULL),
+(40, 2, 'Stiwi', 'Karam', 'stiwi@gmail.com', 'JB111118', '0658793145', 'stiwi@gmail.com', '$2y$10$ECLu.VK6Liiyoo0tMOJjteQzpBDlWLwRfejmPEf2odTiuIqOVlaHO', '2023-04-28 14:12:46', NULL);
 
 --
 -- Indexes for dumped tables
@@ -483,43 +618,43 @@ ALTER TABLE `administrateur`
 -- AUTO_INCREMENT for table `affectation_etud`
 --
 ALTER TABLE `affectation_etud`
-  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `affectation_prof`
 --
 ALTER TABLE `affectation_prof`
-  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `affectation_section`
 --
 ALTER TABLE `affectation_section`
-  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `affectation_semestre`
 --
 ALTER TABLE `affectation_semestre`
-  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `annonce`
 --
 ALTER TABLE `annonce`
-  MODIFY `id_annonce` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_annonce` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `cours`
 --
 ALTER TABLE `cours`
-  MODIFY `id_cour` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_cour` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `etudiant`
 --
 ALTER TABLE `etudiant`
-  MODIFY `id_etud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_etud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `filiere`
@@ -537,25 +672,25 @@ ALTER TABLE `module`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `professeur`
 --
 ALTER TABLE `professeur`
-  MODIFY `id_prof` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_prof` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `reply`
 --
 ALTER TABLE `reply`
-  MODIFY `id_reply` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_reply` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `section`
 --
 ALTER TABLE `section`
-  MODIFY `id_section` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_section` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `semestre`
@@ -567,7 +702,7 @@ ALTER TABLE `semestre`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- Constraints for dumped tables

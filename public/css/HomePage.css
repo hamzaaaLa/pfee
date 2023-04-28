@@ -256,10 +256,24 @@ input[type=submit] {
 .courses .col .card .card-body .card-title {
     color: black;
     font-weight: 500;
+    display: block!important;
+    display: -webkit-box!important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
 }
 .courses .col .card .card-body .card-text a {
     color: #6a6f73;
     font-size: 13px;
+    display: block!important;
+    display: -webkit-box!important;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
 }
 .courses .col .card .card-body .card-text a:hover {
     text-decoration: underline;
@@ -402,22 +416,27 @@ input[type=submit] {
 .more .col .card .card-body .content {
     padding: 15px;
 }
-.more .col .card .card-body .content a {
+.more .col .card .card-body .card-title {
+    color: black;
+    font-weight: bold;
+    display: block!important;
+    display: -webkit-box!important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+.more .col .card .card-body .card-text a {
+    color: #6a6f73;
+    font-size: 13px;
+    text-decoration: underline;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
     white-space: normal;
     text-overflow: ellipsis;
-}
-.more .col .card .card-body .card-title {
-    color: black;
-    font-weight: bold;
-}
-.more .col .card .card-body .card-text a {
-    color: #6a6f73;
-    font-size: 13px;
-    text-decoration: underline;
 }
 .more .col .card .card-body .acceder {
     padding: 20px;

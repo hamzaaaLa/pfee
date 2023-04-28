@@ -243,6 +243,7 @@ a {
     height: 120px;
     border-radius: 50%;
     opacity: 0;
+    transition: var(--main-transition);
 }
 .modifier .img-box > a:hover:before {
     opacity: .7;
