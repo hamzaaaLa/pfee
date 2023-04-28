@@ -10,6 +10,9 @@
 body {
     font-family: "Work Sans", sans-serif;
 }
+ul {
+    list-style: none;
+}
 /* End Global Rules */
 /* Start Components */
 .fancy {
@@ -138,9 +141,6 @@ body {
     font-weight: bold;
     font-size: 26px;
 }
-/*.navbar .nav-item:hover {
-    background-color: #fafafa;
-}*/
 .navbar .nav-link {
     display: flex;
     justify-content: center;
@@ -154,13 +154,14 @@ body {
         #000 50%
     );
     background-size: 200% 100%;
-    background-position: 0%;
+    background-position: 0;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: all var(--main-transition) ease-in-out;
     overflow: hidden;
     font-size: 17px;
+    font-weight: 500;
 }
 .navbar .nav-link:hover {
     background-position: -100%;
@@ -172,7 +173,7 @@ body {
     width: 100%;
     height: 4px;
     background-color: var(--main-color);
-    bottom: 0px;
+    bottom: 0;
     left: -100%;
     transition: var(--main-transition);
 }
@@ -375,6 +376,64 @@ body {
     color: var(--main-color);
 }
 /* End Stats */
+/* Start Footer */
+.footer {
+    background-color: #191919;
+    padding: 70px 0;
+}
+.footer .content {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+}
+.footer .content h3 {
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+.footer .content .site-info {
+    max-width: 400px;
+}
+.footer .content .site-info p {
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+.footer .content .site-info ul {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+.footer .content .site-info ul li a {
+    background-color: #193ceb;
+    color: white;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    transition: var(--main-transition);
+}
+.footer .content .site-info ul li a.facebook:hover {
+    background-color: #1877f2;
+}
+.footer .content .site-info ul li a.linkedin:hover {
+    background-color: #0077b5;
+}
+.footer .content .site-info ul li a.twitter:hover {
+    background-color: #1da1f2;
+}
+.footer .content .site-address .box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+.footer .content .site-address .box svg {
+    font-size: 25px;
+    color: #193ceb;
+}
+/* End Footer */
 /* Start Animation */
 @keyframes up-and-down {
     0%,

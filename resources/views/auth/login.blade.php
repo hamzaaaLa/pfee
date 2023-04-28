@@ -15,17 +15,17 @@
         <link rel="stylesheet" href="{{asset('/css/all.min.css')}}" />
         <!-- Main CSS File -->
         <link rel="stylesheet" href="{{asset('/css/LogInUser.css')}}" />
-        <!-- Google Fonts - Open Sans -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <!-- Google Fonts - Work Sans -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
     </head>
     <body>
     <!-- Start Header -->
     <nav class="navbar navbar-expand-lg header">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="../img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="{{asset('/img/fsa_agadir.png')}}" alt="" width="40" height="30" class="d-inline-block align-text-top">
                 FSA-Online
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,22 +33,24 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item" alt="Accueil">
-                        <a class="nav-link active" aria-current="page" href="#">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/') }}">
                             Accueil
                         </a>
                     </li>
-                    <li class="nav-item" alt="Formation">
-                        <a class="nav-link" href="#">
-                            Formations
-                        </a>
+                    <li class="nav-item">
+                        @auth
+                            <a class="nav-link" href="{{ url('/home') }}">
+                                Tableau de bord
+                            </a>
+                        @endauth
+                        @guest
+                            <a class="nav-link" href="{{ route('login') }}">
+                                Tableau de bord
+                            </a>
+                        @endguest
                     </li>
-                    <li class="nav-item" alt="A propos">
-                        <a class="nav-link" href="#">
-                            A propos
-                        </a>
-                    </li>
-                    <li class="nav-item" alt="Contactez-nous">
+                    <li class="nav-item">
                         <a class="nav-link" href="#">
                             Contactez-nous
                         </a>

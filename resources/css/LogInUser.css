@@ -8,7 +8,7 @@
 /* End Variables */
 /* Start Global Rules */
 body {
-    font-family: "Work Sans", sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 /* End Global Rules */
 /* Start Header */
@@ -41,14 +41,12 @@ body {
         #000 50%
     );
     background-size: 200% 100%;
-    background-position: 0;
+    background-position: 0%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: all var(--main-transition) ease-in-out;
     overflow: hidden;
-    font-size: 17px;
-    font-weight: 500;
 }
 .navbar .nav-link:hover {
     background-position: -100%;

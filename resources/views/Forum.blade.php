@@ -8,17 +8,17 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Forum - Bases de Données</title>
     <!-- Website favicon-->
-    <link rel="shortcut icon" href="/img/fsa_agadir.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('/img/fsa_agadir.png')}}" type="image/x-icon">
     <!-- Bootstrap 05 -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="/css/Forum.css" />
+    <link rel="stylesheet" href="{{asset('/css/Forum.css')}}" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="/css/all.min.css" />
-    <!-- Google Fonts - Open Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('/css/all.min.css')}}" />
+    <!-- Google Fonts - Work Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
 </head>
 <body>
     <?php
@@ -54,8 +54,8 @@
     <!-- Start Header -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="/img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="{{asset('/img/fsa_agadir.png')}}" alt="" width="40" height="30" class="d-inline-block align-text-top">
                 FSA-Online
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,19 +64,21 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">
-                            Tableau de bord
+                        <a class="nav-link" href="{{ url('/') }}">
+                            Accueil
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Formations
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            A propos
-                        </a>
+                        @auth
+                            <a class="nav-link" href="{{ url('/home') }}">
+                                Tableau de bord
+                            </a>
+                        @endauth
+                        @guest
+                            <a class="nav-link" href="{{ route('login') }}">
+                                Tableau de bord
+                            </a>
+                        @endguest
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
@@ -202,7 +204,7 @@
                                                 <button type="button" class="btn btn-primary"><input type="submit" value="Ajouter"></button>
                                             </div>
                                         </form>
-                                    @endif    
+                                    @endif
                                 </div>
                             </div>
                         </div>

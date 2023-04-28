@@ -8,8 +8,7 @@
 /* End Variables */
 /* Start Global Rules */
 body {
-    /*font-family: "Work Sans", sans-serif;*/
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Work Sans", sans-serif;
 }
 a {
     text-decoration: none;
@@ -58,7 +57,7 @@ a {
 
 .add-btn span {
     color: #fff;
-    font-weight: 600;
+    font-weight: 500;
 }
 input[type="submit"] {
     background-color: transparent;
@@ -90,6 +89,7 @@ input[type="submit"] {
     height: 60px;
     position: relative;
     font-weight: 500;
+    font-size: 17px;
     background-image: linear-gradient(
             to left,
             var(--main-color),

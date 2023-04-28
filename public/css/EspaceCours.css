@@ -8,8 +8,7 @@
 /* End Variables */
 /* Start Global Rules */
 body {
-    /*font-family: "Work Sans", sans-serif;*/
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Work Sans", sans-serif;
 }
 a {
     text-decoration: none;
@@ -37,7 +36,7 @@ ul {
 
 .add-btn span {
     color: #fff;
-    font-weight: 600;
+    font-weight: 500;
 }
 input[type="submit"] {
     background-color: transparent;
@@ -65,9 +64,6 @@ input[type="submit"] {
     font-weight: bold;
     font-size: 26px;
 }
-/*.navbar .nav-item:hover {
-    background-color: #fafafa;
-}*/
 .navbar .nav-link {
     display: flex;
     justify-content: center;
@@ -88,6 +84,7 @@ input[type="submit"] {
     -webkit-text-fill-color: transparent;
     transition: all var(--main-transition) ease-in-out;
     overflow: hidden;
+    font-size: 17px;
 }
 .navbar .nav-link:hover {
     background-position: -100%;
@@ -207,7 +204,7 @@ input[type="submit"] {
     padding: 0;
     font-size: inherit;
     font-family: inherit;
-    width: 17rem;
+    width: 17.5rem;
     height: auto;
 }
 .cours .header .forum-btn .circle {
@@ -256,7 +253,7 @@ input[type="submit"] {
     padding: 0.75rem 0;
     margin: 0 0 0 1.85rem;
     color: var(--main-color);
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1.6;
     text-align: center;
     text-transform: uppercase;

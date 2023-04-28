@@ -1,0 +1,113 @@
+/* Start Variables */
+:root {
+    --main-color: #2196f3;
+    --secondary-color: #2c59be;
+    --main-background: #fafafb;
+    --main-transition: 0.3s;
+}
+/* End Variables */
+/* Start Global Rules */
+body {
+    font-family: "Open Sans", sans-serif;
+}
+/* End Global Rules */
+/* Start Header */
+.navbar {
+    background-color: white;
+    -webkit-box-shadow: 0 0 10px #ddd;
+    -moz-box-shadow: 0 0 10px #ddd;
+    box-shadow: 0 0 10px #ddd;
+    padding: 0;
+}
+.navbar .navbar-brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    color: var(--main-color);
+    font-weight: bold;
+    font-size: 26px;
+}
+/*.navbar .nav-item:hover {
+    background-color: #fafafa;
+}*/
+.navbar .nav-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    position: relative;
+    background-image: linear-gradient(
+        to left,
+        var(--main-color),
+        var(--main-color) 50%,
+        #000 50%
+    );
+    background-size: 200% 100%;
+    background-position: 0%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all var(--main-transition) ease-in-out;
+    overflow: hidden;
+}
+.navbar .nav-link:hover {
+    background-position: -100%;
+    left: 0;
+}
+.navbar .nav-link::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: var(--main-color);
+    bottom: 0px;
+    left: -100%;
+    transition: var(--main-transition);
+}
+.navbar .nav-link:hover:before {
+    left: 0;
+}
+@media (max-width: 991px) {
+    .navbar .nav-link {
+        margin: 0 auto;
+        width: fit-content;
+    }
+    .navbar .collapse > a {
+        display: block;
+        margin: 5px auto;
+        width: fit-content;
+    }
+}
+.navbar .collapse > a {
+    border: none;
+    color: #fff;
+    background-image: linear-gradient(30deg, var(--main-color), var(--secondary-color));
+    border-radius: 20px;
+    background-size: 100% auto;
+    font-family: inherit;
+    font-size: 17px;
+    padding: 0.6em 1.5em;
+}
+
+.navbar .collapse > a:hover {
+    background-position: right center;
+    background-size: 200% auto;
+    -webkit-animation: pulse 2s infinite;
+    animation: pulse512 1.5s infinite;
+}
+
+@keyframes pulse512 {
+    0% {
+        box-shadow: 0 0 0 0 #05bada66;
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgb(218 103 68 / 0%);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
+    }
+}
+/* End Header */

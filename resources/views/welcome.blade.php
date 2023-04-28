@@ -6,17 +6,13 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>FSA-Online</title>
         <!-- Website favicon-->
-        <link rel="shortcut icon" href={{asset('/img/fsa_agadir.png')}} type="image/x-icon">
+        <link rel="shortcut icon" href="{{asset('/img/fsa_agadir.png')}}" type="image/x-icon">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="{{asset('/css/all.min.css')}}" />
         <!-- Bootstrap 05 -->
         <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />
         <!-- Main CSS File -->
         <link rel="stylesheet" href="{{asset('/css/Welcome.css')}}" />
-        <!-- Google Fonts - Open Sans -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
         <!-- Google Fonts - Work Sans -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,8 +21,8 @@
     <!-- Start Header -->
     <nav class="navbar navbar-expand-lg header">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src={{asset('/img/fsa_agadir.png')}} alt="" width="40" height="30" class="d-inline-block align-text-top">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="{{asset('/img/fsa_agadir.png')}}" alt="" width="40" height="30" class="d-inline-block align-text-top">
                 FSA-Online
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,29 +30,24 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item" alt="Accueil">
-                        <a class="nav-link active" aria-current="page" href="#">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/') }}">
                             Accueil
                         </a>
                     </li>
-                    <li class="nav-item" alt="Formation">
+                    <li class="nav-item">
                         @auth
-                        <a class="nav-link" href="{{ url('/home') }}">
-                            Tableau de bord
-                        </a>
+                            <a class="nav-link" href="{{ url('/home') }}">
+                                Tableau de bord
+                            </a>
                         @endauth
                         @guest
-                        <a class="nav-link" href="{{ route('login') }}">
-                            Tableau de bord
-                        </a>
+                            <a class="nav-link" href="{{ route('login') }}">
+                                Tableau de bord
+                            </a>
                         @endguest
                     </li>
-                    {{--<li class="nav-item" alt="A propos">
-                        <a class="nav-link" href="#">
-                            A propos
-                        </a>
-                    </li>--}}
-                    <li class="nav-item" alt="Contactez-nous">
+                    <li class="nav-item">
                         <a class="nav-link" href="#">
                             Contactez-nous
                         </a>
@@ -122,9 +113,8 @@
     <!-- End Features -->
     <!-- Start Stats -->
     <div class="stats">
-        <!--        <h2>Nos Statistiques</h2>-->
         <div class="fancy">
-            <span class="top-key"></span>
+            <span class="top-key">< /span>
             <span class="text">Nos Statistiques</span>
             <span class="bottom-key-1"></span>
             <span class="bottom-key-2"></span>
@@ -148,6 +138,56 @@
         </div>
     </div>
     <!-- End Stats -->
+    <!-- Start Footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="content">
+                <div class="site-info">
+                    <h3>FSA-Online</h3>
+                    <p>La palteforme adéquate pour une efficace formation à distance</p>
+                    <ul>
+                        <li>
+                            <a href="#" class="facebook">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="linkedin">
+                                <i class="fa-brands fa-linkedin-in"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="twitter">
+                                <i class="fa-brands fa-twitter"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="site-address">
+                    <h3>Adresse</h3>
+                    <div class="box">
+                        <i class="fa-solid fa-location-arrow"></i>
+                        <div class="info">
+                            BP 8106 - Cité Dakhla Agadir -  Agadir 80000
+                        </div>
+                    </div>
+                    <div class="box">
+                        <i class="fa-solid fa-phone"></i>
+                        <div class="info">
+                            0528220957
+                        </div>
+                    </div>
+                    <div class="box">
+                        <i class="fa-solid fa-envelopes-bulk"></i>
+                        <div class="info">
+                            fsa.online.support@gmail.com
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer -->
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/all.min.js"></script>
     </body>

@@ -8,17 +8,17 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Forum - Bases de Données</title>
     <!-- Website favicon-->
-    <link rel="shortcut icon" href="/img/fsa_agadir.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('/img/fsa_agadir.png')}}" type="image/x-icon">
     <!-- Bootstrap 05 -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="/css/ForumPost.css" />
+    <link rel="stylesheet" href="{{asset('/css/ForumPost.css')}}" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="/css/all.min.css" />
-    <!-- Google Fonts - Open Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('/css/all.min.css')}}" />
+    <!-- Google Fonts - Work Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
 </head>
 <body>
     <?php
@@ -26,10 +26,10 @@
             $now = new DateTime;
             $ago = new DateTime($datetime);
             $diff = $now->diff($ago);
-        
+
             $diff->w = floor($diff->d / 7);
             $diff->d -= $diff->w * 7;
-        
+
             $string = array(
                 'y' => 'année',
                 'm' => 'mois',
@@ -46,7 +46,7 @@
                     unset($string[$k]);
                 }
             }
-        
+
             if (!$full) $string = array_slice($string, 0, 1);
             return $string ? 'Il y a ' . implode(', ', $string) : 'à l\'instant';
         }
@@ -54,8 +54,8 @@
     <!-- Start Header -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="/img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="{{asset('/img/fsa_agadir.png')}}" alt="" width="40" height="30" class="d-inline-block align-text-top">
                 FSA-Online
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,19 +64,21 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">
-                            Tableau de bord
+                        <a class="nav-link" href="{{ url('/') }}">
+                            Accueil
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Formations
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            A propos
-                        </a>
+                        @auth
+                            <a class="nav-link" href="{{ url('/home') }}">
+                                Tableau de bord
+                            </a>
+                        @endauth
+                        @guest
+                            <a class="nav-link" href="{{ route('login') }}">
+                                Tableau de bord
+                            </a>
+                        @endguest
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
@@ -91,10 +93,20 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li>
-                            <a class="dropdown-item" href="Profile.php">
-                                <i class="fa-solid fa-user"></i>
-                                Profile
-                            </a>
+                            @php
+                                $id_user=Auth::user()->id_user
+                            @endphp
+                            @if(Auth::user()->type=='prof')
+                                <a class="dropdown-item" href="{{route('profProfile',Auth::user()->id_user)}}">
+                                    <i class="fa-solid fa-user"></i>
+                                    Profile
+                                </a>
+                            @else
+                                <a class="dropdown-item" href="{{route('etudiantProfile',Auth::user()->id_user)}}">
+                                    <i class="fa-solid fa-user"></i>
+                                    Profile
+                                </a>
+                            @endif
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
@@ -117,7 +129,7 @@
             <div class="post">
                 <div class="box">
                     @foreach ($posts as $post)
-                        <h5>{{$id_post->titre}}</h5>
+                        <h4>{{$id_post->titre}}</h4>
                         <div class="content">
                             <img src="{{$post->user->profile_image_url}}" alt="">
                             <div class="content-text">
@@ -204,13 +216,13 @@
                                 <button class="add-btn" type="button">
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg>
-                                        <input type="submit" value="Ajouter répondre">
                                     </span>
+                                    <input type="submit" value="Ajouter répondre">
                                 </button>
                             </div>
                         </form>
                     </div>
-                @endif    
+                @endif
             </div>
         </div>
     </div>

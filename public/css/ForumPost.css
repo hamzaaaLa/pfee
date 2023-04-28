@@ -8,8 +8,7 @@
 /* End Variables */
 /* Start Global Rules */
 body {
-    /*font-family: "Work Sans", sans-serif;*/
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Work Sans", sans-serif;
 }
 a {
     text-decoration: none;
@@ -54,13 +53,12 @@ a {
     border-radius: 0.9em;
     padding: 0.7em 1.1em 0.7em 0.9em;
     transition: all ease-in-out 0.2s;
+    font-weight: 500;
     font-size: 16px;
     color: white;
 }
-
 .add-btn span {
     color: #fff;
-    font-weight: 600;
     margin-right: 5px;
 }
 input[type="submit"] {
@@ -94,6 +92,7 @@ input[type="submit"] {
     height: 60px;
     position: relative;
     font-weight: 500;
+    font-size: 17px;
     background-image: linear-gradient(
             to left,
             var(--main-color),
@@ -197,7 +196,7 @@ input[type="submit"] {
 .reply .post .box .content .content-text {
     display: flex;
     flex-direction: column;
-    font-size: 14px;
+    font-size: 15px;
 }
 .reply .post .box .content .content-text span:nth-child(2) {
     color: #777;
@@ -223,7 +222,7 @@ input[type="submit"] {
     margin-bottom: 15px;
 }
 .reply .replies .box .img-container span:nth-child(3) {
-    font-size: 14px;
+    font-size: 15px;
     color: #777;
 }
 .reply .replies .box .content {
