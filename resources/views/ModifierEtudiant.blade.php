@@ -166,7 +166,7 @@
                 </div>
                 <div class="col-md-3">
                     <label for="cne" class="form-label">CNE</label>
-                    <input type="text" class="form-control" name="cne" id="cne" required value="{{old('cne')}}">
+                    <input type="text" class="form-control" name="cne" id="cne" required value="{{$etudiant->cne}}">
                     <div class="valid-feedback">
                         C'est bon!
                     </div>
@@ -221,16 +221,7 @@
                 <div class="col-md-6">
                     <label for="moduleSelect" class="form-label">Modules</label>
                     <select class="form-select" id="moduleSelect" name="moduleSelect[]" multiple="" required>
-                        <option>Module 1</option>
-                        <option>Module 2</option>
-                        <option>Module 3</option>
-                        <option>Module 3</option>
-                        <option>Module 3</option>
-                        <option>Module 3</option>
-                        <option>Module 3</option>
-                        <option>Module 3</option>
-                        <option>Module 3</option>
-                        <option>Module 3</option>
+
                     </select>
                     <div class="valid-feedback">
                         C'est bon!

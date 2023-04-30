@@ -128,7 +128,7 @@ ul {
 /* End Components */
 /* Start Header */
 .navbar {
-    background-color: white;
+    background-color: transparent;
     padding: 0;
     z-index: 33;
 }
@@ -271,7 +271,6 @@ ul {
     height: 100%;
     position: relative;
     animation: up-and-down 5s linear infinite;
-    z-index: 100;
 }
 /* End Welcome */
 /* Start Features */

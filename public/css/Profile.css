@@ -14,6 +14,36 @@ a {
     text-decoration: none;
 }
 /* End Global Rules */
+/* Start Components */
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+@media (max-width: 991px) {
+    .header {
+        justify-content: center;
+    }
+}
+.header h2 {
+    position: relative;
+}
+.header h2::before, .header h2::after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    bottom: -10px;
+    left: 0;
+}
+.header h2::before {
+    background-color: white;
+    width: 125%;
+}
+.header h2::after {
+    background-color: var(--main-color);
+    width: 45%;
+}
+/* End Components */
 /* Start Header */
 .navbar {
     background-color: white;
@@ -122,37 +152,13 @@ a {
     min-height: calc(100vh - 60px);
     padding: 30px 50px;
 }
-.profile .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-}
-.profile .header h2 {
-    position: relative;
-}
-.profile .header h2::before, .profile .header h2::after {
-    content: "";
-    position: absolute;
-    height: 3px;
-    bottom: -10px;
-    left: 0;
-}
-.profile .header h2::before {
-    background-color: white;
-    width: 125%;
-}
-.profile .header h2::after {
-    background-color: var(--main-color);
-    width: 45%;
-}
 .profile .profile-container {
     background-color: white;
     border-radius: 10px;
     display: flex;
     align-items: center;
 }
-@media (max-width: 767px) {
+@media (max-width: 991px) {
     .profile .profile-container {
         flex-direction: column;
     }
@@ -162,7 +168,7 @@ a {
     text-align: center;
     padding: 20px;
 }
-@media (min-width: 768px) {
+@media (min-width: 991px) {
     .profile .profile-container .img-box {
         border-right: 1px solid #eee;
     }
@@ -194,7 +200,7 @@ a {
 .profile .profile-container .profile-content .my-box:hover {
     background-color: #f9f9f9;
 }
-@media (max-width: 767px) {
+@media (max-width: 991px) {
     .profile .profile-container .profile-content .my-box {
         text-align: center;
         justify-content: center;
@@ -203,7 +209,6 @@ a {
 .profile .profile-container .profile-content .my-box h4 {
     width: 100%;
     font-weight: normal;
-    /*font-size: 15px;*/
     color: var(--main-color);
     margin: 0;
 }
@@ -217,6 +222,7 @@ a {
 .profile .profile-container .profile-content .my-box > div ul {
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
     gap: 15px;
     padding-left: 0;
     margin-bottom: 0;

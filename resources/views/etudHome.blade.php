@@ -48,7 +48,7 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{asset('/img/fsa_agadir.png')}}" alt="" width="40" height="30" class="d-inline-block align-text-top">
+            <img src="{{asset('/img/fsa_agadir.png')}}" alt="" width="35" height="35" class="d-inline-block align-text-top">
             FSA-Online
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -133,16 +133,17 @@
                 <div class="row justify-content-center">
                     @if (Auth::user()->type=='prof')
                     @foreach (Auth::user()->professeur as $prof)
-                        @foreach ($prof->affectation_prof as $af)
                             <div class="col">
                                 <div class="card" style="width: 15rem;">
                                     <img src="{{ $af->module->module_image_url}}" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <div class="content">
                                             <p class="card-title">{{$af->module->libelleModule}}</p>
-                                            <p class="card-text">
-                                                <a href="{{route('profProfile',$af->professeur->user->id_user)}}">{{ $af->professeur->user->name}} {{ $af->professeur->user->prenom }}</a>
-                                            </p>
+                                            @foreach ($prof->affectation_prof as $af)
+                                                <p class="card-text">
+                                                    <a href="{{route('profProfile',$af->professeur->user->id_user)}}">{{ $af->professeur->user->name}} {{ $af->professeur->user->prenom }}</a>
+                                                </p>
+                                            @endforeach
                                         </div>
                                         <div class="acceder">
                                             <a href="{{route('prof.EspaceCours', $af->module->id_module)}}">Visiter</a>
@@ -151,21 +152,21 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
                     @endforeach
                     @else
                     @foreach (Auth::user()->etudiant as $etud)
                         @foreach ($etud->affectation_etud as $af_etud)
-                            @foreach ( $af_etud->module->affectation_prof as $af_prof)
                                 <div class="col">
                                     <div class="card" style="width: 15rem;">
                                         <img src="{{ $af_etud->module->module_image_url}}" class="card-img-top" alt="...">
                                         <div class="card-body">
                                             <div class="content">
                                                 <p class="card-title">{{$af_etud->module->libelleModule}}</p>
-                                                <p class="card-text">
-                                                    <a href="{{route('etudProfProfile',$af_prof->professeur->user->id_user)}}">{{$af_prof->professeur->user->name}} {{$af_prof->professeur->user->prenom}}</a>
-                                                </p>
+                                                @foreach ( $af_etud->module->affectation_prof as $af_prof)
+                                                    <p class="card-text">
+                                                        <a href="{{route('etudProfProfile',$af_prof->professeur->user->id_user)}}">{{$af_prof->professeur->user->name}} {{$af_prof->professeur->user->prenom}}</a>
+                                                    </p>
+                                                @endforeach
                                             </div>
                                             <div class="acceder">
                                                 <a href="{{route('etud.EspaceCours', $af_etud->module->id_module)}}">Visiter</a>
@@ -174,7 +175,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
                         @endforeach
                     @endforeach
                     @endif
@@ -297,7 +297,7 @@
                                 @endif
                             </div>
                             <div class="annonce-text">
-                                <a href="">{{ $annonce->professeur->user->name }}</a>
+                                <a href="{{route('etudProfProfile',$annonce->professeur->user->id_user)}}">{{ $annonce->professeur->user->name }}</a>
                                 <p class="subject"><span>Sujet: </span>{{ $annonce->titre }}</p>
                                 <p class="content">{{ $annonce->contenue }}</p>
                                 {{-- <span>{{ date('H:i d/m/Y', strtotime($annonce->datecreation)) }}</span> --}}

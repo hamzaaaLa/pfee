@@ -147,7 +147,8 @@ input[type="submit"] {
     font-weight: 500;
 }
 .dropdown img{
-    width: 40px;
+    width: 35px;
+    height: 35px;
     border: none;
     border-radius: 50%;
 }

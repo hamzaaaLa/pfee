@@ -26,7 +26,7 @@
         <!-- Start Sidebar -->
         <div class="sidebar">
             <a class="navbar-brand" href="#">
-                <img src="/img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
+                <img src="/img/fsa_agadir.png" alt="" width="35" height="35" class="d-inline-block align-text-top">
                 FSA-Online
             </a>
             <div class="accordion" id="accordionExample">
