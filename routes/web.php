@@ -70,7 +70,7 @@ Route::middleware(['auth','user-access:prof'])->group(function () {
 
 Route::middleware(['auth','user-access:admin'])->group(function () {
 
-    Route::get('/admin/dashboard', [HomeController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [HomeController::class, 'adminDashboard'])->name('admineHome');
     Route::get('/admin/ajouter',[FiliereController::class,'dropDownShow'])->name('ajoutEtud');
     Route::post('/admin/ajoutetud',[EtudiantController::class,'add'])->name('ajouterEtudiant');
     Route::get('admin/afficheEtud',[EtudiantController::class,'index'])->name('afficheEtud');
@@ -81,9 +81,9 @@ Route::middleware(['auth','user-access:admin'])->group(function () {
     Route::get('/consulter',[EtudiantController::class,'consulter'])->name('consulterEtud');
     Route::get('/admin/ajouterProfesseurForm',[ProfController::class,'ajoutView'])->name('ajouterProfView');
     Route::get('/admin/ajouterModuleForm',[ModuleController::class,'ajouterView'])->name('ajouterModuleView');
-    Route::get('/admin/Dashboard',function(){
+    /*Route::get('/admin/Dashboard',function(){
         return view('admineHome');
-    })->name('admineHome');
+    })->name('admineHome');*/
     Route::post('/admin/ajoutetud/get-modules', [ModuleController::class, 'getModules'])->name('modules.get');
     Route::post('/admin/ajoutProfesseur',[ProfController::class,'add'])->name('ajouterProf');
     Route::post('/admin/ajoutModule',[ModuleController::class,'add'])->name('ajouterModule');
