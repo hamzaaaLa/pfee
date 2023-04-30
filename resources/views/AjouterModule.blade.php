@@ -109,8 +109,8 @@
     <div class="Ajouter page-content">
         <div class="head">
             <a href="{{route('adminProfile',Auth::user()->id_user)}}" type="button" class="btn">
-                <img src="../img/professeur.jpg" alt="">
-                Admin
+                <img src="{{Auth::user()->profile_image_url}}" alt="">
+                {{Auth::user()->name}} {{Auth::user()->prenom}}
             </a>
         </div>
         <div class="content">

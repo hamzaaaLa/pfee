@@ -59,7 +59,7 @@
                 </ul>
                 <div class="dropdown" >
                     <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ Auth::user()->profile_image_url}}" alt="">
+                        <img src="{{ Auth::user()->profile_image_url }}" alt="">
                             {{ Auth::user()->name }} {{ Auth::user()->prenom }}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -105,7 +105,7 @@
                 <!-- if user is prof -->
                 <div class="profile-container">
                     <div class="img-box">
-                        <img src="{{asset('/img/professeur.jpg')}}" alt="">
+                        <img src="{{$prof->profile_image_url}}" alt="">
                         <h3>{{$prof->name}} {{$prof->prenom}}</h3>
                         <p>Professeur</p>
                     </div>

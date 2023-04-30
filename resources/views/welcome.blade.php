@@ -22,7 +22,7 @@
     <nav class="navbar navbar-expand-lg header">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{asset('/img/fsa_agadir.png')}}" alt="" width="40" height="30" class="d-inline-block align-text-top">
+                <img src="{{asset('/img/fsa_agadir.png')}}" alt="" width="35" height="35" class="d-inline-block align-text-top">
                 FSA-Online
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -151,7 +151,7 @@
     <!-- Start Stats -->
     <div class="stats">
         <div class="fancy">
-            <span class="top-key">< /span>
+            <span class="top-key"></span>
             <span class="text">Nos Statistiques</span>
             <span class="bottom-key-1"></span>
             <span class="bottom-key-2"></span>
