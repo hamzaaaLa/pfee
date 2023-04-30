@@ -32,14 +32,14 @@ class HomeController extends Controller
     public function index()
     {
         if (auth()->user()->type =='admin') {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admineHome');
         }
         else if (auth()->user()->type =='prof') {
             return redirect()->route('prof.dashboard');
         }
         else if (auth()->user()->type =='user'){
             return redirect()->route('dashboard');
-        } 
+        }
     }
     public function etudDashboard()
     {
@@ -49,7 +49,7 @@ class HomeController extends Controller
         return view('etudHome', ['annonces' => $annonces, 'filieres' => $filieres, 'modules' => $modules],);
     }
     public function EspaceCours($id_module){
-        
+
         $id_module = Module::where('id_module',$id_module)->first();
         $module_name = Module::select('libelleModule')
         ->where('id_module', '=', $id_module)
@@ -82,14 +82,14 @@ class HomeController extends Controller
         $reply = Reply::with('user')->where('id_post', $id_post->id_post)->get();
         return view('ForumPost', [  'id_module' => $id_module, 'module_name' => $module_name,'id_post' => $id_post,'posts' => $posts,'post' => $post,'reply' => $reply]);
     }
-    
+
     public function profDashboard()
-    {   
+    {
         return view('etudHome');
     }
 
     public function adminDashboard()
-    {   
+    {
         $prof=Professeur::count();
         $etud=etudiant::count();
         $mod=Module::count();
@@ -115,18 +115,18 @@ class HomeController extends Controller
     //annonce store
     public function store(Request $request)
     {
-        
+
         $professeur = auth()->user();
         $id_prof = professeur::where('user_prof', $professeur->id_user)->value('id_prof');
 
         $module = $request->input('moduleSelect');
-        
+
         $annonce= new Annonce;
         $annonce->id_prof=$id_prof;
         $annonce->id_module = module::where('libelleModule', $module)->value('id_module');
         $annonce->titre = $request->input('titre');
         $annonce->contenue = $request->input('contenue');
-    
+
         if ($annonce->id_module) {
             $annonce->save();
             return redirect()->back()->with('success', 'Annonce créée avec succès.');
