@@ -366,17 +366,20 @@
                                                         <div class="modal fade" id="supprimerSection{{ $aff_sec->section->id_section}}" tabindex="-1" aria-labelledby="supprimerSection{{ $aff_sec->section->id_section}}Label" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="supprimerSection{{ $aff_sec->section->id_section}}Label">Supprimer Section</h5>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        Voulez-vous vraiment supprimer cette section?
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                        <a type="button" class="btn btn-danger" href="#" style="color: white;">Supprimer</a>
-                                                                    </div>
+                                                                    <form action="{{route('section.delete',$aff_sec->section->id_section)}}" method="POST">
+                                                                        @csrf
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="supprimerSection{{ $aff_sec->section->id_section}}Label">Supprimer Section</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            Voulez-vous vraiment supprimer cette section?
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                            <button type="submit" class="btn btn-danger"  style="color: white;">Supprimer</button>
+                                                                        </div>
+                                                                    </form>
                                                                 </div>
                                                             </div>
                                                         </div>

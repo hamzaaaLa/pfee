@@ -56,6 +56,7 @@ Route::middleware(['auth','user-access:prof'])->group(function () {
     Route::POST('/prof/dashboard/annoce_delete/{id_annonce}',[HomeController::class, 'delete'])->name('annonce.delete');
     Route::get('/prof/dashboard/EspaceCours/{id_module}', [HomeController::class, 'EspaceCours'])->name('prof.EspaceCours');
     Route::post('/prof/dashboard/EspaceCours/section_store/{id_module}', [espaceController::class, 'store'])->name('section.store');
+    Route::POST('/prof/dashboard/EspaceCours/section_delete/{id_section}', [espaceController::class, 'delete_section'])->name('section.delete');
     Route::post('/prof/dashboard/EspaceCours/add_Cour/{id_module}', [espaceController::class, 'add_cour'])->name('section.add_cour');
     Route::get('/prof/dashboard/EspaceCours/{id_cour}/dowload', [espaceController::class, 'download'])->name('prof.cour.download');
     Route::get('/prof/dashboard/EspaceCours/{id_module}/Forum', [HomeController::class, 'Forum'])->name('prof.Forum');

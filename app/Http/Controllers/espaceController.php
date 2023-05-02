@@ -24,20 +24,20 @@ class espaceController extends Controller
         $professeur = auth()->user();
         $id_prof = professeur::where('user_prof', $professeur->id_user)->value('id_prof');
 
-    // fetch all existing section titles
-    $existingSections = Section::select('s.titre_section')
-        ->join('affectation_section AS a', 'section.id_section', '=', 'a.id_section')
-        ->join('module', 'a.id_module', '=', 'module.id_module')
-        ->join('section AS s', 'a.id_section', '=', 's.id_section')
-        ->where('module.id_module', $id_module)
-        ->get()
-        ->pluck('titre_section')
-        ->toArray();
+        // fetch all existing section titles
+        $existingSections = Section::select('s.titre_section')
+            ->join('affectation_section AS a', 'section.id_section', '=', 'a.id_section')
+            ->join('module', 'a.id_module', '=', 'module.id_module')
+            ->join('section AS s', 'a.id_section', '=', 's.id_section')
+            ->where('module.id_module', $id_module)
+            ->get()
+            ->pluck('titre_section')
+            ->toArray();
 
-    // check if the requested section name already exists
-    if (in_array($request->input('nomSection'), $existingSections)) {
-        return response('section existe déjà');
-    }
+        // check if the requested section name already exists
+        if (in_array($request->input('nomSection'), $existingSections)) {
+            return response('section existe déjà');
+        }
 
         $section = new Section();
         $section->titre_section = $request->input('nomSection');
@@ -52,7 +52,56 @@ class espaceController extends Controller
 
         return response('success');
     }
+/*     public function delete_section($id_section)
+    {
+        $id_cour=affectation_cours::select('c.id_cour')
+        ->join('affectation_cours AS a', 'a.id_cour', '=', 'c.id_cour')
+        ->join('section', 'section.id_section', '=', 'a.id_section')
+        ->where('section.id_section', $id_section)
+        ->get();
+            foreach($id_cours as $id){
+                $cours = cours::find($id);
+                $cours->delete();
+            }
+            foreach($id_section as $id){
+                $affectation_cours= affectation_cours::find($id_section);
+                $affectation_cours->delete();
+            }
 
+            $section = section::find($id_section);
+            $section->delete();
+            return redirect()->back()->with('success', 'L\'annonce a été supprimée avec succès!');
+    }
+ */
+    public function delete_section($id_section)
+    {
+        // Check if the section has courses
+        $has_courses = affectation_cours::whereHas('section', function($query) use ($id_section){
+            $query->where('id_section', $id_section);
+        })->exists();
+
+        if($has_courses){
+            $id_cours = affectation_cours::select('id_cour')
+                ->join('section', 'section.id_section', '=', 'affectation_cours.id_section')
+                ->where('section.id_section', $id_section)
+                ->get();
+                
+                affectation_cours::whereHas('section', function($query) use ($id_section){
+                    $query->where('id_section', $id_section);
+                })->delete();
+            foreach($id_cours as $id){
+                $cours = cours::find($id->id_cour);
+                $cours->delete();
+            }
+            
+        }
+
+        // Delete the section
+        affectation_section::where('id_section', $id_section)->delete();
+        section::find($id_section)->delete();
+
+        return redirect()->back()->with('success', 'La section a été supprimée avec succès!');
+    }
     public function add_cour(Request $request,$id_module)
     {
         $nomCours = $request->input('nomCours');
@@ -70,6 +119,7 @@ class espaceController extends Controller
         $id_section = Section::select('section.id_section')
             ->join('affectation_section','section.id_section','=','affectation_section.id_section')
             ->where('affectation_section.id_module', '=', $id_module)
+            ->where('section.titre_section','=',$sectionCours)
             ->value('id_section');
     
         $cours = new Cours();
