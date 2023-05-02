@@ -135,5 +135,12 @@ class HomeController extends Controller
         }
         return redirect()->back()->with('success', 'Annonce créée avec succès.');
     }
+    //delete annonce
+    public function delete($id_annonce)
+    {
+        $annonce = Annonce::find($id_annonce);
+        $annonce->delete();
+        return redirect()->back()->with('success', 'L\'annonce a été supprimée avec succès!');
+    }
 }
 

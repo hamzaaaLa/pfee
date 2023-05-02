@@ -28,4 +28,9 @@ class section extends Model
     {
         return $this->hasMany(affectation_section::class, 'id_section')->with('module');
     }
+    //relation with affectation cours
+    public function affectation_cours()
+    {
+        return $this->hasMany(affectation_cours::class,'id_section')->with('cours');
+    }
 }

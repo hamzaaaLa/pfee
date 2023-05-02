@@ -23,4 +23,9 @@ class cours extends Model
     {
         return $this->belognsTo(module::class, 'id_module');
     }
+    //relation with affectation_cours
+    public function affectation_cours()
+    {
+        return $this->hasMany(affectation_cours::class,'id_cour')->with('section');
+    }
 }

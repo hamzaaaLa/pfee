@@ -10,6 +10,7 @@ use App\Models\Annonce;
 use App\Models\Cours;
 use App\Models\section;
 use App\Models\affectation_section;
+use App\Models\affectation_cours;
 use App\Models\Filiere;
 use App\Models\Module;
 use App\Models\Professeur;
@@ -23,13 +24,20 @@ class espaceController extends Controller
         $professeur = auth()->user();
         $id_prof = professeur::where('user_prof', $professeur->id_user)->value('id_prof');
 
-        // fetch all existing section titles
-        $existingSections = Section::where('id_prof', $id_prof)->pluck('titre_section')->toArray();
+    // fetch all existing section titles
+    $existingSections = Section::select('s.titre_section')
+        ->join('affectation_section AS a', 'section.id_section', '=', 'a.id_section')
+        ->join('module', 'a.id_module', '=', 'module.id_module')
+        ->join('section AS s', 'a.id_section', '=', 's.id_section')
+        ->where('module.id_module', $id_module)
+        ->get()
+        ->pluck('titre_section')
+        ->toArray();
 
-        // check if the requested section name already exists
-        if (in_array($request->input('nomSection'), $existingSections)) {
-            return response('section deja existé');
-        }
+    // check if the requested section name already exists
+    if (in_array($request->input('nomSection'), $existingSections)) {
+        return response('section existe déjà');
+    }
 
         $section = new Section();
         $section->titre_section = $request->input('nomSection');
@@ -45,7 +53,7 @@ class espaceController extends Controller
         return response('success');
     }
 
-    public function add_cour(Request $request, $id_module)
+    public function add_cour(Request $request,$id_module)
     {
         $nomCours = $request->input('nomCours');
         $sectionCours = $request->input('sectionCours');
@@ -58,17 +66,21 @@ class espaceController extends Controller
         } else {
             return response('error', 400);
         }
-        
-        $id_section = Section::select('id_section')
-            ->where('titre_section', '=', $sectionCours)
+
+        $id_section = Section::select('section.id_section')
+            ->join('affectation_section','section.id_section','=','affectation_section.id_section')
+            ->where('affectation_section.id_module', '=', $id_module)
             ->value('id_section');
     
         $cours = new Cours();
         $cours->libelleCour = $nomCours;
         $cours->contenu = $filePath;
-        $cours->id_module = $id_module;
-        $cours->id_section = $id_section;
         $cours->save();
+        
+        $affectation_cours= new affectation_cours();
+        $affectation_cours->id_section=$id_section;
+        $affectation_cours->id_cour=$cours->id_cour;
+        $affectation_cours->save();
     
         return redirect()->back()->with('success', 'Cours créé avec succès.');
     }

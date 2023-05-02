@@ -172,14 +172,10 @@
                                                     <label for="sectionCours" class="form-label">Section</label>
                                                     <select class="form-select" name="sectionCours" id="sectionCours" aria-label="Default select example">
                                                         <option selected>Choisir...</option>
-                                                        @foreach (Auth::user()->professeur as $prof)
-                                                            @foreach ($prof->affectation_prof as $affectation)
-                                                                @foreach ($affectation->module->affectation_section as $sec)
-                                                                    <option>
-                                                                        {{ $sec->section->titre_section }}
-                                                                    </option>
-                                                                @endforeach
-                                                            @endforeach
+                                                        @foreach ($id_module->affectation_section as $aff_sec)
+                                                            <option>
+                                                                {{ $aff_sec->section->titre_section }}
+                                                            </option>
                                                         @endforeach
                                                     </select>
                                                     <div class="valid-feedback">
@@ -237,34 +233,33 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="sectionError"></div>
                     </div>
                     <div class="accordion" id="accordionPanelsStayOpen">
-                        @foreach (Auth::user()->professeur as $prof)
-                            @foreach ($prof->affectation_prof as $affectation)
-                                @foreach ($affectation->module->affectation_section as $sec)
+                        @foreach ($id_module->affectation_section as $aff_sec)
                                     <div class="accordion-item">
-                                        <h2 class="accordion-header" id="panelsStayOpen-{{ $sec->section->titre_section }}">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ $sec->section->id_section }}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{ $sec->section->id_section }}">
-                                                            {{ $sec->section->titre_section }}
+                                        <h2 class="accordion-header" id="panelsStayOpen-{{ $aff_sec->section->titre_section }}">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ $aff_sec->section->id_section }}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{ $aff_sec->section->id_section }}">
+                                                            {{ $aff_sec->section->titre_section }}
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapse{{ $sec->section->id_section}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-{{ $sec->section->titre_section }}">
+                                        <div id="panelsStayOpen-collapse{{ $aff_sec->section->id_section}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-{{ $aff_sec->section->titre_section }}">
                                             <div class="accordion-body">
                                                 <ul>
-                                                    @foreach ($sec->section->cours as $cours )
+                                                    @foreach ($aff_sec->section->affectation_cours as $aff_cour )
                                                         <li>
                                                             <div class="content">
                                                                 <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                                                <a href="{{ route('prof.cour.download', ['id_cour' => $cours->id_cour]) }}">{{$cours->libelleCour }}</a>
+                                                                <a href="{{ route('prof.cour.download', ['id_cour' => $aff_cour->cours->id_cour]) }}">{{$aff_cour->cours->libelleCour }}</a>
                                                             </div>
                                                             <div class="actions">
                                                                 <!-- Modifier Cours -->
-                                                                <button type="button" class="add-btn modif" data-bs-toggle="modal" data-bs-target="#modifierCours{{$cours->id_cour}}">
+                                                                <button type="button" class="add-btn modif" data-bs-toggle="modal" data-bs-target="#modifierCours{{$aff_cour->cours->id_cour}}">
                                                                     <i class="fa-solid fa-pen"></i>
                                                                 </button>
 
                                                                 <!-- Modal Modifier Cours -->
-                                                                <div class="modal fade" id="modifierCours{{$cours->id_cour}}" tabindex="-1" aria-labelledby="modifierCours{{$cours->id_cour}}Label" aria-hidden="true">
+                                                                <div class="modal fade" id="modifierCours{{$aff_cour->cours->id_cour}}" tabindex="-1" aria-labelledby="modifierCours{{$aff_cour->cours->id_cour}}Label" aria-hidden="true">
                                                                     <div class="modal-dialog">
                                                                         <div class="modal-content">
                                                                             <div class="container">
@@ -272,7 +267,7 @@
                                                                                       action="" method="post" novalidate>
                                                                                     @csrf
                                                                                     <div class="modal-header">
-                                                                                        <h5 class="modal-title" id="modifierCours{{$cours->id_cour}}Label">Modifer Titre Cours</h5>
+                                                                                        <h5 class="modal-title" id="modifierCours{{$aff_cour->cours->id_cour}}Label">Modifer Titre Cours</h5>
                                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                     </div>
                                                                                     <div class="modal-body">
@@ -297,16 +292,16 @@
                                                                     </div>
                                                                 </div>
                                                                 <!-- Supprimer Cours -->
-                                                                <button type="button" class="add-btn del" data-bs-toggle="modal" data-bs-target="#supprimerCours{{$cours->id_cour}}">
+                                                                <button type="button" class="add-btn del" data-bs-toggle="modal" data-bs-target="#supprimerCours{{$aff_cour->cours->id_cour}}">
                                                                     <i class="fa-solid fa-trash"></i>
                                                                 </button>
 
                                                                 <!-- Modal Supprimer Cours -->
-                                                                <div class="modal fade" id="supprimerCours{{$cours->id_cour}}" tabindex="-1" aria-labelledby="supprimerCours{{$cours->id_cour}}Label" aria-hidden="true">
+                                                                <div class="modal fade" id="supprimerCours{{$aff_cour->cours->id_cour}}" tabindex="-1" aria-labelledby="supprimerCours{{$aff_cour->cours->id_cour}}Label" aria-hidden="true">
                                                                     <div class="modal-dialog">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title" id="supprimerCours{{$cours->id_cour}}Label">Supprimer Cours</h5>
+                                                                                <h5 class="modal-title" id="supprimerCours{{$aff_cour->cours->id_cour}}Label">Supprimer Cours</h5>
                                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                             </div>
                                                                             <div class="modal-body">
@@ -324,20 +319,20 @@
                                                     @endforeach
                                                     <li class="actions">
                                                         <!-- Modifier Section -->
-                                                        <button type="button" class="add-btn" data-bs-toggle="modal" data-bs-target="#modifierSection{{ $sec->section->id_section}}">
+                                                        <button type="button" class="add-btn" data-bs-toggle="modal" data-bs-target="#modifierSection{{ $aff_sec->section->id_section}}">
                                                             <i class="fa-solid fa-pen"></i>
                                                             Modifier Section
                                                         </button>
 
                                                         <!-- Modal Modifier Section -->
-                                                        <div class="modal fade" id="modifierSection{{ $sec->section->id_section}}" tabindex="-1" aria-labelledby="modifierSection{{ $sec->section->id_section}}Label" aria-hidden="true">
+                                                        <div class="modal fade" id="modifierSection{{ $aff_sec->section->id_section}}" tabindex="-1" aria-labelledby="modifierSection{{ $aff_sec->section->id_section}}Label" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="container">
                                                                         <form class="row g-3 needs-validation" action="" method="post" novalidate>
                                                                             @csrf
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title" id="modifierSection{{ $sec->section->id_section}}Label">Modifier Titre Section</h5>
+                                                                                <h5 class="modal-title" id="modifierSection{{ $aff_sec->section->id_section}}Label">Modifier Titre Section</h5>
                                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                             </div>
                                                                             <div class="modal-body">
@@ -362,17 +357,17 @@
                                                             </div>
                                                         </div>
                                                         <!-- Supprimer Section -->
-                                                        <button type="button" class="add-btn" data-bs-toggle="modal" data-bs-target="#supprimerSection{{ $sec->section->id_section}}">
+                                                        <button type="button" class="add-btn" data-bs-toggle="modal" data-bs-target="#supprimerSection{{ $aff_sec->section->id_section}}">
                                                             <i class="fa-solid fa-trash"></i>
                                                             Supprimer Section
                                                         </button>
 
                                                         <!-- Modal Supprimer Section -->
-                                                        <div class="modal fade" id="supprimerSection{{ $sec->section->id_section}}" tabindex="-1" aria-labelledby="supprimerSection{{ $sec->section->id_section}}Label" aria-hidden="true">
+                                                        <div class="modal fade" id="supprimerSection{{ $aff_sec->section->id_section}}" tabindex="-1" aria-labelledby="supprimerSection{{ $aff_sec->section->id_section}}Label" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title" id="supprimerSection{{ $sec->section->id_section}}Label">Supprimer Section</h5>
+                                                                        <h5 class="modal-title" id="supprimerSection{{ $aff_sec->section->id_section}}Label">Supprimer Section</h5>
                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                     </div>
                                                                     <div class="modal-body">
@@ -390,38 +385,32 @@
                                             </div>
                                         </div>
                                     </div>
-                                 @endforeach
-                            @endforeach
                         @endforeach
                     </div>
                 @else
                     <div class="accordion" id="accordionPanelsStayOpen">
-                        @foreach (Auth::user()->etudiant as $etud)
-                            @foreach ($etud->affectation_etud as $affectation)
-                                @foreach ($affectation->module->affectation_section as $sec)
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="panelsStayOpen-{{ $sec->section->titre_section }}">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ $sec->section->id_section }}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{ $sec->section->id_section }}">
-                                                            {{ $sec->section->titre_section }}
-                                            </button>
-                                        </h2>
-                                        <div id="panelsStayOpen-collapse{{ $sec->section->id_section}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-{{ $sec->section->titre_section }}">
-                                            <div class="accordion-body">
-                                                <ul>
-                                                    @foreach ($sec->section->cours as $cours )
-                                                        <li>
-                                                            <div class="content">
-                                                                <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                                                <a href="{{ route('etud.cour.download', ['id_cour' => $cours->id_cour]) }}">{{$cours->libelleCour }}</a>
-                                                            </div>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        </div>
+                        @foreach ($id_module->affectation_section as $aff_sec)
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-{{ $aff_sec->section->titre_section }}">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ $aff_sec->section->id_section }}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{ $aff_sec->section->id_section }}">
+                                        {{ $aff_sec->section->titre_section }}
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapse{{ $aff_sec->section->id_section}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-{{ $aff_sec->section->titre_section }}">
+                                    <div class="accordion-body">
+                                        <ul>
+                                            @foreach ($aff_sec->section->affectation_cours as $aff_cour )
+                                            <li>
+                                                <div class="content">
+                                                    <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
+                                                    <a href="{{ route('etud.cour.download', ['id_cour' => $aff_cour->cours->id_cour]) }}">{{$aff_cour->cours->libelleCour }}</a>
+                                                </div>
+                                            </li>
+                                            @endforeach
+                                        </ul>
                                     </div>
-                                @endforeach
-                            @endforeach
+                                </div>
+                            </div>
                         @endforeach
                     </div>
                 @endif
@@ -535,11 +524,32 @@
                                     '</div>' +
                                 '</div>' +
                             '</div>';
-                        // Ading the section in the accordion
-                        $("#accordionPanelsStayOpen").append(newSection);
-                        // Ading the section in the add course form
-                        var option = $("<option>").text(nomSection).val(nomSection);
-                        $("#sectionCours").append(option);
+                            // Ading the section in the accordion
+                            $("#accordionPanelsStayOpen").append(newSection);
+                            // Ading the section in the add course form
+                            var option = $("<option>").text(nomSection).val(nomSection);
+                            $("#sectionCours").append(option);
+                        }
+                        else if(response == 'section existe déjà') {
+                            /* var sectionError = '<div class="modal" tabindex="-1">' +
+                                '<div class="modal-dialog">' +
+                                    '<div class="modal-content">' +
+                                        '<div class="modal-header">' +
+                                            '<h5 class="modal-title">Modal title</h5>' +
+                                            '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>' +
+                                        '</div>' +
+                                        '<div class="modal-body">' +
+                                            '<p>Modal body text goes here.</p>' +
+                                        '</div>' +
+                                        '<div class="modal-footer"> +'
+                                            '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>' +
+                                            '<button type="button" class="btn btn-primary">Save changes</button>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>';
+ */
+                            alert("Section existe déjà. Veuillez insérer un titre qui n'existe pas");
                         }
                     }
                 });

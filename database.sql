@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2023 at 01:28 AM
+-- Generation Time: May 02, 2023 at 09:28 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -32,6 +32,26 @@ CREATE TABLE `administrateur` (
   `user_admin` int(11) NOT NULL,
   `dateEmbauche` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `affectation_cours`
+--
+
+CREATE TABLE `affectation_cours` (
+  `id_affect` int(11) NOT NULL,
+  `id_section` int(11) DEFAULT NULL,
+  `id_cour` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `affectation_cours`
+--
+
+INSERT INTO `affectation_cours` (`id_affect`, `id_section`, `id_cour`) VALUES
+(2, 5, 12),
+(3, 5, 13);
 
 -- --------------------------------------------------------
 
@@ -127,7 +147,11 @@ CREATE TABLE `affectation_section` (
 --
 
 INSERT INTO `affectation_section` (`id_affect`, `id_module`, `id_section`) VALUES
-(3, 19, 3);
+(3, 19, 3),
+(4, 17, 4),
+(5, 16, 5),
+(6, 16, 6),
+(12, 16, 12);
 
 -- --------------------------------------------------------
 
@@ -166,13 +190,6 @@ CREATE TABLE `annonce` (
   `datecreation` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `annonce`
---
-
-INSERT INTO `annonce` (`id_annonce`, `id_prof`, `id_module`, `titre`, `contenue`, `datecreation`) VALUES
-(3, 7, 19, 'Scéance d\'avancement', 'lorum ipsum lorum ipsum lorum ipsum lorum ipsum lorum ipsum lorum ipsum lorum ipsum lorum ipsum', '2023-04-28 14:16:51');
-
 -- --------------------------------------------------------
 
 --
@@ -182,8 +199,6 @@ INSERT INTO `annonce` (`id_annonce`, `id_prof`, `id_module`, `titre`, `contenue`
 CREATE TABLE `cours` (
   `id_cour` int(11) NOT NULL,
   `libelleCour` varchar(50) NOT NULL,
-  `id_module` int(11) NOT NULL,
-  `id_section` int(11) DEFAULT NULL,
   `contenu` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -191,8 +206,10 @@ CREATE TABLE `cours` (
 -- Dumping data for table `cours`
 --
 
-INSERT INTO `cours` (`id_cour`, `libelleCour`, `id_module`, `id_section`, `contenu`) VALUES
-(6, 'Cours Chapitre 1 Mécanique', 19, 3, '1682695788.pdf');
+INSERT INTO `cours` (`id_cour`, `libelleCour`, `contenu`) VALUES
+(11, 'cour1_analyse1', '1683044427.pdf'),
+(12, 'cour1_analyse1', '1683045777.pdf'),
+(13, 'cour2_analyse1', '1683045845.pdf');
 
 -- --------------------------------------------------------
 
@@ -399,7 +416,8 @@ CREATE TABLE `reply` (
 --
 
 INSERT INTO `reply` (`id_reply`, `id_post`, `id_user`, `contenu`, `date_created`, `id_module`) VALUES
-(3, 4, 37, 'xxxxxxxxxxxxxxxxxxxxxxxx', '2023-04-28 15:37:59', 57);
+(3, 4, 37, 'xxxxxxxxxxxxxxxxxxxxxxxx', '2023-04-28 15:37:59', 57),
+(4, 4, 36, 'hjfhjfjhf', '2023-05-01 01:44:46', 18);
 
 -- --------------------------------------------------------
 
@@ -418,7 +436,11 @@ CREATE TABLE `section` (
 --
 
 INSERT INTO `section` (`id_section`, `titre_section`, `id_prof`) VALUES
-(3, 'Chapitre 1', 7);
+(3, 'Chapitre 1', 7),
+(4, 'chapitre 1', 6),
+(5, 'Chapitre 1', 6),
+(6, 'chapitre 1', 6),
+(12, 'Chapitre 2', 6);
 
 -- --------------------------------------------------------
 
@@ -491,6 +513,14 @@ ALTER TABLE `administrateur`
   ADD KEY `user_admin` (`user_admin`);
 
 --
+-- Indexes for table `affectation_cours`
+--
+ALTER TABLE `affectation_cours`
+  ADD PRIMARY KEY (`id_affect`),
+  ADD KEY `id_section` (`id_section`),
+  ADD KEY `id_cour` (`id_cour`);
+
+--
 -- Indexes for table `affectation_etud`
 --
 ALTER TABLE `affectation_etud`
@@ -534,9 +564,7 @@ ALTER TABLE `annonce`
 -- Indexes for table `cours`
 --
 ALTER TABLE `cours`
-  ADD PRIMARY KEY (`id_cour`),
-  ADD KEY `id_module` (`id_module`),
-  ADD KEY `id_section` (`id_section`);
+  ADD PRIMARY KEY (`id_cour`);
 
 --
 -- Indexes for table `etudiant`
@@ -615,6 +643,12 @@ ALTER TABLE `administrateur`
   MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `affectation_cours`
+--
+ALTER TABLE `affectation_cours`
+  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `affectation_etud`
 --
 ALTER TABLE `affectation_etud`
@@ -630,7 +664,7 @@ ALTER TABLE `affectation_prof`
 -- AUTO_INCREMENT for table `affectation_section`
 --
 ALTER TABLE `affectation_section`
-  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `affectation_semestre`
@@ -642,13 +676,13 @@ ALTER TABLE `affectation_semestre`
 -- AUTO_INCREMENT for table `annonce`
 --
 ALTER TABLE `annonce`
-  MODIFY `id_annonce` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_annonce` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `cours`
 --
 ALTER TABLE `cours`
-  MODIFY `id_cour` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_cour` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `etudiant`
@@ -684,13 +718,13 @@ ALTER TABLE `professeur`
 -- AUTO_INCREMENT for table `reply`
 --
 ALTER TABLE `reply`
-  MODIFY `id_reply` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_reply` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `section`
 --
 ALTER TABLE `section`
-  MODIFY `id_section` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_section` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `semestre`
@@ -713,6 +747,13 @@ ALTER TABLE `users`
 --
 ALTER TABLE `administrateur`
   ADD CONSTRAINT `administrateur_ibfk_1` FOREIGN KEY (`user_admin`) REFERENCES `users` (`id_user`);
+
+--
+-- Constraints for table `affectation_cours`
+--
+ALTER TABLE `affectation_cours`
+  ADD CONSTRAINT `affectation_cours_ibfk_1` FOREIGN KEY (`id_section`) REFERENCES `section` (`id_section`),
+  ADD CONSTRAINT `affectation_cours_ibfk_2` FOREIGN KEY (`id_cour`) REFERENCES `cours` (`id_cour`);
 
 --
 -- Constraints for table `affectation_etud`
@@ -748,13 +789,6 @@ ALTER TABLE `affectation_semestre`
 ALTER TABLE `annonce`
   ADD CONSTRAINT `annonce_ibfk_1` FOREIGN KEY (`id_prof`) REFERENCES `professeur` (`id_prof`),
   ADD CONSTRAINT `annonce_ibfk_2` FOREIGN KEY (`id_module`) REFERENCES `module` (`id_module`);
-
---
--- Constraints for table `cours`
---
-ALTER TABLE `cours`
-  ADD CONSTRAINT `cours_ibfk_1` FOREIGN KEY (`id_module`) REFERENCES `module` (`id_module`),
-  ADD CONSTRAINT `cours_ibfk_2` FOREIGN KEY (`id_section`) REFERENCES `section` (`id_section`);
 
 --
 -- Constraints for table `etudiant`
