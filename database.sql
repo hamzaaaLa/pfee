@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2023 at 09:28 PM
+-- Generation Time: May 03, 2023 at 06:33 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -51,7 +51,8 @@ CREATE TABLE `affectation_cours` (
 
 INSERT INTO `affectation_cours` (`id_affect`, `id_section`, `id_cour`) VALUES
 (2, 5, 12),
-(3, 5, 13);
+(3, 5, 13),
+(8, 15, 18);
 
 -- --------------------------------------------------------
 
@@ -147,11 +148,12 @@ CREATE TABLE `affectation_section` (
 --
 
 INSERT INTO `affectation_section` (`id_affect`, `id_module`, `id_section`) VALUES
-(3, 19, 3),
 (4, 17, 4),
 (5, 16, 5),
 (6, 16, 6),
-(12, 16, 12);
+(12, 16, 12),
+(14, 19, 14),
+(15, 19, 15);
 
 -- --------------------------------------------------------
 
@@ -209,7 +211,8 @@ CREATE TABLE `cours` (
 INSERT INTO `cours` (`id_cour`, `libelleCour`, `contenu`) VALUES
 (11, 'cour1_analyse1', '1683044427.pdf'),
 (12, 'cour1_analyse1', '1683045777.pdf'),
-(13, 'cour2_analyse1', '1683045845.pdf');
+(13, 'cour2_analyse1', '1683045845.pdf'),
+(18, 'Cours Chapitre 1 Mécanique', '1683071925.pdf');
 
 -- --------------------------------------------------------
 
@@ -371,7 +374,9 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id_post`, `id_user`, `titre`, `contenu`, `date_created`, `id_module`) VALUES
-(4, 37, 'test', 'ddddddddddddddddd', '2023-04-28 15:37:49', 57);
+(4, 37, 'test', 'ddddddddddddddddd', '2023-04-28 15:37:49', 57),
+(5, 37, 'df', 'df', '2023-05-03 01:39:31', 57),
+(6, 37, 'dfdf', 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', '2023-05-03 01:39:43', 57);
 
 -- --------------------------------------------------------
 
@@ -436,11 +441,12 @@ CREATE TABLE `section` (
 --
 
 INSERT INTO `section` (`id_section`, `titre_section`, `id_prof`) VALUES
-(3, 'Chapitre 1', 7),
 (4, 'chapitre 1', 6),
 (5, 'Chapitre 1', 6),
 (6, 'chapitre 1', 6),
-(12, 'Chapitre 2', 6);
+(12, 'Chapitre 2', 6),
+(14, 'Chapitre 4', 7),
+(15, 'Chapitre 2', 7);
 
 -- --------------------------------------------------------
 
@@ -646,7 +652,7 @@ ALTER TABLE `administrateur`
 -- AUTO_INCREMENT for table `affectation_cours`
 --
 ALTER TABLE `affectation_cours`
-  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `affectation_etud`
@@ -664,7 +670,7 @@ ALTER TABLE `affectation_prof`
 -- AUTO_INCREMENT for table `affectation_section`
 --
 ALTER TABLE `affectation_section`
-  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `affectation_semestre`
@@ -682,7 +688,7 @@ ALTER TABLE `annonce`
 -- AUTO_INCREMENT for table `cours`
 --
 ALTER TABLE `cours`
-  MODIFY `id_cour` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_cour` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `etudiant`
@@ -706,7 +712,7 @@ ALTER TABLE `module`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `professeur`
@@ -724,7 +730,7 @@ ALTER TABLE `reply`
 -- AUTO_INCREMENT for table `section`
 --
 ALTER TABLE `section`
-  MODIFY `id_section` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_section` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `semestre`
