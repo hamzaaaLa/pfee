@@ -279,7 +279,9 @@
                                 document.addEventListener('click', function(event) {
                                     if (!element{{$r->id_reply}}.contains(event.target) && !toggleButton{{$r->id_reply}}.contains(event.target)) {
                                         element{{$r->id_reply}}.classList.add('hidden');
-                                        toggleButton{{$r->id_reply}}.classList.toggle('clicked');
+                                        if(toggleButton{{$r->id_reply}}.classList.contains('clicked')) {
+                                            toggleButton{{$r->id_reply}}.classList.toggle('clicked');
+                                        }
                                     }
                                 });
                             </script>

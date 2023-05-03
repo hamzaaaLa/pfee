@@ -348,9 +348,7 @@
                             </div>
                            <script>
                                var toggleButton{{$post->id_post}} = document.getElementById('actions-list-toggle' + {{$post->id_post}});
-                               console.log(toggleButton{{$post->id_post}});
                                var element{{$post->id_post}} = document.getElementById('actions-list' + {{$post->id_post}});
-                               console.log(element{{$post->id_post}});
 
                                toggleButton{{$post->id_post}}.addEventListener('click', function() {
                                    if(this.classList.contains('clicked')) {
@@ -364,7 +362,9 @@
                                document.addEventListener('click', function(event) {
                                    if (!element{{$post->id_post}}.contains(event.target) && !toggleButton{{$post->id_post}}.contains(event.target)) {
                                        element{{$post->id_post}}.classList.add('hidden');
-                                       toggleButton{{$post->id_post}}.classList.toggle('clicked');
+                                       if(toggleButton{{$post->id_post}}.classList.contains('clicked')) {
+                                            toggleButton{{$post->id_post}}.classList.toggle('clicked');
+                                       }
                                    }
                                });
                            </script>
