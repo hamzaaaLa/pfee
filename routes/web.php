@@ -57,7 +57,10 @@ Route::middleware(['auth','user-access:prof'])->group(function () {
     Route::get('/prof/dashboard/EspaceCours/{id_module}', [HomeController::class, 'EspaceCours'])->name('prof.EspaceCours');
     Route::post('/prof/dashboard/EspaceCours/section_store/{id_module}', [espaceController::class, 'store'])->name('section.store');
     Route::POST('/prof/dashboard/EspaceCours/section_delete/{id_section}', [espaceController::class, 'delete_section'])->name('section.delete');
+    Route::POST('/prof/dashboard/EspaceCours/section_update/{id_section}',[espaceController::class, 'update_section'])->name('section.update');
     Route::post('/prof/dashboard/EspaceCours/add_Cour/{id_module}', [espaceController::class, 'add_cour'])->name('section.add_cour');
+    Route::POST('/prof/dashboard/EspaceCours/cour_update/{id_cour}',[espaceController::class, 'update_cour'])->name('cour.update');
+    Route::POST('/prof/dashboard/EspaceCours/cour_delete/{id_cour}', [espaceController::class, 'delete_cour'])->name('cour.delete');
     Route::get('/prof/dashboard/EspaceCours/{id_cour}/dowload', [espaceController::class, 'download'])->name('prof.cour.download');
     Route::get('/prof/dashboard/EspaceCours/{id_module}/Forum', [HomeController::class, 'Forum'])->name('prof.Forum');
     Route::get('/prof/dashboard/EspaceCours/{id_module}/Forum/ForumPost/{id_post}', [HomeController::class, 'ForumPost'])->name('prof.ForumPost');

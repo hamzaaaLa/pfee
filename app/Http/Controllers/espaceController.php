@@ -52,27 +52,7 @@ class espaceController extends Controller
 
         return response('success');
     }
-/*     public function delete_section($id_section)
-    {
-        $id_cour=affectation_cours::select('c.id_cour')
-        ->join('affectation_cours AS a', 'a.id_cour', '=', 'c.id_cour')
-        ->join('section', 'section.id_section', '=', 'a.id_section')
-        ->where('section.id_section', $id_section)
-        ->get();
-            foreach($id_cours as $id){
-                $cours = cours::find($id);
-                $cours->delete();
-            }
-            foreach($id_section as $id){
-                $affectation_cours= affectation_cours::find($id_section);
-                $affectation_cours->delete();
-            }
 
-            $section = section::find($id_section);
-            $section->delete();
-            return redirect()->back()->with('success', 'L\'annonce a été supprimée avec succès!');
-    }
- */
     public function delete_section($id_section)
     {
         // Check if the section has courses
@@ -102,6 +82,14 @@ class espaceController extends Controller
 
         return redirect()->back()->with('success', 'La section a été supprimée avec succès!');
     }
+
+    public function update_section(Request $request,$id_section){
+        $section = new section();
+        $section::where('id_section', $id_section)->update(['titre_section' => $request->input('nomSection')]);
+        
+        return redirect()->back()->with('success', 'La section a été modifiée avec succès!');;
+    }
+
     public function add_cour(Request $request,$id_module)
     {
         $nomCours = $request->input('nomCours');
@@ -133,6 +121,20 @@ class espaceController extends Controller
         $affectation_cours->save();
     
         return redirect()->back()->with('success', 'Cours créé avec succès.');
+    }
+
+    public function update_cour(Request $request,$id_cour)
+    {
+        $cours= new cours();
+        $cours::where('id_cour',$id_cour)->update(['libelleCour'=>$request->input('nomCours')]);
+        
+        return redirect()->back()->with('success', 'La section a été modifiée avec succès!');;
+    }
+    public function delete_cour(Request $request,$id_cour){
+        affectation_cours::where('id_cour',$id_cour)->delete();
+        cours::find($id_cour)->delete();
+
+        return redirect()->back()->with('success', 'Le cour a été supprimé avec succès!');
     }
 
     public function download($id_cour)

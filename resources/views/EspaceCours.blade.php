@@ -264,7 +264,7 @@
                                                                         <div class="modal-content">
                                                                             <div class="container">
                                                                                 <form class="row g-3 needs-validation"
-                                                                                      action="" method="post" novalidate>
+                                                                                      action="{{route('cour.update',$aff_cour->cours->id_cour)}}" method="POST" novalidate>
                                                                                     @csrf
                                                                                     <div class="modal-header">
                                                                                         <h5 class="modal-title" id="modifierCours{{$aff_cour->cours->id_cour}}Label">Modifer Titre Cours</h5>
@@ -273,7 +273,7 @@
                                                                                     <div class="modal-body">
                                                                                         <div class="mb-3">
                                                                                             <label for="nomCours" class="form-label">Titre</label>
-                                                                                            <input type="text" name="nomCours" class="form-control" id="nomCours" required>
+                                                                                            <input type="text" name="nomCours" class="form-control" value="{{$aff_cour->cours->libelleCour}}" id="nomCours" required>
                                                                                             <div class="valid-feedback">
                                                                                                 C'est bon!
                                                                                             </div>
@@ -300,17 +300,20 @@
                                                                 <div class="modal fade" id="supprimerCours{{$aff_cour->cours->id_cour}}" tabindex="-1" aria-labelledby="supprimerCours{{$aff_cour->cours->id_cour}}Label" aria-hidden="true">
                                                                     <div class="modal-dialog">
                                                                         <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="supprimerCours{{$aff_cour->cours->id_cour}}Label">Supprimer Cours</h5>
-                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                Voulez-vous vraiment supprimer ce cours?
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                                                                <a type="button" class="btn btn-danger" href="#" style="color: white;">Supprimer</a>
-                                                                            </div>
+                                                                            <form action="{{route('cour.delete',$aff_cour->cours->id_cour)}}" method="POST">
+                                                                                @csrf
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="supprimerCours{{$aff_cour->cours->id_cour}}Label">Supprimer Cours</h5>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    Voulez-vous vraiment supprimer ce cours?
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                                                    <button type="submit" class="btn btn-danger" href="#" style="color: white;">Supprimer</button>
+                                                                                </div>
+                                                                            </form>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -329,7 +332,7 @@
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="container">
-                                                                        <form class="row g-3 needs-validation" action="" method="post" novalidate>
+                                                                        <form class="row g-3 needs-validation" action="{{route('section.update',$aff_sec->section->id_section)}}" method="post" novalidate>
                                                                             @csrf
                                                                             <div class="modal-header">
                                                                                 <h5 class="modal-title" id="modifierSection{{ $aff_sec->section->id_section}}Label">Modifier Titre Section</h5>
@@ -338,7 +341,7 @@
                                                                             <div class="modal-body">
                                                                                 <div class="mb-3">
                                                                                     <label for="nomSection" class="form-label">Titre</label>
-                                                                                    <input type="text" name="nomSection" class="form-control" id="nomSection" required>
+                                                                                    <input type="text" name="nomSection" class="form-control" value="{{ old('titre_section', $aff_sec->section->titre_section) }}"id="nomSection" required>
                                                                                     <div class="valid-feedback">
                                                                                         C'est bon!
                                                                                     </div>
@@ -349,7 +352,7 @@
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                                                                <button type="button" class="btn btn-primary"><input type="submit" value="Modifier"></button>
+                                                                                <button type="submit" class="btn btn-primary"><input type="submit" value="Modifier"></button>
                                                                             </div>
                                                                         </form>
                                                                     </div>
