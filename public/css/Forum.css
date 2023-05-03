@@ -13,6 +13,17 @@ body {
 a {
     text-decoration: none;
 }
+ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.clicked {
+    background-color: #cdcdcd !important;
+}
+.hidden {
+    display: none;
+}
 /* End Global Rules */
 /* Start Components */
 .header {
@@ -183,19 +194,11 @@ input[type="submit"] {
     border-bottom: 1px solid #eee;
     color: black;
 }
-.forum .posts .box:hover {
-    background-color: #f9f9f9;
-}
-.forum .posts .box:hover:first-child {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-.forum .posts .box:hover:last-child {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
 .forum .posts .box .img-container {
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .forum .posts .box .img-container img {
     width: 35px;
@@ -213,6 +216,36 @@ input[type="submit"] {
 .forum .posts .box .img-container span > span {
     position: absolute;
     top: -25%;
+}
+.forum .posts .box .img-container .actions {
+    position: relative;
+}
+.forum .posts .box .img-container .actions button {
+    transition: var(--main-transition);
+    border-radius: 50%;
+    border-color: transparent;
+}
+.forum .posts .box .img-container .actions .actions-list {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    padding: 11px 0;
+    background-color: #c5c5c5;
+    border-radius: 15px;
+    width: 190px;
+    z-index: 10;
+}
+.forum .posts .box .img-container .actions .actions-list li {
+    padding: 10px 20px;
+}
+.forum .posts .box .img-container .actions .actions-list li:hover {
+    background-color: #8b8b8b;
+}
+.forum .posts .box .img-container .actions .actions-list a {
+    color: black;
+}
+.forum .posts .box .img-container .actions .actions-list a svg {
+    margin-right: 16px;
 }
 .forum .posts .box .post-content {
     padding: 0 20px;
@@ -239,8 +272,15 @@ input[type="submit"] {
     margin-top: 18px;
     color: #888;
     font-size: 14px;
+    display: block;
+}
+.forum .posts .box .post-content .reply a {
+    color: #888;
 }
 .forum .posts .box .post-content .reply span {
     margin-left: 7px;
+}
+.forum .posts .box:hover .post-content .reply span {
+    text-decoration: underline;
 }
 /*  End Forum*/

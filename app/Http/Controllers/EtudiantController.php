@@ -19,20 +19,22 @@ class EtudiantController extends Controller
 {
     public function index()
     {
-        $etudiant =\App\Models\etudiant::all();
-        return view('visualiserEtudiant', ['etudiant' => $etudiant]); 
+        $etudiant = Etudiant::all();
+        return view('visualiserEtudiant', ['etudiant' => $etudiant]);
     }
     public function consulter(){
         $filieres = Filiere::get();
-   $semestres=Semestre::get();
-   return view('ModifierEtudiant',['filieres'=>$filieres],['semestres'=>$semestres]);
+        $semestres=Semestre::get();
+
+        return view('ModifierEtudiant',['filieres'=>$filieres],['semestres'=>$semestres]);
     }
+
     function add(Request $request){
         $request->validate([
             'name'=>'required',
             'prenom'=>'required',
             'email'=>'required|email|unique:users',
-            
+
         ]);
 
 
@@ -67,8 +69,8 @@ class EtudiantController extends Controller
         }
 
         $moduleValues=$request->input('moduleSelect');
-        
-        
+
+
         foreach($moduleValues as $key){
             $affectEtud=new Affectation_etud();
             $affectEtud->id_etud=$etudiant->id_etud;
@@ -93,7 +95,7 @@ class EtudiantController extends Controller
         $etudiants=Etudiant::orderBy('nom','asc')->get();
         return view('visualiserEtudiant',['etudiants'=>$etudiants]);
         }
-        
+
     public function edit($id_user){
         $filieres=Filiere::get();
         $semestres=Semestre::get();
@@ -107,7 +109,7 @@ class EtudiantController extends Controller
     }
 
     public function update(Request $request,$id_user){
-        
+
         $id_etud=User::join('etudiant','users.id_user','=','etudiant.user_etud')->where('users.id_user',$id_user)->value('etudiant.id_etud');
         affectation_semestre::where('id_etud','=',$id_etud)->delete();
         Affectation_etud::where('id_etud','=',$id_etud)->delete();
@@ -135,16 +137,16 @@ class EtudiantController extends Controller
         }
 
         $moduleValues=$request->input('moduleSelect');
-        
-        
+
+
         foreach($moduleValues as $key){
             Affectation_etud::where('id_etud',$id_etud)->updateOrCreate([
             'id_etud'=>$id_etud,
             'id_module'=>Module::where('libelleModule',$key)->value('id_module'),
             ]);
-            
+
         }
-        
+
         return redirect(route('afficheEtud'));
     }
 
@@ -178,25 +180,25 @@ class EtudiantController extends Controller
     {
         // Get the file from the request
         $file = $request->file('image');
-    
+
         // Check if a file was uploaded
         if ($file) {
             // Generate a unique file name
             $filename = uniqid('profile_') . '.' . $file->getClientOriginalExtension();
-    
+
             // Save the file to the imagesProfile folder
             $file->move('imagesProfile', $filename);
-    
+
             // Update the user's imageProfile attribute with the file path
             User::where('id_user', $id_user)->update([
                 'imageProfile' => $filename,
             ]);
         }
-    
+
         // Redirect back to the page
         return redirect()->back();
     }
-    
+
      public function getProfProfile($id_user){
         $id_prof=User::join('professeur','users.id_user','=','professeur.user_prof')->where('users.id_user',$id_user)->value('professeur.id_prof');
         $prof=User::join('professeur','users.id_user','=','professeur.user_prof')->where('users.id_user',$id_user)->first();

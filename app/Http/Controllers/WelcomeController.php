@@ -22,5 +22,5 @@ class WelcomeController extends Controller
         $mod=module::count();
         return view('welcome',compact(['etud','prof','mod']));
     }
-    //
+
 }

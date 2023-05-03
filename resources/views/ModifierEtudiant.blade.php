@@ -10,17 +10,17 @@
     <!-- JQuery plugin for multi-select -->
     <link rel="stylesheet" href="{{asset('/css/chosen.min.css')}}" />
     <!-- Website favicon-->
-    <link rel="shortcut icon" href="../img/fsa_agadir.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('/img/fsa_agadir.png')}}" type="image/x-icon">
     <!-- Bootstrap 05 -->
     <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{asset('/css/HomePageAdmin.css')}}" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('/css/all.min.css')}}" />
-    <!-- Google Fonts - Open Sans -->
-    <link rel="preconnect" href="{{asset('https://fonts.googleapis.com')}}">
-    <link rel="preconnect" href="{{asset('https://fonts.gstatic.com')}}" crossorigin>
-    <link href="{{asset('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap')}}" rel="stylesheet">
+    <!-- Google Fonts - Work Sans -->
+    <link rel="preconnect" href="{{asset('https://fonts.googleapis.com')}}" />
+    <link rel="preconnect" href="{{asset('https://fonts.gstatic.com')}}" crossorigin />
+    <link href="{{asset('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700;900&display=swap')}}" rel="stylesheet" />
 </head>
 <body>
 <div class="page">
@@ -32,8 +32,9 @@
     @endif
     <!-- Start Sidebar -->
     <div class="sidebar">
-        <a class="navbar-brand" href="#">
-            <img src="../img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
+        <a class="navbar-brand" href="{{ url('/') }}">
+            <img src="{{asset('/img/fsa_agadir.png')}}" alt="" width="35" height="35" class="d-inline-block
+            align-text-top">
             FSA-Online
         </a>
         <div class="accordion" id="accordionExample">
@@ -41,6 +42,23 @@
                 <i class="fa-regular fa-chart-bar fa-fw"></i>
                 <span>Dashboard</span>
             </a>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                        <i class="fa-solid fa-user-check"></i>
+                        Administrateurs
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="headingFour">
+                    <div class="accordion-body">
+                        <ul>
+                            <li class="active"><a href="{{route('afficheAdminView')}}">Consulter et Modifier</a></li>
+                            <li><a href="{{route('ajouterAdminView')}}">Ajouter Module</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
@@ -110,9 +128,9 @@
     <!-- Start Formulaire -->
     <div class="Ajouter page-content">
         <div class="head">
-            <a href="{{route('adminProfile',Auth::user()->id_user)}}" type="button" class="btn">
-                <img src="../img/professeur.jpg" alt="">
-                Admin
+            <a href="{{route('adminProfile', Auth::user()->id_user)}}" class="btn">
+                <img src="{{Auth::user()->profile_image_url}}" alt="">
+                {{Auth::user()->name}} {{Auth::user()->prenom}}
             </a>
         </div>
         <div class="content">

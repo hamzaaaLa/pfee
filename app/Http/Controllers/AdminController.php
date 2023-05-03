@@ -4,18 +4,82 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Annonce;
-use App\Models\Cours;
-use App\Models\section;
-use App\Models\affectation_section;
-use App\Models\Filiere;
-use App\Models\Module;
-use App\Models\Professeur;
 use App\Models\User;
+use App\Models\Administrateur;
 
 
 class AdminController extends Controller
 {
+    public function index()
+    {
+        $admin = Administrateur::all();
+        return view('visualiserAdmin', ['admin' => $admin]);
+    }
+
+    public function addAdminView(){
+        return view('AjouterAdmin');
+    }
+
+    function addAdmin(Request $request) {
+
+        $user = new User;
+
+        $user->type = 1;
+        $user->name = $request->input('name');
+        $user->prenom = $request->input('prenom');
+        $user->email = $request->input('email');
+        $user->cin = $request->input('cin');
+        $user->telephone = $request->input('tel');
+        $user->nomUtilisateur = $request->input('email');
+        $user->password = bcrypt($request->input('cin'));
+
+        $user->save();
+
+        $admin = new Administrateur;
+
+        $admin->dateEmbauche = $request->input('dateEmbauche');
+        $admin->user_admin = $user->id_user;
+
+        $admin->save();
+
+        return redirect()->back();
+    }
+
+    public function modifierAdminView($id_user) {
+        $user = User::where('id_user', $id_user)->first();
+
+        $admin = User::join('administrateur', 'users.id_user', '=', 'administrateur.user_admin')
+            ->where('id_user', $id_user)->first();
+
+        return view('ModifierAdmin', compact(['admin', 'user']));
+    }
+
+    public function modifierAdmin(Request $request, $id_user) {
+
+        User::where('id_user', $id_user)
+            ->update([
+                'name'=>$request->name,
+                'prenom'=>$request->prenom,
+                'email'=>$request->email,
+                'cin'=>$request->cin,
+                'telephone'=>$request->tel,
+                'password'=>bcrypt($request->cin),
+                'nomUtilisateur'=>$request->email,
+            ]);
+
+        return redirect(route('afficheAdminView'));
+
+    }
+
+    public function supprimerAdmin($id_user) {
+
+        Administrateur::where('user_admin', '=', $id_user)->delete();
+        User::where('id_user', '=', $id_user)->delete();
+
+        return redirect(route('afficheAdminView'));
+
+    }
+
     public function getProfile($id_user){
         $admin=User::join('administrateur','users.id_user','=','administrateur.user_admin')->where('users.id_user',$id_user)->first();
 
@@ -35,6 +99,6 @@ class AdminController extends Controller
         ]);
         return redirect()->back();
     }
-    
+
     //
 }

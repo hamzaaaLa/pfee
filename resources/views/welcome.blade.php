@@ -158,12 +158,12 @@
         </div>
         <div class="info">
             <div class="box">
-                <i class="fa-solid fa-user fa-2x"></i>
+                <i class="fa-solid fa-graduation-cap fa-2x"></i>
                 <span class="number">{{$etud}}</span>
                 <span class="text">Etudiants</span>
             </div>
             <div class="box">
-                <i class="fa-solid fa-user fa-2x"></i>
+                <i class="fa-solid fa-chalkboard-user fa-2x"></i>
                 <span class="number">{{$prof}}</span>
                 <span class="text">Professeurs</span>
             </div>

@@ -163,8 +163,33 @@
                             </span>
                         </div>
                         <div class="content">
-                            <span>Publié {{time_elapsed_string($r->date_created)}}</span>
-                            <p>{{$r->contenu}}</p>
+                            <div class="text">
+                                <span>Publié {{time_elapsed_string($r->date_created)}}</span>
+                                <p>{{$r->contenu}}</p>
+                            </div>
+                            <div class="actions">
+                                <button class="btn" id="actions-list-toggle{{$post->id_post}}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                    </svg>
+                                </button>
+                                <div class="actions-list hidden" id="actions-list{{$post->id_post}}">
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa-solid fa-pen fa-lg"></i>
+                                                Modifier
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa-solid fa-trash fa-lg"></i>
+                                                Supprimer
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -246,6 +271,28 @@
                     }, false)
                 })
         })()
+    </script>
+    <script>
+        var toggleButton = document.getElementById('actions-list-toggle' + {{$post->id_post}});
+        console.log(toggleButton);
+        var element = document.getElementById('actions-list' + {{$post->id_post}});
+        console.log(element);
+
+        toggleButton.addEventListener('click', function() {
+            if(this.classList.contains('clicked')) {
+                this.classList.toggle('clicked');
+            } else {
+                this.classList.add('clicked');
+            }
+            element.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!element.contains(event.target) && !toggleButton.contains(event.target)) {
+                element.classList.add('hidden');
+                toggleButton.classList.toggle('clicked');
+            }
+        });
     </script>
 </body>
 </html>

@@ -21,12 +21,12 @@ class module extends Model
     {
         return $this->belongsTo(filiere::class, 'id_filiere');
     }
-    //relation with annonce 
+    //relation with annonce
     public function Annonce()
     {
         return $this->hasMany(Annonce::class, 'id_module');
     }
-    
+
     //relation between affectation_prof|module
     public function affectation_prof()
     {
@@ -58,9 +58,6 @@ class module extends Model
     {
         $filename = $this->attributes['imageModule'];
         $url = asset('img/module.png');
-    
-      
-    
         return $url;
     }
 }

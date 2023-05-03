@@ -222,39 +222,51 @@
                 </div>
                 <div class="posts">
                     @foreach ($posts as $post)
-                        @if(Auth::user()->type=='prof')
-                            <a class="box" href="{{ route('prof.ForumPost', ['id_module' => $id_module, 'id_post' => $post->id_post]) }}">
-                                <div class="img-container">
+                       <div class="box">
+                            <div class="img-container">
+                                <div class="img-content">
                                     <img src="{{ $post->user->profile_image_url}}" alt="">
                                     <span>{{$post->user->name}} {{$post->user->prenom}}<span>.</span></span>
                                     <span>{{time_elapsed_string($post->date_created)}}</span>
                                 </div>
-                                <div class="post-content">
-                                    <h5>{{$post->titre}}</h5>
-                                    <p>{{$post->contenu}}.</p>
-                                    <div class="reply">
-                                        <i class="fa-regular fa-comment"></i>
-                                        <span>{{ $post->reply_count }} Reponses</span>
+                                <div class="actions">
+                                    <button class="btn" id="actions-list-toggle{{$post->id_post}}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                        </svg>
+                                    </button>
+                                    <div class="actions-list hidden" id="actions-list{{$post->id_post}}">
+                                        <ul>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa-solid fa-pen fa-lg"></i>
+                                                    Modifier
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa-solid fa-trash fa-lg"></i>
+                                                    Supprimer
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
-                            </a>
-                        @else
-                        <a class="box" href="{{ route('etud.ForumPost', ['id_module' => $id_module, 'id_post' => $post->id_post]) }}">
-                            <div class="img-container">
-                                <img src="{{ $post->user->profile_image_url}}" alt="">
-                                <span>{{$post->user->name}} {{$post->user->prenom}}<span>.</span></span>
-                                <span>{{time_elapsed_string($post->date_created)}}</span>
                             </div>
                             <div class="post-content">
                                 <h5>{{$post->titre}}</h5>
                                 <p>{{$post->contenu}}.</p>
-                                <div class="reply">
-                                    <i class="fa-regular fa-comment"></i>
-                                    <span>{{ $post->reply_count }} Reponses</span>
-                                </div>
+                                @if(Auth::user()->type=='prof')
+                                    <a class="reply" href="{{ route('prof.ForumPost', ['id_module' => $id_module, 'id_post' => $post->id_post]) }}">
+                                @else
+                                    <a class="reply" href="{{ route('etud.ForumPost', ['id_module' => $id_module, 'id_post' => $post->id_post]) }}">
+                                @endif
+                                        <i class="fa-regular fa-comment"></i>
+                                        <span>{{ $post->reply_count }} Reponses</span>
+                                    </a>
+                                    </a>
                             </div>
-                        </a>
-                        @endif
+                       </div>
                     @endforeach
                 </div>
             </div>
@@ -278,6 +290,28 @@
                     }, false)
                 })
         })()
+    </script>
+    <script>
+        var toggleButton = document.getElementById('actions-list-toggle' + {{$post->id_post}});
+        console.log(toggleButton);
+        var element = document.getElementById('actions-list' + {{$post->id_post}});
+        console.log(element);
+
+        toggleButton.addEventListener('click', function() {
+            if(this.classList.contains('clicked')) {
+                this.classList.toggle('clicked');
+            } else {
+                this.classList.add('clicked');
+            }
+            element.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!element.contains(event.target) && !toggleButton.contains(event.target)) {
+                element.classList.add('hidden');
+                toggleButton.classList.toggle('clicked');
+            }
+        });
     </script>
 </body>
 </html>

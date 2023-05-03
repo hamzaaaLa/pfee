@@ -1,7 +1,5 @@
-
-
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -9,24 +7,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Visualiser Etudiants</title>
     <!-- Website favicon-->
-    <link rel="shortcut icon" href="../img/fsa_agadir.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('/img/fsa_agadir.png')}}" type="image/x-icon">
     <!-- Bootstrap 05 -->
     <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{asset('/css/HomePageAdmin.css')}}" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('/css/all.min.css')}}" />
-    <!-- Google Fonts - Open Sans -->
-    <link rel="preconnect" href="{{asset('https://fonts.googleapis.com')}}">
-    <link rel="preconnect" href="{{asset('https://fonts.gstatic.com')}}" crossorigin>
-    <link href="{{asset('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap')}}" rel="stylesheet">
+    <!-- Google Fonts - Work Sans -->
+    <link rel="preconnect" href="{{asset('https://fonts.googleapis.com')}}" />
+    <link rel="preconnect" href="{{asset('https://fonts.gstatic.com')}}" crossorigin />
+    <link href="{{asset('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700;900&display=swap')}}" rel="stylesheet" />
 </head>
 <body>
 <div class="page">
     <!-- Start Sidebar -->
     <div class="sidebar">
-        <a class="navbar-brand" href="#">
-            <img src="../img/fsa_agadir.png" alt="" width="40" height="30" class="d-inline-block align-text-top">
+        <a class="navbar-brand" href="{{ url('/') }}">
+            <img src="{{asset('/img/fsa_agadir.png')}}" alt="" width="35" height="35" class="d-inline-block align-text-top">
             FSA-Online
         </a>
         <div class="accordion" id="accordionExample">
@@ -34,6 +32,23 @@
                 <i class="fa-regular fa-chart-bar fa-fw"></i>
                 <span>Dashboard</span>
             </a>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <i class="fa-solid fa-user-check"></i>
+                        Administrateurs
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+                    <div class="accordion-body">
+                        <ul>
+                            <li><a href="{{route('afficheAdminView')}}">Consulter et Modifier</a></li>
+                            <li><a href="{{route('ajouterModuleView')}}">Ajouter Module</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -100,11 +115,10 @@
     </div>
     <!-- End Sidebar -->
     <div class="visualiser page-content">
-<!--        <div class="container-fluid">-->
             <div class="head">
-                <a href="{{route('adminProfile',Auth::user()->id_user)}}" type="button" class="btn">
-                    <img src="../img/professeur.jpg" alt="">
-                    Admin
+                <a href="{{route('adminProfile', Auth::user()->id_user)}}" class="btn">
+                    <img src="{{Auth::user()->profile_image_url}}" alt="">
+                    {{Auth::user()->name}} {{Auth::user()->prenom}}
                 </a>
             </div>
             <div class="content">
@@ -112,7 +126,7 @@
                     <h2>Données Etudiants</h2>
                     <div class="search">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="search" id="search" placeholder="Saisir un CIN">
+                        <input type="search" id="search" placeholder="Saisir un nom">
                     </div>
                     <a href="{{route('ajoutEtud')}}" type="button" class="btn btn-primary">Ajouter Etudiant</a>
                 </div>
@@ -161,8 +175,8 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="row-cin">{{ $etudiant->user->cin }}</td>
-                            <td>{{ $etudiant->user->name }} </td>
+                            <td>{{ $etudiant->user->cin }}</td>
+                            <td class="row-name">{{ $etudiant->user->name }} </td>
                             <td>{{ $etudiant->user->prenom }}</td>
                             <td>{{ $etudiant->user->email }}</td>
                             <td>{{ $etudiant->user->telephone }}</td>
@@ -182,8 +196,6 @@
                                     @endforeach
                                 </ul>
                             </td>
-                            {{-- <td><img src="data:image/jpg;base64,{{ $etudiant->imageProfile }}" width="100"></td> --}}
-
                         </tr>
                         @endforeach
                         </tbody>
@@ -203,9 +215,9 @@
         var searchText = event.target.value.toLowerCase();
 
         rows.forEach(function(row) {
-            var cin = row.querySelector('td.row-cin').textContent.toLowerCase();
+            var name = row.querySelector('td.row-name').textContent.toLowerCase();
 
-            if(cin.includes(searchText)) {
+            if(name.includes(searchText)) {
                 row.style.display = 'table-row';
             } else {
                 row.style.display = 'none';

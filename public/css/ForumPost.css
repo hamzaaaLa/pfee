@@ -13,6 +13,17 @@ body {
 a {
     text-decoration: none;
 }
+ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.clicked {
+    background-color: #cdcdcd !important;
+}
+.hidden {
+    display: none;
+}
 /* End Global Rules */
 /* Start Components */
 .header {
@@ -230,13 +241,44 @@ input[type="submit"] {
     background-color: white;
     padding: 10px 20px;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
-.reply .replies .box .content span {
+.reply .replies .box .content .text span {
     font-size: 14px;
     color: #777;
 }
-.reply .replies .box .content p {
+.reply .replies .box .content .text p {
     margin-top: 10px;
+}
+.reply .replies .box .content .actions {
+    position: relative;
+}
+.reply .replies .box .content .actions button {
+    transition: var(--main-transition);
+    border-radius: 50%;
+    border-color: transparent;
+}
+.reply .replies .box .content .actions .actions-list {
+    position: absolute;
+    right: 0;
+    padding: 11px 0;
+    background-color: #c5c5c5;
+    border-radius: 15px;
+    width: 190px;
+    z-index: 10;
+}
+.reply .replies .box .content .actions .actions-list li {
+    padding: 10px 20px;
+}
+.reply .replies .box .content .actions .actions-list li:hover {
+    background-color: #8b8b8b;
+}
+.reply .replies .box .content .actions .actions-list a {
+    color: black;
+}
+.reply .replies .box .content .actions .actions-list a svg {
+    margin-right: 16px;
 }
 .reply-form {
     display: flex;

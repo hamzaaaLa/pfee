@@ -81,6 +81,12 @@ Route::middleware(['auth','user-access:admin'])->group(function () {
     Route::get('admin/afficheEtud',[EtudiantController::class,'index'])->name('afficheEtud');
     Route::get('admin/afficheProf',[ProfController::class,'index'])->name('afficheProf');
     Route::get('admin/afficheModule',[ModuleController::class,'index'])->name('afficheModule');
+    Route::get('admin/afficheAdmin', [AdminController::class, 'index'])->name('afficheAdminView');
+    Route::get('admin/ajouterAdmin', [AdminController::class, 'addAdminView'])->name('ajouterAdminView');
+    Route::post('admin/ajouterAdminF', [AdminController::class, 'addAdmin'])->name('ajouterAdmin');
+    Route::get('admin/modifierAdmin/{id_user}', [AdminController::class, 'modifierAdminView'])->name('modifierAdminView');
+    Route::post('admin/modifierAdminF/{id_user}', [AdminController::class, 'modifierAdmin'])->name('modifierAdmin');
+    Route::get('/supprimerAdmin/{id_user}',[AdminController::class,'supprimerAdmin'])->name('supprimerAdmin');
     Route::get('/editEtudiant/{id_user}',[EtudiantController::class,'edit'])->name('editerEtudiant');
     Route::post('/updatEtud/{id_user}',[EtudiantController::class,'update'])->name('updateEtud');
     Route::get('/consulter',[EtudiantController::class,'consulter'])->name('consulterEtud');
@@ -101,7 +107,7 @@ Route::middleware(['auth','user-access:admin'])->group(function () {
     Route::get('/supprimerEtudiant/{id_user}',[EtudiantController::class,'delete'])->name('deleteEtudiant');
     Route::get('admin/profile/{id_user}',[AdminController::class,'getProfile'])->name('adminProfile');
     Route::post('admin/profile/modifier/{id_user}',[AdminController::class,'updateProfile'])->name('adminUpdateProfile');
-    
+
 
     /*Route::get('/admin/ajouterProfForm',function(){
         return view('AjouterProfesseur');

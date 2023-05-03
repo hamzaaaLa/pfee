@@ -32,6 +32,23 @@
                     <span>Dashboard</span>
                 </a>
                 <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <i class="fa-solid fa-user-check"></i>
+                            Administrateurs
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour">
+                        <div class="accordion-body">
+                            <ul>
+                                <li><a href="{{route('afficheAdminView')}}">Consulter et Modifier</a></li>
+                                <li><a href="{{route('ajouterModuleView')}}">Ajouter Module</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                             <i class="fa-solid fa-graduation-cap"></i>
@@ -109,12 +126,17 @@
                 </div>
                 <div class="info">
                     <a class="box" href="{{route('afficheEtud')}}">
-                        <i class="fa-solid fa-user fa-2x"></i>
+                        <i class="fa-solid fa-user-check fa-2x"></i>
+                        <span class="number">{{$admin}}</span>
+                        <span class="text">Administrateurs</span>
+                    </a>
+                    <a class="box" href="{{route('afficheEtud')}}">
+                        <i class="fa-solid fa-graduation-cap fa-2x"></i>
                         <span class="number">{{$etud}}</span>
                         <span class="text">Etudiants</span>
                     </a>
                     <a class="box" href="{{route('afficheProf')}}">
-                        <i class="fa-solid fa-user fa-2x"></i>
+                        <i class="fa-solid fa-chalkboard-user fa-2x"></i>
                         <span class="number">{{$prof}}</span>
                         <span class="text">Professeurs</span>
                     </a>
