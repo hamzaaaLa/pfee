@@ -167,100 +167,199 @@
                                 <span>Publié {{time_elapsed_string($r->date_created)}}</span>
                                 <p>{{$r->contenu}}</p>
                             </div>
-                            <div class="actions">
-                                <button class="btn" id="actions-list-toggle{{$r->id_reply}}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                                    </svg>
-                                </button>
-                                <div class="actions-list hidden" id="actions-list{{$r->id_reply}}">
-                                    <ul>
-                                        <li>
-                                            <!-- Modifier Reply -->
-                                            <button class="btn action-btn" type="button" data-bs-toggle="modal"
-                                                    data-bs-target="#modifierReply{{$r->id_reply}}Modal">
-                                                <i class="fa-solid fa-pen fa-lg"></i>
-                                                Modifier
-                                            </button>
+                            @if($r->user->id_user === Auth::user()->id_user)
+                                @if(Auth::user()->type=='prof')
+                                    <div class="actions">
+                                        <button class="btn" id="actions-list-toggle{{$r->id_reply}}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                            </svg>
+                                        </button>
+                                        <div class="actions-list hidden" id="actions-list{{$r->id_reply}}">
+                                            <ul>
+                                                <li>
+                                                    <!-- Modifier Reply -->
+                                                    <button class="btn action-btn" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#modifierReply{{$r->id_reply}}Modal">
+                                                        <i class="fa-solid fa-pen fa-lg"></i>
+                                                        Modifier
+                                                    </button>
 
-                                            <!-- Modifier Reply Modal -->
-                                            <div class="modal fade" id="modifierReply{{$r->id_reply}}Modal"
-                                                 data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1"
-                                                 aria-labelledby="modifierReply{{$r->id_reply}}ModalLabel"
-                                                 aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="container">
-                                                            <form class="row g-3 needs-validation" action="" method="POST" novalidate>
-                                                                @csrf
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title"
-                                                                        id="modifierReply{{$r->id_reply}}ModalLabel">Modifier Réponse</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="mb-3">
-                                                                        <label for="validationTextarea" class="form-label">Contenue</label>
-                                                                        <textarea class="form-control" name="contenue"
-                                                                                  id="validationTextarea"
-                                                                                  rows="5" required></textarea>
-                                                                        <div class="valid-feedback">
-                                                                            C'est bon!
+                                                    <!-- Modifier Reply Modal -->
+                                                    <div class="modal fade" id="modifierReply{{$r->id_reply}}Modal"
+                                                        data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1"
+                                                        aria-labelledby="modifierReply{{$r->id_reply}}ModalLabel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="container">
+                                                                    <form class="row g-3 needs-validation" action="{{route('prof.reply.update',['id_module' => $id_module, 'id_post' => $post->id_post,'id_reply'=>$r->id_reply])}}" method="POST" novalidate>
+                                                                        @csrf
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title"
+                                                                                id="modifierReply{{$r->id_reply}}ModalLabel">Modifier Réponse</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                         </div>
-                                                                        <div class="invalid-feedback">
-                                                                            Veuillez insérer du context.
+                                                                        <div class="modal-body">
+                                                                            <div class="mb-3">
+                                                                                <label for="validationTextarea" class="form-label">Contenue</label>
+                                                                                <textarea class="form-control" name="contenue"
+                                                                                        id="validationTextarea"
+                                                                                        rows="5" required></textarea>
+                                                                                <div class="valid-feedback">
+                                                                                    C'est bon!
+                                                                                </div>
+                                                                                <div class="invalid-feedback">
+                                                                                    Veuillez insérer du context.
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuuler</button>
+                                                                            <button type="submit" class="btn btn-primary">Modifier</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <!-- Supprimer Reply -->
+                                                    <button class="btn action-btn" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#supprimerReply{{$r->id_reply}}Modal">
+                                                        <i class="fa-solid fa-trash fa-lg"></i>
+                                                        Supprimer
+                                                    </button>
+
+                                                    <!-- Supprimer Reply Modal -->
+                                                    <div class="modal fade" id="supprimerReply{{$r->id_reply}}Modal"
+                                                        data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1"
+                                                        aria-labelledby="supprimerReply{{$r->id_reply}}ModalLabel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="container">
+                                                                    <form action="{{route('prof.reply.delete',['id_module' => $id_module, 'id_post' => $post->id_post,'id_reply'=>$r->id_reply])}}" method="POST">
+                                                                        @csrf
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title"
+                                                                                id="supprimerReply{{$r->id_reply}}ModalLabel">Supprimer Réponse</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            Voulez-vous vraiment supprimer cette réponse?
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                                            <button type="submit" class="btn btn-danger" style="color: white;">Supprimer</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                @else
+                                <div class="actions">
+                                    <button class="btn" id="actions-list-toggle{{$r->id_reply}}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                        </svg>
+                                    </button>
+                                    <div class="actions-list hidden" id="actions-list{{$r->id_reply}}">
+                                        <ul>
+                                            <li>
+                                                <!-- Modifier Reply -->
+                                                <button class="btn action-btn" type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#modifierReply{{$r->id_reply}}Modal">
+                                                    <i class="fa-solid fa-pen fa-lg"></i>
+                                                    Modifier
+                                                </button>
+
+                                                <!-- Modifier Reply Modal -->
+                                                <div class="modal fade" id="modifierReply{{$r->id_reply}}Modal"
+                                                    data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1"
+                                                    aria-labelledby="modifierReply{{$r->id_reply}}ModalLabel"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="container">
+                                                                <form class="row g-3 needs-validation" action="{{route('etud.reply.update',['id_module' => $id_module, 'id_post' => $post->id_post,'id_reply'=>$r->id_reply])}}" method="POST" novalidate>
+                                                                    @csrf
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title"
+                                                                            id="modifierReply{{$r->id_reply}}ModalLabel">Modifier Réponse</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="mb-3">
+                                                                            <label for="validationTextarea" class="form-label">Contenue</label>
+                                                                            <textarea class="form-control" name="contenue"
+                                                                                    id="validationTextarea"
+                                                                                    rows="5" required></textarea>
+                                                                            <div class="valid-feedback">
+                                                                                C'est bon!
+                                                                            </div>
+                                                                            <div class="invalid-feedback">
+                                                                                Veuillez insérer du context.
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuuler</button>
-                                                                    <button type="button" class="btn btn-primary">Modifier</button>
-                                                                </div>
-                                                            </form>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuuler</button>
+                                                                        <button type="submit" class="btn btn-primary">Modifier</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <!-- Supprimer Reply -->
-                                            <button class="btn action-btn" type="button" data-bs-toggle="modal"
-                                                    data-bs-target="#supprimerReply{{$r->id_reply}}Modal">
-                                                <i class="fa-solid fa-trash fa-lg"></i>
-                                                Supprimer
-                                            </button>
+                                            </li>
+                                            <li>
+                                                <!-- Supprimer Reply -->
+                                                <button class="btn action-btn" type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#supprimerReply{{$r->id_reply}}Modal">
+                                                    <i class="fa-solid fa-trash fa-lg"></i>
+                                                    Supprimer
+                                                </button>
 
-                                            <!-- Supprimer Reply Modal -->
-                                            <div class="modal fade" id="supprimerReply{{$r->id_reply}}Modal"
-                                                 data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1"
-                                                 aria-labelledby="supprimerReply{{$r->id_reply}}ModalLabel"
-                                                 aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="container">
-                                                            <form action="" method="POST">
-                                                                @csrf
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title"
-                                                                        id="supprimerReply{{$r->id_reply}}ModalLabel">Supprimer Réponse</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    Voulez-vous vraiment supprimer cette réponse?
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                                                    <button type="submit" class="btn btn-danger" style="color: white;">Supprimer</button>
-                                                                </div>
-                                                            </form>
+                                                <!-- Supprimer Reply Modal -->
+                                                <div class="modal fade" id="supprimerReply{{$r->id_reply}}Modal"
+                                                    data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1"
+                                                    aria-labelledby="supprimerReply{{$r->id_reply}}ModalLabel"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="container">
+                                                                <form action="{{route('etud.reply.delete',['id_module' => $id_module, 'id_post' => $post->id_post,'id_reply'=>$r->id_reply])}}" method="POST">
+                                                                    @csrf
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title"
+                                                                            id="supprimerReply{{$r->id_reply}}ModalLabel">Supprimer Réponse</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        Voulez-vous vraiment supprimer cette réponse?
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                                        <button type="submit" class="btn btn-danger" style="color: white;">Supprimer</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
+                                @endif
+                            @endif
                             <script>
                                 var toggleButton{{$r->id_reply}} = document.getElementById('actions-list-toggle' + {{$r->id_reply}});
                                 console.log(toggleButton{{$r->id_reply}});

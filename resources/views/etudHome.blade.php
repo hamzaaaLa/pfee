@@ -149,7 +149,7 @@
                                              aria-labelledby="example{{$af->module->id_module}}ModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
-                                                    <form class="needs-validation" enctype="multipart/form-data" method="post" action="" novalidate>
+                                                    <form class="needs-validation" enctype="multipart/form-data" action="{{route('modifierImageModule',$af->module->id_module)}}" method="post"  novalidate>
                                                         @csrf
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="example{{$af->module->id_module}}ModalLabel">Modifier l'image</h5>

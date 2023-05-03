@@ -100,13 +100,13 @@
     <div class="cours">
         <div class="container">
             <div class="header">
-                <h1>{{$id_module->libelleModule}}</h1>
+                <h1>{{$module->libelleModule}}</h1>
                 @if(Auth::user()->type=='prof')
                     @foreach (Auth::user()->professeur as $prof)
                         @foreach ($prof->affectation_prof as $af)
                         @endforeach
                     @endforeach
-                        <a class="forum-btn" href="{{route('prof.Forum',$af->module->id_module)}}">
+                        <a class="forum-btn" href="{{route('prof.Forum',$module)}}">
                             <span class="circle" aria-hidden="true">
                             <span class="icon arrow"></span>
                             </span>
@@ -117,7 +117,7 @@
                         @foreach ($etud->affectation_etud as $af_etud)
                         @endforeach
                     @endforeach
-                        <a class="forum-btn" href="{{route('etud.Forum',$af_etud->module->id_module)}}">
+                        <a class="forum-btn" href="{{route('etud.Forum',$module)}}">
                             <span class="circle" aria-hidden="true">
                             <span class="icon arrow"></span>
                             </span>
@@ -172,7 +172,7 @@
                                                     <label for="sectionCours" class="form-label">Section</label>
                                                     <select class="form-select" name="sectionCours" id="sectionCours" aria-label="Default select example">
                                                         <option selected>Choisir...</option>
-                                                        @foreach ($id_module->affectation_section as $aff_sec)
+                                                        @foreach ($module->affectation_section as $aff_sec)
                                                             <option>
                                                                 {{ $aff_sec->section->titre_section }}
                                                             </option>
@@ -236,7 +236,7 @@
                         <div class="sectionError"></div>
                     </div>
                     <div class="accordion" id="accordionPanelsStayOpen">
-                        @foreach ($id_module->affectation_section as $aff_sec)
+                        @foreach ($module->affectation_section as $aff_sec)
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="panelsStayOpen-{{ $aff_sec->section->titre_section }}">
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ $aff_sec->section->id_section }}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{ $aff_sec->section->id_section }}">
@@ -395,7 +395,7 @@
                     </div>
                 @else
                     <div class="accordion" id="accordionPanelsStayOpen">
-                        @foreach ($id_module->affectation_section as $aff_sec)
+                        @foreach ($module->affectation_section as $aff_sec)
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="panelsStayOpen-{{ $aff_sec->section->titre_section }}">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ $aff_sec->section->id_section }}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{ $aff_sec->section->id_section }}">

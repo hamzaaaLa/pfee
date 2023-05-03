@@ -19,6 +19,7 @@ use App\Models\reply;
 
 class espaceController extends Controller
 {
+    //section crud
     public function store(Request $request, $id_module)
     {       
         $professeur = auth()->user();
@@ -87,9 +88,10 @@ class espaceController extends Controller
         $section = new section();
         $section::where('id_section', $id_section)->update(['titre_section' => $request->input('nomSection')]);
         
-        return redirect()->back()->with('success', 'La section a été modifiée avec succès!');;
+        return redirect()->back()->with('success', 'La section a été modifiée avec succès!');
     }
 
+    //cours crud
     public function add_cour(Request $request,$id_module)
     {
         $nomCours = $request->input('nomCours');
@@ -151,7 +153,7 @@ class espaceController extends Controller
             abort(404);
         }
     }
-    
+    //posts crud 
     public function store_posts(Request $request,$id_module){
         $id_user = auth()->user()->id_user;
         $posts = new posts();
@@ -163,6 +165,33 @@ class espaceController extends Controller
         return back()->with('success', 'Post added successfully!');
     }
 
+    public function update_posts(Request $request,$id_module,$id_post){
+        $posts= new posts();
+        $posts::where('id_post',$id_post)->update(['titre'=>$request->input('titre'),'contenu'=>$request->input('contenue')]);
+        return redirect()->back()->with('success', 'La publication a été modifiée avec succès!');
+    }
+    public function delete_posts($id_module,$id_post){
+        
+        $has_replies = reply::whereHas('posts', function($query) use ($id_post){
+            $query->where('id_post', $id_post);
+        })->exists();
+
+        if($has_replies)
+        {
+            $id_reply=reply::select('id_reply')
+                    ->where('id_post','=',$id_post)
+                    ->get();
+            foreach($id_reply as $reply)
+            {
+                $replies = reply::find($reply->id_reply);
+                $replies->delete();
+            }
+        }
+        $post = posts::find($id_post);
+        $post->delete();
+        return redirect()->back()->with('success', 'La publication a été supprimée avec succès!');
+    }
+    //reply crud
     public function store_reply(Request $request,$id_module,$id_post){
         $id_user = auth()->user()->id_user;
         $reply = new reply();
@@ -173,4 +202,18 @@ class espaceController extends Controller
         $reply->save();
         return back()->with('success', 'Post added successfully!');
     }
+    public function update_reply(Request $request,$id_module,$id_post,$id_reply){
+        $reply= new reply();
+        $reply::where('id_reply',$id_reply)->update(['contenu'=>$request->input('contenue')]);
+        return redirect()->back()->with('success', 'La réponse a été modifiée avec succès!');
+    }
+    public function delete_reply(Request $request,$id_module,$id_post,$id_reply){
+        
+        reply::find($id_reply)->delete();
+
+        return redirect()->back()->with('success', 'La réponse a été supprimé avec succès!');
+    }
+
+    
+
 }

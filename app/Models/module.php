@@ -57,7 +57,12 @@ class module extends Model
     public function getModuleImageUrlAttribute(): string
     {
         $filename = $this->attributes['imageModule'];
-        $url = asset('img/module.png');
-        return $url;
+    
+        if ($filename) {
+            return asset('imagesModule/' . $filename);
+        } else {
+            return asset('img/module.png');
+        }
     }
+
 }

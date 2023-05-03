@@ -38,7 +38,11 @@ Route::middleware(['auth','user-access:user'])->group(function () {
     Route::get('/dashboard/EspaceCours/{id_module}/Forum', [HomeController::class, 'Forum'])->name('etud.Forum');
     Route::get('/dashboard/EspaceCours/{id_module}/Forum/ForumPost/{id_post}', [HomeController::class, 'ForumPost'])->name('etud.ForumPost');
     Route::post('/dashboard/EspaceCours/{id_module}/Forum/posts', [espaceController::class, 'store_posts'])->name('etud.add_post');
+    Route::POST('/dashboard/EspaceCours/{id_module}/Forum/post_update/{id_post}',[espaceController::class, 'update_posts'])->name('etud.post.update');
+    Route::POST('/dashboard/EspaceCours/{id_module}/Forum/post_delete/{id_post}',[espaceController::class, 'delete_posts'])->name('etud.post.delete');
     Route::post('/dashboard/EspaceCours/{id_module}/Forum/ForumPost/{id_post}/replies', [espaceController::class, 'store_reply'])->name('etud.add_reply');
+    Route::post('/dashboard/EspaceCours/{id_module}/Forum/ForumPost/{id_post}/replies/reply_update/{id_reply}', [espaceController::class, 'update_reply'])->name('etud.reply.update');
+    Route::post('/dashboard/EspaceCours/{id_module}/Forum/ForumPost/{id_post}/replies/reply_delete/{id_reply}', [espaceController::class, 'delete_reply'])->name('etud.reply.delete');
     Route::get('etudiant/profile/{id_user}',[EtudiantController::class,'getProfile'])->name('etudiantProfile');
     Route::post('etudiant/profile/modifier/{id_user}',[EtudiantController::class,'modifierProfile'])->name('modifierProfile');
     Route::get('etudiant/prof/profile/{id_user}',[EtudiantController::class,'getProfProfile'])->name('etudProfProfile');
@@ -54,6 +58,7 @@ Route::middleware(['auth','user-access:prof'])->group(function () {
     Route::post('/prof/dashboard/get-modules', [HomeController::class, 'getModules'])->name('get.modules');
     Route::post('/prof/dashboard/annonce_store', [HomeController::class, 'store'])->name('annonce.store');
     Route::POST('/prof/dashboard/annoce_delete/{id_annonce}',[HomeController::class, 'delete'])->name('annonce.delete');
+    Route::post('/prof/dashboard/{$id_module}', [HomeController::class, 'modifierImageModule'])->name('modifierImageModule');
     Route::get('/prof/dashboard/EspaceCours/{id_module}', [HomeController::class, 'EspaceCours'])->name('prof.EspaceCours');
     Route::post('/prof/dashboard/EspaceCours/section_store/{id_module}', [espaceController::class, 'store'])->name('section.store');
     Route::POST('/prof/dashboard/EspaceCours/section_delete/{id_section}', [espaceController::class, 'delete_section'])->name('section.delete');
@@ -65,7 +70,11 @@ Route::middleware(['auth','user-access:prof'])->group(function () {
     Route::get('/prof/dashboard/EspaceCours/{id_module}/Forum', [HomeController::class, 'Forum'])->name('prof.Forum');
     Route::get('/prof/dashboard/EspaceCours/{id_module}/Forum/ForumPost/{id_post}', [HomeController::class, 'ForumPost'])->name('prof.ForumPost');
     Route::post('/prof/dashboard/EspaceCours/{id_module}/Forum/posts', [espaceController::class, 'store_posts'])->name('prof.add_post');
+    Route::POST('/prof/dashboard/EspaceCours/{id_module}/Forum/post_update/{id_post}',[espaceController::class, 'update_posts'])->name('prof.post.update');
+    Route::POST('/prof/dashboard/EspaceCours/{id_module}/Forum/post_delete/{id_post}',[espaceController::class, 'delete_posts'])->name('prof.post.delete');
     Route::post('/prof/dashboard/EspaceCours/{id_module}/Forum/ForumPost/{id_post}/replies', [espaceController::class, 'store_reply'])->name('prof.add_reply');
+    Route::post('/prof/dashboard/EspaceCours/{id_module}/Forum/ForumPost/{id_post}/replies/reply_update/{id_reply}', [espaceController::class, 'update_reply'])->name('prof.reply.update');
+    Route::post('/prof/dashboard/EspaceCours/{id_module}/Forum/ForumPost/{id_post}/replies/reply_delete/{id_reply}', [espaceController::class, 'delete_reply'])->name('prof.reply.delete');
     Route::get('prof/profile/{id_user}',[ProfController::class,'getProfile'])->name('profProfile');
     Route::post('prof/profile/modifier/{id_user}',[ProfController::class,'modifierProfile'])->name('profModifierProfile');
     Route::post('prof/profile/modifierPhotoProfile/{id_user}',[ProfController::class,'modifierPhoto'])->name('profModifierPhoto');

@@ -229,109 +229,217 @@
                                     <span>{{$post->user->name}} {{$post->user->prenom}}<span>.</span></span>
                                     <span>{{time_elapsed_string($post->date_created)}}</span>
                                 </div>
-                                <div class="actions">
-                                    <button class="btn" id="actions-list-toggle{{$post->id_post}}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                                        </svg>
-                                    </button>
-                                    <div class="actions-list hidden" id="actions-list{{$post->id_post}}">
-                                        <ul>
-                                            <li>
-                                                <!-- Modifier Post -->
-                                                <button class="btn action-btn" type="button" data-bs-toggle="modal"
-                                                        data-bs-target="#modifierPost{{$post->id_post}}Modal">
-                                                    <i class="fa-solid fa-pen fa-lg"></i>
-                                                    Modifier
-                                                </button>
+                                @if($post->user->id_user === Auth::user()->id_user)
+                                    @if(Auth::user()->type=='prof')
+                                        <div class="actions">
+                                            <button class="btn" id="actions-list-toggle{{$post->id_post}}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                                </svg>
+                                            </button>
+                                            <div class="actions-list hidden" id="actions-list{{$post->id_post}}">
+                                                <ul>
+                                                    <li>
+                                                        <!-- Modifier Post -->
+                                                        <button class="btn action-btn" type="button" data-bs-toggle="modal"
+                                                                data-bs-target="#modifierPost{{$post->id_post}}Modal">
+                                                            <i class="fa-solid fa-pen fa-lg"></i>
+                                                            Modifier
+                                                        </button>
 
-                                                <!-- Modifier Post Modal -->
-                                                <div class="modal fade" id="modifierPost{{$post->id_post}}Modal"
-                                                     data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifierPost{{$post->id_post}}ModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="container">
-                                                                <form class="row g-3 needs-validation" action="" method="POST" novalidate>
-                                                                    @csrf
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title"
-                                                                            id="modifierPost{{$post->id_post}}ModalLabel">Modifier Publication</h5>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <!-- Modifier Post Modal -->
+                                                        <div class="modal fade" id="modifierPost{{$post->id_post}}Modal"
+                                                            data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifierPost{{$post->id_post}}ModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="container">
+                                                                        <form class="row g-3 needs-validation" action="{{route('prof.post.update',['id_module' => $id_module, 'id_post' => $post->id_post])}}" method="POST" novalidate>
+                                                                            @csrf
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="modifierPost{{$post->id_post}}ModalLabel">Modifier Publication</h5>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <div class="mb-3">
+                                                                                    <label for="titre" class="form-label">Titre</label>
+                                                                                    <input type="text" name="titre" class="form-control" value="{{$post->titre}}" id="titre" required>
+                                                                                    <div class="valid-feedback">
+                                                                                        C'est bon!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Veuillez insérer un titre.
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-3">
+                                                                                    <label for="validationTextarea" class="form-label">Contenue</label>
+                                                                                    <textarea class="form-control" name="contenue"
+                                                                                            id="validationTextarea"
+                                                                                            rows="5" required>{{$post->contenu}}</textarea>
+                                                                                    <div class="valid-feedback">
+                                                                                        C'est bon!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Veuillez insérer du context.
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuuler</button>
+                                                                                <button type="submit" class="btn btn-primary">Modifier</button>
+                                                                            </div>
+                                                                        </form>
                                                                     </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="mb-3">
-                                                                            <label for="titre" class="form-label">Titre</label>
-                                                                            <input type="text" name="titre" class="form-control" id="titre" required>
-                                                                            <div class="valid-feedback">
-                                                                                C'est bon!
-                                                                            </div>
-                                                                            <div class="invalid-feedback">
-                                                                                Veuillez insérer un titre.
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mb-3">
-                                                                            <label for="validationTextarea" class="form-label">Contenue</label>
-                                                                            <textarea class="form-control" name="contenue"
-                                                                                      id="validationTextarea"
-                                                                                      rows="5" required></textarea>
-                                                                            <div class="valid-feedback">
-                                                                                C'est bon!
-                                                                            </div>
-                                                                            <div class="invalid-feedback">
-                                                                                Veuillez insérer du context.
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuuler</button>
-                                                                        <button type="button" class="btn btn-primary">Modifier</button>
-                                                                    </div>
-                                                                </form>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <!-- Supprimer Post -->
-                                                <button class="btn action-btn" type="button" data-bs-toggle="modal"
-                                                        data-bs-target="#supprimerPost{{$post->id_post}}Modal">
-                                                    <i class="fa-solid fa-trash fa-lg"></i>
-                                                    Supprimer
-                                                </button>
+                                                    </li>
+                                                    <li>
+                                                        <!-- Supprimer Post -->
+                                                        <button class="btn action-btn" type="button" data-bs-toggle="modal"
+                                                                data-bs-target="#supprimerPost{{$post->id_post}}Modal">
+                                                            <i class="fa-solid fa-trash fa-lg"></i>
+                                                            Supprimer
+                                                        </button>
 
-                                                <!-- Supprimer Post Modal -->
-                                                <div class="modal fade" id="supprimerPost{{$post->id_post}}Modal"
-                                                     data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1"
-                                                     aria-labelledby="supprimerPost{{$post->id_post}}ModalLabel"
-                                                     aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="container">
-                                                                <form action="" method="POST">
-                                                                    @csrf
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title"
-                                                                            id="supprimerPost{{$post->id_post}}ModalLabel">Supprimer Publication</h5>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <!-- Supprimer Post Modal -->
+                                                        <div class="modal fade" id="supprimerPost{{$post->id_post}}Modal"
+                                                            data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1"
+                                                            aria-labelledby="supprimerPost{{$post->id_post}}ModalLabel"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="container">
+                                                                        <form action="{{route('prof.post.delete',['id_module' => $id_module, 'id_post' => $post->id_post])}}" method="POST">
+                                                                            @csrf
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="supprimerPost{{$post->id_post}}ModalLabel">Supprimer Publication</h5>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                Voulez-vous vraiment supprimer cette
+                                                                                publication?
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                                                <button type="submit" class="btn btn-danger" style="color: white;">Supprimer</button>
+                                                                            </div>
+                                                                        </form>
                                                                     </div>
-                                                                    <div class="modal-body">
-                                                                        Voulez-vous vraiment supprimer cette
-                                                                        publication?
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                                                        <button type="submit" class="btn btn-danger" style="color: white;">Supprimer</button>
-                                                                    </div>
-                                                                </form>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="actions">
+                                            <button class="btn" id="actions-list-toggle{{$post->id_post}}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                                </svg>
+                                            </button>
+                                            <div class="actions-list hidden" id="actions-list{{$post->id_post}}">
+                                                <ul>
+                                                    <li>
+                                                        <!-- Modifier Post -->
+                                                        <button class="btn action-btn" type="button" data-bs-toggle="modal"
+                                                                data-bs-target="#modifierPost{{$post->id_post}}Modal">
+                                                            <i class="fa-solid fa-pen fa-lg"></i>
+                                                            Modifier
+                                                        </button>
+
+                                                        <!-- Modifier Post Modal -->
+                                                        <div class="modal fade" id="modifierPost{{$post->id_post}}Modal"
+                                                            data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifierPost{{$post->id_post}}ModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="container">
+                                                                        <form class="row g-3 needs-validation" action="{{route('etud.post.update',['id_module' => $id_module, 'id_post' => $post->id_post])}}" method="POST" novalidate>
+                                                                            @csrf
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="modifierPost{{$post->id_post}}ModalLabel">Modifier Publication</h5>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <div class="mb-3">
+                                                                                    <label for="titre" class="form-label">Titre</label>
+                                                                                    <input type="text" name="titre" class="form-control" value="{{$post->titre}}" id="titre" required>
+                                                                                    <div class="valid-feedback">
+                                                                                        C'est bon!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Veuillez insérer un titre.
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-3">
+                                                                                    <label for="validationTextarea" class="form-label">Contenue</label>
+                                                                                    <textarea class="form-control" name="contenue"
+                                                                                            id="validationTextarea"
+                                                                                            rows="5" required>{{$post->contenu}}</textarea>
+                                                                                    <div class="valid-feedback">
+                                                                                        C'est bon!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Veuillez insérer du context.
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuuler</button>
+                                                                                <button type="submit" class="btn btn-primary">Modifier</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <!-- Supprimer Post -->
+                                                        <button class="btn action-btn" type="button" data-bs-toggle="modal"
+                                                                data-bs-target="#supprimerPost{{$post->id_post}}Modal">
+                                                            <i class="fa-solid fa-trash fa-lg"></i>
+                                                            Supprimer
+                                                        </button>
+
+                                                        <!-- Supprimer Post Modal -->
+                                                        <div class="modal fade" id="supprimerPost{{$post->id_post}}Modal"
+                                                            data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1"
+                                                            aria-labelledby="supprimerPost{{$post->id_post}}ModalLabel"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="container">
+                                                                        <form action="{{route('etud.post.delete',['id_module' => $id_module, 'id_post' => $post->id_post])}}" method="POST">
+                                                                            @csrf
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="supprimerPost{{$post->id_post}}ModalLabel">Supprimer Publication</h5>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                Voulez-vous vraiment supprimer cette
+                                                                                publication?
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                                                <button type="submit" class="btn btn-danger" style="color: white;">Supprimer</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endif
                             </div>
                             <div class="post-content">
                                 <h5>{{$post->titre}}</h5>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Administrateur;
 use App\Models\Annonce;
 use App\Models\etudiant;
 use App\Models\Filiere;
@@ -50,25 +51,33 @@ class HomeController extends Controller
     }
     public function EspaceCours($id_module){
 
-        $id_module = Module::where('id_module',$id_module)->first();
+        $module = Module::where('id_module',$id_module)->first();
         $module_name = Module::select('libelleModule')
-        ->where('id_module', '=', $id_module)
-        ->get();
+            ->where('id_module', '=', $id_module)
+            ->get();
         $filieres = Filiere::get();
         $annonces = Annonce::orderBy('datecreation', 'desc')->get();
-        return view('EspaceCours', ['annonces' => $annonces, 'filieres' => $filieres, 'id_module' => $id_module,'module_name' => $module_name],);
+        return view('EspaceCours', [
+            'annonces' => $annonces, 
+            'filieres' => $filieres, 
+            'id_module' => $id_module,
+            'module_name' => $module_name,
+            'module' => $module, // Add the module object to the view data
+        ]);
     }
     //Forum
         //post
-    public function Forum($id_module){
-        $module = Module::where('id_module', $id_module)->first();
-        $module_name = Module::select('libelleModule')
-        ->where('id_module', '=', $id_module)
-        ->get();
-        $module_name = $module->libelleModule;
-        $posts = Posts::withCount('reply')->get();
-        return view('Forum', ['id_module' => $id_module, 'module_name' => $module_name,'posts' => $posts],);
-    }
+        public function Forum($id_module){
+            
+            $module = Module::where('id_module',$id_module)->first();
+            $module_name = $module->libelleModule;
+                
+            $posts = Posts::withCount('reply')
+                        ->where('id_module', $id_module)
+                        ->orderByDesc('date_created')
+                        ->get();
+            return view('Forum', ['id_module' => $id_module, 'module_name' => $module_name,'posts' => $posts],);
+        }
         //reply
     public function ForumPost($id_module,$id_post){
         $id_post = posts::where('id_post',$id_post)->first();
@@ -93,7 +102,8 @@ class HomeController extends Controller
         $prof=Professeur::count();
         $etud=etudiant::count();
         $mod=Module::count();
-        return view('admineHome',compact(['prof','etud','mod']));
+        $admin=administrateur::count();
+        return view('admineHome',compact(['prof','etud','mod','admin']));
     }
     //displaying modules commande
     public function getModules(Request $request) {
@@ -141,6 +151,29 @@ class HomeController extends Controller
         $annonce = Annonce::find($id_annonce);
         $annonce->delete();
         return redirect()->back()->with('success', 'L\'annonce a été supprimée avec succès!');
+    }
+
+    public function modifierImageModule(Request $request, $id_module)
+    {
+        // Get the file from the request
+        $file = $request->file('image');
+    
+        // Check if a file was uploaded
+        if ($file) {
+            // Generate a unique file name
+            $filename = uniqid('Module_') . '.' . $file->getClientOriginalExtension();
+    
+            // Save the file to the imagesProfile folder
+            $file->move('imagesModule', $filename);
+    
+            // Update the user's imageProfile attribute with the file path
+            User::where('id_module', $id_module)->update([
+                'imageModule' => $filename,
+            ]);
+        }
+    
+        // Redirect back to the page
+        return redirect()->back();
     }
 }
 
