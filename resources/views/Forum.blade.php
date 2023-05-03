@@ -132,14 +132,14 @@
             <div class="content">
                 <div class="add-container">
                     <!-- Question -->
-                    <button class="add-btn" type="button" data-bs-toggle="modal" data-bs-target="#coursModal">
+                    <button class="add-btn" type="button" data-bs-toggle="modal" data-bs-target="#postModal">
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg>
                             Ajouter une publication
                         </span>
                     </button>
                     <!-- Modal Cours -->
-                    <div class="modal fade" id="coursModal" tabindex="-1" aria-labelledby="postModalLabel"
+                    <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel"
                          aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -238,16 +238,96 @@
                                     <div class="actions-list hidden" id="actions-list{{$post->id_post}}">
                                         <ul>
                                             <li>
-                                                <a href="#">
+                                                <!-- Modifier Post -->
+                                                <button class="btn action-btn" type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#modifierPost{{$post->id_post}}Modal">
                                                     <i class="fa-solid fa-pen fa-lg"></i>
                                                     Modifier
-                                                </a>
+                                                </button>
+
+                                                <!-- Modifier Post Modal -->
+                                                <div class="modal fade" id="modifierPost{{$post->id_post}}Modal"
+                                                     data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifierPost{{$post->id_post}}ModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="container">
+                                                                <form class="row g-3 needs-validation" action="" method="POST" novalidate>
+                                                                    @csrf
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title"
+                                                                            id="modifierPost{{$post->id_post}}ModalLabel">Modifier Publication</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="mb-3">
+                                                                            <label for="titre" class="form-label">Titre</label>
+                                                                            <input type="text" name="titre" class="form-control" id="titre" required>
+                                                                            <div class="valid-feedback">
+                                                                                C'est bon!
+                                                                            </div>
+                                                                            <div class="invalid-feedback">
+                                                                                Veuillez insérer un titre.
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <label for="validationTextarea" class="form-label">Contenue</label>
+                                                                            <textarea class="form-control" name="contenue"
+                                                                                      id="validationTextarea"
+                                                                                      rows="5" required></textarea>
+                                                                            <div class="valid-feedback">
+                                                                                C'est bon!
+                                                                            </div>
+                                                                            <div class="invalid-feedback">
+                                                                                Veuillez insérer du context.
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuuler</button>
+                                                                        <button type="button" class="btn btn-primary">Modifier</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </li>
                                             <li>
-                                                <a href="#">
+                                                <!-- Supprimer Post -->
+                                                <button class="btn action-btn" type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#supprimerPost{{$post->id_post}}Modal">
                                                     <i class="fa-solid fa-trash fa-lg"></i>
                                                     Supprimer
-                                                </a>
+                                                </button>
+
+                                                <!-- Supprimer Post Modal -->
+                                                <div class="modal fade" id="supprimerPost{{$post->id_post}}Modal"
+                                                     data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1"
+                                                     aria-labelledby="supprimerPost{{$post->id_post}}ModalLabel"
+                                                     aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="container">
+                                                                <form action="" method="POST">
+                                                                    @csrf
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title"
+                                                                            id="supprimerPost{{$post->id_post}}ModalLabel">Supprimer Publication</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        Voulez-vous vraiment supprimer cette
+                                                                        publication?
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                                        <button type="submit" class="btn btn-danger" style="color: white;">Supprimer</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </li>
                                         </ul>
                                     </div>
@@ -266,6 +346,28 @@
                                     </a>
                                     </a>
                             </div>
+                           <script>
+                               var toggleButton{{$post->id_post}} = document.getElementById('actions-list-toggle' + {{$post->id_post}});
+                               console.log(toggleButton{{$post->id_post}});
+                               var element{{$post->id_post}} = document.getElementById('actions-list' + {{$post->id_post}});
+                               console.log(element{{$post->id_post}});
+
+                               toggleButton{{$post->id_post}}.addEventListener('click', function() {
+                                   if(this.classList.contains('clicked')) {
+                                       this.classList.toggle('clicked');
+                                   } else {
+                                       this.classList.add('clicked');
+                                   }
+                                   element{{$post->id_post}}.classList.toggle('hidden');
+                               });
+
+                               document.addEventListener('click', function(event) {
+                                   if (!element{{$post->id_post}}.contains(event.target) && !toggleButton{{$post->id_post}}.contains(event.target)) {
+                                       element{{$post->id_post}}.classList.add('hidden');
+                                       toggleButton{{$post->id_post}}.classList.toggle('clicked');
+                                   }
+                               });
+                           </script>
                        </div>
                     @endforeach
                 </div>
@@ -291,27 +393,6 @@
                 })
         })()
     </script>
-    <script>
-        var toggleButton = document.getElementById('actions-list-toggle' + {{$post->id_post}});
-        console.log(toggleButton);
-        var element = document.getElementById('actions-list' + {{$post->id_post}});
-        console.log(element);
 
-        toggleButton.addEventListener('click', function() {
-            if(this.classList.contains('clicked')) {
-                this.classList.toggle('clicked');
-            } else {
-                this.classList.add('clicked');
-            }
-            element.classList.toggle('hidden');
-        });
-
-        document.addEventListener('click', function(event) {
-            if (!element.contains(event.target) && !toggleButton.contains(event.target)) {
-                element.classList.add('hidden');
-                toggleButton.classList.toggle('clicked');
-            }
-        });
-    </script>
 </body>
 </html>

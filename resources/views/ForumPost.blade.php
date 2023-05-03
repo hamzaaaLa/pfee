@@ -168,28 +168,121 @@
                                 <p>{{$r->contenu}}</p>
                             </div>
                             <div class="actions">
-                                <button class="btn" id="actions-list-toggle{{$post->id_post}}">
+                                <button class="btn" id="actions-list-toggle{{$r->id_reply}}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
                                         <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
                                     </svg>
                                 </button>
-                                <div class="actions-list hidden" id="actions-list{{$post->id_post}}">
+                                <div class="actions-list hidden" id="actions-list{{$r->id_reply}}">
                                     <ul>
                                         <li>
-                                            <a href="#">
+                                            <!-- Modifier Reply -->
+                                            <button class="btn action-btn" type="button" data-bs-toggle="modal"
+                                                    data-bs-target="#modifierReply{{$r->id_reply}}Modal">
                                                 <i class="fa-solid fa-pen fa-lg"></i>
                                                 Modifier
-                                            </a>
+                                            </button>
+
+                                            <!-- Modifier Reply Modal -->
+                                            <div class="modal fade" id="modifierReply{{$r->id_reply}}Modal"
+                                                 data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1"
+                                                 aria-labelledby="modifierReply{{$r->id_reply}}ModalLabel"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="container">
+                                                            <form class="row g-3 needs-validation" action="" method="POST" novalidate>
+                                                                @csrf
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"
+                                                                        id="modifierReply{{$r->id_reply}}ModalLabel">Modifier Réponse</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="mb-3">
+                                                                        <label for="validationTextarea" class="form-label">Contenue</label>
+                                                                        <textarea class="form-control" name="contenue"
+                                                                                  id="validationTextarea"
+                                                                                  rows="5" required></textarea>
+                                                                        <div class="valid-feedback">
+                                                                            C'est bon!
+                                                                        </div>
+                                                                        <div class="invalid-feedback">
+                                                                            Veuillez insérer du context.
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuuler</button>
+                                                                    <button type="button" class="btn btn-primary">Modifier</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#">
+                                            <!-- Supprimer Reply -->
+                                            <button class="btn action-btn" type="button" data-bs-toggle="modal"
+                                                    data-bs-target="#supprimerReply{{$r->id_reply}}Modal">
                                                 <i class="fa-solid fa-trash fa-lg"></i>
                                                 Supprimer
-                                            </a>
+                                            </button>
+
+                                            <!-- Supprimer Reply Modal -->
+                                            <div class="modal fade" id="supprimerReply{{$r->id_reply}}Modal"
+                                                 data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1"
+                                                 aria-labelledby="supprimerReply{{$r->id_reply}}ModalLabel"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="container">
+                                                            <form action="" method="POST">
+                                                                @csrf
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"
+                                                                        id="supprimerReply{{$r->id_reply}}ModalLabel">Supprimer Réponse</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Voulez-vous vraiment supprimer cette réponse?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                                    <button type="submit" class="btn btn-danger" style="color: white;">Supprimer</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
+                            <script>
+                                var toggleButton{{$r->id_reply}} = document.getElementById('actions-list-toggle' + {{$r->id_reply}});
+                                console.log(toggleButton{{$r->id_reply}});
+                                var element{{$r->id_reply}} = document.getElementById('actions-list' + {{$r->id_reply}});
+                                console.log(element{{$r->id_reply}});
+
+                                toggleButton{{$r->id_reply}}.addEventListener('click', function() {
+                                    if(this.classList.contains('clicked')) {
+                                        this.classList.toggle('clicked');
+                                    } else {
+                                        this.classList.add('clicked');
+                                    }
+                                    element{{$r->id_reply}}.classList.toggle('hidden');
+                                });
+
+                                document.addEventListener('click', function(event) {
+                                    if (!element{{$r->id_reply}}.contains(event.target) && !toggleButton{{$r->id_reply}}.contains(event.target)) {
+                                        element{{$r->id_reply}}.classList.add('hidden');
+                                        toggleButton{{$r->id_reply}}.classList.toggle('clicked');
+                                    }
+                                });
+                            </script>
                         </div>
                     </div>
                 @endforeach
@@ -272,27 +365,6 @@
                 })
         })()
     </script>
-    <script>
-        var toggleButton = document.getElementById('actions-list-toggle' + {{$post->id_post}});
-        console.log(toggleButton);
-        var element = document.getElementById('actions-list' + {{$post->id_post}});
-        console.log(element);
 
-        toggleButton.addEventListener('click', function() {
-            if(this.classList.contains('clicked')) {
-                this.classList.toggle('clicked');
-            } else {
-                this.classList.add('clicked');
-            }
-            element.classList.toggle('hidden');
-        });
-
-        document.addEventListener('click', function(event) {
-            if (!element.contains(event.target) && !toggleButton.contains(event.target)) {
-                element.classList.add('hidden');
-                toggleButton.classList.toggle('clicked');
-            }
-        });
-    </script>
 </body>
 </html>

@@ -254,7 +254,7 @@ input[type="submit"] {
 .reply .replies .box .content .actions {
     position: relative;
 }
-.reply .replies .box .content .actions button {
+.reply .replies .box .content .actions > button {
     transition: var(--main-transition);
     border-radius: 50%;
     border-color: transparent;
@@ -274,10 +274,11 @@ input[type="submit"] {
 .reply .replies .box .content .actions .actions-list li:hover {
     background-color: #8b8b8b;
 }
-.reply .replies .box .content .actions .actions-list a {
-    color: black;
+.reply .replies .box .content .actions .actions-list .action-btn {
+    padding: 0;
+    border-color: transparent;
 }
-.reply .replies .box .content .actions .actions-list a svg {
+.reply .replies .box .content .actions .actions-list .action-btn svg {
     margin-right: 16px;
 }
 .reply-form {

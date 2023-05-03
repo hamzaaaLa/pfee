@@ -220,7 +220,7 @@ input[type="submit"] {
 .forum .posts .box .img-container .actions {
     position: relative;
 }
-.forum .posts .box .img-container .actions button {
+.forum .posts .box .img-container .actions > button {
     transition: var(--main-transition);
     border-radius: 50%;
     border-color: transparent;
@@ -241,10 +241,11 @@ input[type="submit"] {
 .forum .posts .box .img-container .actions .actions-list li:hover {
     background-color: #8b8b8b;
 }
-.forum .posts .box .img-container .actions .actions-list a {
-    color: black;
+.forum .posts .box .img-container .actions .actions-list .action-btn {
+    padding: 0;
+    border-color: transparent;
 }
-.forum .posts .box .img-container .actions .actions-list a svg {
+.forum .posts .box .img-container .actions .actions-list .action-btn svg {
     margin-right: 16px;
 }
 .forum .posts .box .post-content {
