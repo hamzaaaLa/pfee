@@ -136,7 +136,45 @@
                             @foreach ($prof->affectation_prof as $af)
                                 <div class="col">
                                     <div class="card" style="width: 15rem;">
-                                        <img src="{{ $af->module->module_image_url}}" class="card-img-top" alt="...">
+                                        <a type="button" data-bs-toggle="modal" data-bs-target="#example{{$af->module->id_module}}Modal">
+                                            <img src="{{ $af->module->module_image_url}}" class="card-img-top" alt="...">
+                                            <div class="img-modif">
+                                                <i class="fa-solid fa-pen"></i>
+                                                Modifier
+                                            </div>
+                                        </a>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="example{{$af->module->id_module}}Modal" data-bs-backdrop="false" data-bs-keyboard="false"
+                                             tabindex="-1"
+                                             aria-labelledby="example{{$af->module->id_module}}ModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <form class="needs-validation" enctype="multipart/form-data" method="post" action="" novalidate>
+                                                        @csrf
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="example{{$af->module->id_module}}ModalLabel">Modifier l'image</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="col" style="text-align: center">
+                                                                <label for="image" class="form-label">Image:</label>
+                                                                <input type="file" class="form-control" id="image" name="image" required>
+                                                                <div class="valid-feedback">
+                                                                    C'est bon!
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                    Veuillez insérer une image.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
+                                                            <button type="submit" class="btn btn-primary">Modifier</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="card-body">
                                             <div class="content">
                                                 <p class="card-title">{{$af->module->libelleModule}}</p>
