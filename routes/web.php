@@ -116,6 +116,7 @@ Route::middleware(['auth','user-access:admin'])->group(function () {
     Route::get('/supprimerEtudiant/{id_user}',[EtudiantController::class,'delete'])->name('deleteEtudiant');
     Route::get('admin/profile/{id_user}',[AdminController::class,'getProfile'])->name('adminProfile');
     Route::post('admin/profile/modifier/{id_user}',[AdminController::class,'updateProfile'])->name('adminUpdateProfile');
+    Route::post('admin/profile/modifierPhotoProfile/{id_user}',[AdminController::class,'modifierPhoto'])->name('modifierAdminProfile');
 
 
     /*Route::get('/admin/ajouterProfForm',function(){

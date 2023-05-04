@@ -105,7 +105,7 @@
             <div class="page-content">
                 <div class="head">
                     <a href="{{route('adminProfile',Auth::user()->id_user)}}" type="button" class="btn">
-                        <img src="{{asset('/img/professeur.jpg')}}" alt="">
+                        <img src="{{$admin->profile_image_url}}" alt="">
                         Admin
                     </a>
                 </div>
@@ -116,7 +116,7 @@
                         </div>
                         <div class="profile-container">
                             <div class="img-box">
-                                <img src="/img/professeur.jpg" alt="">
+                                <img src="{{$admin->profile_image_url}}" alt="">
                                 <h3>{{$admin->name}} {{$admin->prenom}}</h3>
                                 <p>Administrateur</p>
                             </div>
@@ -161,7 +161,7 @@
                         <div class="profile-container">
                             <div class="img-box">
                                 <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    <img src="/img/professeur.jpg" alt="">
+                                    <img src="{{$admin->profile_image_url}}" alt="">
                                     <div class="img-modif">
                                         <i class="fa-solid fa-pen"></i>
                                         Modifier
@@ -171,7 +171,8 @@
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <form class="needs-validation" novalidate>
+                                            <form class="needs-validation" enctype="multipart/form-data" method="post" action="{{route('modifierAdminProfile',$admin->id_user)}}" novalidate>
+                                            @csrf
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Modifier l'image</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -190,7 +191,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
-                                                    <button type="button" class="btn btn-primary">Modifier</button>
+                                                    <button type="submit" class="btn btn-primary">Modifier</button>
                                                 </div>
                                             </form>
                                         </div>

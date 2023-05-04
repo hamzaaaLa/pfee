@@ -100,5 +100,26 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+    public function modifierPhoto(Request $request, $id_user)
+    {
+        // Get the file from the request
+        $file = $request->file('image');
+
+        // Check if a file was uploaded
+        if ($file) {
+            // Generate a unique file name
+            $filename = uniqid('profile_') . '.' . $file->getClientOriginalExtension();
+
+            // Save the file to the imagesProfile folder
+            $file->move('imagesProfile', $filename);
+
+            // Update the user's imageProfile attribute with the file path
+            User::where('id_user', $id_user)->update([
+                'imageProfile' => $filename,
+            ]);
+        }
+        return redirect()->back();
+    }
+
     //
 }
