@@ -58,7 +58,7 @@ Route::middleware(['auth','user-access:prof'])->group(function () {
     Route::post('/prof/dashboard/get-modules', [HomeController::class, 'getModules'])->name('get.modules');
     Route::post('/prof/dashboard/annonce_store', [HomeController::class, 'store'])->name('annonce.store');
     Route::POST('/prof/dashboard/annoce_delete/{id_annonce}',[HomeController::class, 'delete'])->name('annonce.delete');
-    Route::post('/prof/dashboard/{$id_module}', [HomeController::class, 'modifierImageModule'])->name('modifierImageModule');
+    Route::post('/prof/dashboard/modifier_image/{id_module}', [HomeController::class, 'modifierImageModule'])->name('modifierImageModule');
     Route::get('/prof/dashboard/EspaceCours/{id_module}', [HomeController::class, 'EspaceCours'])->name('prof.EspaceCours');
     Route::post('/prof/dashboard/EspaceCours/section_store/{id_module}', [espaceController::class, 'store'])->name('section.store');
     Route::POST('/prof/dashboard/EspaceCours/section_delete/{id_section}', [espaceController::class, 'delete_section'])->name('section.delete');

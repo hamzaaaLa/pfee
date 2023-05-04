@@ -153,7 +153,7 @@ class HomeController extends Controller
         return redirect()->back()->with('success', 'L\'annonce a été supprimée avec succès!');
     }
 
-    public function modifierImageModule(Request $request, $id_module)
+   /*  public function modifierImageModule(Request $request, $id_module)
     {
         // Get the file from the request
         $file = $request->file('image');
@@ -174,6 +174,28 @@ class HomeController extends Controller
     
         // Redirect back to the page
         return redirect()->back();
+    } */
+    public function modifierImageModule(Request $request, $id_module)
+{
+    // Get the file from the request
+    $file = $request->file('image');
+
+    // Check if a file was uploaded
+    if ($file) {
+        // Generate a unique file name
+        $filename = uniqid('Module_') . '.' . $file->getClientOriginalExtension();
+
+        // Save the file to the imagesModule folder
+        $file->move('imagesModule', $filename);
+
+        // Update the module's imageModule attribute with the file path
+        Module::where('id_module', $id_module)->update([
+            'imageModule' => $filename,
+        ]);
     }
+
+    // Redirect back to the page
+    return redirect()->back();
+}
 }
 
