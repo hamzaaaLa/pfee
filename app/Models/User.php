@@ -58,7 +58,7 @@ class User extends Authenticatable
     public function getProfileImageUrlAttribute(): string
     {
         $filename = $this->attributes['imageProfile'];
-    
+
         if ($filename) {
             return asset('imagesProfile/' . $filename);
         } else {
@@ -77,12 +77,12 @@ class User extends Authenticatable
     //relation between etud and user
     public function etudiant()
     {
-        return $this->hasMany(etudiant::class, 'user_etud');
+        return $this->hasMany(Etudiant::class, 'user_etud');
     }
 
     public function professeur()
     {
-        return $this->hasMany(professeur::class, 'user_prof');
+        return $this->hasOne(professeur::class, 'user_prof');
     }
 
     public function reply()
@@ -94,7 +94,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(posts::class,'id_user');
     }
-    
+
     protected function type(): Attribute
     {
         return new Attribute(

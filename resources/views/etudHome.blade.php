@@ -132,68 +132,66 @@
                 </div>
                 <div class="row justify-content-center">
                     @if (Auth::user()->type=='prof')
-                        @foreach (Auth::user()->professeur as $prof)
-                            @foreach ($prof->affectation_prof as $af)
-                                <div class="col">
-                                    <div class="card" style="width: 15rem;">
-                                        <a type="button" data-bs-toggle="modal" data-bs-target="#example{{$af->module->id_module}}Modal">
-                                            <img src="{{ $af->module->module_image_url}}" class="card-img-top" alt="...">
-                                            <div class="img-modif">
-                                                <i class="fa-solid fa-pen"></i>
-                                                Modifier
-                                            </div>
-                                        </a>
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="example{{$af->module->id_module}}Modal" data-bs-backdrop="false" data-bs-keyboard="false"
-                                             tabindex="-1"
-                                             aria-labelledby="example{{$af->module->id_module}}ModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <form class="needs-validation" enctype="multipart/form-data" action="{{route('modifierImageModule',$af->module->id_module)}}" method="post"  novalidate>
-                                                        @csrf
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="example{{$af->module->id_module}}ModalLabel">Modifier l'image</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="col" style="text-align: center">
-                                                                <label for="image" class="form-label">Image:</label>
-                                                                <input type="file" class="form-control" id="image" name="image" required>
-                                                                <div class="valid-feedback">
-                                                                    C'est bon!
-                                                                </div>
-                                                                <div class="invalid-feedback">
-                                                                    Veuillez insérer une image.
-                                                                </div>
+                        @foreach (Auth::user()->professeur->affectation_prof as $af)
+                            <div class="col">
+                                <div class="card" style="width: 15rem;">
+                                    <a type="button" data-bs-toggle="modal" data-bs-target="#example{{$af->module->id_module}}Modal">
+                                        <img src="{{ $af->module->module_image_url}}" class="card-img-top" alt="...">
+                                        <div class="img-modif">
+                                            <i class="fa-solid fa-pen"></i>
+                                            Modifier
+                                        </div>
+                                    </a>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="example{{$af->module->id_module}}Modal" data-bs-backdrop="false" data-bs-keyboard="false"
+                                         tabindex="-1"
+                                         aria-labelledby="example{{$af->module->id_module}}ModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <form class="needs-validation" enctype="multipart/form-data" action="{{route('modifierImageModule',$af->module->id_module)}}" method="post"  novalidate>
+                                                    @csrf
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="example{{$af->module->id_module}}ModalLabel">Modifier l'image</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="col" style="text-align: center">
+                                                            <label for="image" class="form-label">Image:</label>
+                                                            <input type="file" class="form-control" id="image" name="image" required>
+                                                            <div class="valid-feedback">
+                                                                C'est bon!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Veuillez insérer une image.
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
-                                                            <button type="submit" class="btn btn-primary">Modifier</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="content">
-                                                <p class="card-title">{{$af->module->libelleModule}}</p>
-                                                <p class="card-text">
-                                                    <a href="{{route('profProfile',$af->professeur->user->id_user)}}">{{ $af->professeur->user->name}} {{ $af->professeur->user->prenom }}</a>
-                                                </p>
-                                            </div>
-                                            <div class="acceder">
-                                                <a href="{{route('prof.EspaceCours', $af->module->id_module)}}">Visiter</a>
-                                                <i class="fas fa-long-arrow-alt-right"></i>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
+                                                        <button type="submit" class="btn btn-primary">Modifier</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="card-body">
+                                        <div class="content">
+                                            <p class="card-title">{{$af->module->libelleModule}}</p>
+                                            <p class="card-text">
+                                                <a href="{{route('profProfile',$af->professeur->user->id_user)}}">{{ $af->professeur->user->name}} {{ $af->professeur->user->prenom }}</a>
+                                            </p>
+                                        </div>
+                                        <div class="acceder">
+                                            <a href="{{route('prof.EspaceCours', $af->module->id_module)}}">Visiter</a>
+                                            <i class="fas fa-long-arrow-alt-right"></i>
+                                        </div>
+                                    </div>
                                 </div>
-                            @endforeach
+                            </div>
                         @endforeach
                     @else
-                    @foreach (Auth::user()->etudiant as $etud)
-                        @foreach ($etud->affectation_etud as $af_etud)
+                        @foreach (Auth::user()->etudiant as $etud)
+                            @foreach ($etud->affectation_etud as $af_etud)
                                 <div class="col">
                                     <div class="card" style="width: 15rem;">
                                         <img src="{{ $af_etud->module->module_image_url}}" class="card-img-top" alt="...">
@@ -213,8 +211,8 @@
                                         </div>
                                     </div>
                                 </div>
-                        @endforeach
-                    @endforeach
+                          @endforeach
+                      @endforeach
                     @endif
                 </div>
             </div>
@@ -304,56 +302,52 @@
                         </div>
                     </div>
                 </div>
-                <ul>
-                    @if(Auth::user()->type=='prof')
-                        <li>
-                            <div class="annonce-container">
-                                @foreach(Auth::user()->professeur as $prof)
-                                    @foreach ($prof->affectation_prof as $aff) 
-                                        @foreach ($aff->module->annonce as $Annonce)
-                                            <div class="img-content">
-                                                <img src="{{ $Annonce->professeur->user->profile_image_url}}" alt="">
-                                                <a type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                </a>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <form action="{{ route('annonce.delete', $Annonce->id_annonce) }}" method="POST">
-                                                                @csrf
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="staticBackdropLabel1">Supprimer Annonce</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    Voulez-vous vraiment supprimer cette annonce?
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                                                    <button type="submit" class="btn btn-danger">Supprimer</button>
-                                                                </div>
-                                                            </form>
+                @if(Auth::user()->type=='prof')
+                    <ul>
+                        @foreach (Auth::user()->professeur->affectation_prof as $aff)
+                            @foreach ($aff->module->annonce as $Annonce)
+                                <li>
+                                    <div class="img-content">
+                                        <img src="{{ $Annonce->professeur->user->profile_image_url}}" alt="">
+                                        <a type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <form action="{{ route('annonce.delete', $Annonce->id_annonce) }}" method="POST">
+                                                        @csrf
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabel1">Supprimer Annonce</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                    </div>
+                                                        <div class="modal-body">
+                                                            Voulez-vous vraiment supprimer cette annonce?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
-                                            <div class="annonce-text">
-                                                <a href="{{route('profProfile',$Annonce->professeur->user->id_user)}}">{{ $Annonce->professeur->user->name }}</a>
-                                                <p class="subject"><span>Sujet: </span>{{ $Annonce->titre }}</p>
-                                                <p class="content">{{ $Annonce->contenue }}</p>
-                                                <span>{{ time_elapsed_string($Annonce->datecreation) }}</span>
-                                            </div>
-                                        @endforeach
-                                    @endforeach
-                                @endforeach
-                            </div>
-                        </li>
+                                        </div>
+                                    </div>
+                                    <div class="annonce-text">
+                                        <a href="{{route('profProfile',$Annonce->professeur->user->id_user)}}">{{ $Annonce->professeur->user->name }}</a>
+                                        <p class="subject"><span>Sujet: </span>{{ $Annonce->titre }}</p>
+                                        <p class="content">{{ $Annonce->contenue }}</p>
+                                        <span>{{ time_elapsed_string($Annonce->datecreation) }}</span>
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endforeach
                     @else
                         <li>
                             <div class="annonce-container">
                                 @foreach(Auth::user()->etudiant as $etud)
-                                    @foreach ($etud->affectation_etud as $aff) 
+                                    @foreach ($etud->affectation_etud as $aff)
                                         @foreach ($aff->module->annonce as $Annonce)
                                             <div class="img-content">
                                                 <img src="{{ $Annonce->professeur->user->profile_image_url}}" alt="">
