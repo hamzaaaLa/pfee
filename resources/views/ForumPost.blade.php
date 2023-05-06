@@ -134,7 +134,8 @@
                             <img src="{{$post->user->profile_image_url}}" alt="">
                             <div class="content-text">
                                 <span>Par {{$post->user->name}} {{$post->user->prenom}}</span>
-                                <span>{{time_elapsed_string($post->date_created)}} dans Bases de Données</span>
+                                <span>{{time_elapsed_string($post->date_created)}} dans {{$module_name}}</span>
+                                <span> {{$post->contenu}}</span>
                             </div>
                         </div>
                     @endforeach

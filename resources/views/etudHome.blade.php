@@ -305,47 +305,74 @@
                     </div>
                 </div>
                 <ul>
-                    @foreach($annonces as $annonce)
-                    <li>
-                        <div class="img-content">
-                            <img src="{{ $annonce->professeur->user->profile_image_url}}" alt="">
-                            @if(Auth::user()->type=='prof')
-                            <a type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
-                            <!-- Modal -->
-                            <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <form action="{{ route('annonce.delete', $annonce->id_annonce) }}" method="POST">
-                                            @csrf
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel1">Supprimer Annonce</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    @if(Auth::user()->type=='prof')
+                        <li>
+                            <div class="annonce-container">
+                                @foreach(Auth::user()->professeur as $prof)
+                                    @foreach ($prof->affectation_prof as $aff) 
+                                        @foreach ($aff->module->annonce as $Annonce)
+                                            <div class="img-content">
+                                                <img src="{{ $Annonce->professeur->user->profile_image_url}}" alt="">
+                                                <a type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </a>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <form action="{{ route('annonce.delete', $Annonce->id_annonce) }}" method="POST">
+                                                                @csrf
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="staticBackdropLabel1">Supprimer Annonce</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Voulez-vous vraiment supprimer cette annonce?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="modal-body">
-                                                Voulez-vous vraiment supprimer cette annonce?
+                                            <div class="annonce-text">
+                                                <a href="{{route('profProfile',$Annonce->professeur->user->id_user)}}">{{ $Annonce->professeur->user->name }}</a>
+                                                <p class="subject"><span>Sujet: </span>{{ $Annonce->titre }}</p>
+                                                <p class="content">{{ $Annonce->contenue }}</p>
+                                                <span>{{ time_elapsed_string($Annonce->datecreation) }}</span>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                                <button type="submit" class="btn btn-danger">Supprimer</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                </div>
-                                @endif
-                                </div>
-                                <div class="annonce-text">
-                                    <a href="{{route('etudProfProfile',$annonce->professeur->user->id_user)}}">{{ $annonce->professeur->user->name }}</a>
-                                    <p class="subject"><span>Sujet: </span>{{ $annonce->titre }}</p>
-                                    <p class="content">{{ $annonce->contenue }}</p>
-                                    <span>{{ time_elapsed_string($annonce->datecreation) }}</span>
-                                </div>
+                                        @endforeach
+                                    @endforeach
+                                @endforeach
                             </div>
-                        </div>
-                    </li>
-                    @endforeach
+                        </li>
+                    @else
+                        <li>
+                            <div class="annonce-container">
+                                @foreach(Auth::user()->etudiant as $etud)
+                                    @foreach ($etud->affectation_etud as $aff) 
+                                        @foreach ($aff->module->annonce as $Annonce)
+                                            <div class="img-content">
+                                                <img src="{{ $Annonce->professeur->user->profile_image_url}}" alt="">
+                                                <a type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </a>
+                                            </div>
+                                            <div class="annonce-text">
+                                                <a href="{{route('etudProfProfile',$Annonce->professeur->user->id_user)}}">{{ $Annonce->professeur->user->name }}</a>
+                                                <p class="subject"><span>Sujet: </span>{{ $Annonce->titre }}</p>
+                                                <p class="content">{{ $Annonce->contenue }}</p>
+                                                <span>{{ time_elapsed_string($Annonce->datecreation) }}</span>
+                                            </div>
+                                        @endforeach
+                                    @endforeach
+                                @endforeach
+                            </div>
+                        </li>
+                    @endif
                 </ul>
             </div>
             <!-- End Announcements -->
