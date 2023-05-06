@@ -77,7 +77,7 @@ class User extends Authenticatable
     //relation between etud and user
     public function etudiant()
     {
-        return $this->hasMany(Etudiant::class, 'user_etud');
+        return $this->hasOne(Etudiant::class, 'user_etud');
     }
 
     public function professeur()
