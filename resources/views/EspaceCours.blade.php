@@ -102,10 +102,10 @@
             <div class="header">
                 <h1>{{$module->libelleModule}}</h1>
                 @if(Auth::user()->type=='prof')
-                    @foreach (Auth::user()->professeur as $prof)
+                    {{-- @foreach (Auth::user()->professeur as $prof)
                         @foreach ($prof->affectation_prof as $af)
                         @endforeach
-                    @endforeach
+                    @endforeach --}}
                         <a class="forum-btn" href="{{route('prof.Forum',$module)}}">
                             <span class="circle" aria-hidden="true">
                             <span class="icon arrow"></span>
@@ -113,10 +113,8 @@
                             <span class="button-text">Accéder au discussion</span>
                         </a>
                 @else
-                    @foreach (Auth::user()->etudiant as $etud)
-                        @foreach ($etud->affectation_etud as $af_etud)
-                        @endforeach
-                    @endforeach
+                    {{-- @foreach (Auth::user()->etudiant->affectation_etud as $aff_etud)
+                    @endforeach --}}
                         <a class="forum-btn" href="{{route('etud.Forum',$module)}}">
                             <span class="circle" aria-hidden="true">
                             <span class="icon arrow"></span>
