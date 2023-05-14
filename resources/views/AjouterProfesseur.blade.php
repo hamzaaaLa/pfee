@@ -52,7 +52,7 @@
                     <div class="accordion-body">
                         <ul>
                             <li><a href="{{route('afficheAdminView')}}">Consulter et Modifier</a></li>
-                            <li><a href="{{route('ajouterAdminView')}}">Ajouter Module</a></li>
+                            <li><a href="{{route('ajouterAdminView')}}">Ajouter Administrateur</a></li>
                         </ul>
                     </div>
                 </div>
@@ -94,12 +94,12 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingThree">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                         <i class="fa-solid fa-book"></i>
                         Modules
                     </button>
                 </h2>
-                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree">
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
                     <div class="accordion-body">
                         <ul>
                             <li><a href="{{route('afficheModule')}}">Consulter et Modifier</a></li>

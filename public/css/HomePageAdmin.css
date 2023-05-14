@@ -27,7 +27,7 @@ ul {
 /* End Global Rules */
 /* Start Components */
 .page-content {
-    width: calc(100% - 280px);
+    width: calc(100% - 290px);
     background-color: var(--main-background);
 }
 .page-content .head {
@@ -50,7 +50,7 @@ ul {
 }
 .page-content .head img {
     width: 40px;
-    height: fit-content;
+    height: 40px;
     border: none;
     border-radius: 50%;
 }
@@ -82,6 +82,10 @@ ul {
     background-color: var(--main-color);
     width: 35%;
 }
+.page-content .content .table-responsive {
+    overflow-y: auto;
+    height: calc(100vh - 250px);
+}
 /* End Components */
 /* Start Page */
 .page {
@@ -90,7 +94,7 @@ ul {
 /* End Page */
 /* Start Sidebar */
 .sidebar {
-    width: 280px;
+    width: 290px;
     box-shadow: 0 0 10px #ddd;
     padding: 20px;
     z-index: 5;
@@ -128,8 +132,6 @@ ul {
     border: 2px solid var(--main-color);
     bottom: -6px;
     background-color: white;
-}
-.sidebar .accordion {
 }
 .sidebar .accordion > a {
     color: black;

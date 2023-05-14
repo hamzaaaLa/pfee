@@ -30,7 +30,7 @@ class module extends Model
     //relation between affectation_prof|module
     public function affectation_prof()
     {
-        return $this->hasMany(affectation_prof::class, 'id_module')->with('professeur');
+        return $this->hasOne(affectation_prof::class, 'id_module')->with('professeur');
     }
 
     public function affectation_mod()

@@ -51,7 +51,7 @@
                         <div class="accordion-body">
                             <ul>
                                 <li><a href="{{route('afficheAdminView')}}">Consulter et Modifier</a></li>
-                                <li><a href="{{route('ajouterAdminView')}}">Ajouter Module</a></li>
+                                <li><a href="{{route('ajouterAdminView')}}">Ajouter Administrateur</a></li>
                             </ul>
                         </div>
                     </div>
@@ -149,7 +149,7 @@
                     <div class="col-md-6">
                         <label for="filiereSelect" class="form-label">Filière</label>
                         <select class="form-select" id="filiereSelect" name="filiereSelect" required>
-                            <option selected >{{$module->libellefiliere}}</option>
+                            <option selected>{{$module->libellefiliere}}</option>
                             @foreach($filieres as $key){
                                 @if($key->libellefiliere != $module->libellefiliere)
                                     <option>{{$key->libellefiliere}}</option>
@@ -166,10 +166,12 @@
                     <div class="col-md-6">
                         <label for="semestreSelect" class="form-label">Semestre</label>
                         <select class="form-select" id="semestreSelect" name="semestreSelect" required>
-                            <option selected disabled value="">Choisir...</option>
+                            <option selected>{{$module->semestre}}</option>
                             @foreach($semestres as $key){
-                            <option >{{$key->libelleSemestre}}</option>
-                            }@endforeach>
+                                @if ($key->libelleSemestre != $module->semestre)
+                                    <option>{{$key->libelleSemestre}}</option>
+                                @endif
+                            }@endforeach
                         </select>
                         <div class="valid-feedback">
                             C'est bon!
@@ -181,7 +183,7 @@
                     <div class="col-md-6">
                         <label for="professeur" class="form-label">Professeur</label>
                         <select class="form-select" name="professeur" id="professeur" required>
-                            <option selected disabled value="">Choisir...</option>
+                            <option selected>{{ $module->affectation_prof->professeur->user->name }} {{ $module->affectation_prof->professeur->user->prenom }}</option>
                             @foreach($professeur as $professeur)
                                 <option>{{ $professeur->user->name }} {{ $professeur->user->prenom }}</option>
                             @endforeach

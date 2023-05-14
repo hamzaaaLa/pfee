@@ -53,7 +53,7 @@
                     <div class="accordion-body">
                         <ul>
                             <li><a href="{{route('afficheAdminView')}}">Consulter et Modifier</a></li>
-                            <li class="active"><a href="{{route('ajouterModuleView')}}">Ajouter Module</a></li>
+                            <li class="active"><a href="{{route('ajouterModuleView')}}">Ajouter Administrateur</a></li>
                         </ul>
                     </div>
                 </div>

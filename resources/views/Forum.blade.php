@@ -80,11 +80,6 @@
                             </a>
                         @endguest
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Contactez-nous
-                        </a>
-                    </li>
                 </ul>
                 <div class="dropdown" >
                     <button class="btn dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">

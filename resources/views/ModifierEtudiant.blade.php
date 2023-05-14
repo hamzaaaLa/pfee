@@ -44,32 +44,32 @@
             </a>
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingFour">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                         <i class="fa-solid fa-user-check"></i>
                         Administrateurs
                     </button>
                 </h2>
-                <div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="headingFour">
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour">
                     <div class="accordion-body">
                         <ul>
-                            <li class="active"><a href="{{route('afficheAdminView')}}">Consulter et Modifier</a></li>
-                            <li><a href="{{route('ajouterAdminView')}}">Ajouter Module</a></li>
+                            <li><a href="{{route('afficheAdminView')}}">Consulter et Modifier</a></li>
+                            <li><a href="{{route('ajouterAdminView')}}">Ajouter Administrateur</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         <i class="fa-solid fa-graduation-cap"></i>
                         <span>Etudiant</span>
                     </button>
                 </h2>
-                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne">
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
                     <div class="accordion-body test">
                         <ul>
-                            <li><a href="{{route('afficheEtud')}}">Consulter et Modifier</a></li>
+                            <li class="active"><a href="{{route('afficheEtud')}}">Consulter et Modifier</a></li>
                             <li><a href='{{route('ajoutEtud')}}'>Ajouter Etudiant</a></li>
                         </ul>
                     </div>
@@ -209,11 +209,11 @@
                     <label for="filiereSelect" class="form-label">Filière</label>
                     <select class="form-select" id="filiereSelect" name="filiereSelect"  required>
                         <option selected >{{$etudiant->filiere}}</option>
-                        @foreach($filieres as $key){
+                        @foreach($filieres as $key)
                             @if($key->libellefiliere != $etudiant->filiere)
                                 <option>{{$key->libellefiliere}}</option>
                             @endif
-                        }@endforeach
+                        @endforeach
                     </select>
                     <div class="valid-feedback">
                         C'est bon!
@@ -225,9 +225,14 @@
                 <div class="col-md-6">
                     <label for="semestre" class="form-label">Semestre</label>
                     <select class="form-select" id="semestreSelect" name="semestreSelect[]" multiple="" required>
-                        @foreach($semestres as $key){
-                        <option >{{$key->libelleSemestre}}</option>
-                        }@endforeach
+                        @foreach ($etudiant->etudiant->affectation_semestre as $affectation)
+                            <option selected>{{ $affectation->semestre->libelleSemestre }}</option>
+                            @foreach($semestres as $key)
+                                @if($key->libelleSemestre != $affectation->semestre->libelleSemestre)
+                                    <option>{{$key->libelleSemestre}}</option>
+                                @endif
+                            @endforeach
+                        @endforeach
                     </select>
                     <div class="valid-feedback">
                         C'est bon!
@@ -235,11 +240,14 @@
                     <div class="invalid-feedback">
                         Veuillez choisir un semestre.
                     </div>
+                
                 </div>
                 <div class="col-md-6">
                     <label for="moduleSelect" class="form-label">Modules</label>
                     <select class="form-select" id="moduleSelect" name="moduleSelect[]" multiple="" required>
-
+                        @foreach ($etudiant->etudiant->affectation_etud as $affectation)
+                            <option selected>{{ $affectation->module->libelleModule }}</option>
+                        @endforeach
                     </select>
                     <div class="valid-feedback">
                         C'est bon!
@@ -326,21 +334,6 @@
                         moduleSelect.trigger("chosen:updated");
                     }
                 });
-
-                //     /*var xhr = new XMLHttpRequest();
-                //     // Send an AJAX request to get the data for the select menues
-                //     xhr.open("GET", "get_select_menu_data.php?filiere=" + filiere + "&semestre=" + semestre);
-                //     xhr.onload = function() {
-                //         // Parse the JSON response and update the selected menues
-                //         modules = JSON.parse(xhr.responseText);
-                //         moduleSelect.innerHTML = "";
-                //         for (var i = 0; modules.length; i++) {
-                //             var option = document.createElement("option");
-                //             option.text = semestre[i];
-                //             moduleSelect.add(option);
-                //         }
-                //     };
-                //     xhr.send();*/
             }
         }
     </script>

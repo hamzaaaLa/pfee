@@ -44,7 +44,7 @@
                     <div class="accordion-body">
                         <ul>
                             <li><a href="{{route('afficheAdminView')}}">Consulter et Modifier</a></li>
-                            <li><a href="{{route('ajouterModuleView')}}">Ajouter Module</a></li>
+                            <li><a href="{{route('ajouterModuleView')}}">Ajouter Administrateur</a></li>
                         </ul>
                     </div>
                 </div>
@@ -174,11 +174,10 @@
                         <td>{{ $module->semestre }}</td>
                         <td>{{ $module->filiere->libellefiliere }}</td>
                         <td>
-                             @foreach($module->affectation_prof as $affectation)
-                                {{$affectation->professeur->user->name}} {{$affectation->professeur->user->prenom}}
-                                    @if(!$loop->last),@endif
-                            @endforeach
-                    </td>
+                            @if ($module->affectation_prof != null)
+                                {{$module->affectation_prof->professeur->user->name}} {{$module->affectation_prof->professeur->user->prenom}}
+                            @endif
+                        </td>
                     </tr>
                         @endforeach
                     </tbody>

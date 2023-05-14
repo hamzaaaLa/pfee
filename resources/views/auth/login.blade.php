@@ -50,11 +50,6 @@
                             </a>
                         @endguest
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Contactez-nous
-                        </a>
-                    </li>
                 </ul>
             </div>
         </div>

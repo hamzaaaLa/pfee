@@ -40,11 +40,6 @@
                                 A propos
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Contactez-nous
-                            </a>
-                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
