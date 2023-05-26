@@ -106,7 +106,7 @@
                 <div class="head">
                     <a href="{{route('adminProfile',Auth::user()->id_user)}}" type="button" class="btn">
                         <img src="{{$admin->profile_image_url}}" alt="">
-                        Admin
+                        {{$admin->name}} {{$admin->prenom}}
                     </a>
                 </div>
                 <div class="profile content">

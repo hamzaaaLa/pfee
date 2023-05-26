@@ -206,16 +206,82 @@ class EtudiantController extends Controller
         return view('ProfileOther',compact(['prof','module']));
      }
      public function tousLesModules($id_user){
-        $id_etud=User::join('etudiant','users.id_user','=','etudiant.user_etud')->where('users.id_user',$id_user)->value('etudiant.id_etud');
-        $id_filiere=Etudiant::join('filiere','etudiant.filiere','=','filiere.libelleFiliere')->where('etudiant.id_etud',$id_etud)->value('filiere.id_filiere');
-        $newSemestre=affectation_semestre::join('semestre','affectation_semestre.id_semestre','=','semestre.id_semestre')
-        ->join('module','semestre.libelleSemestre','=','module.semestre')->where('affectation_semestre.id_etud',$id_etud)->get();
-        /*$newSemestre=affectation_semestre::join('semestre','affectation_semestre.id_semestre','=','semestre.id_semestre')
-        ->join('module','semestre.libelleSemestre','=','module.semestre')->where('')->get()*/
-        $allModule=Module::where('id_filiere',$id_filiere)->get();
-        $moduleAct=Affectation_etud::join('module','affectation_etud.id_module','=','module.id_module')->where('id_etud',$id_etud)->get();
-        $profs=Affectation_prof::join('professeur','affectation_prof.id_prof','=','professeur.id_prof')->join('users','professeur.user_prof','=','users.id_user')->get();
-        return view('MoreModules',compact(['moduleAct','allModule','profs']));
+        $id_etud = User::join('etudiant','users.id_user','=','etudiant.user_etud')
+            ->where('users.id_user', $id_user)
+            ->value('etudiant.id_etud');
+
+        $id_filiere = Etudiant::join('filiere','etudiant.filiere','=','filiere.libelleFiliere')
+            ->where('etudiant.id_etud',$id_etud)
+            ->value('filiere.id_filiere');
+
+        /*$newSemestre = affectation_semestre::join('semestre','affectation_semestre.id_semestre','=','semestre.id_semestre')
+            ->join('module','semestre.libelleSemestre','=','module.semestre')
+            ->where('affectation_semestre.id_etud',$id_etud)
+            ->get();
+
+        $newSemestre = affectation_semestre::join('semestre','affectation_semestre.id_semestre','=','semestre.id_semestre')
+            ->join('module','semestre.libelleSemestre','=','module.semestre')
+            ->where('')
+            ->get();*/
+
+        $allModule = Module::where('id_filiere',$id_filiere)
+            ->get();
+
+        /*$moduleAct = Affectation_etud::join('module','affectation_etud.id_module','=','module.id_module')
+            ->where('id_etud',$id_etud)
+            ->get();*/
+
+        $moduleAct = Module::join('affectation_etud', 'module.id_module', '=', 'affectation_etud.id_module')
+            ->where('affectation_etud.id_etud', $id_etud)
+            ->get();
+
+        for($i = 0; $i < $moduleAct->count(); $i++){
+            $semestre[$i] = $moduleAct[$i]->semestre;
+        }
+        $maxSemestre = max($semestre);
+
+        $modules = Module::where('id_filiere', $id_filiere)
+            ->where('semestre', '<=', $maxSemestre)
+            ->get();
+
+        $semestres = Semestre::select('libelleSemestre')
+            ->get();
+
+        $allSemestre = [];
+        for($i = 0; $i < $semestres->count(); $i++) {
+            if($semestres[$i] <= $maxSemestre) {
+                $allSemestre[$i] = $semestres[$i];
+            }
+        }
+
+        /*$j = 0;
+        $allSemestre = [];
+        $is = false;
+
+        foreach ($allModule as $key) {
+         if($key->semestre <= $maxSemestre) {
+             $k = 0;
+             foreach ($allSemestre as $s) {
+                 if($key->semestre == $allSemestre[$k]) {
+                     $is = true;
+                     break;
+                 } else {
+                     $k++;
+                 }
+             }
+             if(!$is) {
+                 $allSemestre[$j] = $key->semestre;
+                 $j++;
+             }
+         }
+        }*/
+
+        $profs = Affectation_prof::join('professeur','affectation_prof.id_prof','=','professeur.id_prof')
+            ->join('users','professeur.user_prof','=','users.id_user')
+            ->get();
+
+//         return view('MoreModules',compact(['moduleAct','allModule','profs']));
+        return view('MoreModules',compact(['modules', 'allSemestre','profs']));
      }
     function test(){
         echo "bonjour";

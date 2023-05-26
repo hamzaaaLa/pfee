@@ -93,69 +93,99 @@
             <div class="header">
                 <h1>Tous les Modules</h1>
             </div>
-            <div class="row justify-content-center">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
                 @php
                 /*for($i=0;$i<$moduleAct->count();$i++)
                 if($moduleAct[$i]->semestre<$moduleAct[$i+1]->semestre);
                 $moduleMin=$moduleAct[$i]->semestre;*/
-                for($i=0;$i<$moduleAct->count();$i++){
-                    $semestre[$i]=$moduleAct[$i]->semestre;
-                }
-                $minSemestre=min($semestre);
+                    /*for($i = 0; $i < $moduleAct->count(); $i++){
+                        $semestre[$i] = $moduleAct[$i]->semestre;
+                    }
+                    $maxSemestre = max($semestre);*/
+
+
+
+                    /*$j = 0;
+                    $allSemestre = [];
+                    $is = false;
+                    foreach ($allModule as $key) {
+                        if($key->semestre <= $maxSemestre) {
+                            $k = 0;
+                            foreach ($allSemestre as $s) {
+                                if($key->semestre == $allSemestre[$k]) {
+                                    $is = true;
+                                    break;
+                                } else {
+                                    $k++;
+                                }
+                            }
+                            if(!$is) {
+                                $allSemestre[$j] = $key->semestre;
+                                $j++;
+                            }
+                        }
+                    }*/
                 @endphp
-                @foreach($moduleAct as $key)
-                <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="{{$key->module_image_url}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <div class="content">
-
-                                <p class="card-title">{{$key->libelleModule}}</p>
-                                <p class="card-text">
-                                    @foreach($profs as $prof)
-                                    @if($prof->id_module==$key->id_module)
-                                    <a href="{{route('etudProfProfile',$prof->id_user)}}">{{$prof->name}} {{$prof->prenom}}</a>
+                {{--<div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-heading{{ $moduleAct[0]->semestre }}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ $moduleAct[0]->semestre }}" aria-expanded="false" aria-controls="flush-collapse{{ $moduleAct[0]->semestre }}">
+                            {{ $moduleAct[0]->semestre }}
+                        </button>
+                    </h2>
+                    <div id="flush-collapse{{ $moduleAct[0]->semestre }}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{ $moduleAct[0]->semestre }}" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            @foreach($moduleAct as $key)
+                                <div class="col">
+                                    <img src="{{$key->module_image_url}}" class="card-img-top" alt="...">
+                                    <div class="content">
+                                        <p class="card-title">
+                                            <a href="{{route('etud.EspaceCours', $key->id_module)}}">{{$key->libelleModule}}</a>
+                                        </p>
+                                        <p class="card-text">
+                                            @foreach($profs as $prof)
+                                                @if($prof->id_module==$key->id_module)
+                                                    <a href="{{route('etudProfProfile',$prof->id_user)}}">{{$prof->name}} {{$prof->prenom}}</a>
+                                               @endif
+                                            @endforeach
+                                        </p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>--}}
+                @foreach($allSemestre as $s)
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-heading{{ $s }}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ $s }}" aria-expanded="false" aria-controls="flush-collapse{{ $s }}">
+                                {{ $s }}
+                            </button>
+                        </h2>
+                        <div id="flush-collapse{{ $s }}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{ $s }}" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                @foreach($modules as $key)
+                                    @if($key->semestre == $s)
+                                        <div class="col">
+                                            <img src="{{$key->module_image_url}}" class="card-img-top" alt="...">
+                                            <div class="content">
+                                                <p class="card-title">
+                                                    <a href="{{route('etud.EspaceCours', $key->id_module)}}">{{$key->libelleModule}}</a>
+                                                </p>
+                                                <p class="card-text">
+                                                    @foreach($profs as $prof)
+                                                        @if($prof->id_module==$key->id_module)
+                                                            <a href="{{route('etudProfProfile',$prof->id_user)}}">{{$prof->name}} {{$prof->prenom}}</a>
+                                                       @endif
+                                                    @endforeach
+                                                </p>
+                                            </div>
+                                        </div>
                                     @endif
-                                    @endforeach
-                                </p>
-                            </div>
-                            <div class="acceder">
-                                <a href="{{route('etud.EspaceCours', $key->id_module)}}">Visiter</a>
-                                <i class="fas fa-long-arrow-alt-right"></i>
+                                @endforeach
                             </div>
                         </div>
                     </div>
-                </div>
                 @endforeach
-                @foreach($allModule as $key)
-
-                @if($key->semestre<$minSemestre)
-
-                <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="{{$key->module_image_url}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <div class="content">
-
-                                <p class="card-title">{{$key->libelleModule}}</p>
-                                <p class="card-text">
-                                    @foreach($profs as $prof)
-                                    @if($prof->id_module==$key->id_module)
-                                    <a href="{{route('etudProfProfile',$prof->id_user)}}">{{$prof->name}} {{$prof->prenom}}</a>
-                                    @endif
-                                    @endforeach
-                                </p>
-                            </div>
-                            <div class="acceder">
-                                <a href="{{route('etud.EspaceCours', $key->id_module)}}">Visiter</a>
-                                <i class="fas fa-long-arrow-alt-right"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endif
-                @endforeach
-                </div>
             </div>
         </div>
     </div>

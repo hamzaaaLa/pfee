@@ -390,32 +390,23 @@ input[type=submit] {
     min-height: calc(100vh - 60px);
     background-color: #f1f5f9;
 }
-.more .row {
-    margin: 0;
-    gap: 20px;
-}
-@media (max-width: 991px) {
-    .more .row {
-        height: auto;
-    }
+.more .accordion-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 .more .col {
-    max-width: fit-content;
-    padding: 4px;
+    display: flex;
 }
-.more .col .card {
-    border: none;
-    -webkit-box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
-    -moz-box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
-    box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
+.more .col img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
 }
-.more .col .card .card-body {
-    padding: 0;
-}
-.more .col .card .card-body .content {
+.more .col .content {
     padding: 15px;
 }
-.more .col .card .card-body .card-title {
+.more .col .card-title {
     color: black;
     font-weight: bold;
     display: block!important;
@@ -426,7 +417,13 @@ input[type=submit] {
     text-overflow: ellipsis;
     white-space: normal;
 }
-.more .col .card .card-body .card-text a {
+.more .col .card-title a {
+    color: black;
+}
+.more .col:hover .card-title a {
+    text-decoration: underline;
+}
+.more .col .card-text a {
     color: #6a6f73;
     font-size: 13px;
     text-decoration: underline;
@@ -436,24 +433,6 @@ input[type=submit] {
     overflow: hidden;
     white-space: normal;
     text-overflow: ellipsis;
-}
-.more .col .card .card-body .acceder {
-    padding: 20px;
-    border-top: 1px solid #e6e6e7;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
-}
-.more .col .card .card-body .acceder a {
-    color: var(--main-color);
-    font-weight: bold;
-}
-.more .col .card .card-body .acceder svg {
-    color: var(--main-color);
-}
-.more .col:hover .card .card-body .acceder svg {
-    animation: moving-arrow 0.6s linear infinite;
 }
 /* End More */
 /* Start Animation */

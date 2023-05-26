@@ -230,111 +230,43 @@
                     </div>
                     <div class="accordion" id="accordionPanelsStayOpen">
                         @foreach ($module->affectation_section as $aff_sec)
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="panelsStayOpen-{{ $aff_sec->section->titre_section }}">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ $aff_sec->section->id_section }}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{ $aff_sec->section->id_section }}">
-                                                            {{ $aff_sec->section->titre_section }}
-                                            </button>
-                                        </h2>
-                                        <div id="panelsStayOpen-collapse{{ $aff_sec->section->id_section}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-{{ $aff_sec->section->titre_section }}">
-                                            <div class="accordion-body">
-                                                <ul>
-                                                    @foreach ($aff_sec->section->affectation_cours as $aff_cour )
-                                                        <li>
-                                                            <div class="content">
-                                                                <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
-                                                                <a href="{{ route('prof.cour.download', ['id_cour' => $aff_cour->cours->id_cour]) }}">{{$aff_cour->cours->libelleCour }}</a>
-                                                            </div>
-                                                            <div class="actions">
-                                                                <!-- Modifier Cours -->
-                                                                <button type="button" class="add-btn modif" data-bs-toggle="modal" data-bs-target="#modifierCours{{$aff_cour->cours->id_cour}}">
-                                                                    <i class="fa-solid fa-pen"></i>
-                                                                </button>
-
-                                                                <!-- Modal Modifier Cours -->
-                                                                <div class="modal fade" id="modifierCours{{$aff_cour->cours->id_cour}}" tabindex="-1" aria-labelledby="modifierCours{{$aff_cour->cours->id_cour}}Label" aria-hidden="true">
-                                                                    <div class="modal-dialog">
-                                                                        <div class="modal-content">
-                                                                            <div class="container">
-                                                                                <form class="row g-3 needs-validation"
-                                                                                      action="{{route('cour.update',$aff_cour->cours->id_cour)}}" method="POST" novalidate>
-                                                                                    @csrf
-                                                                                    <div class="modal-header">
-                                                                                        <h5 class="modal-title" id="modifierCours{{$aff_cour->cours->id_cour}}Label">Modifer Titre Cours</h5>
-                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                    </div>
-                                                                                    <div class="modal-body">
-                                                                                        <div class="mb-3">
-                                                                                            <label for="nomCours" class="form-label">Titre</label>
-                                                                                            <input type="text" name="nomCours" class="form-control" value="{{$aff_cour->cours->libelleCour}}" id="nomCours" required>
-                                                                                            <div class="valid-feedback">
-                                                                                                C'est bon!
-                                                                                            </div>
-                                                                                            <div class="invalid-feedback">
-                                                                                                Veuillez insérer un titre.
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="modal-footer">
-                                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                                                                        <button type="button" class="btn btn-primary"><input type="submit" value="Modifier"></button>
-                                                                                    </div>
-                                                                                </form>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- Supprimer Cours -->
-                                                                <button type="button" class="add-btn del" data-bs-toggle="modal" data-bs-target="#supprimerCours{{$aff_cour->cours->id_cour}}">
-                                                                    <i class="fa-solid fa-trash"></i>
-                                                                </button>
-
-                                                                <!-- Modal Supprimer Cours -->
-                                                                <div class="modal fade" id="supprimerCours{{$aff_cour->cours->id_cour}}" tabindex="-1" aria-labelledby="supprimerCours{{$aff_cour->cours->id_cour}}Label" aria-hidden="true">
-                                                                    <div class="modal-dialog">
-                                                                        <div class="modal-content">
-                                                                            <form action="{{route('cour.delete',$aff_cour->cours->id_cour)}}" method="POST">
-                                                                                @csrf
-                                                                                <div class="modal-header">
-                                                                                    <h5 class="modal-title" id="supprimerCours{{$aff_cour->cours->id_cour}}Label">Supprimer Cours</h5>
-                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                </div>
-                                                                                <div class="modal-body">
-                                                                                    Voulez-vous vraiment supprimer ce cours?
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                                                                    <button type="submit" class="btn btn-danger" style="color: white;">Supprimer</button>
-                                                                                </div>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    @endforeach
-                                                    <li class="actions">
-                                                        <!-- Modifier Section -->
-                                                        <button type="button" class="add-btn" data-bs-toggle="modal" data-bs-target="#modifierSection{{ $aff_sec->section->id_section}}">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-{{ $aff_sec->section->titre_section }}">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ $aff_sec->section->id_section }}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{ $aff_sec->section->id_section }}">
+                                                    {{ $aff_sec->section->titre_section }}
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapse{{ $aff_sec->section->id_section}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-{{ $aff_sec->section->titre_section }}">
+                                    <div class="accordion-body">
+                                        <ul>
+                                            @foreach ($aff_sec->section->affectation_cours as $aff_cour )
+                                                <li>
+                                                    <div class="content">
+                                                        <i class="fa-solid fa-file-pdf fa-xl" style="color: #e5252a;"></i>
+                                                        <a href="{{ route('prof.cour.download', ['id_cour' => $aff_cour->cours->id_cour]) }}">{{$aff_cour->cours->libelleCour }}</a>
+                                                    </div>
+                                                    <div class="actions">
+                                                        <!-- Modifier Cours -->
+                                                        <button type="button" class="add-btn modif" data-bs-toggle="modal" data-bs-target="#modifierCours{{$aff_cour->cours->id_cour}}">
                                                             <i class="fa-solid fa-pen"></i>
-                                                            Modifier Section
                                                         </button>
 
-                                                        <!-- Modal Modifier Section -->
-                                                        <div class="modal fade" id="modifierSection{{ $aff_sec->section->id_section}}" tabindex="-1" aria-labelledby="modifierSection{{ $aff_sec->section->id_section}}Label" aria-hidden="true">
+                                                        <!-- Modal Modifier Cours -->
+                                                        <div class="modal fade" id="modifierCours{{$aff_cour->cours->id_cour}}" tabindex="-1" aria-labelledby="modifierCours{{$aff_cour->cours->id_cour}}Label" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="container">
-                                                                        <form class="row g-3 needs-validation" action="{{route('section.update',$aff_sec->section->id_section)}}" method="post" novalidate>
+                                                                        <form class="row g-3 needs-validation"
+                                                                              action="{{route('cour.update',$aff_cour->cours->id_cour)}}" method="POST" novalidate>
                                                                             @csrf
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title" id="modifierSection{{ $aff_sec->section->id_section}}Label">Modifier Titre Section</h5>
+                                                                                <h5 class="modal-title" id="modifierCours{{$aff_cour->cours->id_cour}}Label">Modifer Titre Cours</h5>
                                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                             </div>
                                                                             <div class="modal-body">
                                                                                 <div class="mb-3">
-                                                                                    <label for="nomSection" class="form-label">Titre</label>
-                                                                                    <input type="text" name="nomSection" class="form-control" value="{{ old('titre_section', $aff_sec->section->titre_section) }}"id="nomSection" required>
+                                                                                    <label for="nomCours" class="form-label">Titre</label>
+                                                                                    <input type="text" name="nomCours" class="form-control" value="{{$aff_cour->cours->libelleCour}}" id="nomCours" required>
                                                                                     <div class="valid-feedback">
                                                                                         C'est bon!
                                                                                     </div>
@@ -345,45 +277,113 @@
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                                                                <button type="submit" class="btn btn-primary"><input type="submit" value="Modifier"></button>
+                                                                                <button type="button" class="btn btn-primary"><input type="submit" value="Modifier"></button>
                                                                             </div>
                                                                         </form>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!-- Supprimer Section -->
-                                                        <button type="button" class="add-btn" data-bs-toggle="modal" data-bs-target="#supprimerSection{{ $aff_sec->section->id_section}}">
+                                                        <!-- Supprimer Cours -->
+                                                        <button type="button" class="add-btn del" data-bs-toggle="modal" data-bs-target="#supprimerCours{{$aff_cour->cours->id_cour}}">
                                                             <i class="fa-solid fa-trash"></i>
-                                                            Supprimer Section
                                                         </button>
 
-                                                        <!-- Modal Supprimer Section -->
-                                                        <div class="modal fade" id="supprimerSection{{ $aff_sec->section->id_section}}" tabindex="-1" aria-labelledby="supprimerSection{{ $aff_sec->section->id_section}}Label" aria-hidden="true">
+                                                        <!-- Modal Supprimer Cours -->
+                                                        <div class="modal fade" id="supprimerCours{{$aff_cour->cours->id_cour}}" tabindex="-1" aria-labelledby="supprimerCours{{$aff_cour->cours->id_cour}}Label" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
-                                                                    <form action="{{route('section.delete',$aff_sec->section->id_section)}}" method="POST">
+                                                                    <form action="{{route('cour.delete',$aff_cour->cours->id_cour)}}" method="POST">
                                                                         @csrf
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="supprimerSection{{ $aff_sec->section->id_section}}Label">Supprimer Section</h5>
+                                                                            <h5 class="modal-title" id="supprimerCours{{$aff_cour->cours->id_cour}}Label">Supprimer Cours</h5>
                                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            Voulez-vous vraiment supprimer cette section?
+                                                                            Voulez-vous vraiment supprimer ce cours?
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                            <button type="submit" class="btn btn-danger"  style="color: white;">Supprimer</button>
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                                            <button type="submit" class="btn btn-danger" style="color: white;">Supprimer</button>
                                                                         </div>
                                                                     </form>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                            <li class="actions">
+                                                <!-- Modifier Section -->
+                                                <button type="button" class="add-btn" data-bs-toggle="modal" data-bs-target="#modifierSection{{ $aff_sec->section->id_section}}">
+                                                    <i class="fa-solid fa-pen"></i>
+                                                    Modifier Section
+                                                </button>
+
+                                                <!-- Modal Modifier Section -->
+                                                <div class="modal fade" id="modifierSection{{ $aff_sec->section->id_section}}" tabindex="-1" aria-labelledby="modifierSection{{ $aff_sec->section->id_section}}Label" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="container">
+                                                                <form class="row g-3 needs-validation" action="{{route('section.update',$aff_sec->section->id_section)}}" method="post" novalidate>
+                                                                    @csrf
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="modifierSection{{ $aff_sec->section->id_section}}Label">Modifier Titre Section</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="mb-3">
+                                                                            <label for="nomSection" class="form-label">Titre</label>
+                                                                            <input type="text" name="nomSection" class="form-control" value="{{ old('titre_section', $aff_sec->section->titre_section) }}"id="nomSection" required>
+                                                                            <div class="valid-feedback">
+                                                                                C'est bon!
+                                                                            </div>
+                                                                            <div class="invalid-feedback">
+                                                                                Veuillez insérer un titre.
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                                        <button type="submit" class="btn btn-primary"><input type="submit" value="Modifier"></button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Supprimer Section -->
+                                                <button type="button" class="add-btn" data-bs-toggle="modal" data-bs-target="#supprimerSection{{ $aff_sec->section->id_section}}">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                    Supprimer Section
+                                                </button>
+
+                                                <!-- Modal Supprimer Section -->
+                                                <div class="modal fade" id="supprimerSection{{ $aff_sec->section->id_section}}" tabindex="-1" aria-labelledby="supprimerSection{{ $aff_sec->section->id_section}}Label" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <form action="{{route('section.delete',$aff_sec->section->id_section)}}" method="POST">
+                                                                @csrf
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="supprimerSection{{ $aff_sec->section->id_section}}Label">Supprimer Section</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Voulez-vous vraiment supprimer cette section?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-danger"  style="color: white;">Supprimer</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
+                                </div>
+                            </div>
                         @endforeach
                     </div>
                 @else
@@ -423,7 +423,7 @@
             var nomSection = $("#nomSection").val();
             var i=1000;
 
-            if(nomSection != "") {
+            if(nomSection !== "") {
                 $.ajax({
                    url: "{{route('section.store',$id_module)}}",
                    type: 'POST',
@@ -432,7 +432,7 @@
                        '_token': $('meta[name="csrf-token"]').attr('content')
                    },
                     success: function(response) {
-                        if(response == 'success') {
+                        if(response === 'success') {
                             var newSection = '<div class="accordion-item">' +
                                 '<h2 class="accordion-header" id="panelsStayOpen-heading' + i + '">' +
                                     '<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse' +  i + '" aria-expanded="true" aria-controls="#panelsStayOpen-collapse' +  i + '">' +
@@ -529,7 +529,7 @@
                             var option = $("<option>").text(nomSection).val(nomSection);
                             $("#sectionCours").append(option);
                         }
-                        else if(response == 'section existe déjà') {
+                        else if(response === 'section existe déjà') {
                             /* var sectionError = '<div class="modal" tabindex="-1">' +
                                 '<div class="modal-dialog">' +
                                     '<div class="modal-content">' +

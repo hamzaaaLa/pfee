@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2023 at 06:33 PM
+-- Generation Time: May 17, 2023 at 01:38 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -33,6 +33,15 @@ CREATE TABLE `administrateur` (
   `dateEmbauche` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `administrateur`
+--
+
+INSERT INTO `administrateur` (`id_admin`, `user_admin`, `dateEmbauche`) VALUES
+(6, 45, '2023-05-03'),
+(7, 46, '2023-05-14'),
+(8, 47, '2023-05-14');
+
 -- --------------------------------------------------------
 
 --
@@ -52,7 +61,9 @@ CREATE TABLE `affectation_cours` (
 INSERT INTO `affectation_cours` (`id_affect`, `id_section`, `id_cour`) VALUES
 (2, 5, 12),
 (3, 5, 13),
-(8, 15, 18);
+(8, 15, 18),
+(10, 4, 20),
+(13, 17, 23);
 
 -- --------------------------------------------------------
 
@@ -71,13 +82,6 @@ CREATE TABLE `affectation_etud` (
 --
 
 INSERT INTO `affectation_etud` (`id_affect`, `id_etud`, `id_module`) VALUES
-(20, 17, 16),
-(21, 17, 17),
-(22, 17, 18),
-(23, 17, 19),
-(24, 17, 20),
-(25, 17, 21),
-(26, 17, 22),
 (27, 18, 53),
 (28, 18, 17),
 (29, 18, 18),
@@ -97,7 +101,14 @@ INSERT INTO `affectation_etud` (`id_affect`, `id_etud`, `id_module`) VALUES
 (43, 20, 26),
 (44, 20, 27),
 (45, 20, 28),
-(46, 20, 29);
+(46, 20, 29),
+(54, 17, 16),
+(55, 17, 17),
+(56, 17, 18),
+(57, 17, 19),
+(58, 17, 20),
+(59, 17, 21),
+(60, 17, 22);
 
 -- --------------------------------------------------------
 
@@ -150,10 +161,9 @@ CREATE TABLE `affectation_section` (
 INSERT INTO `affectation_section` (`id_affect`, `id_module`, `id_section`) VALUES
 (4, 17, 4),
 (5, 16, 5),
-(6, 16, 6),
-(12, 16, 12),
 (14, 19, 14),
-(15, 19, 15);
+(15, 19, 15),
+(17, 16, 17);
 
 -- --------------------------------------------------------
 
@@ -172,10 +182,10 @@ CREATE TABLE `affectation_semestre` (
 --
 
 INSERT INTO `affectation_semestre` (`id_affect`, `id_semestre`, `id_etud`) VALUES
-(19, 1, 17),
 (20, 1, 18),
 (21, 2, 19),
-(22, 2, 20);
+(22, 2, 20),
+(25, 1, 17);
 
 -- --------------------------------------------------------
 
@@ -191,6 +201,13 @@ CREATE TABLE `annonce` (
   `contenue` text DEFAULT NULL,
   `datecreation` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `annonce`
+--
+
+INSERT INTO `annonce` (`id_annonce`, `id_prof`, `id_module`, `titre`, `contenue`, `datecreation`) VALUES
+(10, 6, 16, 'Annonce 1', 'Contenue de l\'annonce', '2023-05-14 01:47:12');
 
 -- --------------------------------------------------------
 
@@ -210,9 +227,11 @@ CREATE TABLE `cours` (
 
 INSERT INTO `cours` (`id_cour`, `libelleCour`, `contenu`) VALUES
 (11, 'cour1_analyse1', '1683044427.pdf'),
-(12, 'cour1_analyse1', '1683045777.pdf'),
+(12, 'WORKED', '1683045777.pdf'),
 (13, 'cour2_analyse1', '1683045845.pdf'),
-(18, 'Cours Chapitre 1 Mécanique', '1683071925.pdf');
+(18, 'Cours Chapitre 1 Mécanique', '1683071925.pdf'),
+(20, 'chapitre 1  algebre 1', '1683153068.pdf'),
+(23, 'Cour chapitre 2', '1684029033.pdf');
 
 -- --------------------------------------------------------
 
@@ -279,7 +298,7 @@ CREATE TABLE `module` (
 --
 
 INSERT INTO `module` (`id_module`, `libelleModule`, `id_filiere`, `semestre`, `imageModule`) VALUES
-(16, 'ANALYSE 1 : Suite Numérique et Fonctions', 6, 'S1', NULL),
+(16, 'ANALYSE 1 : Suite Numérique et Fonctions', 6, 'S1', 'Module_64603c93bed18.png'),
 (17, 'ALGEBRE 1: Généralités et Arithmétique dans Z', 6, 'S1', NULL),
 (18, 'ALGEBRE 2: Structures, Polynômes et Fractions Rati', 6, 'S1', NULL),
 (19, 'Physique 1 : Mécanique 1', 6, 'S1', NULL),
@@ -374,9 +393,10 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id_post`, `id_user`, `titre`, `contenu`, `date_created`, `id_module`) VALUES
-(4, 37, 'test', 'ddddddddddddddddd', '2023-04-28 15:37:49', 57),
-(5, 37, 'df', 'df', '2023-05-03 01:39:31', 57),
-(6, 37, 'dfdf', 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', '2023-05-03 01:39:43', 57);
+(8, 37, 'reply', 'aeeaeaeaeefefeffeefef', '2023-05-03 21:55:09', 57),
+(9, 34, 'rfefe', 'grgrfefe', '2023-05-03 22:03:23', 23),
+(13, 36, 'Publication 1', 'Contenue de la publication', '2023-05-14 01:54:46', 16),
+(14, 32, 'Publication 2', 'contenue de la publication 2', '2023-05-14 02:06:56', 16);
 
 -- --------------------------------------------------------
 
@@ -421,8 +441,9 @@ CREATE TABLE `reply` (
 --
 
 INSERT INTO `reply` (`id_reply`, `id_post`, `id_user`, `contenu`, `date_created`, `id_module`) VALUES
-(3, 4, 37, 'xxxxxxxxxxxxxxxxxxxxxxxx', '2023-04-28 15:37:59', 57),
-(4, 4, 36, 'hjfhjfjhf', '2023-05-01 01:44:46', 18);
+(5, 8, 37, 'test', '2023-05-03 21:55:23', 57),
+(12, 13, 36, 'Reponse sur la publication', '2023-05-14 01:56:44', 16),
+(14, 14, 36, 'répondre sur la publication', '2023-05-15 20:54:51', 16);
 
 -- --------------------------------------------------------
 
@@ -443,10 +464,9 @@ CREATE TABLE `section` (
 INSERT INTO `section` (`id_section`, `titre_section`, `id_prof`) VALUES
 (4, 'chapitre 1', 6),
 (5, 'Chapitre 1', 6),
-(6, 'chapitre 1', 6),
-(12, 'Chapitre 2', 6),
 (14, 'Chapitre 4', 7),
-(15, 'Chapitre 2', 7);
+(15, 'Chapitre 2', 7),
+(17, 'Chapitre 2', 6);
 
 -- --------------------------------------------------------
 
@@ -497,15 +517,18 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id_user`, `type`, `name`, `prenom`, `email`, `cin`, `telephone`, `nomUtilisateur`, `password`, `dernierAcces`, `imageProfile`) VALUES
 (9, 1, 'admin', 'hani', 'admin1@gmail.com', '12345', '0654678645', 'admin1@gmail.com', '$2y$10$3sG0vN7dbz6bFff2itl6iebN1avM1JnKp3PridG1oJSyvoPxYevGW', '2023-04-20 11:17:02', NULL),
-(32, 0, 'Depp', 'Johnny', 'johnnydepp@gmail.com', 'JB111111', '0657009012', 'johnnydepp@gmail.com', '$2y$10$mZFwH/hdmLMmDn0Juc.ukOktVV/2V8SVjwK/NMNLbPeoMcpuF/GgC', '2023-04-28 13:57:21', NULL),
-(33, 0, 'Abid', 'Nasrolah', 'nasrolahabid@gmail.com', 'JB222222', '0647893412', 'nasrolahabid@gmail.com', '$2y$10$wJ6/IBmnGQQVYfbr.62kgeztbh7hrm9D5W2mYHF3bmlswL8BulOgu', '2023-04-28 13:58:50', NULL),
+(32, 0, 'Depp', 'Johnny', 'johnnydepp@gmail.com', 'JB111111', '0657009012', 'johnnydepp@gmail.com', '$2y$10$noaUgX8nWtJ8.YuU8Obl.elQ4TrVHmR9ctcJN1YtSd79.C4Ra9qsq', '2023-05-14 14:38:10', 'profile_646041b4dfcb8.jpg'),
+(33, 0, 'Abid', 'Nasrolah', 'nasrolahabid@gmail.com', 'JB222222', '0647893412', 'nasrolahabid@gmail.com', '$2y$10$wJ6/IBmnGQQVYfbr.62kgeztbh7hrm9D5W2mYHF3bmlswL8BulOgu', '2023-05-14 02:00:48', 'profile_646040d078bf9.jpg'),
 (34, 0, 'Abid', 'Ayoub', 'ayoubabid@gmail.com', 'JB111110', '0756458700', 'ayoubabid@gmail.com', '$2y$10$EzWgvyUOs305cChX5vel6uN2MGmIV.J7Xome.nLEokCEbubfqtCq.', '2023-04-28 14:03:45', NULL),
 (35, 0, 'Abid', 'Soufaine', 'soufianeabid@gmail.com', 'JB111112', '0623413467', 'soufianeabid@gmail.com', '$2y$10$YF2u3bz12rnfK1IMH8AigOpOc4gQZXfMep/EDSrAMgraz7Nj2mv2K', '2023-04-28 14:05:14', NULL),
-(36, 2, 'Bamo', 'Abderrahman', 'bamo@gmail.com', 'JB111114', '0661476812', 'bamo@gmail.com', '$2y$10$mx7hfXDDJhLjWeHVAQYUEOUClWv9OB/CoiVE/AEan894K8yuRB/1G', '2023-04-28 14:06:55', NULL),
+(36, 2, 'Bamo', 'Abderrahman', 'bamo@gmail.com', 'JB111114', '0661476812', 'bamo@gmail.com', '$2y$10$mx7hfXDDJhLjWeHVAQYUEOUClWv9OB/CoiVE/AEan894K8yuRB/1G', '2023-05-14 01:43:25', 'profile_64603cbd5205e.jpg'),
 (37, 2, 'Shengli', 'Hamza', 'shengli@gmail.com', 'JB111115', '0765678906', 'shengli@gmail.com', '$2y$10$i1ayvlGD0rYwA0ByQo89r./a.jLFfT7WopxC4SyTmQn7ncwvIvjMO', '2023-04-28 15:44:02', 'profile_644be9c2d6d56.jpg'),
 (38, 2, 'Alami', 'Youssef', 'Alami@gmail.com', 'JB111116', '0676459809', 'Alami@gmail.com', '$2y$10$DC.F9DgaFuu5ln7UhCxpIuCYKen1/9XCvop3d1OrFTEA43UFPlEZS', '2023-04-28 14:08:29', NULL),
 (39, 2, 'Fouks', 'Abderahman', 'fouks@gmail.com', 'JB111117', '0768095743', 'fouks@gmail.com', '$2y$10$P2bzJwG4NFiXuHBndYL8rOmt0fo.Ijx2EWBamLQ002l/yDGaMn6AW', '2023-04-28 14:09:19', NULL),
-(40, 2, 'Stiwi', 'Karam', 'stiwi@gmail.com', 'JB111118', '0658793145', 'stiwi@gmail.com', '$2y$10$ECLu.VK6Liiyoo0tMOJjteQzpBDlWLwRfejmPEf2odTiuIqOVlaHO', '2023-04-28 14:12:46', NULL);
+(40, 2, 'Stiwi', 'Karam', 'stiwi@gmail.com', 'JB111118', '0658793145', 'stiwi@gmail.com', '$2y$10$ECLu.VK6Liiyoo0tMOJjteQzpBDlWLwRfejmPEf2odTiuIqOVlaHO', '2023-04-28 14:12:46', NULL),
+(45, 1, 'chhou', 'anass', 'anasschhou@gmail.com', 'JB110011', '0607177214', 'anasschhou@gmail.com', '$2y$10$Om12CiHvhrGnY.ilfZQg8.wjA8kNZEGwTLsyONxHudOgVqPkfCk1a', '2023-05-14 01:28:00', 'profile_646039207d120.jpg'),
+(46, 1, 'Berriss', 'Ismail', 'ismailberriss@gmail.com', 'JB001100', '0123456789', 'ismailberriss@gmail.com', '$2y$10$XYXu8aPpTS4Fe19ny2Cv1uksv6hPK3izinydHdPWqr2evwZeVhqJ.', '2023-05-14 16:13:47', NULL),
+(47, 1, 'Lachhab', 'Hamza', 'lachhabhamza@gmail.com', 'JB001111', '0123456789', 'lachhabhamza@gmail.com', '$2y$10$xUOkCZK7xj0pRswkgVy7wOCGNZEscE0DNiBIwUXbkjaiagxe7CB8C', '2023-05-14 16:14:35', NULL);
 
 --
 -- Indexes for dumped tables
@@ -646,19 +669,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `administrateur`
 --
 ALTER TABLE `administrateur`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `affectation_cours`
 --
 ALTER TABLE `affectation_cours`
-  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `affectation_etud`
 --
 ALTER TABLE `affectation_etud`
-  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `affectation_prof`
@@ -670,25 +693,25 @@ ALTER TABLE `affectation_prof`
 -- AUTO_INCREMENT for table `affectation_section`
 --
 ALTER TABLE `affectation_section`
-  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `affectation_semestre`
 --
 ALTER TABLE `affectation_semestre`
-  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_affect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `annonce`
 --
 ALTER TABLE `annonce`
-  MODIFY `id_annonce` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_annonce` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `cours`
 --
 ALTER TABLE `cours`
-  MODIFY `id_cour` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_cour` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `etudiant`
@@ -712,7 +735,7 @@ ALTER TABLE `module`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `professeur`
@@ -724,13 +747,13 @@ ALTER TABLE `professeur`
 -- AUTO_INCREMENT for table `reply`
 --
 ALTER TABLE `reply`
-  MODIFY `id_reply` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_reply` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `section`
 --
 ALTER TABLE `section`
-  MODIFY `id_section` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_section` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `semestre`
@@ -742,7 +765,7 @@ ALTER TABLE `semestre`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- Constraints for dumped tables

@@ -11,7 +11,7 @@ class module extends Model
     public $timestamps = false;
     protected $table = "module";
     protected $primaryKey = 'id_module';
-    protected $fillable = ["libelleModule","semester","id_filiere"];
+    protected $fillable = ["libelleModule","semestre","id_filiere"];
     protected $dates = [
         'dernierAcces'
     ];
@@ -21,6 +21,8 @@ class module extends Model
     {
         return $this->belongsTo(filiere::class, 'id_filiere');
     }
+
+
     //relation with annonce
     public function Annonce()
     {
@@ -57,7 +59,7 @@ class module extends Model
     public function getModuleImageUrlAttribute(): string
     {
         $filename = $this->attributes['imageModule'];
-    
+
         if ($filename) {
             return asset('imagesModule/' . $filename);
         } else {

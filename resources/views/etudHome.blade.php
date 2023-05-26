@@ -192,11 +192,11 @@
                                     <div class="card-body">
                                         <div class="content">
                                             <p class="card-title">{{$af_etud->module->libelleModule}}</p>
-                                            @foreach ( $af_etud->module->affectation_prof as $af_prof)
-                                                <p class="card-text">
-                                                    <a href="{{route('etudProfProfile',$af_prof->professeur->user->id_user)}}">{{$af_prof->professeur->user->name}} {{$af_prof->professeur->user->prenom}}</a>
-                                                </p>
-                                            @endforeach
+                                            <p class="card-text">
+                                                @if($af_etud->module->affectation_prof != null)
+                                                    <a href="{{route('etudProfProfile',$af_etud->module->affectation_prof->professeur->user->id_user)}}">{{$af_etud->module->affectation_prof->professeur->user->name}} {{$af_etud->module->affectation_prof->professeur->user->prenom}}</a>
+                                                @endif
+                                            </p>
                                         </div>
                                         <div class="acceder">
                                             <a href="{{route('etud.EspaceCours', $af_etud->module->id_module)}}">Visiter</a>
