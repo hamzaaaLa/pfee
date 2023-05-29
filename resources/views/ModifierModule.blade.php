@@ -183,9 +183,11 @@
                     <div class="col-md-6">
                         <label for="professeur" class="form-label">Professeur</label>
                         <select class="form-select" name="professeur" id="professeur" required>
-                            <option selected>{{ $module->affectation_prof->professeur->user->name }} {{ $module->affectation_prof->professeur->user->prenom }}</option>
-                            @foreach($professeur as $professeur)
-                                <option>{{ $professeur->user->name }} {{ $professeur->user->prenom }}</option>
+                            <option selected>{{ $module->affectation_prof->professeur->user->name ?? 'Aucun professeur' }} {{ $module->affectation_prof->professeur->user->prenom ?? '' }}</option>
+                            @foreach ($professeur as $prof)
+                                @if ($prof->user->name && $prof->user->prenom)
+                                    <option>{{ $prof->user->name }} {{ $prof->user->prenom }}</option>
+                                @endif
                             @endforeach
                         </select>
                         <div class="valid-feedback">

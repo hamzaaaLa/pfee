@@ -153,11 +153,11 @@
                                 <a href="{{route('editerEtudiant',$etudiant->user->id_user)}}">
                                     <i class="fa-solid fa-pen"></i>
                                 </a>
-                                <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $etudiant->user->id_user }}">
                                     <i class="fa-solid fa-trash"></i>
                                 </a>
                                 <!-- Modal Supprimer -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="exampleModal{{ $etudiant->user->id_user }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
