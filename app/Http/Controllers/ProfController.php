@@ -89,11 +89,10 @@ class ProfController extends Controller
             $courses = affectation_cours::whereIn('id_section', $sections)->pluck('id_cour');
             $affectationIds = affectation_section::whereIn('id_section', $sections)->pluck('id_affect');
     
-            reply::whereIn('id_post', function ($query) use ($sections) {
-                $query->select('id_post')->from('reply')->whereIn('id_module', $sections);
-            })->delete();
+            
     
-            posts::whereIn('id_module', $sections)->delete();
+            posts::whereIn('id_user', $professor->id_prof)->delete();
+            reply::whereIn('id_user', $professor->id_prof)->delete();
             affectation_cours::whereIn('id_section', $sections)->delete();
             cours::whereIn('id_cour', $courses)->delete();
             affectation_section::whereIn('id_affect', $affectationIds)->delete();
