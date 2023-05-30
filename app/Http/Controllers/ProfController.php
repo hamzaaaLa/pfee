@@ -11,6 +11,13 @@ use App\Models\Affectation_etud;
 use App\Models\affectation_prof;
 use App\Models\Module;
 use App\Models\professeur;
+use App\Models\posts;
+use App\Models\reply;
+use App\Models\section;
+use App\Models\affectation_section;
+use App\Models\affectation_cours;
+use App\Models\cours;
+use App\Models\annonce;
 
 class ProfController extends Controller
 {
@@ -74,13 +81,30 @@ class ProfController extends Controller
         return redirect(route('afficheProf'));
     }
 
-    public function delete($id_user){
-        $id_prof=User::join('professeur','users.id_user','=','professeur.user_prof')->where('users.id_user',$id_user)->value('professeur.id_prof');
-        affectation_prof::where('id_prof','=',$id_prof)->delete();
-        professeur::where('user_prof','=',$id_user)->delete();
-        User::where('id_user','=',$id_user)->delete();
-        
-        
+    public function delete($id_user) {
+        $professor = professeur::where('user_prof', $id_user)->first();
+    
+        if ($professor) {
+            $sections = section::where('id_prof', $professor->id_prof)->pluck('id_section');
+            $courses = affectation_cours::whereIn('id_section', $sections)->pluck('id_cour');
+            $affectationIds = affectation_section::whereIn('id_section', $sections)->pluck('id_affect');
+    
+            reply::whereIn('id_post', function ($query) use ($sections) {
+                $query->select('id_post')->from('reply')->whereIn('id_module', $sections);
+            })->delete();
+    
+            posts::whereIn('id_module', $sections)->delete();
+            affectation_cours::whereIn('id_section', $sections)->delete();
+            cours::whereIn('id_cour', $courses)->delete();
+            affectation_section::whereIn('id_affect', $affectationIds)->delete();
+            section::whereIn('id_section', $sections)->delete();
+            annonce::where('id_prof',$professor->id_prof)->delete();
+            affectation_prof::where('id_prof', $professor->id_prof)->delete();
+            professeur::where('user_prof', $id_user)->delete();
+        }
+    
+        User::where('id_user', $id_user)->delete();
+    
         return redirect(route('afficheProf'));
     }
 

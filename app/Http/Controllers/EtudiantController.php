@@ -14,6 +14,8 @@ use App\Models\User;
 use App\Models\Affectation_etud;
 use App\Models\affectation_prof;
 use App\Models\Module;
+use App\Models\posts;
+use App\Models\reply;
 
 class EtudiantController extends Controller
 {
@@ -151,17 +153,16 @@ class EtudiantController extends Controller
     }
 
     public function delete($id_user) {
-        $id_etud = User::join('etudiant', 'users.id_user', '=', 'etudiant.user_etud')
-                        ->where('users.id_user', $id_user)
-                        ->value('etudiant.id_etud');
-    
-        Affectation_etud::where('id_etud', $id_etud)->delete();
-        affectation_semestre::where('id_etud', $id_etud)->delete();
-        Etudiant::where('user_etud', $id_user)->delete();
-        User::where('id_user', $id_user)->delete();
-    
-        return redirect(route('afficheEtud'));
-    }
+        $id_etud=User::join('etudiant','users.id_user','=','etudiant.user_etud')->where('users.id_user',$id_user)->value('etudiant.id_etud');
+        reply::where('id_user','=',$id_user)->delete();
+        posts::where('id_user','=',$id_user)->delete();
+        affectation_semestre::where('id_etud','=',$id_etud)->delete();
+        Affectation_etud::where('id_etud','=',$id_etud)->delete();
+        Etudiant::where('user_etud','=',$id_user)->delete();
+        User::where('id_user','=',$id_user)->delete();
+
+            return redirect(route('afficheEtud'));
+        }
 
     public function getProfile($id_user){
         $id_etud=User::join('etudiant','users.id_user','=','etudiant.user_etud')->where('users.id_user',$id_user)->value('etudiant.id_etud');

@@ -9,6 +9,13 @@ use App\Models\professeur;
 use App\Models\module;
 use App\Models\Filiere;
 use App\Models\Semestre;
+use App\Models\posts;
+use App\Models\reply;
+use App\Models\section;
+use App\Models\affectation_section;
+use App\Models\affectation_cours;
+use App\Models\cours;
+use App\Models\annonce;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -83,6 +90,14 @@ class ModuleController extends Controller
     }
 
     public function delete($id_module){
+        $sectionIds = Affectation_section::where('id_module', '=', $id_module)->pluck('id_section');
+        $courses = affectation_cours::whereIn('id_section', $sectionIds)->pluck('id_cour');
+        reply::where('id_module','=',$id_module)->delete();
+        posts::where('id_module','=',$id_module)->delete();
+        Affectation_cours::whereIn('id_section', $sectionIds)->delete();
+        cours::whereIn('id_cour', $courses)->delete();
+        Affectation_section::where('id_module', '=', $id_module)->delete();
+        section::whereIn('id_section', $sectionIds)->delete();
         Affectation_etud::where('id_module','=',$id_module)->delete();
         affectation_prof::where('id_module','=',$id_module)->delete();
         module::where('id_module','=',$id_module)->delete();
